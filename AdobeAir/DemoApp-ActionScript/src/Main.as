@@ -85,6 +85,10 @@ public class Main extends Sprite {
         IronSource.instance.addEventListener("onBannerAdScreenPresented", onBannerAdScreenPresented);
         IronSource.instance.addEventListener("onBannerAdScreenDismissed", onBannerAdScreenDismissed);
         IronSource.instance.addEventListener("onBannerAdLeftApplication", onBannerAdLeftApplication);
+        IronSource.instance.addEventListener("onSegmentReceived", onSegmentReceived);
+
+        IronSource.instance.addEventListener("onImpressionDataDidSucceed", onImpressionDataDidSucceed);
+
         IronSource.instance.setIronSourceClientSideCallbacks(true);
         IronSource.instance.init("38760d6d");
         loadBanner();
@@ -341,6 +345,12 @@ public class Main extends Sprite {
     //************************** Segment Callbacks **************************
     private function onSegmentReceived(event:DataEvent):void {
         trace("onSegmentReceived: " + event.data);
+    }
+
+    //************************** ARM Callbacks **************************
+    private function onImpressionDataDidSucceed(event:DataEvent):void {
+        trace("onImpressionDataDidSucceed: " + event.data);
+
     }
 
     //************************** UI Methods **************************

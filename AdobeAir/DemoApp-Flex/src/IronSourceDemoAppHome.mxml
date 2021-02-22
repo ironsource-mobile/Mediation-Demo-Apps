@@ -68,6 +68,8 @@
             IronSource.instance.addEventListener("onBannerAdLeftApplication", onBannerAdLeftApplication);
 
             IronSource.instance.addEventListener("onSegmentReceived", onSegmentReceived);
+            IronSource.instance.addEventListener("onImpressionDataDidSucceed", onImpressionDataDidSucceed);
+
 
             IronSource.instance.setAdaptersDebug(true);
             IronSource.instance.setConsent(true);
@@ -333,6 +335,12 @@
         private function onSegmentReceived(event:DataEvent):void {
             trace("onSegmentReceived: " + event.data);
         }
+
+        //************************** ARM Callbacks **************************
+        private function onImpressionDataDidSucceed(event:DataEvent):void {
+        trace("onImpressionDataDidSucceed: " + event.data);
+
+    }
         ]]>
     </fx:Script>
 
