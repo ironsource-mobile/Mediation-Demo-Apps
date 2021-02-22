@@ -246,6 +246,21 @@
                 <!-- iPad devices -->
                 <string>2</string>
             </array>
+
+        <key>NSAppTransportSecurity</key>
+        <dict>
+            <key>NSAllowsArbitraryLoads</key>
+            <true/>
+	        <key>SKAdNetworkIdentifier</key>
+			<string>SU67R6K2V3.skadnetwork</string>
+
+        </dict>
+	    <key>NSUserTrackingUsageDescription</key>
+	    <string>Improving your user experience.</string>
+
+
+        <!--<key>GADApplicationIdentifier</key>-->
+        <!--<string>YOUR_ADMOB_APP_ID-</string>-->
             <!--<key>UIStatusBarStyle</key>-->
             <!--<string>UIStatusBarStyleBlackOpaque</string>-->
             <!--<key>UIRequiresPersistentWiFi</key>-->

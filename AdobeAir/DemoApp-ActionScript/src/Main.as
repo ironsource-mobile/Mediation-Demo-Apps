@@ -46,6 +46,13 @@ public class Main extends Sprite {
         createUI();
         addEventListener(Event.DEACTIVATE, onPause);
         addEventListener(Event.ACTIVATE, onResume);
+
+        // Register for apple attribution and request ATT
+        IronSource.instance.registerAppForAdNetworkAttribution();
+        IronSource.instance.requestTrackingAuthorizationWithCompletionHandler();
+        var userStatus:int = IronSource.instance.trackingAuthorizationStatus();
+        trace("trackingAuthorizationStatus is "+userStatus.toString());
+
         IronSource.instance.addEventListener("onRewardedVideoAdOpened", onRewardedVideoAdOpened);
         IronSource.instance.addEventListener("onRewardedVideoAdClosed", onRewardedVideoAdClosed);
         IronSource.instance.addEventListener("onRewardedVideoAvailabilityChanged", onRewardedVideoAvailabilityChanged);
