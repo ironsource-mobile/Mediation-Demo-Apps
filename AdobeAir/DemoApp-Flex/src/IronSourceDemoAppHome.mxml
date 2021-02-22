@@ -24,6 +24,13 @@
             userId = "demoUserAdobe";
             appKey = "515de885";
 
+
+            // Register for apple attribution and request ATT
+            IronSource.instance.registerAppForAdNetworkAttribution();
+            IronSource.instance.requestTrackingAuthorizationWithCompletionHandler();
+            var userStatus:int = IronSource.instance.trackingAuthorizationStatus();
+            trace("trackingAuthorizationStatus is "+userStatus.toString());
+
             //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
             IronSource.instance.validateIntegration();
 
@@ -68,6 +75,8 @@
             IronSource.instance.setUserId(userId);
             IronSource.instance.init(appKey);
             //IronSource.instance.init(appKey, [IronSource.REWARDED_VIDEO, IronSource.INTERSTITIAL, IronSource.OFFERWALL, IronSource.BANNER]);
+
+
         }
 
         private function showRewardedVideo():void {
