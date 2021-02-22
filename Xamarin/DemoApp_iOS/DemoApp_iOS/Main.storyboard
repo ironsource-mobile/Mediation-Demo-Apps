@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SupersonicLogo" translatesAutoresizingMaskIntoConstraints="NO" id="9h1-2m-S8I" misplaced="YES">
+                                <rect key="frame" x="0.0" y="8" width="375" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="61" id="7K5-mc-Yv8"/>
+                                    <constraint firstAttribute="width" constant="375" id="vzN-yb-WjX"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXu-N1-s3N" misplaced="YES">
+                                <rect key="frame" x="87.5" y="77" width="200" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="7xV-bB-oHy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="owN-4m-7Dn" misplaced="YES">
+                                <rect key="frame" x="82.5" y="110.5" width="210" height="36"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="9AB-Pw-Znh"/>
+                                    <constraint firstAttribute="width" constant="210" id="IpR-VK-HgV"/>
+                                </constraints>
+                                <state key="normal" title="Show"/>
+                                <state key="disabled" title="Initializing"/>
+                                <connections>
+                                    <action selector="ShowRV_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1951"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offerwall" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dE2-Xv-fWE" misplaced="YES">
+                                <rect key="frame" x="87.5" y="178.5" width="200" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="4mq-xl-XR9"/>
+                                    <constraint firstAttribute="width" constant="200" id="Omx-hO-3Lh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeC-BL-YoN" misplaced="YES">
+                                <rect key="frame" x="82.5" y="207.5" width="210" height="36"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="36k-vG-nhB"/>
+                                    <constraint firstAttribute="width" constant="210" id="DEO-5d-086"/>
+                                </constraints>
+                                <state key="normal" title="Show"/>
+                                <state key="disabled" title="Initializing"/>
+                                <connections>
+                                    <action selector="ShowOW_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1952"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SmR-au-rqO" misplaced="YES">
+                                <rect key="frame" x="87.5" y="275.5" width="200" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="GYU-51-nKn"/>
+                                    <constraint firstAttribute="height" constant="21" id="ta6-Pa-9Iw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ewV-7w-ZnS" misplaced="YES">
+                                <rect key="frame" x="197.5" y="304.5" width="90" height="36"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <bool key="isElement" value="NO"/>
+                                </accessibility>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="NTp-IA-L0X"/>
+                                    <constraint firstAttribute="width" constant="90" id="ZQd-pc-gd6"/>
+                                </constraints>
+                                <state key="normal" title="Show"/>
+                                <state key="disabled" title="Initializing"/>
+                                <connections>
+                                    <action selector="ShowIS_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1954"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LQC-Ph-jpP" misplaced="YES">
+                                <rect key="frame" x="87.5" y="304.5" width="90" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="huV-b7-MJk"/>
+                                    <constraint firstAttribute="width" constant="90" id="lFG-pX-YtW"/>
+                                </constraints>
+                                <state key="normal" title="Load"/>
+                                <state key="disabled" title="Initializing"/>
+                                <connections>
+                                    <action selector="LoadIS_TouchUpInside:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1953"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="csG-VO-kr5" misplaced="YES">
+                                <rect key="frame" x="87.5" y="378.5" width="200" height="20.5"/>
+                                <accessibility key="accessibilityConfiguration" identifier="version_lbl"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="csG-VO-kr5" firstAttribute="trailing" secondItem="dE2-Xv-fWE" secondAttribute="trailing" id="4nW-jB-cRM"/>
+                            <constraint firstItem="csG-VO-kr5" firstAttribute="leading" secondItem="dE2-Xv-fWE" secondAttribute="leading" id="5CQ-bu-WCj"/>
+                            <constraint firstItem="owN-4m-7Dn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ANi-vo-pZj"/>
+                            <constraint firstItem="ewV-7w-ZnS" firstAttribute="top" secondItem="SmR-au-rqO" secondAttribute="bottom" constant="8" id="AtB-pv-wg5"/>
+                            <constraint firstItem="dE2-Xv-fWE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="C8m-NE-C2y"/>
+                            <constraint firstItem="cXu-N1-s3N" firstAttribute="top" secondItem="9h1-2m-S8I" secondAttribute="bottom" constant="8" id="I4O-80-MXh"/>
+                            <constraint firstItem="ewV-7w-ZnS" firstAttribute="trailing" secondItem="SmR-au-rqO" secondAttribute="trailing" id="IaW-ge-aNT"/>
+                            <constraint firstItem="dE2-Xv-fWE" firstAttribute="top" secondItem="owN-4m-7Dn" secondAttribute="bottom" constant="32" id="L2A-CE-gze"/>
+                            <constraint firstItem="ZeC-BL-YoN" firstAttribute="centerX" secondItem="dE2-Xv-fWE" secondAttribute="centerX" id="Lhq-1y-Hf0"/>
+                            <constraint firstItem="SmR-au-rqO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Qyu-dh-QZh"/>
+                            <constraint firstItem="9h1-2m-S8I" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="SEo-48-uZJ"/>
+                            <constraint firstItem="LQC-Ph-jpP" firstAttribute="leading" secondItem="SmR-au-rqO" secondAttribute="leading" id="YTH-6j-vja"/>
+                            <constraint firstItem="ZeC-BL-YoN" firstAttribute="top" secondItem="dE2-Xv-fWE" secondAttribute="bottom" constant="8" id="aaf-q8-6KC"/>
+                            <constraint firstItem="csG-VO-kr5" firstAttribute="top" secondItem="LQC-Ph-jpP" secondAttribute="bottom" constant="38" id="awq-Sg-43X"/>
+                            <constraint firstItem="9h1-2m-S8I" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="cXM-lK-FPc"/>
+                            <constraint firstItem="SmR-au-rqO" firstAttribute="top" secondItem="ZeC-BL-YoN" secondAttribute="bottom" constant="32" id="cek-Kz-EVH"/>
+                            <constraint firstItem="cXu-N1-s3N" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fdo-hm-0Ec"/>
+                            <constraint firstItem="LQC-Ph-jpP" firstAttribute="top" secondItem="SmR-au-rqO" secondAttribute="bottom" constant="8" id="kLC-V4-TeU"/>
+                            <constraint firstItem="owN-4m-7Dn" firstAttribute="top" secondItem="cXu-N1-s3N" secondAttribute="bottom" constant="13" id="ltc-il-3Ak"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="LoadIS" destination="LQC-Ph-jpP" id="name-outlet-LQC-Ph-jpP"/>
+                        <outlet property="ShowIS" destination="ewV-7w-ZnS" id="name-outlet-ewV-7w-ZnS"/>
+                        <outlet property="ShowOW" destination="ZeC-BL-YoN" id="name-outlet-ZeC-BL-YoN"/>
+                        <outlet property="ShowRV" destination="owN-4m-7Dn" id="name-outlet-owN-4m-7Dn"/>
+                        <outlet property="version_lbl" destination="csG-VO-kr5" id="name-outlet-csG-VO-kr5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SupersonicLogo" width="205" height="43.5"/>
+    </resources>
+</document>

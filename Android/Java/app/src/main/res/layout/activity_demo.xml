@@ -1,0 +1,90 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DemoActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/banner_footer">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/logo_small" />
+
+        <Button
+            android:id="@+id/rv_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ironsource_button_shape"
+            android:padding="5dp"
+            android:text="initializing rewarded video" />
+
+        <Button
+            android:id="@+id/ow_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/rv_button"
+            android:layout_alignLeft="@+id/rv_button"
+            android:layout_alignRight="@+id/rv_button"
+            android:layout_alignStart="@+id/rv_button"
+            android:layout_below="@+id/rv_button"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ironsource_button_shape"
+            android:text="initializing offerwall" />
+
+
+        <TextView
+            android:id="@+id/version_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/is_button_1"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ow_button"
+            android:layout_alignStart="@+id/ow_button"
+            android:layout_below="@+id/ow_button"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ironsource_button_shape"
+            android:text="Initializing Interstitial" />
+
+        <Button
+            android:id="@+id/is_button_2"
+            android:layout_width="125dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/is_button_1"
+            android:layout_toEndOf="@+id/is_button_1"
+            android:layout_toRightOf="@+id/is_button_1"
+            android:background="@drawable/ironsource_button_shape"
+            android:text="Show Interstitial" />
+
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/banner_footer"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone">
+
+    </FrameLayout>
+
+</RelativeLayout>

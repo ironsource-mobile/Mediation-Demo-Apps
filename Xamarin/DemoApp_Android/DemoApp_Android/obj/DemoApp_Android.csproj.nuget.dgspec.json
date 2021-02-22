@@ -1,0 +1,56 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/alond/Downloads/DemoApp_Android/DemoApp_Android/DemoApp_Android/DemoApp_Android.csproj": {}
+  },
+  "projects": {
+    "/Users/alond/Downloads/DemoApp_Android/DemoApp_Android/DemoApp_Android/DemoApp_Android.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alond/Downloads/DemoApp_Android/DemoApp_Android/DemoApp_Android/DemoApp_Android.csproj",
+        "projectName": "Xamarin Integration App",
+        "projectPath": "/Users/alond/Downloads/DemoApp_Android/DemoApp_Android/DemoApp_Android/DemoApp_Android.csproj",
+        "packagesPath": "/Users/alond/.nuget/packages/",
+        "outputPath": "/Users/alond/Downloads/DemoApp_Android/DemoApp_Android/DemoApp_Android/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/Users/alond/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "monoandroid90"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "monoandroid90": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "monoandroid90": {
+          "dependencies": {
+            "Xamarin.Android.Support.Core.Utils": {
+              "target": "Package",
+              "version": "[28.0.0.3, )"
+            },
+            "Xamarin.Android.Support.CustomTabs": {
+              "target": "Package",
+              "version": "[28.0.0.3, )"
+            },
+            "Xamarin.Android.Support.Design": {
+              "target": "Package",
+              "version": "[28.0.0.3, )"
+            },
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.5.3.2, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}

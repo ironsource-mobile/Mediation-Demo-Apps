@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Integration Demo</string>
+    <string name="initializing">Initializing</string>
+    <string name="show">Show</string>
+    <string name="load">Load</string>
+    <string name="rv">Rewarded Video</string>
+    <string name="ow">Offerwall</string>
+    <string name="is">Interstitial</string>
+    <string name="version">sdk version</string>
+    <string name="rewarded_dialog_header">Video Rewarded</string>
+    <string name="rewarded_dialog_message">You have been rewarded</string>
+    <string name="rvButtonState">rvButtonState</string>
+    <string name="isButtonState">isButtonState</string>
+    <string name="owButtonState">owButtonState</string>
+
+
+
+</resources>

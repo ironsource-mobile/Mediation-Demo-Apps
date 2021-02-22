@@ -1,0 +1,6 @@
+RemoveDynamicRegistrar:true
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/device-builds/iphone7.1-12.4.7/DemoApp_iOS.app:/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/DemoApp_iOS.exe
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/device-builds/iphone7.1-12.4.7/DemoApp_iOS.app:/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/mscorlib.dll
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/device-builds/iphone7.1-12.4.7/DemoApp_iOS.app:/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/Xamarin.iOS.dll
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/device-builds/iphone7.1-12.4.7/DemoApp_iOS.app:/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/System.dll
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/device-builds/iphone7.1-12.4.7/DemoApp_iOS.app:/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/IronSource-iOS_v6.17.0.dll

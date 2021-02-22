@@ -1,0 +1,15 @@
+Function=SystemNative_GetNonCryptographicallySecureRandomBytes
+	/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/mscorlib.dll
+Function=xamarin_timezone_get_local_name
+	/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/mscorlib.dll
+Function=xamarin_timezone_get_data
+	/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/mscorlib.dll
+Function=xamarin_find_protocol_wrapper_type
+	/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/Xamarin.iOS.dll
+Function=xamarin_log
+	/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/Xamarin.iOS.dll
+Function=xamarin_get_block_descriptor
+	/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/Xamarin.iOS.dll
+Function=UIApplicationMain
+	/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache/1-Link/Xamarin.iOS.dll
+Function=mono_pmip

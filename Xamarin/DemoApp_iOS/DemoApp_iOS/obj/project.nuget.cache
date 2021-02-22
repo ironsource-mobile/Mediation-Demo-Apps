@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "p2AlQiWTuMQmIp2NWY/CT0otZ+jc7dHUtPFscmHP58Z2g42Ft1JoMS3dianKA7FC3emZjedOkBOUaDcZ3HWY0g==",
+  "success": true,
+  "projectFilePath": "/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS.csproj",
+  "expectedPackageFiles": [
+    "/Users/alond/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/alond/.nuget/packages/xamarin.essentials/1.2.0/xamarin.essentials.1.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}

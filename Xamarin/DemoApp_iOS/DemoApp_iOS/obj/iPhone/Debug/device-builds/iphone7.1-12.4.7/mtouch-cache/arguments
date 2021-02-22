@@ -1,0 +1,33 @@
+# Version: 13.22.1.8 (d16-8: 6f5adef8e
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mtouch/mtouch.exe \
+	--debug \
+	'/target-framework:Xamarin.iOS,Version=v1.0' \
+	--http-message-handler=HttpClientHandler \
+	--cache=/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-cache \
+	--root-assembly=/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/DemoApp_iOS.exe \
+	--sdkroot=/Applications/Xcode.app/Contents/Developer \
+	--targetver=8.0 \
+	--dev=/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/device-builds/iphone7.1-12.4.7/DemoApp_iOS.app \
+	--executable=DemoApp_iOS \
+	--fastdev \
+	--linksdkonly \
+	--sdk=13.6 \
+	--aot-options=-O=float32 \
+	--abi=arm64 \
+	--symbollist=/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/mtouch-symbols.list \
+	--dsym=no \
+	--framework=../IronSource.framework \
+	--reference=/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/IronSource-iOS_v6.17.0.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/mscorlib.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/OpenTK-1.0.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Core.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Facades/System.Drawing.Common.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Numerics.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Numerics.Vectors.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/System.Xml.dll \
+	--reference=/Library/Frameworks/Xamarin.iOS.framework/Versions/Current/lib/mono/Xamarin.iOS/Xamarin.iOS.dll \
+	--reference=/Users/alond/.nuget/packages/xamarin.essentials/1.2.0/lib/xamarinios10/Xamarin.Essentials.dll \
+	--reference=/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/IronSource-iOS_v6.17.0.dll \
+	@/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/response-file.rsp \
+	--gcc_flags=-ObjC \

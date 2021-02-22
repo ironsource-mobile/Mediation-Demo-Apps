@@ -1,0 +1,11 @@
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/DemoApp_iOS.exe
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/mscorlib.dll
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/../../64bits/Xamarin.iOS.dll
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/System.dll
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/Mono.Security.dll
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/System.Xml.dll
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/System.Numerics.dll
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/System.Core.dll
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/System.Net.Http.dll
+/Library/Frameworks/Xamarin.iOS.framework/Versions/13.22.1.8/lib/mono/Xamarin.iOS/Facades/System.Drawing.Common.dll
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/IronSource-iOS_v6.17.0.dll

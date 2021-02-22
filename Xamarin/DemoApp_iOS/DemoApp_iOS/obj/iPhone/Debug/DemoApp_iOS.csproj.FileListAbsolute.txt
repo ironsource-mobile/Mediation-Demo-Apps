@@ -1,0 +1,16 @@
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/DemoApp_iOS.exe
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/DemoApp_iOS.pdb
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/Xamarin.Essentials.dll
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/Xamarin.Essentials.pdb
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/bin/iPhone/Debug/IronSource-iOS_v6.17.0.dll
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/ibtool/_BundleResourceWithLogicalName.items
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/_PartialAppManifest.items
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/_BundleResourceWithLogicalName.items
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/coremlc/_PartialAppManifest.items
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/coremlc/_BundleResourceWithLogicalName.items
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/optimized/
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/DemoApp_iOS.csprojAssemblyReference.cache
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/DemoApp_iOS.csproj.CoreCompileInputs.cache
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/DemoApp_iOS.csproj.CopyComplete
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/DemoApp_iOS.exe
+/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/DemoApp_iOS.pdb

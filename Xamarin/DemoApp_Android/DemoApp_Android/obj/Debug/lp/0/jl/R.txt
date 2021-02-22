@@ -1,0 +1,2 @@
+int drawable ic_launcher 0x7f080001
+int string app_name 0x7f140001

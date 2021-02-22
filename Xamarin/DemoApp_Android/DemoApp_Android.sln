@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoApp_Android", "DemoApp_Android\DemoApp_Android.csproj", "{6534A402-9ADD-4209-8A9B-72CEA609B0A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6534A402-9ADD-4209-8A9B-72CEA609B0A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6534A402-9ADD-4209-8A9B-72CEA609B0A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6534A402-9ADD-4209-8A9B-72CEA609B0A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6534A402-9ADD-4209-8A9B-72CEA609B0A2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

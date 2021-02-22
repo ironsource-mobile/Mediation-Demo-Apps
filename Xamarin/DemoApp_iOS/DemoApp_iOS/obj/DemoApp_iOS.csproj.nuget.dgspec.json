@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS.csproj": {}
+  },
+  "projects": {
+    "/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS.csproj",
+        "projectName": "DemoApp_iOS",
+        "projectPath": "/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS.csproj",
+        "packagesPath": "/Users/alond/.nuget/packages/",
+        "outputPath": "/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "configFilePaths": [
+          "/Users/alond/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "xamarinios10"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "xamarinios10": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "xamarinios10": {
+          "dependencies": {
+            "Xamarin.Essentials": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

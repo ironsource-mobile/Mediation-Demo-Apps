@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tta-pJ-xOo">
+    <device id="retina6_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="xi7-46-NCS">
+            <objects>
+                <viewController id="tta-pJ-xOo" customClass="ViewController" customModule="IronSourceSwiftDemoApp" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="giv-Ql-OfH"/>
+                        <viewControllerLayoutGuide type="bottom" id="od8-95-bCW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fgI-sm-TzC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SupersonicLogo" translatesAutoresizingMaskIntoConstraints="NO" id="qHo-I7-uFF">
+                                <rect key="frame" x="104.66666666666669" y="52" width="205" height="43.666666666666657"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1jj-Ap-8Dq">
+                                <rect key="frame" x="144.66666666666666" y="125" width="124.99999999999997" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFx-r6-uqU">
+                                <rect key="frame" x="172.66666666666666" y="154" width="69" height="30"/>
+                                <state key="normal" title="Show"/>
+                                <state key="disabled" title="Initializing"/>
+                                <connections>
+                                    <action selector="showRVButtonAction:" destination="tta-pJ-xOo" eventType="touchUpInside" id="DXR-ws-sGk"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offerwall" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ5-N1-ktV">
+                                <rect key="frame" x="172.66666666666666" y="199" width="69" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccu-RV-kFr">
+                                <rect key="frame" x="169.33333333333334" y="319.66666666666669" width="75.333333333333343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rRj-a9-rT6">
+                                <rect key="frame" x="212.33333333333334" y="348.66666666666669" width="69.000000000000028" height="30"/>
+                                <state key="normal" title="Show"/>
+                                <state key="disabled" title="Initializing"/>
+                                <connections>
+                                    <action selector="showISButtonAction:" destination="tta-pJ-xOo" eventType="touchUpInside" id="YX9-9G-KvZ"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v5E-zR-vGw">
+                                <rect key="frame" x="120" y="348.66666666666669" width="34" height="30"/>
+                                <state key="normal" title="Load"/>
+                                <state key="disabled" title="Initializing"/>
+                                <connections>
+                                    <action selector="loadISButtonAction:" destination="tta-pJ-xOo" eventType="touchUpInside" id="Zoq-il-vu2"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8po-Nl-4Ty">
+                                <rect key="frame" x="120" y="455" width="34" height="30"/>
+                                <state key="normal" title="Load"/>
+                                <connections>
+                                    <action selector="loadBNButton:" destination="tta-pJ-xOo" eventType="touchUpInside" id="cNa-xt-k43"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3IM-RW-5Wq">
+                                <rect key="frame" x="220" y="455" width="54" height="30"/>
+                                <state key="normal" title="Destroy"/>
+                                <connections>
+                                    <action selector="destroyBNButton:" destination="tta-pJ-xOo" eventType="touchUpInside" id="3un-y3-9cl"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zpk-8B-p6b">
+                                <rect key="frame" x="180" y="426" width="54.333333333333343" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SH6-bD-xYj">
+                                <rect key="frame" x="186.33333333333334" y="538.33333333333337" width="41.666666666666657" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ydj-ea-q7B">
+                                <rect key="frame" x="172" y="251" width="69" height="30"/>
+                                <state key="normal" title="Show"/>
+                                <state key="disabled" title="Initializing"/>
+                                <connections>
+                                    <action selector="showOWButtonAction:" destination="tta-pJ-xOo" eventType="touchUpInside" id="qZp-Av-Cyp"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="qHo-I7-uFF" firstAttribute="top" secondItem="giv-Ql-OfH" secondAttribute="bottom" constant="8" id="6XU-4K-C5a"/>
+                            <constraint firstItem="Ydj-ea-q7B" firstAttribute="top" secondItem="ZQ5-N1-ktV" secondAttribute="bottom" constant="8" id="FA8-08-b90"/>
+                            <constraint firstItem="ccu-RV-kFr" firstAttribute="top" secondItem="Ydj-ea-q7B" secondAttribute="bottom" constant="61.666666666666686" id="H0X-h9-hea"/>
+                            <constraint firstItem="zpk-8B-p6b" firstAttribute="centerX" secondItem="fgI-sm-TzC" secondAttribute="centerX" id="HFa-Um-WNo"/>
+                            <constraint firstItem="SH6-bD-xYj" firstAttribute="top" secondItem="8po-Nl-4Ty" secondAttribute="bottom" constant="53.333333333333314" id="JV5-bU-ZKn"/>
+                            <constraint firstItem="v5E-zR-vGw" firstAttribute="leading" secondItem="fgI-sm-TzC" secondAttribute="leadingMargin" constant="100" id="JaR-z0-cDg"/>
+                            <constraint firstItem="ccu-RV-kFr" firstAttribute="centerX" secondItem="fgI-sm-TzC" secondAttribute="centerX" id="MGr-hb-Uvx"/>
+                            <constraint firstItem="8po-Nl-4Ty" firstAttribute="leading" secondItem="fgI-sm-TzC" secondAttribute="leadingMargin" constant="100" id="MmM-fe-ySd"/>
+                            <constraint firstItem="1jj-Ap-8Dq" firstAttribute="top" secondItem="qHo-I7-uFF" secondAttribute="bottom" constant="29.333333333333343" id="S9b-YD-E0F"/>
+                            <constraint firstItem="1jj-Ap-8Dq" firstAttribute="centerX" secondItem="fgI-sm-TzC" secondAttribute="centerX" id="V03-GH-uvi"/>
+                            <constraint firstItem="sFx-r6-uqU" firstAttribute="centerX" secondItem="fgI-sm-TzC" secondAttribute="centerX" id="VQM-ep-n4e"/>
+                            <constraint firstItem="v5E-zR-vGw" firstAttribute="top" secondItem="ccu-RV-kFr" secondAttribute="bottom" constant="8" id="bjO-ke-MMb"/>
+                            <constraint firstItem="ZQ5-N1-ktV" firstAttribute="centerX" secondItem="fgI-sm-TzC" secondAttribute="centerX" id="c5e-GS-xAg"/>
+                            <constraint firstItem="ZQ5-N1-ktV" firstAttribute="top" secondItem="sFx-r6-uqU" secondAttribute="bottom" constant="15" id="c6a-Sw-67q"/>
+                            <constraint firstItem="Ydj-ea-q7B" firstAttribute="centerX" secondItem="fgI-sm-TzC" secondAttribute="centerX" id="d7G-Bt-tpu"/>
+                            <constraint firstItem="Ydj-ea-q7B" firstAttribute="top" secondItem="ZQ5-N1-ktV" secondAttribute="bottom" constant="8" id="e1z-bk-lPm"/>
+                            <constraint firstItem="sFx-r6-uqU" firstAttribute="top" secondItem="1jj-Ap-8Dq" secondAttribute="bottom" constant="8" id="geD-tx-AAJ"/>
+                            <constraint firstItem="8po-Nl-4Ty" firstAttribute="top" secondItem="zpk-8B-p6b" secondAttribute="bottom" constant="8.6666666666666856" id="k9q-bh-nzR"/>
+                            <constraint firstItem="3IM-RW-5Wq" firstAttribute="top" secondItem="zpk-8B-p6b" secondAttribute="bottom" constant="8.6666666666666856" id="kCU-Gm-0ck"/>
+                            <constraint firstItem="qHo-I7-uFF" firstAttribute="centerX" secondItem="fgI-sm-TzC" secondAttribute="centerX" id="mdY-O3-Jaa"/>
+                            <constraint firstItem="rRj-a9-rT6" firstAttribute="top" secondItem="ccu-RV-kFr" secondAttribute="bottom" constant="8" id="ndA-7F-FPY"/>
+                            <constraint firstItem="zpk-8B-p6b" firstAttribute="top" secondItem="rRj-a9-rT6" secondAttribute="bottom" constant="47.333333333333314" id="r3L-jH-4t8"/>
+                            <constraint firstItem="3IM-RW-5Wq" firstAttribute="leading" secondItem="8po-Nl-4Ty" secondAttribute="trailing" constant="66.000000000000057" id="spU-FS-HSx"/>
+                            <constraint firstItem="rRj-a9-rT6" firstAttribute="leading" secondItem="v5E-zR-vGw" secondAttribute="trailing" constant="58.333333333333314" id="xJQ-sx-RS4"/>
+                            <constraint firstItem="SH6-bD-xYj" firstAttribute="centerX" secondItem="fgI-sm-TzC" secondAttribute="centerX" id="xuf-A7-AG7"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="destroyBNButton" destination="3IM-RW-5Wq" id="ziJ-zs-Eac"/>
+                        <outlet property="loadBNButton" destination="8po-Nl-4Ty" id="LJT-aN-ncf"/>
+                        <outlet property="loadISButton" destination="v5E-zR-vGw" id="beY-Rz-sdN"/>
+                        <outlet property="showISButton" destination="rRj-a9-rT6" id="Rzx-Vq-Cu9"/>
+                        <outlet property="showOWButton" destination="Ydj-ea-q7B" id="swe-PI-3HF"/>
+                        <outlet property="showRVButton" destination="sFx-r6-uqU" id="ikB-8o-5G3"/>
+                        <outlet property="versionLabel" destination="SH6-bD-xYj" id="Mwc-FM-AgY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pat-qB-ILY" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="131.8840579710145" y="50.223214285714285"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="SupersonicLogo" width="205" height="43.5"/>
+    </resources>
+</document>

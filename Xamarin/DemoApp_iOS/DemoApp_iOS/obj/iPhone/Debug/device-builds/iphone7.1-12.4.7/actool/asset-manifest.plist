@@ -1,0 +1,689 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>com.apple.actool.compilation-results</key>
+	<dict>
+		<key>output-files</key>
+		<array>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon20x20@2x.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon20x20@3x.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon29x29@2x.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon29x29@3x.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon40x40@2x.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon40x40@3x.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon60x60@3x.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon20x20~ipad.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon29x29~ipad.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon76x76~ipad.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon76x76@2x~ipad.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/AppIcon83.5x83.5@2x~ipad.png</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/bundle/Assets.car</string>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/partial-info.plist</string>
+		</array>
+	</dict>
+	<key>com.apple.actool.document.warnings</key>
+	<array>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>A 60x60@2x app icon is required for iPhone apps targeting iOS 7.0 and later</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][car][60x60][][][3x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon180-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][16x16][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon32.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][ipad][29x29][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon58-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][512x512][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon1024-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][44x44][appLauncher][40mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon88.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][128x128][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon128.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][98x98][quickLook][42mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon196.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][iphone][60x60][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon120-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][car][60x60][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon120-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][29x29][companionSettings][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon58-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][256x256][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon512.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][16x16][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon16.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][512x512][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon512-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][40x40][appLauncher][38mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon80-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][32x32][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon64.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][86x86][quickLook][38mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon172.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][27.5x27.5][notificationCenter][42mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon55.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][256x256][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon256-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][ipad][20x20][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon40-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch-marketing][1024x1024][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon1024-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][29x29][companionSettings][][3x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon87-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][32x32][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon32-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][ipad][40x40][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon40-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][50x50][appLauncher][44mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon100.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][24x24][notificationCenter][38mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon48.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][128x128][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon256.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][ipad][40x40][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon80-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][256x256][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon256-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][29x29][companionSettings][][3x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon87-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][16x16][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon32.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][ipad][29x29][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon58-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][128x128][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon256.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][256x256][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon512.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][32x32][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon32-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch-marketing][1024x1024][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon1024-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][50x50][appLauncher][44mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon100.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][32x32][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon64.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][ipad][40x40][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon80-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][iphone][60x60][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon120-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][car][60x60][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon120-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][ipad][40x40][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon40-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][98x98][quickLook][42mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon196.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][car][60x60][][][3x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon180-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][512x512][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon1024-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][27.5x27.5][notificationCenter][42mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon55.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][24x24][notificationCenter][38mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon48.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][512x512][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon512-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][44x44][appLauncher][40mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon88.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][ipad][20x20][][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon40-1.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][86x86][quickLook][38mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon172.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][16x16][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon16.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][mac][128x128][][][1x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon128.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][40x40][appLauncher][38mm][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon80-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+		<dict>
+			<key>affected-items</key>
+			<array>
+				<string>./AppIcon.appiconset/[][watch][29x29][companionSettings][][2x][][]</string>
+			</array>
+			<key>catalog</key>
+			<string>/Users/alond/Downloads/DemoApp_iOS/DemoApp_iOS/DemoApp_iOS/obj/iPhone/Debug/device-builds/iphone7.1-12.4.7/actool/cloned-assets/Assets.xcassets</string>
+			<key>message</key>
+			<string>The file "Icon58-2.png" for the image set "AppIcon" does not exist.</string>
+			<key>type</key>
+			<string>Missing Content</string>
+		</dict>
+	</array>
+</dict>
+</plist>

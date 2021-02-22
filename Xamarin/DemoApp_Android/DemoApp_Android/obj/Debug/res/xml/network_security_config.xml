@@ -1,0 +1,1 @@
+<network-security-config><!-- For Facebook Audience Network--><domain-config cleartextTrafficPermitted="true"><domain includeSubdomains="true">127.0.0.1</domain></domain-config></network-security-config>
