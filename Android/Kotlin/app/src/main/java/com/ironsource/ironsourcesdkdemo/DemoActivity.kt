@@ -5,40 +5,38 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.ironsource.adapters.supersonicads.SupersonicConfig
-import com.ironsource.mediationsdk.ISBannerSize
-import com.ironsource.mediationsdk.IronSource
-import com.ironsource.mediationsdk.IronSourceBannerLayout
+import com.ironsource.ironsourcesdkdemo.databinding.ActivityDemoBinding
+import com.ironsource.mediationsdk.*
 import com.ironsource.mediationsdk.impressionData.ImpressionData
 import com.ironsource.mediationsdk.impressionData.ImpressionDataListener
 import com.ironsource.mediationsdk.integration.IntegrationHelper
 import com.ironsource.mediationsdk.logger.IronSourceError
 import com.ironsource.mediationsdk.model.Placement
-import com.ironsource.mediationsdk.sdk.BannerListener
-import com.ironsource.mediationsdk.sdk.InterstitialListener
-import com.ironsource.mediationsdk.sdk.OfferwallListener
-import com.ironsource.mediationsdk.sdk.RewardedVideoListener
+import com.ironsource.mediationsdk.sdk.*
 import com.ironsource.mediationsdk.utils.IronSourceUtils
+import java.util.*
 
 class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, InterstitialListener,ImpressionDataListener {
-    private val TAG = "DemoActivity"
-    private val APP_KEY = "85460dcd"
-    private val FALLBACK_USER_ID = "MyUser"
-    private var mVideoButton: Button? = null
-    private var mOfferwallButton: Button? = null
-    private var mInterstitialLoadButton: Button? = null
-    private var mInterstitialShowButton: Button? = null
+
+    companion object {
+        const val APP_KEY = "85460dcd"
+        const val TAG = "DemoActivity"
+    }
+
+    private lateinit var binding: ActivityDemoBinding
+
     private var mPlacement: Placement? = null
-    private var mBannerParentLayout: FrameLayout? = null
-    private var mIronSourceBannerLayout: IronSourceBannerLayout? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_demo)
+        binding = ActivityDemoBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
         IntegrationHelper.validateIntegration(this)
@@ -46,7 +44,7 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
 
         val advertisingId = IronSource.getAdvertiserId(this@DemoActivity)
         // we're using an advertisingId as the 'userId'
-        initIronSource(APP_KEY, advertisingId)
+        initIronSource(advertisingId)
 
         //Network Connectivity Status
         IronSource.shouldTrackNetworkState(this, true)
@@ -54,7 +52,7 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
 
 
 
-    private fun initIronSource(appKey: String, userId: String?) {
+    private fun initIronSource(userId: String?) {
         // Be sure to set a listener to each product that is being initiated
         // set the IronSource rewarded video listener
         IronSource.setRewardedVideoListener(this)
@@ -70,11 +68,11 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
         // set the IronSource user id
         IronSource.setUserId(userId)
         // init the IronSource SDK
-        IronSource.init(this, appKey)
+        IronSource.init(this, APP_KEY)
         updateButtonsState()
 
         // In order to work with IronSourceBanners you need to add Providers who support banner ad unit and uncomment next line
-         createAndloadBanner();
+         createAndloadBanner()
     }
 
     override fun onResume() {
@@ -97,7 +95,7 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
     private fun updateButtonsState() {
         handleVideoButtonState(IronSource.isRewardedVideoAvailable())
         handleOfferwallButtonState(IronSource.isOfferwallAvailable())
-        handleLoadInterstitialButtonState(true)
+        handleLoadInterstitialButtonState()
         handleInterstitialShowButtonState(false)
     }
 
@@ -105,29 +103,23 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
      * initialize the UI elements of the activity
      */
     private fun initUIElements() {
-        mVideoButton = findViewById<View>(R.id.rv_button) as Button
-        mVideoButton!!.setOnClickListener {
+        binding.rvButton.setOnClickListener {
             // check if video is available
             if (IronSource.isRewardedVideoAvailable()) //show rewarded video
                 IronSource.showRewardedVideo()
         }
-        mOfferwallButton = findViewById<View>(R.id.ow_button) as Button
-        mOfferwallButton!!.setOnClickListener { //show the offerwall
+        binding.owButton.setOnClickListener { //show the offerwall
             if (IronSource.isOfferwallAvailable()) IronSource.showOfferwall()
         }
-        mInterstitialLoadButton = findViewById<View>(R.id.is_button_1) as Button
-        mInterstitialLoadButton!!.setOnClickListener { IronSource.loadInterstitial() }
-        mInterstitialShowButton = findViewById<View>(R.id.is_button_2) as Button
-        mInterstitialShowButton!!.setOnClickListener {
+        binding.isLoadButton.setOnClickListener { IronSource.loadInterstitial() }
+        binding.isShowButton.setOnClickListener {
             // check if interstitial is available
             if (IronSource.isInterstitialReady()) {
                 //show the interstitial
                 IronSource.showInterstitial()
             }
         }
-        val versionTV = findViewById<View>(R.id.version_txt) as TextView
-        versionTV.text = resources.getString(R.string.version) + " " + IronSourceUtils.getSDKVersion()
-        mBannerParentLayout = findViewById<View>(R.id.banner_footer) as FrameLayout
+        binding.versionTxt.text = resources.getString(R.string.version, IronSourceUtils.getSDKVersion())
     }
 
     /**
@@ -139,19 +131,21 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
         val size = ISBannerSize.BANNER
 
         // instantiate IronSourceBanner object, using the IronSource.createBanner API
-        mIronSourceBannerLayout = IronSource.createBanner(this, size)
+        val mIronSourceBannerLayout = IronSource.createBanner(this, size)
 
-        // add IronSourceBanner to your container
-        val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                FrameLayout.LayoutParams.MATCH_PARENT)
-        mBannerParentLayout!!.addView(mIronSourceBannerLayout, 0, layoutParams)
-        if (mIronSourceBannerLayout != null) {
+        mIronSourceBannerLayout?.let {
+            // add IronSourceBanner to your container
+            val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT)
+
+            binding.bannerFooter.addView(it, 0, layoutParams)
+
             // set the banner listener
-            mIronSourceBannerLayout!!.bannerListener = object : BannerListener {
+            it.bannerListener = object : BannerListener {
                 override fun onBannerAdLoaded() {
                     Log.d(TAG, "onBannerAdLoaded")
                     // since banner container was "gone" by default, we need to make it visible as soon as the banner is ready
-                    mBannerParentLayout!!.visibility = View.VISIBLE
+                    binding.bannerFooter.visibility = View.VISIBLE
                 }
 
                 override fun onBannerAdLoadFailed(error: IronSourceError) {
@@ -176,21 +170,14 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
             }
 
             // load ad into the created banner
-            IronSource.loadBanner(mIronSourceBannerLayout)
-        } else {
-            Toast.makeText(this@DemoActivity, "IronSource.createBanner returned null", Toast.LENGTH_LONG).show()
-        }
-    }
+            IronSource.loadBanner(it)
 
-    /**
-     * Destroys IronSource Banner and removes it from the container
-     *
-     */
-    private fun destroyAndDetachBanner() {
-        IronSource.destroyBanner(mIronSourceBannerLayout)
-        if (mBannerParentLayout != null) {
-            mBannerParentLayout!!.removeView(mIronSourceBannerLayout)
+        } ?: run {
+            Toast.makeText(this@DemoActivity, "IronSource.createBanner returned null", Toast.LENGTH_LONG).show()
+
         }
+
+
     }
 
     /**
@@ -198,7 +185,7 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
      *
      * @param available if the video is available
      */
-    fun handleVideoButtonState(available: Boolean) {
+    private fun handleVideoButtonState(available: Boolean) {
         val text: String
         val color: Int
         if (available) {
@@ -209,9 +196,9 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
             text = resources.getString(R.string.initializing) + " " + resources.getString(R.string.rv)
         }
         runOnUiThread {
-            mVideoButton!!.setTextColor(color)
-            mVideoButton!!.text = text
-            mVideoButton!!.isEnabled = available
+            binding.rvButton.setTextColor(color)
+            binding.rvButton.text = text
+            binding.rvButton.isEnabled = available
         }
     }
 
@@ -220,7 +207,7 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
      *
      * @param available if the offerwall is available
      */
-    fun handleOfferwallButtonState(available: Boolean) {
+    private fun handleOfferwallButtonState(available: Boolean) {
         val text: String
         val color: Int
         if (available) {
@@ -231,50 +218,42 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
             text = resources.getString(R.string.initializing) + " " + resources.getString(R.string.ow)
         }
         runOnUiThread {
-            mOfferwallButton!!.setTextColor(color)
-            mOfferwallButton!!.text = text
-            mOfferwallButton!!.isEnabled = available
+            binding.owButton.setTextColor(color)
+            binding.owButton.text = text
+            binding.owButton.isEnabled = available
         }
     }
 
     /**
      * Set the Interstitial button state according to the product's state
      *
-     * @param available if the interstitial is available
      */
-    fun handleLoadInterstitialButtonState(available: Boolean) {
-        Log.d(TAG, "handleInterstitialButtonState | available: $available")
-        val text: String
-        val color: Int
-        if (available) {
-            color = Color.BLUE
-            text = resources.getString(R.string.load) + " " + resources.getString(R.string.`is`)
-        } else {
-            color = Color.BLACK
-            text = resources.getString(R.string.initializing) + " " + resources.getString(R.string.`is`)
-        }
+    private fun handleLoadInterstitialButtonState() {
+        Log.d(TAG, "handleInterstitialButtonState | available: true")
+        val text = resources.getString(R.string.load) + " " + resources.getString(R.string.`is`)
+        val color = Color.BLUE
         runOnUiThread {
-            mInterstitialLoadButton!!.setTextColor(color)
-            mInterstitialLoadButton!!.text = text
-            mInterstitialLoadButton!!.isEnabled = available
+            binding.isLoadButton.setTextColor(color)
+            binding.isLoadButton.text = text
+            binding.isLoadButton.isEnabled = true
         }
     }
+
 
     /**
      * Set the Show Interstitial button state according to the product's state
      *
      * @param available if the interstitial is available
      */
-    fun handleInterstitialShowButtonState(available: Boolean) {
-        val color: Int
-        color = if (available) {
+    private fun handleInterstitialShowButtonState(available: Boolean) {
+        val color: Int = if (available) {
             Color.BLUE
         } else {
             Color.BLACK
         }
         runOnUiThread {
-            mInterstitialShowButton!!.setTextColor(color)
-            mInterstitialShowButton!!.isEnabled = available
+            binding.isShowButton.setTextColor(color)
+            binding.isShowButton.isEnabled = available
         }
     }
 
@@ -288,11 +267,12 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
         // called when the video is closed
         Log.d(TAG, "onRewardedVideoAdClosed")
         // here we show a dialog to the user if he was rewarded
-        if (mPlacement != null) {
+        mPlacement?.let {
             // if the user was rewarded
-            showRewardDialog(mPlacement!!)
+            showRewardDialog(it)
             mPlacement = null
         }
+
     }
 
     override fun onRewardedVideoAvailabilityChanged(b: Boolean) {
@@ -410,7 +390,7 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
 
     // --------- Impression Data Listener ---------
 
-    override fun onImpressionSuccess(impressionData: ImpressionData?): Unit {
+    override fun onImpressionSuccess(impressionData: ImpressionData?) {
         // The onImpressionSuccess will be reported when the rewarded video and interstitial ad is opened.
         // For banners, the impression is reported on load success.
         if (impressionData != null) {
@@ -418,9 +398,9 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
         }
     }
 
-    fun showRewardDialog(placement: Placement) {
+    private fun showRewardDialog(placement: Placement) {
         val builder = AlertDialog.Builder(this@DemoActivity)
-        builder.setPositiveButton("ok") { dialog, id -> dialog.dismiss() }
+        builder.setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
         builder.setTitle(resources.getString(R.string.rewarded_dialog_header))
         builder.setMessage(resources.getString(R.string.rewarded_dialog_message) + " " + placement.rewardAmount + " " + placement.rewardName)
         builder.setCancelable(false)
@@ -430,3 +410,6 @@ class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, Inter
 
 
 }
+
+
+

@@ -328,7 +328,7 @@ class ViewController: UIViewController, ISRewardedVideoDelegate, ISOfferwallDele
     
     //MARK: ISImpressionData Functions
     func impressionDataDidSucceed(_ impressionData: ISImpressionData!) {
-        logFunctionName(string: #function+String(describing: ISImpressionData()))
+        logFunctionName(string: #function+String(describing: impressionData))
 
     }
 }

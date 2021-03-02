@@ -55,7 +55,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <Button
-            android:id="@+id/is_button_1"
+            android:id="@+id/is_load_button"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/ow_button"
@@ -66,12 +66,12 @@
             android:text="Initializing Interstitial" />
 
         <Button
-            android:id="@+id/is_button_2"
+            android:id="@+id/is_show_button"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/is_button_1"
-            android:layout_toEndOf="@+id/is_button_1"
-            android:layout_toRightOf="@+id/is_button_1"
+            android:layout_alignTop="@+id/is_load_button"
+            android:layout_toEndOf="@+id/is_load_button"
+            android:layout_toRightOf="@+id/is_load_button"
             android:background="@drawable/ironsource_button_shape"
             android:text="Show Interstitial" />
 
