@@ -8,9 +8,9 @@ Learn more about the integration for each operating system:
 
 [Unity](https://developers.ironsrc.com/developer-docs/unity/)
 
-[Android](https://developers.ironsrc.com/developer-docs/unity/)
+[Android](https://developers.ironsrc.com/developer-docs/android/)
 
-[iOS](https://developers.ironsrc.com/developer-docs/unity/)
+[iOS](https://developers.ironsrc.com/developer-docs/ios/)
 
 
 
