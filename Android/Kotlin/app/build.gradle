@@ -36,14 +36,9 @@ android {
 //Include IronSource maven repositories
 repositories {
     maven {
-        //IronSource SDK
-        url "https://dl.bintray.com/ironsource-mobile/android-sdk"
+        //IronSource
+        url "https://android-sdk.is.com/"
     }
-    maven {
-        //IronSource Adapters
-        url "http://dl.bintray.com/ironsource-mobile/android-adapters"
-    }
-
 }
 
 

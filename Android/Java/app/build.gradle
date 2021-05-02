@@ -25,14 +25,9 @@ android {
 //Include IronSource maven repositories
 repositories {
     maven {
-        //IronSource SDK
-        url "https://dl.bintray.com/ironsource-mobile/android-sdk"
+        //IronSource
+        url "https://android-sdk.is.com/"
     }
-    maven {
-        //IronSource Adapters
-        url "http://dl.bintray.com/ironsource-mobile/android-adapters"
-    }
-
 }
 
 
@@ -46,6 +41,4 @@ dependencies {
     //Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
     //Make sure you also configure the AdNetworks in your dashboard.
     //For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
-
-
 }
