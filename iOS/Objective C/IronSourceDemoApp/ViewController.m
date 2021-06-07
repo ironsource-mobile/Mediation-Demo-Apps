@@ -315,6 +315,13 @@
 }
 
 /**
+ Called after a banner ad has been successfully shown
+ */
+- (void)bannerDidShow {
+    NSLog(@"%s",__PRETTY_FUNCTION__);
+}
+
+/**
  Called after a banner has attempted to load an ad but failed.
   @param error The reason for the error
  */
@@ -354,7 +361,5 @@
 - (void)impressionDataDidSucceed:(ISImpressionData *)impressionData {
     NSLog(@"impressionData %@",impressionData);
 }
-
-
 
 @end

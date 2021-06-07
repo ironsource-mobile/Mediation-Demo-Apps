@@ -15,12 +15,6 @@ let kAPPKEY = "8545d445"
 
 
 class ViewController: UIViewController, ISRewardedVideoDelegate, ISOfferwallDelegate, ISInterstitialDelegate, ISBannerDelegate,ISImpressionDataDelegate {
-  
-    
-
-    
-   
-    
     
     //MARK: IBOutlets
     @IBOutlet weak var showRVButton: UIButton!
@@ -302,6 +296,10 @@ class ViewController: UIViewController, ISRewardedVideoDelegate, ISOfferwallDele
          
          view.addSubview(bannerView)
         
+        logFunctionName()
+    }
+    
+    func bannerDidShow() {
         logFunctionName()
     }
     
