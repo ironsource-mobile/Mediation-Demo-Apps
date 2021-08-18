@@ -1,7 +1,7 @@
 #Android Java
 Android/Java/.gradle/*
 Android/Java/.idea/*
-
+Android/Java/local.properties
 
 #Android Kotlin
 Android/Kotlin/.idea/*
