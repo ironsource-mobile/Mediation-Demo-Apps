@@ -6,6 +6,7 @@ Android/Java/local.properties
 #Android Kotlin
 Android/Kotlin/.idea/*
 
+iOs/Objective C/Pods/
 iOs/Swift/Pods/
 UserInterfaceState.xcuserstate
 xcschememanagement.plist
