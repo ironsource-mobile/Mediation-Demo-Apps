@@ -80,8 +80,6 @@
      * To finalize your banner integration, you must integrate at least one of our mediation adapters that have banner.
      */
     [self loadBanner];
-    [self destroyBanner];
-
 }
 
 - (void)didReceiveMemoryWarning {
