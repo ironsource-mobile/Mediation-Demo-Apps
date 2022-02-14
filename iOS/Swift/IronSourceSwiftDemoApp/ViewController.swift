@@ -299,10 +299,6 @@ class ViewController: UIViewController, ISRewardedVideoDelegate, ISOfferwallDele
         logFunctionName()
     }
     
-    func bannerDidShow() {
-        logFunctionName()
-    }
-    
     func bannerDidFailToLoadWithError(_ error: Error!) {
         logFunctionName(string: #function+String(describing: Error.self))
 
