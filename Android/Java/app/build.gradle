@@ -36,7 +36,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     //Add IronSource Mediation SDK dependency.
-    implementation 'com.ironsource.sdk:mediationsdk:7.2.1'
+    implementation 'com.ironsource.sdk:mediationsdk:7.2.1.1'
 
     //Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
     //Make sure you also configure the AdNetworks in your dashboard.
