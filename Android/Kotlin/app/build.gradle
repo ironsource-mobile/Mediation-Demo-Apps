@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     //Add IronSource Mediation SDK dependency.
-    implementation 'com.ironsource.sdk:mediationsdk:7.2.1.1'
+    implementation 'com.ironsource.sdk:mediationsdk:7.2.2'
 
 
     //Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
