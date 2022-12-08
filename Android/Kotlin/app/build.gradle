@@ -45,12 +45,12 @@ repositories {
 dependencies {
     //noinspection GradleCompatible
     implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
 
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     //Add IronSource Mediation SDK dependency.
-    implementation 'com.ironsource.sdk:mediationsdk:7.2.5'
+    implementation 'com.ironsource.sdk:mediationsdk:7.2.6'
 
 
     //Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
