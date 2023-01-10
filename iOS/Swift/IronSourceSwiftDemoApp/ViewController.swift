@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 import ObjectiveC.runtime
-
+import IronSource
 
 let kAPPKEY = "8545d445"
 
