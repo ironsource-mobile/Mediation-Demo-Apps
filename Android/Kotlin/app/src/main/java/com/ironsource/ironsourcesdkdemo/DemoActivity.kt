@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.ironsource.adapters.supersonicads.SupersonicConfig
@@ -19,7 +18,6 @@ import com.ironsource.mediationsdk.logger.IronSourceError
 import com.ironsource.mediationsdk.model.Placement
 import com.ironsource.mediationsdk.sdk.*
 import com.ironsource.mediationsdk.utils.IronSourceUtils
-import java.util.*
 
 class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, InterstitialListener,ImpressionDataListener {
 
