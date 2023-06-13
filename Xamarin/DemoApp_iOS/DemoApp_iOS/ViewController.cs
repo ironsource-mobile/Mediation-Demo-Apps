@@ -4,15 +4,18 @@ using UIKit;
 
 using IronSourceiOS;
 using CoreGraphics;
+using CoreAudioKit;
 
 namespace DemoApp_iOS
 {
     public partial class ViewController : UIViewController
     {
-        RVDelegate rvDelegate;
-        OWDelegate owDelegate;
-        ISDelegate isDelegate;
-        BannerWrapper bnDelegate;
+        OfferWallDelegate mOfferWallDelegate;
+        RewardedVideoLevelPlayDelegate mRewardedVideoLevelPlayDelegate;
+        InterstitialLevelPlayDelegate mInterstitialLevelPlayDelegate;
+        BannerWrapper mBannerLevelPlayDelegate;
+        ImpressionDataDelegate mImpressionDataDelegate;
+
         private const String APPKEY = "8545d445";
 
         public ViewController(IntPtr handle) : base(handle)
@@ -24,26 +27,30 @@ namespace DemoApp_iOS
             base.ViewDidLoad();
 
             // Perform any additional setup after loading the view, typically from a nib.
-            rvDelegate = new RVDelegate(this);
-            owDelegate = new OWDelegate(this);
-            isDelegate = new ISDelegate(this);
-            bnDelegate = new BannerWrapper(this);
+            mRewardedVideoLevelPlayDelegate = new RewardedVideoLevelPlayDelegate(this);
+            mOfferWallDelegate = new OfferWallDelegate(this);
+            mInterstitialLevelPlayDelegate = new InterstitialLevelPlayDelegate(this);
+            mBannerLevelPlayDelegate = new BannerWrapper(this);
+            mImpressionDataDelegate = new ImpressionDataDelegate(this);
 
             version_lbl.Text = "SDK Version " + IronSource.SdkVersion;
 
-            IronSource.SetRewardedVideoDelegate(rvDelegate);
-            IronSource.SetOfferwallDelegate(owDelegate);
-            IronSource.SetInterstitialDelegate(isDelegate);
-            IronSource.SetBannerDelegate((ISBannerDelegate)bnDelegate);
+            //Set delegates
+            IronSource.SetOfferwallDelegate(mOfferWallDelegate);
+            IronSource.setLevelPlayBannerDelegate((LevelPlayBannerDelegate)mBannerLevelPlayDelegate);
+            IronSource.setLevelPlayRewardedVideoDelegate(mRewardedVideoLevelPlayDelegate);
+            IronSource.setLevelPlayInterstitialDelegate(mInterstitialLevelPlayDelegate);
+            IronSource.addImpressionDataDelegate(mImpressionDataDelegate);
 
+            //Set configurations
             ISConfigurations.Configurations.Plugin = "Xamarin";
-            ISConfigurations.Configurations.PluginVersion = "6.10.0";
-            ISConfigurations.Configurations.PluginFrameworkVersion = "8.2.0.0";
+            ISConfigurations.Configurations.PluginVersion = "7.3.0";
+            ISConfigurations.Configurations.PluginFrameworkVersion = "16.2.0.5";
             ISSupersonicAdsConfiguration.Configurations.UseClientSideCallbacks = true;
 
             ISIntegrationHelper.ValidateIntegration();
             IronSource.InitWithAppKey(APPKEY);
-            var bannerSize = new ISBannerSize("BANNER");
+            var bannerSize = new ISBannerSize("BANNER", 320, 50);
             IronSource.LoadBannerWithViewController(this, bannerSize);
         }
 
@@ -53,63 +60,65 @@ namespace DemoApp_iOS
             // Release any cached data, images, etc that aren't in use.
         }
 
-        private class RVDelegate : ISRewardedVideoDelegate
+        // ******************* UI ******************* //
+        public void SetRewardedVideoButtomState(bool available)
         {
-            private ViewController viewController;
-
-            public RVDelegate(ViewController viewController)
+            if (available)
             {
-                this.viewController = viewController;
+                ShowRV.SetTitleColor(UIColor.Green, UIControlState.Normal);
+                ShowRV.Enabled = true;
             }
-
-            public override void DidClickRewardedVideo(ISPlacementInfo placementInfo)
+            else
             {
-            }
-
-            public override void DidReceiveRewardForPlacement(ISPlacementInfo placementInfo)
-            {
-            }
-
-            public override void RewardedVideoDidClose()
-            {
-            }
-
-            public override void RewardedVideoDidEnd()
-            {
-            }
-
-            public override void RewardedVideoDidFailToShowWithError(NSError error)
-            {
-            }
-
-            public override void RewardedVideoDidOpen()
-            {
-            }
-
-            public override void RewardedVideoDidStart()
-            {
-            }
-
-            public override void RewardedVideoHasChangedAvailability(bool available)
-            {
-                if (available)
-                {
-                    viewController.ShowRV.SetTitleColor(UIColor.Green, UIControlState.Normal);
-                    viewController.ShowRV.Enabled = true;
-                }
-                else
-                {
-                    viewController.ShowRV.SetTitleColor(UIColor.Red, UIControlState.Normal);
-                    //viewController.ShowRV.Enabled = false;
-                }
+                ShowRV.SetTitleColor(UIColor.Red, UIControlState.Normal);
             }
         }
 
-        private class OWDelegate : ISOfferwallDelegate
+        public void EnableInterstitialButtonState()
+        {
+            ShowIS.SetTitleColor(UIColor.Green, UIControlState.Normal);
+            ShowIS.Enabled = true;
+        }
+
+        public void DisableInterstitialButtonState(bool isNormal)
+        {
+            if (isNormal)
+            {
+                ShowIS.SetTitleColor(UIColor.Red, UIControlState.Normal);
+            }
+            else
+            {
+                ShowIS.SetTitleColor(UIColor.Red, UIControlState.Disabled);
+            }
+        }
+
+        // **************** Button Actions **************** //
+        partial void ShowRV_TouchUpInside(UIButton sender)
+        {
+            IronSource.ShowRewardedVideoWithViewController(this);
+        }
+
+        partial void ShowOW_TouchUpInside(UIButton sender)
+        {
+            IronSource.ShowOfferwallWithViewController(this);
+        }
+
+        partial void LoadIS_TouchUpInside(UIButton sender)
+        {
+            IronSource.LoadInterstitial();
+        }
+
+        partial void ShowIS_TouchUpInside(UIButton sender)
+        {
+            IronSource.ShowInterstitialWithViewController(this);
+        }
+
+        // **************** Offerwall **************** //
+        private class OfferWallDelegate : ISOfferwallDelegate
         {
             private ViewController viewController;
 
-            public OWDelegate(ViewController viewController)
+            public OfferWallDelegate(ViewController viewController)
             {
                 this.viewController = viewController;
             }
@@ -150,68 +159,132 @@ namespace DemoApp_iOS
             }
         }
 
-        private class ISDelegate : ISInterstitialDelegate
+
+    }
+
+    #region LevelPlayRewardedVideo
+    // **************** Rewarded Video **************** //
+    public class RewardedVideoLevelPlayDelegate : LevelPlayRewardedVideoDelegate
+    {
+        ViewController viewController;
+
+        public RewardedVideoLevelPlayDelegate(ViewController viewController)
         {
-            private ViewController viewController;
+            this.viewController = viewController;
+            Console.WriteLine("Xamarin-iOS-Demo : LevelPlayRewardedVideoDelegate didset");
 
-            public ISDelegate(ViewController viewController)
-            {
-                this.viewController = viewController;
-            }
-
-            public override void InterstitialDidClick()
-            {
-            }
-
-            public override void InterstitialDidClose()
-            {
-                viewController.ShowIS.SetTitleColor(UIColor.Red, UIControlState.Normal);
-                //viewController.ShowIS.Enabled = false;
-            }
-
-            public override void InterstitialDidFailToLoadWithError(NSError error)
-            {
-                viewController.ShowIS.SetTitleColor(UIColor.Red, UIControlState.Disabled);
-            }
-
-            public override void InterstitialDidFailToShow(NSError error)
-            {
-
-            }
-
-            public override void InterstitialDidLoad()
-            {
-                viewController.ShowIS.SetTitleColor(UIColor.Green, UIControlState.Normal);
-                viewController.ShowIS.Enabled = true;
-            }
-
-            public override void InterstitialDidOpen()
-            {
-            }
-
-            public override void InterstitialDidShow()
-            {
-            }
         }
 
-        partial void ShowRV_TouchUpInside(UIButton sender)
+        public override void didClick(ISPlacementInfo placementInfo, ISAdInfo adInfo)
         {
-            IronSource.ShowRewardedVideoWithViewController(this);
+            Console.WriteLine("Xamarin-iOS-Demo : LevelPlayRewardedVideoDelegate didClick:  placement: " + placementInfo + " adinfo: " + adInfo);
         }
 
-        partial void ShowOW_TouchUpInside(UIButton sender)
+        public override void didCloseWithAdInfo(ISAdInfo adInfo)
         {
-            IronSource.ShowOfferwallWithViewController(this);
+            Console.WriteLine("Xamarin-iOS-Demo : LevelPlayRewardedVideoDelegate didCloseWithAdInfo: adinfo: " + adInfo);
         }
 
-        partial void LoadIS_TouchUpInside(UIButton sender)
+        public override void didFailToShowWithError(NSError error, ISAdInfo adInfo)
         {
-            IronSource.LoadInterstitial();
+            Console.WriteLine("Xamarin-iOS-Demo : LevelPlayRewardedVideoDelegate didFailToShowWithError:  error: " + error + " adinfo: " + adInfo);
         }
 
-        partial void ShowIS_TouchUpInside(UIButton sender)
+        public override void didOpenWithAdInfo(ISAdInfo adInfo)
         {
-            IronSource.ShowInterstitialWithViewController(this);
+            Console.WriteLine("Xamarin-iOS-Demo : LevelPlayRewardedVideoDelegate didOpenWithAdInfo: adinfo: " + adInfo);
+        }
+
+        public override void didReceiveRewardForPlacement(ISPlacementInfo placementInfo, ISAdInfo adInfo)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : - LevelPlayRewardedVideoDelegate didReceiveRewardForPlacement:  placement: " + placementInfo + " adinfo: " + adInfo);
+        }
+
+        public override void hasAvailableAdWithAdInfo(ISAdInfo adInfo)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : - LevelPlayRewardedVideoDelegate hasAvailableAdWithAdInfo: adinfo: " + adInfo);
+            viewController.SetRewardedVideoButtomState(true);
+        }
+
+        public override void hasNoAvailableAd()
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : LevelPlayRewardedVideoDelegate hasNoAvailableAd");
+            viewController.SetRewardedVideoButtomState(false);
+
+        }
+    }
+    #endregion
+
+
+    #region LevelPlayInterstitial
+    // **************** Interstitial **************** //
+
+
+    public class InterstitialLevelPlayDelegate : LevelPlayInterstitialDelegate
+    {
+        readonly ViewController viewController;
+
+        public InterstitialLevelPlayDelegate(ViewController viewController)
+        {
+            this.viewController = viewController;
+        }
+
+        public override void didClickWithAdInfo(ISAdInfo adInfo)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : InterstitialLevelPlayDelegate didClickWithAdInfo: adInfo: " + adInfo);
+        }
+
+        public override void didCloseWithAdInfo(ISAdInfo adInfo)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : InterstitialLevelPlayDelegate didCloseWithAdInfo: adInfo: " + adInfo);
+            this.viewController.DisableInterstitialButtonState(true);
+        }
+
+        public override void didFailToLoadWithError(NSError error)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : InterstitialLevelPlayDelegate didFailToLoadWithError: error: " + error);
+            this.viewController.DisableInterstitialButtonState(false);
+
+        }
+
+        public override void didFailToShowWithError(NSError error, ISAdInfo adInfo)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : InterstitialLevelPlayDelegate didFailToShowWithError: adInfo: " + adInfo + " error:" + error);
+        }
+
+        public override void didLoadWithAdInfo(ISAdInfo adInfo)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : InterstitialLevelPlayDelegate didLoadWithAdInfo: adInfo: " + adInfo);
+            this.viewController.EnableInterstitialButtonState();
+        }
+
+        public override void didOpenWithAdInfo(ISAdInfo adInfo)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : InterstitialLevelPlayDelegate didOpenWithAdInfo: adInfo: " + adInfo);
+        }
+
+        public override void didShowWithAdInfo(ISAdInfo adInfo)
+        {
+            Console.WriteLine("Xamarin-iOS-Demo : InterstitialLevelPlayDelegate didShowWithAdInfo: adInfo: " + adInfo);
+        }
+    }
+    #endregion
+
+    // ********* Impression Data ********** //
+    public class ImpressionDataDelegate : ISImpressionDataDelegate
+    {
+        readonly ViewController parent;
+
+        public ImpressionDataDelegate(ViewController parent)
+        {
+            this.parent = parent;
+        }
+
+        public override void ImpressionDataDidSucceed(ISImpressionData impressionData)
+        {
+            NSDictionary allData = impressionData.All_data;
+            int revenue = impressionData.Revenue;
+            string adNetwork = impressionData.Ad_network;
         }
     }
 }

@@ -6,7 +6,7 @@ using UIKit;
 
 namespace DemoApp_iOS
 {
-    public class BannerWrapper : ISBannerDelegate
+    public class BannerWrapper : LevelPlayBannerDelegate
     {
         readonly UIViewController parent;
         ISBannerView bannerView = null;
@@ -22,28 +22,28 @@ namespace DemoApp_iOS
             return false;
         }
 
-        public BannerWrapper(UIViewController viewController)
-        {
-            this.parent = viewController;
-        }
-        public override void BannerDidClick()
+        public override void didClickWithAdInfo(ISAdInfo adInfo)
         {
         }
 
-        public override void BannerDidDismissScreen()
+        public override void didDismissScreenWithAdInfo(ISAdInfo adInfo)
         {
         }
 
-        public override void BannerDidFailToLoadWithError(NSError error)
+        public override void didFailToLoadWithError(NSError error)
         {
         }
 
-        public override void BannerDidLoad(ISBannerView bnView)
+        public override void didLeaveApplicationWithAdInfo(ISAdInfo adInfo)
+        {
+        }
+
+        public override void didLoad(ISBannerView bannerView, ISAdInfo adInfo)
         {
             InvokeOnMainThread(() =>
             {
 
-                bannerView = bnView;
+                this.bannerView = bannerView;
 
                 nfloat y = this.parent.View.Frame.Size.Height - (bannerView.Frame.Size.Height / 2);
                 if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
@@ -56,16 +56,18 @@ namespace DemoApp_iOS
                 bannerView.AccessibilityLabel = "bannerContainer";
 
             });
-
         }
 
-        public override void BannerWillLeaveApplication()
+        public override void didPresentScreenWithAdInfo(ISAdInfo adInfo)
         {
         }
 
-        public override void BannerWillPresentScreen()
+        public BannerWrapper(UIViewController viewController)
         {
+            this.parent = viewController;
         }
+
+
     }
 
 }

@@ -12,6 +12,10 @@ UserInterfaceState.xcuserstate
 xcschememanagement.plist
 PodFile.lock
 
+#Xamarin
+Xamarin/DemoApp_Android/DemoApp_Android/bin/*
+Xamarin/DemoApp_Android/DemoApp_Android/obj/*
+
 # Xcode
 #
 # gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
