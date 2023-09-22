@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *showOWButton;
 @property (weak, nonatomic) IBOutlet UIButton *showISButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadISButton;
+@property (weak, nonatomic) IBOutlet UIButton *nativeAdButton;
 @property (weak, nonatomic) IBOutlet UILabel  *versionLabel;
 
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
@@ -37,7 +38,7 @@
     // UI setup
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
     
-    for (UIButton *button in @[self.showISButton, self.showOWButton, self.showRVButton, self.loadISButton]) {
+    for (UIButton *button in @[self.showISButton, self.showOWButton, self.showRVButton, self.loadISButton, self.nativeAdButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -118,6 +119,12 @@
     // This will load the Interstitial. Unlike Rewarded
     // Videos there are no placements.
     [IronSource loadInterstitial];
+}
+
+- (IBAction)nativeAdButtonTapped:(id)sender {
+    // This will open a new ViewController showing all Native Ads.
+    // Unlike Rewarded Videos there are no placements.
+    
 }
 
 - (void)loadBanner {
