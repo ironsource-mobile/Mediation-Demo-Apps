@@ -121,12 +121,6 @@
     [IronSource loadInterstitial];
 }
 
-- (IBAction)nativeAdButtonTapped:(id)sender {
-    // This will open a new ViewController showing all Native Ads.
-    // Unlike Rewarded Videos there are no placements.
-    
-}
-
 - (void)loadBanner {
 
     // We call destroy banner before loading a new banner
