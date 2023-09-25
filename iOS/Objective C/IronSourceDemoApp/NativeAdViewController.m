@@ -10,11 +10,12 @@
 #import "NativeAdView.h"
 #import <IronSource/IronSource.h>
 
-@interface NativeAdViewController () <LevelPlayNativeAdDelegate>
+@interface NativeAdViewController () <LevelPlayNativeAdDelegate, UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *loadNAButton;
 @property (nonatomic, strong) NSMutableArray<NSArray *> *nativeAdlist;
+@property (nonatomic, strong) NSMutableArray *tableViewData;
 
 @end
 
@@ -24,66 +25,49 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         _nativeAdlist = [NSMutableArray array];
+        _tableViewData = [NSMutableArray array];
     }
     return self;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 }
 
-- (IBAction)loadNAButtonTapped:(id)sender {
-    
-    // This will load a Native Ad.
-    LevelPlayNativeAd *nativeAd = [[[[LevelPlayNativeAdBuilder new] withViewController:self] withPlacementName:@""] withDelegate:self].build;
 
+- (IBAction)loadNAButtonTapped:(id)sender {
+    // This will load a Native Ad.
+    
+    LevelPlayNativeAd *nativeAd = [[[[LevelPlayNativeAdBuilder new] withViewController:self] withPlacementName:@""] withDelegate:self].build;
+    
     if (nativeAd) {
         [nativeAd loadAd];
         
         NativeAdView *newView = [[NativeAdView alloc] init];
-        
-        [self.scrollView addSubview:newView];
         [self.nativeAdlist addObject:@[nativeAd, newView]];
-    }
-    
-    [self arrangeAdViews];
-}
-
-- (void)arrangeAdViews {
-    CGFloat yOffset = 0;
-    for (NSArray *pair in self.nativeAdlist) {
-            if (pair.count == 2) {
-                LevelPlayNativeAd *nativeAd = pair[0];
-                NativeAdView *adView = pair[1];
-
-                CGRect frame = adView.frame;
-                frame.origin.y = yOffset;
-                adView.frame = frame;
-                yOffset += frame.size.height;
-            }
-        }
-
-    // Update the content size of the scroll view
-    self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.size.width, yOffset);
-}
-
-- (IBAction)deleteButtonTapped:(UIButton *)sender {
-    // Find the corresponding NativeAdView and remove it
-    for (NSArray *pair in self.nativeAdlist) {
-        if (pair.count == 2) {
-            LevelPlayNativeAd *nativeAd = pair[0];
-            NativeAdView *adView = pair[1];
-            if (adView.deleteButton == sender) {
-                [nativeAd destroyAd];
-                [adView removeFromSuperview];
-                [self.nativeAdlist removeObject:pair];
-                [self arrangeAdViews];
-                break;
-            }
-        }
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.tableViewData.count inSection:0];
+        [self.tableViewData addObject:newView]; // Add the adView to your data source.
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
+
+//- (IBAction)deleteButtonTapped:(UIButton *)sender {
+//    // Find the corresponding NativeAdView and remove it
+//    for (NSArray *pair in self.nativeAdlist) {
+//        if (pair.count == 2) {
+//            LevelPlayNativeAd *nativeAd = pair[0];
+//            NativeAdView *adView = pair[1];
+//            if (adView.deleteButton == sender) {
+//                [nativeAd destroyAd];
+//                [adView removeFromSuperview];
+//                [self.nativeAdlist removeObject:pair];
+//                [self arrangeAdViews];
+//                break;
+//            }
+//        }
+//    }
+//}
 
 #pragma mark - Native Ad Delegate Functions
 
@@ -98,19 +82,21 @@
     NSLog(@"%s",__PRETTY_FUNCTION__);
     
     NSInteger index = -1;
-        for (NSInteger i = 0; i < self.nativeAdlist.count; i++) {
-            NSArray *pair = self.nativeAdlist[i];
-            if ([pair.firstObject isEqual:nativeAd]) {
-                index = i;
-                break;
-            }
+    for (NSInteger i = 0; i < self.nativeAdlist.count; i++) {
+        NSArray *pair = self.nativeAdlist[i];
+        if ([pair.firstObject isEqual:nativeAd]) {
+            index = i;
+            break;
         }
-
-        if (index != -1) {
-            NSArray *pair = self.nativeAdlist[index];
-            NativeAdView *adView = pair[1];
-            [adView loadNativeAdLayout:nativeAd];
-        }
+    }
+    
+    if (index != -1) {
+        NSArray *pair = self.nativeAdlist[index];
+        NativeAdView *adView = pair[1];
+        
+        [adView loadNativeAdLayout:nativeAd];
+        [self.tableView reloadData];
+    }
 }
 
 // This method gets invoked after a video has been clicked
@@ -166,6 +152,32 @@
 
 - (void)updateFocusIfNeeded {
     NSLog(@"%s",__PRETTY_FUNCTION__);
+}
+
+#pragma mark - UI TableView Delegate Functions
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    id cellData = _tableViewData[indexPath.row];
+    if ([cellData isKindOfClass:[NativeAdView class]]) {
+        // Return the NativeAdView as a cell.
+        NativeAdView *adView = (NativeAdView *)cellData;
+        UITableViewCell *adCell = [[UITableViewCell alloc] init];
+        [adCell.contentView addSubview:adView];
+        
+        [NSLayoutConstraint activateConstraints:@[
+            [adView.widthAnchor constraintEqualToAnchor:adCell.contentView.widthAnchor constant:0],
+            [adView.centerXAnchor constraintEqualToAnchor:adCell.contentView.centerXAnchor constant:0],
+            
+            [adCell.contentView.heightAnchor constraintEqualToAnchor:adView.heightAnchor constant:0],
+            [adView.centerYAnchor constraintEqualToAnchor:adCell.contentView.centerYAnchor constant:0],
+        ]];
+        
+        return adCell;
+    }
+    return nil;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _tableViewData.count;
 }
 
 @end

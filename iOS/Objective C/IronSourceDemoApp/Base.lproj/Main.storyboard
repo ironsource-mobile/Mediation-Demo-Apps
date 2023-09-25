@@ -200,29 +200,32 @@
                                     <action selector="loadNAButtonTapped:" destination="0Zx-O7-V9a" eventType="touchUpInside" id="Zqi-X8-Tmb"/>
                                 </connections>
                             </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3CL-cw-mYQ">
-                                <rect key="frame" x="66" y="215" width="243" height="405"/>
-                                <color key="backgroundColor" systemColor="systemMintColor"/>
-                                <viewLayoutGuide key="contentLayoutGuide" id="9dy-yy-OcM"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="9vu-wh-XiK"/>
-                            </scrollView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8vt-3t-hxc">
+                                <rect key="frame" x="24" y="155.5" width="327" height="503.5"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0Zx-O7-V9a" id="LgF-gS-pfR"/>
+                                    <outlet property="delegate" destination="0Zx-O7-V9a" id="akx-Ff-0hy"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3CL-cw-mYQ" firstAttribute="centerX" secondItem="k7l-vb-7Ur" secondAttribute="centerX" id="1ZX-yB-vwc"/>
-                            <constraint firstItem="3CL-cw-mYQ" firstAttribute="width" secondItem="k7l-vb-7Ur" secondAttribute="width" multiplier="0.8" id="772-2q-Iti"/>
                             <constraint firstItem="58g-u4-Elr" firstAttribute="centerX" secondItem="k7l-vb-7Ur" secondAttribute="centerX" id="KE8-Wh-ZfI"/>
+                            <constraint firstItem="8vt-3t-hxc" firstAttribute="leading" secondItem="k7l-vb-7Ur" secondAttribute="leadingMargin" constant="8" id="NKS-A3-x3i"/>
                             <constraint firstItem="sYl-se-5Gd" firstAttribute="centerX" secondItem="k7l-vb-7Ur" secondAttribute="centerX" constant="1.5" id="RoV-MX-7L7"/>
                             <constraint firstItem="sYl-se-5Gd" firstAttribute="top" secondItem="58g-u4-Elr" secondAttribute="bottom" constant="8" id="WR8-AD-akZ"/>
-                            <constraint firstItem="3CL-cw-mYQ" firstAttribute="top" secondItem="sYl-se-5Gd" secondAttribute="bottom" constant="8" id="cvK-u9-TvH"/>
-                            <constraint firstItem="3CL-cw-mYQ" firstAttribute="bottom" secondItem="413-pY-jFp" secondAttribute="top" constant="-8" id="flO-Y5-4vn"/>
+                            <constraint firstItem="8vt-3t-hxc" firstAttribute="trailing" secondItem="k7l-vb-7Ur" secondAttribute="trailingMargin" constant="-8" id="cdy-kz-15i"/>
+                            <constraint firstItem="8vt-3t-hxc" firstAttribute="centerX" secondItem="k7l-vb-7Ur" secondAttribute="centerX" id="ezj-zo-BWr"/>
                             <constraint firstItem="58g-u4-Elr" firstAttribute="top" secondItem="izD-Zc-aSW" secondAttribute="bottom" constant="8" id="q2d-ZE-1kf"/>
+                            <constraint firstItem="8vt-3t-hxc" firstAttribute="top" secondItem="sYl-se-5Gd" secondAttribute="bottom" constant="8" id="tYY-dn-hDA"/>
+                            <constraint firstItem="8vt-3t-hxc" firstAttribute="bottom" secondItem="413-pY-jFp" secondAttribute="top" constant="-8" id="x3w-Wn-6Dj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Aht-DI-B6Z"/>
                     <connections>
                         <outlet property="loadNAButton" destination="sYl-se-5Gd" id="X9r-t2-hLj"/>
-                        <outlet property="scrollView" destination="3CL-cw-mYQ" id="Xoa-Wx-UIJ"/>
+                        <outlet property="tableView" destination="8vt-3t-hxc" id="KJu-nT-2nx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="53y-hI-xfc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -255,9 +258,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemMintColor">
-            <color red="0.0" green="0.7803921568627451" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

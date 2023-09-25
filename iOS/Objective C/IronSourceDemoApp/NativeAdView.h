@@ -11,12 +11,12 @@
 
 @interface NativeAdView : UIView
 
-@property (weak, nonatomic) IBOutlet UIView *adAdvertiserView;
+@property (weak, nonatomic) IBOutlet UILabel *adAdvertiserView;
 @property (weak, nonatomic) IBOutlet UIImage *adAppIcon;
-@property (weak, nonatomic) IBOutlet UIView *adBodyView;
-@property (weak, nonatomic) IBOutlet UIView *adCallToActionView;
+@property (weak, nonatomic) IBOutlet UILabel *adBodyView;
+@property (weak, nonatomic) IBOutlet UIButton *adCallToActionView;
 @property (weak, nonatomic) IBOutlet UIView *adMediaView;
-@property (weak, nonatomic) IBOutlet UIView *adTitleView;
+@property (weak, nonatomic) IBOutlet UILabel *adTitleView;
 
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
