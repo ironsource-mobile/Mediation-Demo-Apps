@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <IronSource/IronSource.h>
 
 @interface NativeAdView : UIView
 
@@ -16,9 +17,12 @@
 @property (weak, nonatomic) IBOutlet UIView *adCallToActionView;
 @property (weak, nonatomic) IBOutlet UIView *adMediaView;
 @property (weak, nonatomic) IBOutlet UIView *adTitleView;
+
 @property (weak, nonatomic) IBOutlet UIButton *deleteButton;
 
-+ (instancetype)loadFromNib;
-- (IBAction)deleteButtonTapped:(id)sender;
+@property (nonatomic, strong) LevelPlayNativeAd *nativeAd;
+@property (nonatomic, strong) ISNativeAdView *nativeAdLayout;
+
+- (void)loadNativeAdLayout: (LevelPlayNativeAd *)nativeAd;
 
 @end

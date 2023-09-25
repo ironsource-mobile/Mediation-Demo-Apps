@@ -201,7 +201,7 @@
                                 </connections>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3CL-cw-mYQ">
-                                <rect key="frame" x="67" y="214" width="243" height="405"/>
+                                <rect key="frame" x="66" y="215" width="243" height="405"/>
                                 <color key="backgroundColor" systemColor="systemMintColor"/>
                                 <viewLayoutGuide key="contentLayoutGuide" id="9dy-yy-OcM"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="9vu-wh-XiK"/>
@@ -210,11 +210,12 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="3CL-cw-mYQ" firstAttribute="centerX" secondItem="k7l-vb-7Ur" secondAttribute="centerX" id="1ZX-yB-vwc"/>
+                            <constraint firstItem="3CL-cw-mYQ" firstAttribute="width" secondItem="k7l-vb-7Ur" secondAttribute="width" multiplier="0.8" id="772-2q-Iti"/>
                             <constraint firstItem="58g-u4-Elr" firstAttribute="centerX" secondItem="k7l-vb-7Ur" secondAttribute="centerX" id="KE8-Wh-ZfI"/>
                             <constraint firstItem="sYl-se-5Gd" firstAttribute="centerX" secondItem="k7l-vb-7Ur" secondAttribute="centerX" constant="1.5" id="RoV-MX-7L7"/>
                             <constraint firstItem="sYl-se-5Gd" firstAttribute="top" secondItem="58g-u4-Elr" secondAttribute="bottom" constant="8" id="WR8-AD-akZ"/>
                             <constraint firstItem="3CL-cw-mYQ" firstAttribute="top" secondItem="sYl-se-5Gd" secondAttribute="bottom" constant="8" id="cvK-u9-TvH"/>
-                            <constraint firstItem="413-pY-jFp" firstAttribute="top" secondItem="3CL-cw-mYQ" secondAttribute="bottom" constant="8" id="flO-Y5-4vn"/>
+                            <constraint firstItem="3CL-cw-mYQ" firstAttribute="bottom" secondItem="413-pY-jFp" secondAttribute="top" constant="-8" id="flO-Y5-4vn"/>
                             <constraint firstItem="58g-u4-Elr" firstAttribute="top" secondItem="izD-Zc-aSW" secondAttribute="bottom" constant="8" id="q2d-ZE-1kf"/>
                         </constraints>
                     </view>

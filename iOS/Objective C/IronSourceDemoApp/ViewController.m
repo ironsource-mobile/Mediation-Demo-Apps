@@ -9,7 +9,8 @@
 #import <IronSource/IronSource.h>
 
 #define USERID @"demoapp"
-#define APPKEY @"8545d445"
+//#define APPKEY @"8545d445"
+#define APPKEY @"9c5d9d55"
 
 @interface ViewController () <ISRewardedVideoDelegate ,ISInterstitialDelegate ,ISOfferwallDelegate ,ISBannerDelegate,ISImpressionDataDelegate>
 
@@ -72,9 +73,11 @@
     
     [IronSource initWithAppKey:APPKEY];
     // To initialize specific ad units:
-    // [IronSource initWithAppKey:APPKEY adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_OFFERWALL, IS_BANNER]];
+    // [IronSource initWithAppKey:APPKEY adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_OFFERWALL, IS_BANNER, IS_NATIVE_AD]];
     
     // Scroll down the file to find out what happens when you click a button...
+    
+    // Native Ad Button will lead to a new ViewController demonstrating Native Ads.
     
     /* 
      * Banner integration
