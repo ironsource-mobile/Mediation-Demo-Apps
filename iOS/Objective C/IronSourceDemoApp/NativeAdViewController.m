@@ -45,10 +45,6 @@
         
         NativeAdView *newView = [[NativeAdView alloc] init];
         [self.nativeAdlist addObject:@[nativeAd, newView]];
-        
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:self.tableViewData.count inSection:0];
-        [self.tableViewData addObject:newView]; // Add the adView to your data source.
-        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
@@ -95,7 +91,10 @@
         NativeAdView *adView = pair[1];
         
         [adView loadNativeAdLayout:nativeAd];
-        [self.tableView reloadData];
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        [self.tableViewData addObject:adView]; // Add the adView to your data source.
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 
