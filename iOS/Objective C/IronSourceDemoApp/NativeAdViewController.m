@@ -100,6 +100,10 @@
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         [self.tableViewData addObject:adView]; // Add the adView to your data source.
         [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        // Scroll to the newly added cell
+        NSIndexPath *latestIndexPath = [NSIndexPath indexPathForRow:self.tableViewData.count - 1 inSection:0];
+        [self.tableView scrollToRowAtIndexPath:latestIndexPath atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
 }
 
