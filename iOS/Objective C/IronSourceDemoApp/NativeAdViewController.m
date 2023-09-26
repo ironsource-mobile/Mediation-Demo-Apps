@@ -14,7 +14,10 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *loadNAButton;
+
+// This is an array of pairs of <LevelPlayNativeAd, NativeAdView>.
 @property (nonatomic, strong) NSMutableArray<NSArray *> *nativeAdlist;
+// This is an array of <NativeAdView> that will be used as the data source of the UITableView.
 @property (nonatomic, strong) NSMutableArray *tableViewData;
 
 @end
@@ -36,7 +39,7 @@
 
 
 - (IBAction)loadNAButtonTapped:(id)sender {
-    // This will load a Native Ad.
+    // This will build and is trying to load a Native Ad.
     
     LevelPlayNativeAd *nativeAd = [[[[LevelPlayNativeAdBuilder new] withViewController:self] withPlacementName:@""] withDelegate:self].build;
     
@@ -74,6 +77,8 @@
     NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
+// This method gets invoked after a native ad was loaded.
+// Then the information will be passed to the NativeAdView and added to your data source.
 - (void)didLoad:(nonnull LevelPlayNativeAd *)nativeAd withAdInfo:(nonnull ISAdInfo *)adInfo {
     NSLog(@"%s",__PRETTY_FUNCTION__);
     
