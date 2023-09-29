@@ -10,7 +10,7 @@
 #import "NativeAdView.h"
 #import <IronSource/IronSource.h>
 
-@interface NativeAdViewController () <LevelPlayNativeAdDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface NativeAdViewController () <LevelPlayNativeAdDelegate, UITableViewDelegate, UITableViewDataSource, NativeAdViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *loadNAButton;
@@ -47,26 +47,35 @@
         [nativeAd loadAd];
         
         NativeAdView *newView = [[NativeAdView alloc] init];
+        newView.delegate = self;
         [self.nativeAdlist addObject:@[nativeAd, newView]];
     }
 }
 
-//- (IBAction)deleteButtonTapped:(UIButton *)sender {
-//    // Find the corresponding NativeAdView and remove it
-//    for (NSArray *pair in self.nativeAdlist) {
-//        if (pair.count == 2) {
-//            LevelPlayNativeAd *nativeAd = pair[0];
-//            NativeAdView *adView = pair[1];
-//            if (adView.deleteButton == sender) {
-//                [nativeAd destroyAd];
-//                [adView removeFromSuperview];
-//                [self.nativeAdlist removeObject:pair];
-//                [self arrangeAdViews];
-//                break;
-//            }
-//        }
-//    }
-//}
+- (void)nativeAdViewDeleteButtonTapped:(NativeAdView *)currentAdView {
+    // Find the corresponding NativeAdView and remove it
+    NSInteger index = -1;
+    for (NSInteger i = 0; i < self.nativeAdlist.count; i++) {
+        NSArray *pair = self.nativeAdlist[i];
+        if ([pair.lastObject isEqual:currentAdView]) {
+            index = i;
+            break;
+        }
+    }
+    
+    if (index != -1) {
+        NSArray *pair = self.nativeAdlist[index];
+        LevelPlayNativeAd *nativeAd = pair[0];
+        NativeAdView *adView = pair[1];
+        
+        [nativeAd destroyAd];
+        [self.nativeAdlist removeObject:pair];
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+        [self.tableViewData removeObject:adView];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
+}
 
 #pragma mark - Native Ad Delegate Functions
 

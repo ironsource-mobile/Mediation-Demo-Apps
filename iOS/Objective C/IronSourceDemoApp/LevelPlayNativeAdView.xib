@@ -14,8 +14,8 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7Jf-gS-kFJ">
-                    <rect key="frame" x="8" y="8" width="284" height="234"/>
+                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7Jf-gS-kFJ">
+                    <rect key="frame" x="8" y="8" width="284" height="248"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="FzH-MW-uJc" userLabel="Top Stack View">
                             <rect key="frame" x="0.0" y="0.0" width="284" height="40"/>
@@ -29,17 +29,17 @@
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="BUt-oG-xke">
-                                    <rect key="frame" x="45" y="0.0" width="204" height="34"/>
+                                    <rect key="frame" x="45" y="0.0" width="239" height="34"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="afS-YP-sLG">
-                                            <rect key="frame" x="0.0" y="0.0" width="204" height="17"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="239" height="17"/>
                                             <accessibility key="accessibilityConfiguration" identifier="AdTitle"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="12" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lPh-Kg-YxX">
-                                            <rect key="frame" x="0.0" y="17" width="204" height="17"/>
+                                            <rect key="frame" x="0.0" y="17" width="239" height="17"/>
                                             <accessibility key="accessibilityConfiguration" identifier="AdAdvertiser"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                             <nil key="textColor"/>
@@ -47,22 +47,11 @@
                                         </label>
                                     </subviews>
                                 </stackView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jOi-8e-ucO" userLabel="Delete Button">
-                                    <rect key="frame" x="254" y="0.0" width="30" height="30"/>
-                                    <color key="backgroundColor" systemColor="systemRedColor"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="BpE-4s-Wpl"/>
-                                        <constraint firstAttribute="width" secondItem="jOi-8e-ucO" secondAttribute="height" multiplier="1:1" id="Czm-ln-pfN"/>
-                                    </constraints>
-                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <state key="normal" title="Button"/>
-                                    <buttonConfiguration key="configuration" style="plain" title="X" titleAlignment="center"/>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" systemColor="linkColor"/>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-ZX-3EG" userLabel="Bottom Stack View">
-                            <rect key="frame" x="0.0" y="44" width="284" height="190"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-ZX-3EG" userLabel="Bottom Stack View">
+                            <rect key="frame" x="0.0" y="44" width="284" height="204"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PeD-4v-BX7">
                                     <rect key="frame" x="0.0" y="0.0" width="284" height="14.333333333333334"/>
@@ -71,30 +60,30 @@
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKi-rK-Qb6" userLabel="Media View" customClass="LevelPlayMediaView">
+                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nKi-rK-Qb6" userLabel="Media View" customClass="LevelPlayMediaView">
                                     <rect key="frame" x="0.0" y="19.333333333333329" width="284" height="151.33333333333337"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <accessibility key="accessibilityConfiguration" identifier="AdMedia"/>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ID2-lk-FUW">
-                                    <rect key="frame" x="0.0" y="175.66666666666666" width="284" height="14.333333333333343"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ID2-lk-FUW">
+                                    <rect key="frame" x="0.0" y="175.66666666666666" width="284" height="28.333333333333343"/>
                                     <subviews>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-ba-ZBh">
-                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="14.333333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="28.333333333333332"/>
                                             <accessibility key="accessibilityConfiguration" identifier="AdPrice"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DaN-lm-yTd">
-                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="14.333333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="28.333333333333332"/>
                                             <accessibility key="accessibilityConfiguration" identifier="AdStore"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGK-DS-IwI">
-                                            <rect key="frame" x="0.0" y="0.0" width="284" height="14.333333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="284" height="28.333333333333332"/>
                                             <accessibility key="accessibilityConfiguration" identifier="adCallToAction"/>
                                             <state key="normal" title="Button"/>
                                             <buttonConfiguration key="configuration" style="plain" title="Button">
@@ -113,7 +102,6 @@
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="7Jf-gS-kFJ" firstAttribute="top" secondItem="itB-f1-pgg" secondAttribute="top" constant="8" id="0cv-R0-3R9"/>
                 <constraint firstItem="7Jf-gS-kFJ" firstAttribute="leading" secondItem="itB-f1-pgg" secondAttribute="leading" constant="8" id="6rw-wg-tPc"/>
                 <constraint firstItem="7Jf-gS-kFJ" firstAttribute="bottom" secondItem="itB-f1-pgg" secondAttribute="bottom" constant="-8" id="iLQ-zX-2BG"/>
                 <constraint firstItem="7Jf-gS-kFJ" firstAttribute="trailing" secondItem="itB-f1-pgg" secondAttribute="trailing" constant="-8" id="mOG-ly-1rQ"/>
@@ -126,7 +114,6 @@
                 <outlet property="adCallToActionView" destination="dGK-DS-IwI" id="BXJ-NZ-5qb"/>
                 <outlet property="adMediaView" destination="nKi-rK-Qb6" id="77A-fa-gbs"/>
                 <outlet property="adTitleView" destination="afS-YP-sLG" id="dRf-vk-t6d"/>
-                <outlet property="deleteButton" destination="jOi-8e-ucO" id="B8g-GZ-wUD"/>
             </connections>
             <point key="canvasLocation" x="-681" y="107"/>
         </view>
@@ -137,9 +124,6 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -28,9 +28,63 @@
     
     self = nativeAdView;
     [self setNativeAdViewConstraints];
+    [self setupTopView];
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
     return self;
+}
+
+// This adding a customized top view to the NativeAdView that contains an adBadge on the left and a delete button on the right.
+// The delete button is to remove the native ad from the table view.
+- (void)setupTopView {
+    // Initialize UI elements
+    _adBadge = [[UILabel alloc] init];
+    _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _topView = [[UIView alloc] init];
+    
+    // Configure adBadge
+    _adBadge.text = @"AD";
+    _adBadge.font = [UIFont systemFontOfSize:10];
+    _adBadge.textAlignment = NSTextAlignmentCenter;
+    _adBadge.textColor = [UIColor whiteColor];
+    _adBadge.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0]; // Replace with your desired color
+    _adBadge.layer.cornerRadius = 4.5;
+    _adBadge.clipsToBounds = YES;
+    _adBadge.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    // Configure deleteButton
+    [_deleteButton setTitle:@"x" forState:UIControlStateNormal];
+    _deleteButton.backgroundColor = [UIColor lightGrayColor];
+    _deleteButton.layer.cornerRadius = 15;
+    [_deleteButton addTarget:self action:@selector(deleteButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    _deleteButton.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    // Add subviews
+    [_topView addSubview:_adBadge];
+    [_topView addSubview:_deleteButton];
+    _topView.translatesAutoresizingMaskIntoConstraints = NO;
+    [self addSubview:_topView];
+    
+    // Get the current top view
+    UIView *firstSubview = self.subviews[0];
+    
+    // Set up constraints
+    [NSLayoutConstraint activateConstraints:@[
+        [_topView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:8],
+        [_topView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:-8],
+        [_topView.heightAnchor constraintEqualToConstant:30],
+        
+        [_adBadge.widthAnchor constraintEqualToConstant:20],
+        [_adBadge.heightAnchor constraintEqualToConstant:20],
+        [_adBadge.leadingAnchor constraintEqualToAnchor:_topView.leadingAnchor],
+        [_deleteButton.widthAnchor constraintEqualToConstant:30],
+        [_deleteButton.heightAnchor constraintEqualToAnchor:_topView.heightAnchor],
+        [_deleteButton.trailingAnchor constraintEqualToAnchor:_topView.trailingAnchor],
+        
+        // Set the _topView as the top-most view for the native ad.
+        [self.topAnchor constraintEqualToAnchor:_topView.topAnchor constant:-8],
+        [firstSubview.topAnchor constraintEqualToAnchor:_topView.bottomAnchor constant:8],
+    ]];
 }
 
 - (void)setClearBackgroundRecursively:(UIView *)parentView {
@@ -42,6 +96,8 @@
     }
 }
 
+// Predefine the colors and constraints of the native ad's properties.
+// Replace with your desired colors and look.
 - (void)setNativeAdViewConstraints {
     [self setClearBackgroundRecursively:self];
     self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -59,6 +115,7 @@
     }
 }
 
+// This was triggered after a successful load of a native ad.
 - (void)loadNativeAdLayout:(LevelPlayNativeAd *)nativeAd {
     _nativeAd = nativeAd;
     
@@ -87,7 +144,7 @@
         [binder setBodyView:self.adBodyView];
         [binder setMediaView:self.adMediaView];
         [binder setCallToActionView:self.adCallToActionView];
-
+        
         // This last part of the binding is adding the container to the NetworkNativeAdView
         [binder setNativeAdView:self];
         
@@ -101,15 +158,18 @@
             [binder.networkNativeAdView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor]
         ]];
     }
+    
+    // Bring the adBadge and the delete button to the front of the layer
+    [self bringSubviewToFront:_topView];
 }
 
-- (IBAction)deleteButtonTapped:(UIButton *)sender {
-    
-    [_nativeAd destroyAd];
-    [self removeFromSuperview];
-    //[self.nativeAdlist removeObject:pair];
-    //[self arrangeAdViews];
-    //break;
+// Remove the native ad from the table view.
+- (void)deleteButtonTapped:(UIButton *)sender {
+    // Check if the delegate responds to the delete button tap selector
+    if ([self.delegate respondsToSelector:@selector(nativeAdViewDeleteButtonTapped:)]) {
+        // Call the delegate method
+        [self.delegate nativeAdViewDeleteButtonTapped:self];
+    }
     
 }
 
