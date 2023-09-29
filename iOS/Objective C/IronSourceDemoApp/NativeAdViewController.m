@@ -39,7 +39,7 @@
 
 
 - (IBAction)loadNAButtonTapped:(id)sender {
-    // This will build and is trying to load a Native Ad.
+    // This will build and try to load a Native Ad.
     
     LevelPlayNativeAd *nativeAd = [[[[LevelPlayNativeAdBuilder new] withViewController:self] withPlacementName:@""] withDelegate:self].build;
     
@@ -77,7 +77,9 @@
     }
 }
 
-#pragma mark - Native Ad Delegate Functions
+#pragma mark - LevelPlayNativeAdDelegate Functions
+
+// ISNativeAdLoadDelegate
 
 // This method gets invoked after a failed attempt to load Native Ad.
 // If it does happen, check out 'error' for more information and consult our
@@ -116,58 +118,14 @@
     }
 }
 
+// ISNativeAdInteractionDelegate
+
 // This method gets invoked after a video has been clicked
 - (void)didClick:(nonnull LevelPlayNativeAd *)nativeAd withAdInfo:(nonnull ISAdInfo *)adInfo {
     NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
 - (void)didRecordImpression:(nonnull LevelPlayNativeAd *)nativeAd withAdInfo:(nonnull ISAdInfo *)adInfo {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (void)encodeWithCoder:(nonnull NSCoder *)coder {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (void)preferredContentSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (CGSize)sizeForChildContentContainer:(nonnull id<UIContentContainer>)container withParentContainerSize:(CGSize)parentSize {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-    return parentSize; //?
-}
-
-- (void)systemLayoutFittingSizeDidChangeForChildContentContainer:(nonnull id<UIContentContainer>)container {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (void)willTransitionToTraitCollection:(nonnull UITraitCollection *)newCollection withTransitionCoordinator:(nonnull id<UIViewControllerTransitionCoordinator>)coordinator {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (void)didUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context withAnimationCoordinator:(nonnull UIFocusAnimationCoordinator *)coordinator {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (void)setNeedsFocusUpdate {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-}
-
-- (BOOL)shouldUpdateFocusInContext:(nonnull UIFocusUpdateContext *)context {
-    NSLog(@"%s",__PRETTY_FUNCTION__);
-    return YES; //?
-}
-
-- (void)updateFocusIfNeeded {
     NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
