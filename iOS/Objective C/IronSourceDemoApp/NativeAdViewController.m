@@ -151,6 +151,7 @@
         
         return adCell;
     }
+    cellData = nil;
     return nil;
 }
 
