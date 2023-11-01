@@ -13,9 +13,7 @@
 - (instancetype)init {
     UINib *nib = [UINib nibWithNibName:@"LevelPlayNativeAdView" bundle:[NSBundle mainBundle]];
     NSArray *nibContents = [nib instantiateWithOwner:nil options:nil];
-    NativeAdView *nativeAdView = (NativeAdView *)[nibContents firstObject];
-    
-    self = nativeAdView;
+    self = (NativeAdView *)[nibContents firstObject];
     [self setupTopView];
     self.translatesAutoresizingMaskIntoConstraints = NO;
     
@@ -112,7 +110,7 @@
     }
     
     [self setNativeAd:_levelPlayNativeAd];
-
+    
     // Bring the adBadge and the delete button to the front of the layer
     [self bringSubviewToFront:_topView];
 }

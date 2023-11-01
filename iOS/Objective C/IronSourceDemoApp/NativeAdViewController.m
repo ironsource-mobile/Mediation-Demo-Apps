@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *loadNAButton;
 
 // This is an array of pairs of <LevelPlayNativeAd, NativeAdView>.
-@property (nonatomic, strong) NSMutableArray<NSArray *> *nativeAdlist;
+@property (nonatomic, strong) NSMutableArray<NSArray *> *nativeAdList;
 // This is an array of <NativeAdView> that will be used as the data source of the UITableView.
 @property (nonatomic, strong) NSMutableArray *tableViewData;
 
@@ -27,7 +27,7 @@
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        _nativeAdlist = [NSMutableArray array];
+        _nativeAdList = [NSMutableArray array];
         _tableViewData = [NSMutableArray array];
     }
     return self;
@@ -39,7 +39,7 @@
 
 
 - (IBAction)loadNAButtonTapped:(id)sender {
-    // This will build and try to load a Native Ad.
+    // This will build and try to load a Native Ad; then store the [adObject, adView] pair to the list self.nativeAdList
     
     LevelPlayNativeAd *nativeAd = [[[[LevelPlayNativeAdBuilder new] withViewController:self] withPlacementName:@""] withDelegate:self].build;
     
@@ -48,15 +48,15 @@
         
         NativeAdView *newView = [[NativeAdView alloc] init];
         newView.delegate = self;
-        [self.nativeAdlist addObject:@[nativeAd, newView]];
+        [self.nativeAdList addObject:@[nativeAd, newView]];
     }
 }
 
 - (void)nativeAdViewDeleteButtonTapped:(NativeAdView *)currentAdView {
     // Find the corresponding NativeAdView and remove it
     NSInteger index = -1;
-    for (NSInteger i = 0; i < self.nativeAdlist.count; i++) {
-        NSArray *pair = self.nativeAdlist[i];
+    for (NSInteger i = 0; i < self.nativeAdList.count; i++) {
+        NSArray *pair = self.nativeAdList[i];
         if ([pair.lastObject isEqual:currentAdView]) {
             index = i;
             break;
@@ -64,12 +64,12 @@
     }
     
     if (index != -1) {
-        NSArray *pair = self.nativeAdlist[index];
+        NSArray *pair = self.nativeAdList[index];
         LevelPlayNativeAd *nativeAd = pair[0];
         NativeAdView *adView = pair[1];
         
         [nativeAd destroyAd];
-        [self.nativeAdlist removeObject:pair];
+        [self.nativeAdList removeObject:pair];
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         [self.tableViewData removeObject:adView];
@@ -93,17 +93,19 @@
 - (void)didLoad:(nonnull LevelPlayNativeAd *)nativeAd withAdInfo:(nonnull ISAdInfo *)adInfo {
     NSLog(@"%s",__PRETTY_FUNCTION__);
     
+    // Find the index of the pair from self.nativeAdList based on the current loaded ad object.
     NSInteger index = -1;
-    for (NSInteger i = 0; i < self.nativeAdlist.count; i++) {
-        NSArray *pair = self.nativeAdlist[i];
+    for (NSInteger i = 0; i < self.nativeAdList.count; i++) {
+        NSArray *pair = self.nativeAdList[i];
         if ([pair.firstObject isEqual:nativeAd]) {
             index = i;
             break;
         }
     }
     
+    // Get the [adObject, adView] pair from the index and load the associated UIView.
     if (index != -1) {
-        NSArray *pair = self.nativeAdlist[index];
+        NSArray *pair = self.nativeAdList[index];
         NativeAdView *adView = pair[1];
         
         [adView loadNativeAdLayout:nativeAd];
@@ -120,11 +122,12 @@
 
 // ISNativeAdInteractionDelegate
 
-// This method gets invoked after a video has been clicked
+// This method gets invoked after a native ad has been clicked
 - (void)didClick:(nonnull LevelPlayNativeAd *)nativeAd withAdInfo:(nonnull ISAdInfo *)adInfo {
     NSLog(@"%s",__PRETTY_FUNCTION__);
 }
 
+// This method gets invoked after a native ad impression has been recorded
 - (void)didRecordImpression:(nonnull LevelPlayNativeAd *)nativeAd withAdInfo:(nonnull ISAdInfo *)adInfo {
     NSLog(@"%s",__PRETTY_FUNCTION__);
 }
