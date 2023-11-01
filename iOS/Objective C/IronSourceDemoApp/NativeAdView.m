@@ -116,7 +116,7 @@
         self.adCallToActionView.userInteractionEnabled = NO;
     }
     
-    [self setNativeAd:_levelPlayNativeAd];
+    [self registerNativeAdViews:_levelPlayNativeAd];
     
     // Bring the adBadge and the delete button to the front of the layer
     [self bringSubviewToFront:_topView];
