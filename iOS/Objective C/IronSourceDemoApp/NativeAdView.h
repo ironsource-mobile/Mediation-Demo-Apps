@@ -18,7 +18,7 @@
 
 @property (nonatomic, weak) id<NativeAdViewDelegate> delegate;
 
-@property (nonatomic, strong) LevelPlayNativeAd *nativeAd;
+@property (nonatomic, strong) LevelPlayNativeAd *levelPlayNativeAd;
 - (void)loadNativeAdLayout: (LevelPlayNativeAd *)nativeAd;
 
 @property (nonatomic, strong) UILabel *adBadge;
