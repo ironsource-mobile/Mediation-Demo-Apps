@@ -23,27 +23,9 @@
 // This adding a customized top view to the NativeAdView that contains an adBadge on the left and a delete button on the right.
 // The delete button is to remove the native ad from the table view.
 - (void)setupTopView {
-    // Initialize UI elements
-    _adBadge = [[UILabel alloc] init];
-    _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _topView = [[UIView alloc] init];
-    
-    // Configure adBadge
-    _adBadge.text = @"AD";
-    _adBadge.font = [UIFont systemFontOfSize:10];
-    _adBadge.textAlignment = NSTextAlignmentCenter;
-    _adBadge.textColor = [UIColor whiteColor];
-    _adBadge.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0]; // Replace with your desired color
-    _adBadge.layer.cornerRadius = 4.5;
-    _adBadge.clipsToBounds = YES;
-    _adBadge.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    // Configure deleteButton
-    [_deleteButton setTitle:@"x" forState:UIControlStateNormal];
-    _deleteButton.backgroundColor = [UIColor lightGrayColor];
-    _deleteButton.layer.cornerRadius = 15;
-    [_deleteButton addTarget:self action:@selector(deleteButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
-    _deleteButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [self configAdBadge];
+    [self configDeleteButton];
     
     // Add subviews
     [_topView addSubview:_adBadge];
@@ -53,6 +35,27 @@
     
     // Set up constraints
     [self setTopViewConstraints];
+}
+
+- (void) configAdBadge {
+    _adBadge = [[UILabel alloc] init];
+    _adBadge.text = @"AD";
+    _adBadge.font = [UIFont systemFontOfSize:10];
+    _adBadge.textAlignment = NSTextAlignmentCenter;
+    _adBadge.textColor = [UIColor whiteColor];
+    _adBadge.backgroundColor = [UIColor colorWithRed:0.0 green:0.0 blue:1.0 alpha:1.0]; // Replace with your desired color
+    _adBadge.layer.cornerRadius = 4.5;
+    _adBadge.clipsToBounds = YES;
+    _adBadge.translatesAutoresizingMaskIntoConstraints = NO;
+}
+
+- (void) configDeleteButton {
+    _deleteButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [_deleteButton setTitle:@"x" forState:UIControlStateNormal];
+    _deleteButton.backgroundColor = [UIColor lightGrayColor];
+    _deleteButton.layer.cornerRadius = 15;
+    [_deleteButton addTarget:self action:@selector(deleteButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
+    _deleteButton.translatesAutoresizingMaskIntoConstraints = NO;
 }
 
 - (void)setTopViewConstraints {
@@ -95,15 +98,19 @@
     } else {
         [self.adAppIcon removeFromSuperview];
     }
+    
     if (_levelPlayNativeAd.title) {
         self.adTitleView.text = _levelPlayNativeAd.title;
     }
+    
     if (_levelPlayNativeAd.advertiser) {
         self.adAdvertiserView.text = _levelPlayNativeAd.advertiser;
     }
+    
     if (_levelPlayNativeAd.body) {
         self.adBodyView.text = _levelPlayNativeAd.body;
     }
+    
     if (_levelPlayNativeAd.callToAction) {
         [self.adCallToActionView setTitle:_levelPlayNativeAd.callToAction forState:UIControlStateNormal];
         self.adCallToActionView.userInteractionEnabled = NO;
