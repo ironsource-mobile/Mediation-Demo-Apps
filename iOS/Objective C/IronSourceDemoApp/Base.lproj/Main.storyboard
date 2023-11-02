@@ -129,7 +129,7 @@
                                 <state key="normal" title="NativeAd Button"/>
                                 <state key="disabled" title="Initializing"/>
                                 <connections>
-                                    <segue destination="0Zx-O7-V9a" kind="show" id="M7O-c6-7at"/>
+                                    <action selector="nativeAdButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZrC-fp-RVv"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -177,7 +177,7 @@
         <!--Native Ad View Controller-->
         <scene sceneID="RGv-MF-tFu">
             <objects>
-                <viewController storyboardIdentifier="NativeAdViewController" id="0Zx-O7-V9a" customClass="NativeAdViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NativeAdViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0Zx-O7-V9a" customClass="NativeAdViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="izD-Zc-aSW"/>
                         <viewControllerLayoutGuide type="bottom" id="413-pY-jFp"/>
@@ -201,7 +201,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8vt-3t-hxc">
-                                <rect key="frame" x="24" y="155.5" width="327" height="503.5"/>
+                                <rect key="frame" x="24" y="111.5" width="327" height="547.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <connections>
                                     <outlet property="dataSource" destination="0Zx-O7-V9a" id="LgF-gS-pfR"/>
@@ -210,6 +210,7 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <accessibility key="accessibilityConfiguration" identifier="NativeAdViewController"/>
                         <constraints>
                             <constraint firstItem="58g-u4-Elr" firstAttribute="centerX" secondItem="k7l-vb-7Ur" secondAttribute="centerX" id="KE8-Wh-ZfI"/>
                             <constraint firstItem="8vt-3t-hxc" firstAttribute="leading" secondItem="k7l-vb-7Ur" secondAttribute="leadingMargin" constant="8" id="NKS-A3-x3i"/>

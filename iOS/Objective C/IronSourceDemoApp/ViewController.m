@@ -7,6 +7,7 @@
 
 #import "ViewController.h"
 #import <IronSource/IronSource.h>
+#import "NativeAdViewController.h"
 
 #define USERID @"demoapp"
 //#define APPKEY @"8545d445"
@@ -23,6 +24,7 @@
 
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
 @property (nonatomic, strong) ISBannerView      *bannerView;
+@property (nonatomic, strong) NativeAdViewController *nativeAdViewController;
 @end
 
 @implementation ViewController
@@ -78,6 +80,8 @@
     // Scroll down the file to find out what happens when you click a button...
     
     // Native Ad Button will lead to a new ViewController demonstrating Native Ads.
+    UIStoryboard *storyboard = self.storyboard; //[UIStoryboard storyboardWithName:@"NativeAdViewController" bundle:nil];
+    self.nativeAdViewController = [storyboard instantiateViewControllerWithIdentifier:@"NativeAdViewController"];
     
     /* 
      * Banner integration
@@ -148,6 +152,11 @@
         }
     });
 }
+
+- (IBAction)nativeAdButtonTapped:(id)sender {
+    [self.navigationController pushViewController:_nativeAdViewController animated:YES];
+}
+
 #pragma mark - Rewarded Video Delegate Functions
 
 // This method lets you know whether or not there is a video

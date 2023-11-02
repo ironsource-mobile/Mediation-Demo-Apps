@@ -12,7 +12,7 @@
 
 @interface NativeAdViewController () <LevelPlayNativeAdDelegate, UITableViewDelegate, UITableViewDataSource, NativeAdViewDelegate>
 
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *loadNAButton;
 
 // This is an array of pairs of <LevelPlayNativeAd, NativeAdView>.
@@ -69,11 +69,14 @@
         NativeAdView *adView = pair[1];
         
         [nativeAd destroyAd];
-        [self.nativeAdList removeObject:pair];
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         [self.tableViewData removeObject:adView];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [self.nativeAdList removeObject:pair];
+        nativeAd = nil;
+        adView = nil;
     }
 }
 
