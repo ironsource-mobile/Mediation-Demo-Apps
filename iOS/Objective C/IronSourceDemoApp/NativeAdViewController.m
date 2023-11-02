@@ -49,6 +49,8 @@
         NativeAdView *newView = [[NativeAdView alloc] init];
         newView.delegate = self;
         [self.nativeAdList addObject:@[nativeAd, newView]];
+        nativeAd = nil;
+        newView = nil;
     }
 }
 
@@ -115,6 +117,7 @@
         
         NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
         [self.tableViewData addObject:adView]; // Add the adView to your data source.
+        adView = nil;
         [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
         // Scroll to the newly added cell
@@ -151,7 +154,7 @@
             [adCell.contentView.heightAnchor constraintEqualToAnchor:adView.heightAnchor constant:0],
             [adView.centerYAnchor constraintEqualToAnchor:adCell.contentView.centerYAnchor constant:0],
         ]];
-        
+        adView = nil;
         return adCell;
     }
     cellData = nil;

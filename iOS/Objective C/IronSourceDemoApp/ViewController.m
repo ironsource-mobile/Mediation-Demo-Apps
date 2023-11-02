@@ -80,7 +80,7 @@
     // Scroll down the file to find out what happens when you click a button...
     
     // Native Ad Button will lead to a new ViewController demonstrating Native Ads.
-    UIStoryboard *storyboard = self.storyboard; //[UIStoryboard storyboardWithName:@"NativeAdViewController" bundle:nil];
+    UIStoryboard *storyboard = self.storyboard;
     self.nativeAdViewController = [storyboard instantiateViewControllerWithIdentifier:@"NativeAdViewController"];
     
     /* 
