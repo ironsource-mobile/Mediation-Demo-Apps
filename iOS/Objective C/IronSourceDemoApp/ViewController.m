@@ -30,7 +30,7 @@
 @property (nonatomic, strong) InterstitialLevelPlayCallbacksHandler *interstitialDelegate;
 @property (nonatomic, strong) BannerLevelPlayCallbacksHandler *bannerDelegate;
 
-@property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
+@property (nonatomic, strong) ISPlacementInfo   *rewardedVideoPlacementInfo;
 @property (nonatomic, strong) ISBannerView      *bannerView;
 
 @end
@@ -192,15 +192,15 @@
 - (void)rewardedVideoLevelPlayDidReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo
                                                 withAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
-    self.rvPlacementInfo = placementInfo;
+    self.rewardedVideoPlacementInfo = placementInfo;
 }
 
 - (void)rewardedVideoLevelPlayDidCloseWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    if (self.rvPlacementInfo) {
+    if (self.rewardedVideoPlacementInfo) {
         UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        NSString *message = [NSString stringWithFormat:@"You have been rewarded %d %@", [self.rvPlacementInfo.rewardAmount intValue], self.rvPlacementInfo.rewardName];
+        NSString *message = [NSString stringWithFormat:@"You have been rewarded %d %@", [self.rewardedVideoPlacementInfo.rewardAmount intValue], self.rewardedVideoPlacementInfo.rewardName];
         
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Video Reward"
                                                                       message:message
@@ -213,7 +213,7 @@
         [alert addAction:okAction];
         [rootVC presentViewController:alert animated:NO completion:nil];
         
-        self.rvPlacementInfo = nil;
+        self.rewardedVideoPlacementInfo = nil;
     }
 }
 
