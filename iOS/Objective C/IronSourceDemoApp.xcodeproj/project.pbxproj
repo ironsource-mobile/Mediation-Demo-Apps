@@ -30,6 +30,9 @@
 		E80C8FCD1C16E4C400CF3C27 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FCC1C16E4C400CF3C27 /* StoreKit.framework */; };
 		E80C8FCF1C16E4C800CF3C27 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FCE1C16E4C800CF3C27 /* AdSupport.framework */; };
 		E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FD01C16E4D200CF3C27 /* Security.framework */; };
+		F15948072AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948012AF7AB010033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m */; };
+		F15948082AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948022AF7AB010033FB4D /* InterstitialLevelPlayCallbacksHandler.m */; };
+		F15948092AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +65,12 @@
 		E80C8FCC1C16E4C400CF3C27 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E80C8FCE1C16E4C800CF3C27 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		E80C8FD01C16E4D200CF3C27 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		F15948012AF7AB010033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardedVideoLevelPlayCallbacksHandler.m; sourceTree = "<group>"; };
+		F15948022AF7AB010033FB4D /* InterstitialLevelPlayCallbacksHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterstitialLevelPlayCallbacksHandler.m; sourceTree = "<group>"; };
+		F15948032AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterstitialLevelPlayCallbacksHandler.h; sourceTree = "<group>"; };
+		F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerLevelPlayCallbacksHandler.m; sourceTree = "<group>"; };
+		F15948052AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerLevelPlayCallbacksHandler.h; sourceTree = "<group>"; };
+		F15948062AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardedVideoLevelPlayCallbacksHandler.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +108,12 @@
 				72E0D6451E267513009ABC1B /* AppDelegate.m */,
 				72E0D6531E267513009ABC1B /* ViewController.h */,
 				72E0D6541E267513009ABC1B /* ViewController.m */,
+				F15948052AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.h */,
+				F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */,
+				F15948032AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.h */,
+				F15948022AF7AB010033FB4D /* InterstitialLevelPlayCallbacksHandler.m */,
+				F15948062AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.h */,
+				F15948012AF7AB010033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m */,
 				72E0D6461E267513009ABC1B /* Assets.xcassets */,
 				72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */,
 				72E0D6491E267513009ABC1B /* Main.storyboard */,
@@ -266,6 +281,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F15948092AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m in Sources */,
+				F15948082AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.m in Sources */,
+				F15948072AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m in Sources */,
 				72E0D65E1E267513009ABC1B /* ViewController.m in Sources */,
 				72E0D6601E2675C7009ABC1B /* main.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,

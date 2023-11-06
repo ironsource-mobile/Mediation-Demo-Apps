@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -21,27 +19,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SupersonicLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SupersonicLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
                                 <rect key="frame" x="0.0" y="28" width="375" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="AIm-zw-dN4"/>
                                     <constraint firstAttribute="width" constant="375" id="sDb-5O-aWJ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-xC-13i">
-                                <rect key="frame" x="88" y="97" width="200" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-xC-13i" userLabel="Rewarded Video Label">
+                                <rect key="frame" x="87.5" y="129" width="200" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="3DF-T9-Vmt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-QP-8mE">
-                                <rect key="frame" x="82" y="131" width="210" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
+                                <rect key="frame" x="72.5" y="163" width="230" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="2St-3F-xvd"/>
-                                    <constraint firstAttribute="width" constant="210" id="9Xc-Z5-ayD"/>
+                                    <constraint firstAttribute="width" constant="230" id="9Xc-Z5-ayD"/>
                                 </constraints>
                                 <state key="normal" title="Show"/>
                                 <state key="disabled" title="Initializing"/>
@@ -49,54 +47,20 @@
                                     <action selector="showRVButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W9h-7f-k4a"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Offerwall" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cO-cG-V8Z">
-                                <rect key="frame" x="88" y="199" width="200" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cO-cG-V8Z" userLabel="Interstitial Label">
+                                <rect key="frame" x="87.5" y="231" width="200" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="6yv-0V-EHb"/>
                                     <constraint firstAttribute="height" constant="21" id="w2x-4t-B18"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhm-wI-nt6">
-                                <rect key="frame" x="83" y="228" width="210" height="36"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qE4-Rn-VtA" userLabel="Load Interstitial Button">
+                                <rect key="frame" x="100" y="260" width="100" height="36"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="210" id="MNH-0b-7lm"/>
-                                    <constraint firstAttribute="height" constant="36" id="ae8-3f-7dz"/>
-                                </constraints>
-                                <state key="normal" title="Show"/>
-                                <state key="disabled" title="Initializing"/>
-                                <connections>
-                                    <action selector="showOWButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8G4-Ef-0Pq"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiU-tt-WK6">
-                                <rect key="frame" x="87" y="296" width="200" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="HdI-EA-zam"/>
-                                    <constraint firstAttribute="width" constant="200" id="xxB-TN-dnJ"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tt8-Ax-caa">
-                                <rect key="frame" x="197" y="325" width="90" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="8DL-ck-dxZ"/>
-                                    <constraint firstAttribute="width" constant="90" id="o3Q-97-NEg"/>
-                                </constraints>
-                                <state key="normal" title="Show"/>
-                                <state key="disabled" title="Initializing"/>
-                                <connections>
-                                    <action selector="showISButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tur-as-I7U"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qE4-Rn-VtA">
-                                <rect key="frame" x="87" y="325" width="90" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="WCF-Rz-jIa"/>
+                                    <constraint firstAttribute="width" constant="100" id="WCF-Rz-jIa"/>
                                     <constraint firstAttribute="height" constant="36" id="hlO-nJ-mfL"/>
                                 </constraints>
                                 <state key="normal" title="Load"/>
@@ -105,40 +69,48 @@
                                     <action selector="loadISButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bfh-hK-kfG"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnw-Fv-bW3">
-                                <rect key="frame" x="88" y="399" width="200" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhm-wI-nt6" userLabel="Show Interstitial Button">
+                                <rect key="frame" x="225" y="260" width="100" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="MNH-0b-7lm"/>
+                                    <constraint firstAttribute="height" constant="36" id="ae8-3f-7dz"/>
+                                </constraints>
+                                <state key="normal" title="Show"/>
+                                <state key="disabled" title="Show"/>
+                                <state key="selected" title="Show"/>
+                                <state key="highlighted" title="Show"/>
+                                <connections>
+                                    <action selector="showISButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GCY-SP-jHQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnw-Fv-bW3">
+                                <rect key="frame" x="160" y="378" width="41.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="qE4-Rn-VtA" firstAttribute="leading" secondItem="HiU-tt-WK6" secondAttribute="leading" id="2E4-Mj-Ypt"/>
+                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Dl-sK-gxo"/>
                             <constraint firstItem="Dhm-wI-nt6" firstAttribute="top" secondItem="7cO-cG-V8Z" secondAttribute="bottom" constant="8" id="5C4-XJ-suU"/>
-                            <constraint firstItem="Szc-xC-13i" firstAttribute="top" secondItem="WUr-4g-cHl" secondAttribute="bottom" constant="8" id="Bcu-ay-ftx"/>
+                            <constraint firstItem="Szc-xC-13i" firstAttribute="top" secondItem="WUr-4g-cHl" secondAttribute="bottom" constant="40" id="Bcu-ay-ftx"/>
                             <constraint firstItem="WUr-4g-cHl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Dtn-jb-wLu"/>
                             <constraint firstItem="7cO-cG-V8Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IFJ-aB-Rbl"/>
+                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="top" secondItem="Dhm-wI-nt6" secondAttribute="bottom" constant="82" id="IMD-mZ-rcz"/>
+                            <constraint firstItem="Dhm-wI-nt6" firstAttribute="leading" secondItem="qE4-Rn-VtA" secondAttribute="trailing" constant="25" id="Iku-m5-Cju"/>
                             <constraint firstItem="N20-QP-8mE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q7n-xd-lAd"/>
-                            <constraint firstItem="Dhm-wI-nt6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Rm8-CQ-c99"/>
-                            <constraint firstItem="HiU-tt-WK6" firstAttribute="top" secondItem="Dhm-wI-nt6" secondAttribute="bottom" constant="32" id="ZIN-cM-msa"/>
+                            <constraint firstItem="qE4-Rn-VtA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="100" id="d6E-kU-Ndu"/>
                             <constraint firstItem="Szc-xC-13i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eOo-MI-eel"/>
-                            <constraint firstItem="HiU-tt-WK6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fZi-63-hay"/>
+                            <constraint firstItem="qE4-Rn-VtA" firstAttribute="top" secondItem="7cO-cG-V8Z" secondAttribute="bottom" constant="8" id="euv-pV-GWM"/>
                             <constraint firstItem="WUr-4g-cHl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fjI-hK-kEr"/>
-                            <constraint firstItem="qE4-Rn-VtA" firstAttribute="top" secondItem="HiU-tt-WK6" secondAttribute="bottom" constant="8" id="gcP-hM-Uob"/>
                             <constraint firstItem="7cO-cG-V8Z" firstAttribute="top" secondItem="N20-QP-8mE" secondAttribute="bottom" constant="32" id="ghm-oI-b4M"/>
-                            <constraint firstItem="Tt8-Ax-caa" firstAttribute="trailing" secondItem="HiU-tt-WK6" secondAttribute="trailing" id="hnd-aJ-tGk"/>
-                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="trailing" secondItem="7cO-cG-V8Z" secondAttribute="trailing" id="lWh-dT-QJM"/>
-                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="top" secondItem="qE4-Rn-VtA" secondAttribute="bottom" constant="38" id="lwE-DW-TGi"/>
-                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="leading" secondItem="7cO-cG-V8Z" secondAttribute="leading" id="m9b-Lt-hQ7"/>
                             <constraint firstItem="N20-QP-8mE" firstAttribute="top" secondItem="Szc-xC-13i" secondAttribute="bottom" constant="13" id="qpa-hf-72n"/>
-                            <constraint firstItem="Tt8-Ax-caa" firstAttribute="top" secondItem="HiU-tt-WK6" secondAttribute="bottom" constant="8" id="yec-0K-PTb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="loadISButton" destination="qE4-Rn-VtA" id="GqZ-ga-Asf"/>
-                        <outlet property="showISButton" destination="Tt8-Ax-caa" id="CtW-5j-kMU"/>
-                        <outlet property="showOWButton" destination="Dhm-wI-nt6" id="nh8-j1-jXF"/>
+                        <outlet property="showISButton" destination="Dhm-wI-nt6" id="dsZ-6I-2fz"/>
                         <outlet property="showRVButton" destination="N20-QP-8mE" id="Mwm-MG-lvD"/>
                         <outlet property="versionLabel" destination="Dnw-Fv-bW3" id="eDm-X0-027"/>
                     </connections>
@@ -149,6 +121,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SupersonicLogo" width="205" height="43"/>
+        <image name="SupersonicLogo" width="205" height="43.5"/>
+        <systemColor name="darkTextColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>
