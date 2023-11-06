@@ -1,11 +1,11 @@
 //
-//  ViewController.m
+//  DemoViewController.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2023 IronSource. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "DemoViewController.h"
 #import "RewardedVideoLevelPlayCallbacksHandler.h"
 #import "InterstitialLevelPlayCallbacksHandler.h"
 #import "BannerLevelPlayCallbacksHandler.h"
@@ -14,7 +14,7 @@
 #define USERID @"demoapp"
 #define APPKEY @"8545d445"
 
-@interface ViewController () <RewardedVideoLevelPlayCallbacksWrapper, InterstitialLevelPlayCallbacksWrapper, BannerLevelPlayCallbacksWrapper, ISImpressionDataDelegate>
+@interface DemoViewController () <RewardedVideoLevelPlayCallbacksWrapper, InterstitialLevelPlayCallbacksWrapper, BannerLevelPlayCallbacksWrapper, ISImpressionDataDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *showRewardedVideoButton;
 
@@ -35,7 +35,7 @@
 
 @end
 
-@implementation ViewController
+@implementation DemoViewController
 
 #pragma mark -
 #pragma mark Lifecycle Methods

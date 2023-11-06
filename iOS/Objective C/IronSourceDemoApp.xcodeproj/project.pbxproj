@@ -13,7 +13,6 @@
 		72E0D6561E267513009ABC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6461E267513009ABC1B /* Assets.xcassets */; };
 		72E0D6571E267513009ABC1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */; };
 		72E0D6581E267513009ABC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6491E267513009ABC1B /* Main.storyboard */; };
-		72E0D65E1E267513009ABC1B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D6541E267513009ABC1B /* ViewController.m */; };
 		72E0D6601E2675C7009ABC1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D65F1E2675C7009ABC1B /* main.m */; };
 		9771B54585AE6AE9D8FE4049 /* libPods-IronSourceDemoApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DB5F29898D4A91261843296 /* libPods-IronSourceDemoApp.a */; };
 		E80C8FB61C16E48200CF3C27 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */; };
@@ -33,6 +32,7 @@
 		F15948072AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948012AF7AB010033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m */; };
 		F15948082AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948022AF7AB010033FB4D /* InterstitialLevelPlayCallbacksHandler.m */; };
 		F15948092AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */; };
+		F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FCA2AF954A20077FADE /* DemoViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +45,6 @@
 		72E0D6461E267513009ABC1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72E0D6481E267513009ABC1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72E0D64A1E267513009ABC1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		72E0D6531E267513009ABC1B /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		72E0D6541E267513009ABC1B /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = IronSourceDemoApp/main.m; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BD9B6B5F89AFD94696FF9BC2 /* Pods-IronSourceDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceDemoApp.release.xcconfig"; path = "Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -71,6 +69,8 @@
 		F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerLevelPlayCallbacksHandler.m; sourceTree = "<group>"; };
 		F15948052AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerLevelPlayCallbacksHandler.h; sourceTree = "<group>"; };
 		F15948062AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardedVideoLevelPlayCallbacksHandler.h; sourceTree = "<group>"; };
+		F1666FC92AF954A20077FADE /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
+		F1666FCA2AF954A20077FADE /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,8 +106,8 @@
 			children = (
 				72E0D6441E267513009ABC1B /* AppDelegate.h */,
 				72E0D6451E267513009ABC1B /* AppDelegate.m */,
-				72E0D6531E267513009ABC1B /* ViewController.h */,
-				72E0D6541E267513009ABC1B /* ViewController.m */,
+				F1666FC92AF954A20077FADE /* DemoViewController.h */,
+				F1666FCA2AF954A20077FADE /* DemoViewController.m */,
 				F15948052AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.h */,
 				F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */,
 				F15948032AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.h */,
@@ -284,8 +284,8 @@
 				F15948092AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m in Sources */,
 				F15948082AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.m in Sources */,
 				F15948072AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m in Sources */,
-				72E0D65E1E267513009ABC1B /* ViewController.m in Sources */,
 				72E0D6601E2675C7009ABC1B /* main.m in Sources */,
+				F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
