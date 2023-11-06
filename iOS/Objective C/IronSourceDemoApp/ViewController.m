@@ -16,9 +16,14 @@
 
 @interface ViewController () <RewardedVideoLevelPlayCallbacksWrapper, InterstitialLevelPlayCallbacksWrapper, BannerLevelPlayCallbacksWrapper, ISImpressionDataDelegate>
 
-@property (weak, nonatomic) IBOutlet UIButton *showRVButton;
-@property (weak, nonatomic) IBOutlet UIButton *loadISButton;
-@property (weak, nonatomic) IBOutlet UIButton *showISButton;
+@property (weak, nonatomic) IBOutlet UIButton *showRewardedVideoButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *loadInterstitialButton;
+@property (weak, nonatomic) IBOutlet UIButton *showInterstitialButton;
+
+@property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
+@property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
+
 @property (weak, nonatomic) IBOutlet UILabel  *versionLabel;
 
 @property (nonatomic, strong) RewardedVideoLevelPlayCallbacksHandler *rewardedVideoDelegate;
@@ -44,7 +49,7 @@
     // UI setup
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
     
-    for (UIButton *button in @[self.showISButton, self.showRVButton, self.loadISButton]) {
+    for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -63,12 +68,12 @@
     self.rewardedVideoDelegate = [[RewardedVideoLevelPlayCallbacksHandler alloc] initWithDelegate:self];
     self.interstitialDelegate = [[InterstitialLevelPlayCallbacksHandler alloc] initWithDelegate:self];
     self.bannerDelegate = [[BannerLevelPlayCallbacksHandler alloc] initWithDelegate:self];
-
+    
     [IronSource setLevelPlayRewardedVideoDelegate:self.rewardedVideoDelegate];
     [IronSource setLevelPlayInterstitialDelegate:self.interstitialDelegate];
     [IronSource setLevelPlayBannerDelegate:self.bannerDelegate];
     [IronSource addImpressionDataDelegate:self];
-
+    
     NSString *userId = [IronSource advertiserId];
     
     if ([userId length] == 0) {
@@ -85,12 +90,6 @@
     // [IronSource initWithAppKey:APPKEY adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER]];
     
     // Scroll down the file to find out what happens when you click a button...
-    
-    /* 
-     * Banner integration
-     * To finalize your banner integration, you must integrate at least one of our Mediation adapters that have banner.
-     */
-    [self loadBanner];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -101,27 +100,27 @@
 #pragma mark -
 #pragma mark Interface Handling
 
-- (IBAction)showRVButtonTapped:(id)sender {
+- (IBAction)showRewardedVideoButtonTapped:(id)sender {
     // After calling 'setLevelPlayRewardedVideoDelegate' and 'initWithAppKey:'
     // you are ready to present an ad. You can supply a placement
     // by calling 'showRewardedVideoWithViewController:placement:', or you can simply
-    // call 'showRewardedVideoWithViewController'. 
+    // call 'showRewardedVideoWithViewController'.
     // In this case the SDK will use the default placement one created for you.
     [IronSource showRewardedVideoWithViewController:self];
 }
 
-- (IBAction)loadISButtonTapped:(id)sender {
+- (IBAction)loadInterstitialButtonTapped:(id)sender {
     // This will load the Interstitial.
     [IronSource loadInterstitial];
 }
 
-- (IBAction)showISButtonTapped:(id)sender {
+- (IBAction)showInterstitialButtonTapped:(id)sender {
     // This will present the Interstitial. Unlike Rewarded
     // Videos there are no placements.
     [IronSource showInterstitialWithViewController:self];
 }
 
-- (void)loadBanner {
+- (IBAction)loadBannerButtonTapped:(id)sender {
     // We call destroy banner before loading a new banner
     if (self.bannerView) {
         [self destroyBanner];
@@ -129,11 +128,15 @@
     
     // This will load the Banner. You can supply a placement
     // by calling 'loadBannerWithViewController:size:placement', or you can simply
-    // call 'loadBannerWithViewController:size'. 
+    // call 'loadBannerWithViewController:size'.
     // In this case the SDK will use the default placement one created for you.
     // You can pick any banner size: ISBannerSize_BANNER, ISBannerSize_LARGE, ISBannerSize_RECTANGLE or ISBannerSize_LEADERBOARD
     [IronSource loadBannerWithViewController:self
                                         size:ISBannerSize_BANNER];
+}
+
+- (IBAction)destroyBannerButtonTapped:(id)sender {
+    [self destroyBanner];
 }
 
 - (void)destroyBanner {
@@ -142,6 +145,8 @@
             [IronSource destroyBanner:self.bannerView];
             self.bannerView = nil;
         }
+        
+        [self.destroyBannerButton setEnabled:NO];
     });
 }
 
@@ -152,7 +157,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showRVButton setEnabled:YES];
+        [self.showRewardedVideoButton setEnabled:YES];
     });
 }
 
@@ -160,7 +165,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showRVButton setEnabled:NO];
+        [self.showRewardedVideoButton setEnabled:NO];
     });
 }
 
@@ -214,7 +219,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showISButton setEnabled:YES];
+        [self.showInterstitialButton setEnabled:YES];
     });
 }
 
@@ -222,7 +227,7 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showISButton setEnabled:NO];
+        [self.showInterstitialButton setEnabled:NO];
     });
 }
 
@@ -265,6 +270,8 @@
         
         bannerView.center = CGPointMake(self.view.frame.size.width / 2.0, y);
         [self.view addSubview:bannerView];
+        
+        [self.destroyBannerButton setEnabled:YES];
     });
 }
 

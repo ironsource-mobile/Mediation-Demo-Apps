@@ -20,71 +20,151 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SupersonicLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
-                                <rect key="frame" x="0.0" y="28" width="375" height="61"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="AIm-zw-dN4"/>
                                     <constraint firstAttribute="width" constant="375" id="sDb-5O-aWJ"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-xC-13i" userLabel="Rewarded Video Label">
-                                <rect key="frame" x="87.5" y="129" width="200" height="21"/>
+                            <view contentMode="scaleToFill" id="xQF-eI-Igz" userLabel="Rewarded Video Container View">
+                                <rect key="frame" x="78" y="121" width="220" height="70"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-xC-13i" userLabel="Rewarded Video Label">
+                                        <rect key="frame" x="10" y="0.0" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="3DF-T9-Vmt"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
+                                        <rect key="frame" x="0.0" y="44" width="220" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="2St-3F-xvd"/>
+                                            <constraint firstAttribute="width" constant="220" id="9Xc-Z5-ayD"/>
+                                        </constraints>
+                                        <state key="normal" title="Show"/>
+                                        <state key="disabled" title="Initializing"/>
+                                        <connections>
+                                            <action selector="showRewardedVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rbr-Q7-Efw"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="3DF-T9-Vmt"/>
+                                    <constraint firstAttribute="height" constant="80" id="6Y9-8o-jBi"/>
+                                    <constraint firstAttribute="bottom" secondItem="N20-QP-8mE" secondAttribute="bottom" id="BO5-vN-sr8"/>
+                                    <constraint firstItem="Szc-xC-13i" firstAttribute="centerX" secondItem="xQF-eI-Igz" secondAttribute="centerX" id="Xey-o0-uvA"/>
+                                    <constraint firstItem="N20-QP-8mE" firstAttribute="centerX" secondItem="xQF-eI-Igz" secondAttribute="centerX" id="hvl-RG-2Au"/>
+                                    <constraint firstItem="Szc-xC-13i" firstAttribute="top" secondItem="xQF-eI-Igz" secondAttribute="top" id="lgH-9n-Rgf"/>
+                                    <constraint firstAttribute="width" constant="220" id="q1J-Jp-7zE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
-                                <rect key="frame" x="72.5" y="163" width="230" height="36"/>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XOQ-ks-7Xg" userLabel="Interstitial Container View">
+                                <rect key="frame" x="78" y="251" width="220" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cO-cG-V8Z" userLabel="Interstitial Label">
+                                        <rect key="frame" x="10" y="0.0" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="200" id="6yv-0V-EHb"/>
+                                            <constraint firstAttribute="height" constant="21" id="w2x-4t-B18"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qE4-Rn-VtA" userLabel="Load Interstitial Button">
+                                        <rect key="frame" x="0.0" y="44" width="100" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="WCF-Rz-jIa"/>
+                                            <constraint firstAttribute="height" constant="36" id="hlO-nJ-mfL"/>
+                                        </constraints>
+                                        <state key="normal" title="Load"/>
+                                        <state key="disabled" title="Initializing"/>
+                                        <connections>
+                                            <action selector="loadInterstitialButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BWO-cy-fU5"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhm-wI-nt6" userLabel="Show Interstitial Button">
+                                        <rect key="frame" x="120" y="44" width="100" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="MNH-0b-7lm"/>
+                                            <constraint firstAttribute="height" constant="36" id="ae8-3f-7dz"/>
+                                        </constraints>
+                                        <state key="normal" title="Show"/>
+                                        <state key="disabled" title="Show"/>
+                                        <state key="selected" title="Show"/>
+                                        <state key="highlighted" title="Show"/>
+                                        <connections>
+                                            <action selector="showInterstitialButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fhz-yZ-mxV"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="2St-3F-xvd"/>
-                                    <constraint firstAttribute="width" constant="230" id="9Xc-Z5-ayD"/>
+                                    <constraint firstAttribute="trailing" secondItem="Dhm-wI-nt6" secondAttribute="trailing" id="9xx-cb-fCZ"/>
+                                    <constraint firstAttribute="width" constant="220" id="Acx-Nf-Y7h"/>
+                                    <constraint firstItem="7cO-cG-V8Z" firstAttribute="top" secondItem="XOQ-ks-7Xg" secondAttribute="top" id="DFy-q4-s4j"/>
+                                    <constraint firstAttribute="height" constant="80" id="Kqj-Ei-rv8"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dhm-wI-nt6" secondAttribute="bottom" id="WJR-J4-ASv"/>
+                                    <constraint firstItem="7cO-cG-V8Z" firstAttribute="centerX" secondItem="XOQ-ks-7Xg" secondAttribute="centerX" id="hus-F9-bIv"/>
+                                    <constraint firstAttribute="bottom" secondItem="qE4-Rn-VtA" secondAttribute="bottom" id="oww-nO-0zh"/>
+                                    <constraint firstItem="qE4-Rn-VtA" firstAttribute="leading" secondItem="XOQ-ks-7Xg" secondAttribute="leading" id="rD7-XB-lTg"/>
                                 </constraints>
-                                <state key="normal" title="Show"/>
-                                <state key="disabled" title="Initializing"/>
-                                <connections>
-                                    <action selector="showRVButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="W9h-7f-k4a"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cO-cG-V8Z" userLabel="Interstitial Label">
-                                <rect key="frame" x="87.5" y="231" width="200" height="21"/>
+                            </view>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rm3-Oo-rgO" userLabel="Banner Container View">
+                                <rect key="frame" x="78" y="381" width="220" height="70"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAA-Bc-iLn" userLabel="Banner Label">
+                                        <rect key="frame" x="10" y="0.0" width="200" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="ZLj-Nq-YjX"/>
+                                            <constraint firstAttribute="width" constant="200" id="bUM-X7-xSR"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" systemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DN1-DN-sO8" userLabel="Load Banner Button">
+                                        <rect key="frame" x="0.0" y="44" width="100" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="100" id="44d-C4-dmz"/>
+                                            <constraint firstAttribute="height" constant="36" id="Zp6-aG-A1J"/>
+                                        </constraints>
+                                        <state key="normal" title="Load"/>
+                                        <state key="disabled" title="Initializing"/>
+                                        <connections>
+                                            <action selector="loadBannerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7uA-Jm-DPx"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="424-rj-ygl" userLabel="Destroy Banner Button">
+                                        <rect key="frame" x="120" y="44" width="100" height="36"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="36" id="6BJ-Js-DSP"/>
+                                            <constraint firstAttribute="width" constant="100" id="ub4-zw-owL"/>
+                                        </constraints>
+                                        <state key="normal" title="Destroy"/>
+                                        <state key="disabled" title="Destroy"/>
+                                        <state key="selected" title="Show"/>
+                                        <state key="highlighted" title="Show"/>
+                                        <connections>
+                                            <action selector="destroyBannerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wEc-GR-syv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="200" id="6yv-0V-EHb"/>
-                                    <constraint firstAttribute="height" constant="21" id="w2x-4t-B18"/>
+                                    <constraint firstItem="MAA-Bc-iLn" firstAttribute="top" secondItem="rm3-Oo-rgO" secondAttribute="top" id="Sh1-Uz-Gyf"/>
+                                    <constraint firstAttribute="bottom" secondItem="424-rj-ygl" secondAttribute="bottom" id="Tue-T4-zl3"/>
+                                    <constraint firstItem="MAA-Bc-iLn" firstAttribute="centerX" secondItem="rm3-Oo-rgO" secondAttribute="centerX" id="Y8P-Cd-onZ"/>
+                                    <constraint firstItem="DN1-DN-sO8" firstAttribute="leading" secondItem="rm3-Oo-rgO" secondAttribute="leading" id="fYr-rZ-GbM"/>
+                                    <constraint firstAttribute="trailing" secondItem="424-rj-ygl" secondAttribute="trailing" id="ffb-ih-YBz"/>
+                                    <constraint firstAttribute="bottom" secondItem="DN1-DN-sO8" secondAttribute="bottom" id="guL-oR-7f5"/>
+                                    <constraint firstAttribute="width" constant="220" id="jIv-ck-Hov"/>
+                                    <constraint firstAttribute="height" constant="80" id="kNT-QW-nrk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qE4-Rn-VtA" userLabel="Load Interstitial Button">
-                                <rect key="frame" x="100" y="260" width="100" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="WCF-Rz-jIa"/>
-                                    <constraint firstAttribute="height" constant="36" id="hlO-nJ-mfL"/>
-                                </constraints>
-                                <state key="normal" title="Load"/>
-                                <state key="disabled" title="Initializing"/>
-                                <connections>
-                                    <action selector="loadISButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bfh-hK-kfG"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhm-wI-nt6" userLabel="Show Interstitial Button">
-                                <rect key="frame" x="225" y="260" width="100" height="36"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="MNH-0b-7lm"/>
-                                    <constraint firstAttribute="height" constant="36" id="ae8-3f-7dz"/>
-                                </constraints>
-                                <state key="normal" title="Show"/>
-                                <state key="disabled" title="Show"/>
-                                <state key="selected" title="Show"/>
-                                <state key="highlighted" title="Show"/>
-                                <connections>
-                                    <action selector="showISButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GCY-SP-jHQ"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnw-Fv-bW3">
-                                <rect key="frame" x="160" y="378" width="41.5" height="21"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnw-Fv-bW3">
+                                <rect key="frame" x="78" y="521" width="220" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -92,26 +172,24 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="XOQ-ks-7Xg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0qQ-sd-uAj"/>
+                            <constraint firstItem="rm3-Oo-rgO" firstAttribute="top" secondItem="XOQ-ks-7Xg" secondAttribute="bottom" constant="50" id="1NH-41-OYT"/>
+                            <constraint firstItem="XOQ-ks-7Xg" firstAttribute="top" secondItem="xQF-eI-Igz" secondAttribute="bottom" constant="50" id="1Pb-JT-1c9"/>
                             <constraint firstItem="Dnw-Fv-bW3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Dl-sK-gxo"/>
-                            <constraint firstItem="Dhm-wI-nt6" firstAttribute="top" secondItem="7cO-cG-V8Z" secondAttribute="bottom" constant="8" id="5C4-XJ-suU"/>
-                            <constraint firstItem="Szc-xC-13i" firstAttribute="top" secondItem="WUr-4g-cHl" secondAttribute="bottom" constant="40" id="Bcu-ay-ftx"/>
+                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="top" secondItem="rm3-Oo-rgO" secondAttribute="bottom" constant="140" id="7MO-1L-K6n"/>
                             <constraint firstItem="WUr-4g-cHl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Dtn-jb-wLu"/>
-                            <constraint firstItem="7cO-cG-V8Z" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IFJ-aB-Rbl"/>
-                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="top" secondItem="Dhm-wI-nt6" secondAttribute="bottom" constant="82" id="IMD-mZ-rcz"/>
-                            <constraint firstItem="Dhm-wI-nt6" firstAttribute="leading" secondItem="qE4-Rn-VtA" secondAttribute="trailing" constant="25" id="Iku-m5-Cju"/>
-                            <constraint firstItem="N20-QP-8mE" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Q7n-xd-lAd"/>
-                            <constraint firstItem="qE4-Rn-VtA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="100" id="d6E-kU-Ndu"/>
-                            <constraint firstItem="Szc-xC-13i" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="eOo-MI-eel"/>
-                            <constraint firstItem="qE4-Rn-VtA" firstAttribute="top" secondItem="7cO-cG-V8Z" secondAttribute="bottom" constant="8" id="euv-pV-GWM"/>
+                            <constraint firstItem="rm3-Oo-rgO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P5o-NS-Nby"/>
+                            <constraint firstItem="xQF-eI-Igz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Wxq-Cz-4VM"/>
                             <constraint firstItem="WUr-4g-cHl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fjI-hK-kEr"/>
-                            <constraint firstItem="7cO-cG-V8Z" firstAttribute="top" secondItem="N20-QP-8mE" secondAttribute="bottom" constant="32" id="ghm-oI-b4M"/>
-                            <constraint firstItem="N20-QP-8mE" firstAttribute="top" secondItem="Szc-xC-13i" secondAttribute="bottom" constant="13" id="qpa-hf-72n"/>
+                            <constraint firstItem="xQF-eI-Igz" firstAttribute="top" secondItem="WUr-4g-cHl" secondAttribute="bottom" constant="50" id="vIg-Qg-oKh"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="loadISButton" destination="qE4-Rn-VtA" id="GqZ-ga-Asf"/>
-                        <outlet property="showISButton" destination="Dhm-wI-nt6" id="dsZ-6I-2fz"/>
-                        <outlet property="showRVButton" destination="N20-QP-8mE" id="Mwm-MG-lvD"/>
+                        <outlet property="destroyBannerButton" destination="424-rj-ygl" id="8PY-nM-iW4"/>
+                        <outlet property="loadBannerButton" destination="DN1-DN-sO8" id="rHw-dA-GPy"/>
+                        <outlet property="loadInterstitialButton" destination="qE4-Rn-VtA" id="5Wh-Ea-XS0"/>
+                        <outlet property="showInterstitialButton" destination="Dhm-wI-nt6" id="lZv-jU-P6G"/>
+                        <outlet property="showRewardedVideoButton" destination="N20-QP-8mE" id="TcG-9c-34W"/>
                         <outlet property="versionLabel" destination="Dnw-Fv-bW3" id="eDm-X0-027"/>
                     </connections>
                 </viewController>
