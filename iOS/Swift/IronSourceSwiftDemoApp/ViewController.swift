@@ -10,53 +10,34 @@ import Foundation
 import ObjectiveC.runtime
 import IronSource
 
-let kAPPKEY = "8545d445"
+let defaultUserId = "demoapp"
+let appKey = "8545d445"
 
-
-class ViewController: UIViewController, ISRewardedVideoDelegate, ISOfferwallDelegate, ISInterstitialDelegate, ISBannerDelegate,ISImpressionDataDelegate {
+class ViewController: UIViewController, RewardedVideoLevelPlayCallbacksWrapper, InterstitialLevelPlayCallbacksWrapper, BannerLevelPlayCallbacksWrapper, ISImpressionDataDelegate {
     
     //MARK: IBOutlets
-    @IBOutlet weak var showRVButton: UIButton!
-    @IBOutlet weak var showOWButton: UIButton!
-    @IBOutlet weak var showISButton: UIButton!
-    @IBOutlet weak var loadISButton: UIButton!
-    @IBOutlet weak var loadBNButton: UIButton!
-    @IBOutlet weak var destroyBNButton: UIButton!
+    
+    @IBOutlet weak var showRewardedVideoButton: UIButton!
+    
+    @IBOutlet weak var loadInterstitialButton: UIButton!
+    @IBOutlet weak var showInterstitialButton: UIButton!
+    
+    @IBOutlet weak var loadBannerButton: UIButton!
+    @IBOutlet weak var destroyBannerButton: UIButton!
+    
     @IBOutlet weak var versionLabel: UILabel!
+    
+    var rewardedVideoDelegate: RewardedVideoLevelPlayCallbacksHandler! = nil
+    var interstitialDelegate: InterstitialLevelPlayCallbacksHandler! = nil
+    var bannerDelegate: BannerLevelPlayCallbacksHandler! = nil
+    
     var bannerView: ISBannerView! = nil
-
-    //MARK: IBOutlets Actions
-    @IBAction func showRVButtonAction(_ sender: Any) {
-        IronSource.showRewardedVideo(with: self)
-    }
-    
-    @IBAction func showOWButtonAction(_ sender: Any) {
-        IronSource.showOfferwall(with: self)
-    }
-
-    @IBAction func showISButtonAction(_ sender: Any) {
-        IronSource.showInterstitial(with: self)
-    }
-    
-    @IBAction func loadISButtonAction(_ sender: Any) {
-        IronSource.loadInterstitial()
-    }
-    
-    @IBAction func loadBNButton(_ sender: Any) {
-        let BNSize: ISBannerSize = ISBannerSize(description: "BANNER",width:320 ,height:50)
-       IronSource.loadBanner(with: self, size: BNSize)
-    }
-    
-    @IBAction func destroyBNButton(_ sender: Any) {
-        if bannerView != nil {
-            IronSource.destroyBanner(bannerView)
-        }
-        
-    }
     
     //MARK: ViewLifecycle Functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         self.versionLabel.text =  String(format: "%@%@", "sdk version: ", IronSource.sdkVersion());
         self.setupIronSourceSdk()
@@ -68,261 +49,214 @@ class ViewController: UIViewController, ISRewardedVideoDelegate, ISOfferwallDele
     }
     
     //MARK: Private Functions
+    
     func setupIronSourceSdk() {
+        //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
         ISIntegrationHelper.validateIntegration()
         
-        
-        
-        // Before initializing any of our products (Rewarded video, Offerwall or Interstitial) you must set
-        // their delegates. Take a look at these classes and you will see that they each implement a product
+        // Before initializing any of our products (Rewarded video, Interstitial or Banner) you must set
+        // their delegates. Take a look at each of these delegates method and you will see that they each implement a product
         // protocol. This is our way of letting you know what's going on, and if you don't set the delegates
         // we will not be able to communicate with you.
         // We're passing 'self' to our delegates because we want
         // to be able to enable/disable buttons to match ad availability.
-        IronSource.setRewardedVideoDelegate(self)
-        IronSource.setOfferwallDelegate(self)
-        IronSource.setInterstitialDelegate(self)
-        IronSource.setBannerDelegate(self)
+        
+        rewardedVideoDelegate = .init(delegate: self)
+        interstitialDelegate = .init(delegate: self)
+        bannerDelegate = .init(delegate: self)
+        
+        IronSource.setLevelPlayRewardedVideoDelegate(rewardedVideoDelegate)
+        IronSource.setLevelPlayInterstitialDelegate(interstitialDelegate)
+        IronSource.setLevelPlayBannerDelegate(bannerDelegate)
         IronSource.add(self)
         
-    
+        var userId = IronSource.advertiserId()
         
-        IronSource.initWithAppKey(kAPPKEY)
+        if userId.count == 0 {
+            //If we couldn't get the advertiser id, we will use a default one.
+            userId = defaultUserId;
+        }
+        
+        IronSource.setUserId(userId)
+        
+        // After setting the delegates you can go ahead and initialize the SDK.
+        IronSource.initWithAppKey(appKey)
+        
         // To initialize specific ad units:
-//        IronSource.initWithAppKey(kAPPKEY, adUnits:[IS_REWARDED_VIDEO,IS_INTERSTITIAL,IS_OFFERWALL,IS_BANNER])
+        // IronSource.initWithAppKey(appKey, adUnits:[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER])
+        
+        // Scroll down the file to find out what happens when you click a button...
     }
     
     func logFunctionName(string: String = #function) {
-        print("IronSource Swift Demo App: "+string)
+        print("IronSource Swift Demo App: " + string)
     }
     
-    //MARK: ISInterstitialDelegate Functions
-    /**
-     Called after an interstitial has been clicked.
-     */
-    public func didClickInterstitial() {
+    
+    func destroyBanner() {
+        if bannerView != nil {
+            IronSource.destroyBanner(bannerView)
+        }
+        
+        destroyBannerButton.isEnabled = false
+    }
+    
+    //MARK: IBOutlets Actions
+    
+    @IBAction func showRewardedVideoButtonAction(_ sender: Any) {
+        // After calling 'setLevelPlayRewardedVideoDelegate' and 'initWithAppKey'
+        // you are ready to present an ad. You can supply a placement
+        // by calling 'showRewardedVideo(with: viewController, placement: placement)', or you can simply
+        // call 'showRewardedVideo(with:viewController)'.
+        // In this case the SDK will use the default placement one created for you.
+        IronSource.showRewardedVideo(with: self)
+    }
+    
+    @IBAction func loadInterstitialButtonAction(_ sender: Any) {
+        // This will load the Interstitial.
+        IronSource.loadInterstitial()
+    }
+
+    @IBAction func showInterstitialButtonAction(_ sender: Any) {
+        // This will present the Interstitial. Unlike Rewarded
+        // Videos there are no placements.
+        IronSource.showInterstitial(with: self)
+    }
+    
+    @IBAction func loadBannerButtonAction(_ sender: Any) {
+        // We call destroy banner before loading a new banner
+        if bannerView != nil {
+            destroyBanner()
+        }
+        
+        let bannerSize: ISBannerSize = ISBannerSize(description:"BANNER", width:320, height:50)
+        
+        // This will load the Banner. You can supply a placement
+        // by calling 'loadBanner(with: viewControler, size: bannerSize, placement: placement)', or you can simply
+        // call 'loadBanner(with: self, size: bannerSize)'.
+        // In this case the SDK will use the default placement one created for you.
+        IronSource.loadBanner(with: self, size: bannerSize)
+    }
+    
+    @IBAction func destroyBannerButtonAction(_ sender: Any) {
+        destroyBanner()
+    }
+    
+    //MARK: Rewarded Video LevelPlay Callbacks Wrapper Functions
+    
+    func rewardedVideoLevelPlayHasAvailableAd(with adInfo: ISAdInfo!) {
+        showRewardedVideoButton.isEnabled = true
         logFunctionName()
     }
     
-    /**
-     Called after an interstitial has attempted to show but failed.
-     
-     @param error The reason for the error
-     */
-    public func interstitialDidFailToShowWithError(_ error: Error!) {
+    func rewardedVideoLevelPlayHasNoAvailableAd() {
+        showRewardedVideoButton.isEnabled = false
+        logFunctionName()
+    }
+    
+    func rewardedVideoLevelPlayDidOpen(with adInfo: ISAdInfo!) {
+        showRewardedVideoButton.isEnabled = false
+        logFunctionName()
+    }
+    
+    func rewardedVideoLevelPlayDidFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
+        logFunctionName(string: #function+String(describing: error.self))
+    }
+    
+    func rewardedVideoLevelPlayDidClick(_ placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!) {
+        logFunctionName(string: #function+String(describing: placementInfo.self))
+    }
+    
+    func rewardedVideoLevelPlayDidReceiveRewardForPlacement(_ placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!) {
+        logFunctionName(string: #function+String(describing: placementInfo.self))
+    }
+    
+    func rewardedVideoLevelPlayDidClose(with adInfo: ISAdInfo!) {
+        logFunctionName()
+    }
+    
+    
+    //MARK: Interstitial LevelPlay Callbacks Wrapper Functions
+    
+    func interstitialLevelPlayDidLoad(with adInfo: ISAdInfo!) {
+        showInterstitialButton.isEnabled = true
+        logFunctionName()
+    }
+    
+    func interstitialLevelPlayDidFailToLoadWithError(_ error: Error!) {
+        showInterstitialButton.isEnabled = false
         logFunctionName(string: String(describing: error.self))
     }
     
-    /**
-     Called after an interstitial has been displayed on the screen.
-     */
-    public func interstitialDidShow() {
+    func interstitialLevelPlayDidOpen(with adInfo: ISAdInfo!) {
+        showInterstitialButton.isEnabled = false
         logFunctionName()
     }
     
-    /**
-     Called after an interstitial has been dismissed.
-     */
-    public func interstitialDidClose() {
+    func interstitialLevelPlayDidShow(with adInfo: ISAdInfo!) {
         logFunctionName()
     }
     
-    /**
-     Called after an interstitial has been opened.
-     */
-    public func interstitialDidOpen() {
+    func interstitialLevelPlayDidFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
+        logFunctionName(string: String(describing: error.self))
+    }
+    
+    func interstitialLevelPlayDidClick(with adInfo: ISAdInfo!) {
         logFunctionName()
     }
-    
-    /**
-     Called after an interstitial has attempted to load but failed.
-     
-     @param error The reason for the error
-     */
-    public func interstitialDidFailToLoadWithError(_ error: Error!) {
-        logFunctionName(string: #function+String(describing: error.self))
-    }
-    
-    /**
-     Called after an interstitial has been loaded
-     */
-    public func interstitialDidLoad() {
-        showISButton.isEnabled=true
-        logFunctionName()
-    }
-    
-    
-    //MARK: ISOfferwallDelegate Functions
-    /**
-     Called after the 'offerwallCredits' method has attempted to retrieve user's credits info but failed.
-     
-     @param error The reason for the error.
-     */
-    public func didFailToReceiveOfferwallCreditsWithError(_ error: Error!) {
-        logFunctionName(string: #function+String(describing: error.self))
-    }
-    
-    /**
-     @abstract Called each time the user completes an offer.
-     @discussion creditInfo is a dictionary with the following key-value pairs:
-     
-     "credits" - (int) The number of credits the user has Earned since the last didReceiveOfferwallCredits event that returned YES. Note that the credits may represent multiple completions (see return parameter).
-     
-     "totalCredits" - (int) The total number of credits ever earned by the user.
-     
-     "totalCreditsFlag" - (BOOL) In some cases, we won’t be able to provide the exact amount of credits since the last event (specifically if the user clears the app’s data). In this case the ‘credits’ will be equal to the "totalCredits", and this flag will be YES.
-     
-     @param creditInfo Offerwall credit info.
-     
-     @return The publisher should return a BOOL stating if he handled this call (notified the user for example). if the return value is NO, the 'credits' value will be added to the next call.
-     */
-    public func didReceiveOfferwallCredits(_ creditInfo: [AnyHashable : Any]!) -> Bool {
-        logFunctionName()
         
-        return true;
-    }
-    
-    /**
-     Called after the offerwall has been dismissed.
-     */
-    public func offerwallDidClose() {
+    func interstitialLevelPlayDidClose(with adInfo: ISAdInfo!) {
         logFunctionName()
     }
+
+
+    //MARK: Banner LevelPlay Callbacks Wrapper Functions
     
-    /**
-     Called after the offerwall has attempted to show but failed.
-     
-     @param error The reason for the error.
-     */
-    public func offerwallDidFailToShowWithError(_ error: Error!) {
-        logFunctionName(string: #function+String(describing: Error.self))
-    }
-    
-    /**
-     Called after the offerwall has been displayed on the screen.
-     */
-    public func offerwallDidShow() {
-        logFunctionName()
-    }
-    
-    /**
-     Called after the offerwall has changed its availability.
-     
-     @param available The new offerwall availability. YES if available and ready to be shown, NO otherwise.
-     */
-    public func offerwallHasChangedAvailability(_ available: Bool) {
-        showOWButton.isEnabled=true
-        logFunctionName(string: #function+String(describing: available.self))
-    }
-    
-    
-    //MARK: ISRewardedVideoDelegate Functions
-    /**
-     Called after a rewarded video has changed its availability.
-     
-     @param available The new rewarded video availability. YES if available and ready to be shown, NO otherwise.
-     */
-    public func rewardedVideoHasChangedAvailability(_ available: Bool) {
-      showRVButton.isEnabled=true
-        logFunctionName(string: #function+String(available.self))
-    }
-    
-    /**
-     Called after a rewarded video has finished playing.
-     */
-    public func rewardedVideoDidEnd() {
-        logFunctionName()
-    }
-    
-    /**
-     Called after a rewarded video has started playing.
-     */
-    public func rewardedVideoDidStart() {
-        logFunctionName()
-    }
-    
-    /**
-     Called after a rewarded video has been dismissed.
-     */
-    public func rewardedVideoDidClose() {
-        logFunctionName()
-    }
-    
-    /**
-     Called after a rewarded video has been opened.
-     */
-    public func rewardedVideoDidOpen() {
-        logFunctionName()
-    }
-    
-    /**
-     Called after a rewarded video has attempted to show but failed.
-     
-     @param error The reason for the error
-     */
-    public func rewardedVideoDidFailToShowWithError(_ error: Error!) {
-        logFunctionName(string: #function+String(describing: error.self))
-    }
-    
-    /**
-     Called after a rewarded video has been viewed completely and the user is eligible for reward.
-     
-     @param placementInfo An object that contains the placement's reward name and amount.
-     */
-    public func didReceiveReward(forPlacement placementInfo: ISPlacementInfo!) {
-        logFunctionName(string: #function+String(describing: placementInfo.self))
-    }
-    /**
-     Called after a rewarded video has been clicked.
-     
-     @param placementInfo An object that contains the placement's reward name and amount.
-     */
-    func didClickRewardedVideo(_ placementInfo: ISPlacementInfo!) {
-        logFunctionName(string: #function+String(describing: placementInfo.self))
-    }
-    
-    
-     //MARK: ISBannerDelegate Functions
-    func bannerDidLoad(_ bannerView: ISBannerView!) {
-        self.bannerView=bannerView
+    func bannerLevelPlayDidLoad(_ bannerView: ISBannerView!, andAdInfo adInfo: ISAdInfo!) {
+        self.bannerView = bannerView
+        
+        var xPosition = (view.frame.size.width - bannerView.frame.size.width) / 2.0
+        var yPosition = view.frame.size.height - bannerView.frame.size.height
+        var bannerWidth = bannerView.frame.size.width
+        var bannerHeight = 0.0
+        
         if #available(iOS 11.0, *) {
-            bannerView.frame = CGRect(x: view.frame.size.width/2 - bannerView.frame.size.width/2, y: view.frame.size.height - bannerView.frame.size.height, width: bannerView.frame.size.width, height: bannerView.frame.size.height - self.view.safeAreaInsets.bottom * 2.5)
+            bannerHeight = bannerView.frame.size.height - self.view.safeAreaInsets.bottom * 2.5
         } else {
-                bannerView.frame = CGRect(x: view.frame.size.width/2 - bannerView.frame.size.width/2, y: view.frame.size.height - bannerView.frame.size.height, width: bannerView.frame.size.width, height: bannerView.frame.size.height  * 2.5)
+            bannerHeight = bannerView.frame.size.height * 2.5
         }
-
-
-         
-         view.addSubview(bannerView)
+        
+        bannerView.frame = CGRect(x: xPosition, y: yPosition, width: bannerWidth, height: bannerHeight)
+        view.addSubview(bannerView)
+        destroyBannerButton.isEnabled = true
         
         logFunctionName()
     }
     
-    func bannerDidFailToLoadWithError(_ error: Error!) {
+    func bannerLevelPlayDidFailToLoadWithError(_ error: Error!) {
         logFunctionName(string: #function+String(describing: Error.self))
+    }
+    
+    func bannerLevelPlayDidClick(with adInfo: ISAdInfo!) {
+        logFunctionName()
+    }
+    
+    func bannerLevelPlayDidLeaveApplication(with adInfo: ISAdInfo!) {
+        logFunctionName()
+    }
+    
+    func bannerLevelPlayDidPresentScreen(with adInfo: ISAdInfo!) {
+        logFunctionName()
+    }
+    
+    func bannerLevelPlayDidDismissScreen(with adInfo: ISAdInfo!) {
+        logFunctionName()
+    }
 
-    }
-    
-    func didClickBanner() {
-        logFunctionName()
-    }
-    
-    func bannerWillPresentScreen() {
-        logFunctionName()
-    }
-    
-    func bannerDidDismissScreen() {
-        logFunctionName()
-    }
-    
-    func bannerWillLeaveApplication() {
-        logFunctionName()
-    }
-    
+
     //MARK: ISImpressionData Functions
+
     func impressionDataDidSucceed(_ impressionData: ISImpressionData!) {
         logFunctionName(string: #function+String(describing: impressionData))
-
     }
 }
-

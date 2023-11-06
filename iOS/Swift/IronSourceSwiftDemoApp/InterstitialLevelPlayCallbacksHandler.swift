@@ -8,13 +8,30 @@
 import Foundation
 import IronSource
 
+protocol InterstitialLevelPlayCallbacksWrapper {
+    func interstitialLevelPlayDidLoad(with adInfo: ISAdInfo!)
+    func interstitialLevelPlayDidFailToLoadWithError(_ error: Error!)
+    func interstitialLevelPlayDidOpen(with adInfo: ISAdInfo!)
+    func interstitialLevelPlayDidShow(with adInfo: ISAdInfo!)
+    func interstitialLevelPlayDidFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!)
+    func interstitialLevelPlayDidClick(with adInfo: ISAdInfo!)
+    func interstitialLevelPlayDidClose(with adInfo: ISAdInfo!)
+}
+
 class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDelegate {
+    
+    var delegate: InterstitialLevelPlayCallbacksWrapper!
+
+    init(delegate: InterstitialLevelPlayCallbacksWrapper!) {
+        self.delegate = delegate
+    }
     
     /**
      Called after an interstitial has been loaded
      @param adInfo The info of the ad.
      */
     func didLoad(with adInfo: ISAdInfo) {
+        delegate.interstitialLevelPlayDidLoad(with: adInfo)
     }
     
     /**
@@ -22,6 +39,7 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param error The reason for the error
      */
     func didFailToLoadWithError(_ error: Error!) {
+        delegate.interstitialLevelPlayDidFailToLoadWithError(error)
     }
     
     /**
@@ -29,6 +47,7 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didOpen(with adInfo: ISAdInfo!) {
+        delegate.interstitialLevelPlayDidOpen(with: adInfo)
     }
     
     /**
@@ -36,6 +55,7 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didShow(with adInfo: ISAdInfo!) {
+        delegate.interstitialLevelPlayDidShow(with: adInfo)
     }
     
     /**
@@ -44,7 +64,7 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
-        <#code#>
+        delegate.interstitialLevelPlayDidFailToShowWithError(error, andAdInfo: adInfo)
     }
     
     /**
@@ -52,6 +72,7 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didClick(with adInfo: ISAdInfo!) {
+        delegate.interstitialLevelPlayDidClick(with: adInfo)
     }
     
     /**
@@ -59,6 +80,6 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didClose(with adInfo: ISAdInfo!) {
-        <#code#>
+        delegate.interstitialLevelPlayDidClose(with: adInfo)
     }
 }

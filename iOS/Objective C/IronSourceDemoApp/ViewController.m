@@ -171,6 +171,10 @@
 
 - (void)rewardedVideoLevelPlayDidOpenWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.showRewardedVideoButton setEnabled:NO];
+    });
 }
 
 // If the rewarded video fails to show check out 'error' for more information and consult
@@ -233,6 +237,10 @@
 
 - (void)interstitialLevelPlayDidOpenWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.showInterstitialButton setEnabled:NO];
+    });
 }
 
 - (void)interstitialLevelPlayDidShowWithAdInfo:(ISAdInfo *)adInfo {

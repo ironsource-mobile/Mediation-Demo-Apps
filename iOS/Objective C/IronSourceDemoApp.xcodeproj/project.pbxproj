@@ -156,8 +156,8 @@
 				72E0D65F1E2675C7009ABC1B /* main.m */,
 			);
 			name = "Supporting Files";
-			path = SupersoniceDemoApp;
-			sourceTree = "<group>";
+			path = IronSourceDemoApp;
+			sourceTree = SOURCE_ROOT;
 		};
 		E80C8FD21C16E52200CF3C27 /* Frameworks */ = {
 			isa = PBXGroup;
