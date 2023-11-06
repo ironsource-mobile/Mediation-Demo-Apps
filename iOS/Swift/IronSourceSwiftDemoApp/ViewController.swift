@@ -2,8 +2,7 @@
 //  ViewController.swift
 //  IronSourceSwiftDemoApp
 //
-//  Created by Alon Dotan on 19/05/2020.
-//  Copyright © 2017 ironsrc. All rights reserved.
+//  Copyright © 2023 IronSource. All rights reserved.
 //
 
 import UIKit

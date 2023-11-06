@@ -12,6 +12,9 @@
 		471A2A441E66D27A00217BE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A421E66D27A00217BE4 /* Main.storyboard */; };
 		471A2A461E66D27A00217BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A451E66D27A00217BE4 /* Assets.xcassets */; };
 		471A2A491E66D27A00217BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */; };
+		F1666FA82AF8E6EE0077FADE /* InterstitialLevelPlayCallbacksHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FA52AF8E6ED0077FADE /* InterstitialLevelPlayCallbacksHandler.swift */; };
+		F1666FA92AF8E6EE0077FADE /* RewardedVideoLevelPlayCallbacksHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FA62AF8E6EE0077FADE /* RewardedVideoLevelPlayCallbacksHandler.swift */; };
+		F1666FAA2AF8E6EE0077FADE /* BannerLevelPlayCallbacksHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FA72AF8E6EE0077FADE /* BannerLevelPlayCallbacksHandler.swift */; };
 		FC6F30119CA71BFB5602928C /* Pods_IronSourceSwiftDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2849ED84A55F7AFC2C8C9B /* Pods_IronSourceSwiftDemoApp.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +29,9 @@
 		471A2A4A1E66D27A00217BE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C2849ED84A55F7AFC2C8C9B /* Pods_IronSourceSwiftDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSourceSwiftDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5111310BE6147BB80A95CF4 /* Pods-IronSourceSwiftDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceSwiftDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-IronSourceSwiftDemoApp/Pods-IronSourceSwiftDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
+		F1666FA52AF8E6ED0077FADE /* InterstitialLevelPlayCallbacksHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterstitialLevelPlayCallbacksHandler.swift; sourceTree = "<group>"; };
+		F1666FA62AF8E6EE0077FADE /* RewardedVideoLevelPlayCallbacksHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RewardedVideoLevelPlayCallbacksHandler.swift; sourceTree = "<group>"; };
+		F1666FA72AF8E6EE0077FADE /* BannerLevelPlayCallbacksHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BannerLevelPlayCallbacksHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 			children = (
 				471A2A3E1E66D27900217BE4 /* AppDelegate.swift */,
 				471A2A401E66D27900217BE4 /* ViewController.swift */,
+				F1666FA72AF8E6EE0077FADE /* BannerLevelPlayCallbacksHandler.swift */,
+				F1666FA52AF8E6ED0077FADE /* InterstitialLevelPlayCallbacksHandler.swift */,
+				F1666FA62AF8E6EE0077FADE /* RewardedVideoLevelPlayCallbacksHandler.swift */,
 				471A2A421E66D27A00217BE4 /* Main.storyboard */,
 				471A2A451E66D27A00217BE4 /* Assets.xcassets */,
 				471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */,
@@ -189,8 +198,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1666FA92AF8E6EE0077FADE /* RewardedVideoLevelPlayCallbacksHandler.swift in Sources */,
+				F1666FAA2AF8E6EE0077FADE /* BannerLevelPlayCallbacksHandler.swift in Sources */,
 				471A2A411E66D27900217BE4 /* ViewController.swift in Sources */,
 				471A2A3F1E66D27900217BE4 /* AppDelegate.swift in Sources */,
+				F1666FA82AF8E6EE0077FADE /* InterstitialLevelPlayCallbacksHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

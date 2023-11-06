@@ -2,7 +2,7 @@
 //  RewardedVideoLevelPlayCallbacksHandler.m
 //  IronSourceDemoApp
 //
-//  Copyright © 2017 IronSource. All rights reserved.
+//  Copyright © 2023 IronSource. All rights reserved.
 //
 
 #import "RewardedVideoLevelPlayCallbacksHandler.h"
@@ -55,6 +55,7 @@
 
 /**
  Called after a rewarded video has been clicked.
+ @param placementInfo An object that contains the placement's reward name and amount.
  @param adInfo The info of the ad.
  */
 - (void)didClick:(ISPlacementInfo *)placementInfo
