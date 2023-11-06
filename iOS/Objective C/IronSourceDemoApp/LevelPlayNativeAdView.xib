@@ -14,8 +14,8 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7Jf-gS-kFJ">
-                    <rect key="frame" x="8" y="-6" width="284" height="248"/>
+                <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" axis="vertical" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="7Jf-gS-kFJ">
+                    <rect key="frame" x="8" y="-4.6666666666666714" width="284" height="246.66666666666669"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="FzH-MW-uJc" userLabel="Top Stack View">
                             <rect key="frame" x="0.0" y="0.0" width="284" height="40"/>
@@ -50,8 +50,8 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </stackView>
-                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-ZX-3EG" userLabel="Bottom Stack View">
-                            <rect key="frame" x="0.0" y="44" width="284" height="204"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="RmB-ZX-3EG" userLabel="Bottom Stack View">
+                            <rect key="frame" x="0.0" y="43.999999999999986" width="284" height="202.66666666666663"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PeD-4v-BX7">
                                     <rect key="frame" x="0.0" y="0.0" width="284" height="14.333333333333334"/>
@@ -60,13 +60,17 @@
                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nKi-rK-Qb6" userLabel="Media View" customClass="LevelPlayMediaView">
-                                    <rect key="frame" x="0.0" y="19.333333333333329" width="284" height="151.33333333333337"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nKi-rK-Qb6" userLabel="Media View" customClass="LevelPlayMediaView">
+                                    <rect key="frame" x="0.0" y="19.333333333333329" width="284" height="150"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <accessibility key="accessibilityConfiguration" identifier="AdMedia"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="250" id="V4H-cC-elo"/>
+                                        <constraint firstAttribute="height" constant="150" id="VRe-pa-YLE"/>
+                                    </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ID2-lk-FUW">
-                                    <rect key="frame" x="0.0" y="175.66666666666666" width="284" height="28.333333333333343"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ID2-lk-FUW">
+                                    <rect key="frame" x="0.0" y="174.33333333333331" width="284" height="28.333333333333343"/>
                                     <subviews>
                                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e3f-ba-ZBh">
                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="28.333333333333332"/>
