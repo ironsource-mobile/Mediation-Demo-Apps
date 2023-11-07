@@ -11,6 +11,7 @@ iOs/Swift/Pods/
 UserInterfaceState.xcuserstate
 xcschememanagement.plist
 PodFile.lock
+*.DS_Store
 
 #Xamarin
 Xamarin/DemoApp_Android/DemoApp_Android/bin/*
