@@ -8,25 +8,15 @@
 #import <Foundation/Foundation.h>
 #import <IronSource/IronSource.h>
 
+@class DemoViewController;
+
 NS_ASSUME_NONNULL_BEGIN
-
-@protocol BannerLevelPlayCallbacksWrapper <NSObject>
-
-- (void)bannerLevelPlayDidLoad:(ISBannerView *)bannerView
-                    withAdInfo:(ISAdInfo *)adInfo;
-- (void)bannerLevelPlayDidFailToLoadWithError:(NSError *)error;
-- (void)bannerLevelPlayDidClickWithAdInfo:(ISAdInfo *)adInfo;
-- (void)bannerLevelPlayDidLeaveApplicationWithAdInfo:(ISAdInfo *)adInfo;
-- (void)bannerLevelPlayDidPresentScreenWithAdInfo:(ISAdInfo *)adInfo;
-- (void)bannerLevelPlayDidDismissScreenWithAdInfo:(ISAdInfo *)adInfo;
-
-@end
 
 @interface BannerLevelPlayCallbacksHandler : NSObject<LevelPlayBannerDelegate>
 
-@property (nonatomic, weak) id<BannerLevelPlayCallbacksWrapper> delegate;
+@property (nonatomic, weak) DemoViewController *demoViewController;
 
-- (instancetype)initWithDelegate:(id<BannerLevelPlayCallbacksWrapper>)delegate;
+- (instancetype)initWithDemoViewController:(DemoViewController *)viewController;
 
 @end
 

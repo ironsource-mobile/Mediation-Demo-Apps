@@ -6,14 +6,15 @@
 
 
 #import "BannerLevelPlayCallbacksHandler.h"
+#import "DemoViewController.h"
 
 @implementation BannerLevelPlayCallbacksHandler
 
-- (instancetype)initWithDelegate:(id<BannerLevelPlayCallbacksWrapper>)delegate {
+- (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
     self = [super init];
 
     if (self) {
-        _delegate = delegate;
+        _demoViewController = viewController;
     }
 
     return self;
@@ -25,8 +26,10 @@
  */
 - (void)didLoad:(ISBannerView *)bannerView
      withAdInfo:(ISAdInfo *)adInfo {
-    [_delegate bannerLevelPlayDidLoad:bannerView
-                           withAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.demoViewController setAndBindBannerView:bannerView];
+    [self.demoViewController setEnablement:YES forButton:self.demoViewController.destroyBannerButton];
 }
 
 /**
@@ -34,7 +37,7 @@
  @param error The reason for the error
  */
 - (void)didFailToLoadWithError:(NSError *)error {
-    [_delegate bannerLevelPlayDidFailToLoadWithError:error];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -42,7 +45,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didClickWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate bannerLevelPlayDidClickWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -50,7 +53,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didLeaveApplicationWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate bannerLevelPlayDidLeaveApplicationWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -58,7 +61,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didPresentScreenWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate bannerLevelPlayDidPresentScreenWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -66,7 +69,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didDismissScreenWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate bannerLevelPlayDidDismissScreenWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

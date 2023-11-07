@@ -6,32 +6,38 @@
 //
 
 #import "RewardedVideoLevelPlayCallbacksHandler.h"
+#import "DemoViewController.h"
 
 @implementation RewardedVideoLevelPlayCallbacksHandler
 
-- (instancetype)initWithDelegate:(id<RewardedVideoLevelPlayCallbacksWrapper>)delegate {
+- (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
     self = [super init];
-    
+
     if (self) {
-        _delegate = delegate;
+        _demoViewController = viewController;
     }
-    
+
     return self;
 }
+
 
 /**
  Called after a rewarded video has changed its availability to true.
  @param adInfo The info of the ad.
  */
 - (void)hasAvailableAdWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate rewardedVideoLevelPlayHasAvailableAdWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.demoViewController setEnablement:YES forButton:self.demoViewController.showRewardedVideoButton];
 }
 
 /**
  Called after a rewarded video has changed its availability to false.
  */
 - (void)hasNoAvailableAd {
-    [_delegate rewardedVideoLevelPlayHasNoAvailableAd];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.demoViewController setEnablement:NO forButton:self.demoViewController.showRewardedVideoButton];
 }
 
 /**
@@ -39,7 +45,9 @@
  @param adInfo The info of the ad.
  */
 - (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate rewardedVideoLevelPlayDidOpenWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.demoViewController setEnablement:NO forButton:self.demoViewController.showRewardedVideoButton];
 }
 
 /**
@@ -49,8 +57,7 @@
  */
 - (void)didFailToShowWithError:(NSError *)error
                      andAdInfo:(ISAdInfo *)adInfo {
-    [_delegate rewardedVideoLevelPlayDidFailToShowWithError:error
-                                                  andAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -60,8 +67,7 @@
  */
 - (void)didClick:(ISPlacementInfo *)placementInfo
       withAdInfo:(ISAdInfo *)adInfo {
-    [_delegate rewardedVideoLevelPlayDidClick:placementInfo
-                                   withAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -71,8 +77,7 @@
  */
 - (void)didReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo
                           withAdInfo:(ISAdInfo *)adInfo {
-    [_delegate rewardedVideoLevelPlayDidReceiveRewardForPlacement:placementInfo
-                                                       withAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -80,7 +85,9 @@
  @param adInfo The info of the ad.
  */
 - (void)didCloseWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate rewardedVideoLevelPlayDidCloseWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.demoViewController showVideoRewardMessage];
 }
 
 @end

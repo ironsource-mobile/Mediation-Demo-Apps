@@ -6,16 +6,17 @@
 //
 
 #import "InterstitialLevelPlayCallbacksHandler.h"
+#import "DemoViewController.h"
 
 @implementation InterstitialLevelPlayCallbacksHandler
 
-- (instancetype)initWithDelegate:(id<InterstitialLevelPlayCallbacksWrapper>)delegate {
+- (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
     self = [super init];
-    
+
     if (self) {
-        _delegate = delegate;
+        _demoViewController = viewController;
     }
-    
+
     return self;
 }
 
@@ -24,7 +25,9 @@
  @param adInfo The info of the ad.
  */
 - (void)didLoadWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate interstitialLevelPlayDidLoadWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.demoViewController setEnablement:YES forButton:self.demoViewController.showInterstitialButton];
 }
 
 /**
@@ -32,7 +35,9 @@
  @param error The reason for the error
  */
 - (void)didFailToLoadWithError:(NSError *)error {
-    [_delegate interstitialLevelPlayDidFailToLoadWithError:error];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.demoViewController setEnablement:NO forButton:self.demoViewController.showInterstitialButton];
 }
 
 /**
@@ -40,7 +45,9 @@
  @param adInfo The info of the ad.
  */
 - (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate interstitialLevelPlayDidOpenWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
+    
+    [self.demoViewController setEnablement:NO forButton:self.demoViewController.showInterstitialButton];
 }
 
 /**
@@ -48,7 +55,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didShowWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate interstitialLevelPlayDidShowWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -58,8 +65,7 @@
  */
 - (void)didFailToShowWithError:(NSError *)error
                      andAdInfo:(ISAdInfo *)adInfo {
-    [_delegate interstitialLevelPlayDidFailToShowWithError:error
-                                                 andAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -67,7 +73,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didClickWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate interstitialLevelPlayDidClickWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 /**
@@ -75,7 +81,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didCloseWithAdInfo:(ISAdInfo *)adInfo {
-    [_delegate interstitialLevelPlayDidCloseWithAdInfo:adInfo];
+    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

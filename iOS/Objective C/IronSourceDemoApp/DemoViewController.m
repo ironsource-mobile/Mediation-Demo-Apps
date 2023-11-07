@@ -6,34 +6,10 @@
 //
 
 #import "DemoViewController.h"
-#import "RewardedVideoLevelPlayCallbacksHandler.h"
-#import "InterstitialLevelPlayCallbacksHandler.h"
-#import "BannerLevelPlayCallbacksHandler.h"
 #import <IronSource/IronSource.h>
 
-#define USERID @"demoapp"
-#define APPKEY @"8545d445"
-
-@interface DemoViewController () <RewardedVideoLevelPlayCallbacksWrapper, InterstitialLevelPlayCallbacksWrapper, BannerLevelPlayCallbacksWrapper, ISImpressionDataDelegate>
-
-@property (weak, nonatomic) IBOutlet UIButton *showRewardedVideoButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *loadInterstitialButton;
-@property (weak, nonatomic) IBOutlet UIButton *showInterstitialButton;
-
-@property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
-@property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
-
-@property (weak, nonatomic) IBOutlet UILabel  *versionLabel;
-
-@property (nonatomic, strong) RewardedVideoLevelPlayCallbacksHandler *rewardedVideoDelegate;
-@property (nonatomic, strong) InterstitialLevelPlayCallbacksHandler *interstitialDelegate;
-@property (nonatomic, strong) BannerLevelPlayCallbacksHandler *bannerDelegate;
-
-@property (nonatomic, strong) ISPlacementInfo   *rewardedVideoPlacementInfo;
-@property (nonatomic, strong) ISBannerView      *bannerView;
-
-@end
+#define kDefaultUserId @"demoapp"
+#define kAppKey @"8545d445"
 
 @implementation DemoViewController
 
@@ -42,11 +18,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
-    [ISIntegrationHelper validateIntegration];
-    
-    // UI setup
+
+    [self setupUI];
+    [self setupIronSourceSdk];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark Private Methods
+
+- (void)setupUI {
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
     
     for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]) {
@@ -55,8 +39,14 @@
         button.layer.borderWidth = 3.5f;
         button.layer.borderColor = [[UIColor grayColor] CGColor];
     }
+}
+
+- (void)setupIronSourceSdk {
+    [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = @1;
     
-    [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = @(YES);
+    // The ISIntegrationHelper is used to validate the integration.
+    // Remove it before going live!
+    [ISIntegrationHelper validateIntegration];
     
     // Before initializing any of our products (Rewarded video, Interstitial or Banner) you must set
     // their delegates. Take a look at each of these delegates method and you will see that they each implement a product
@@ -65,9 +55,9 @@
     // We're passing 'self' to our delegates because we want
     // to be able to enable/disable buttons to match ad availability.
     
-    self.rewardedVideoDelegate = [[RewardedVideoLevelPlayCallbacksHandler alloc] initWithDelegate:self];
-    self.interstitialDelegate = [[InterstitialLevelPlayCallbacksHandler alloc] initWithDelegate:self];
-    self.bannerDelegate = [[BannerLevelPlayCallbacksHandler alloc] initWithDelegate:self];
+    self.rewardedVideoDelegate = [[RewardedVideoLevelPlayCallbacksHandler alloc] initWithDemoViewController:self];
+    self.interstitialDelegate = [[InterstitialLevelPlayCallbacksHandler alloc] initWithDemoViewController:self];
+    self.bannerDelegate = [[BannerLevelPlayCallbacksHandler alloc] initWithDemoViewController:self];
     
     [IronSource setLevelPlayRewardedVideoDelegate:self.rewardedVideoDelegate];
     [IronSource setLevelPlayInterstitialDelegate:self.interstitialDelegate];
@@ -76,25 +66,20 @@
     
     NSString *userId = [IronSource advertiserId];
     
-    if ([userId length] == 0) {
+    if (!userId.length) {
         //If we couldn't get the advertiser id, we will use a default one.
-        userId = USERID;
+        userId = kDefaultUserId;
     }
     
     [IronSource setUserId:userId];
     
     // After setting the delegates you can go ahead and initialize the SDK.
-    [IronSource initWithAppKey:APPKEY];
+    [IronSource initWithAppKey:kAppKey];
     
     // To initialize specific ad units:
-    // [IronSource initWithAppKey:APPKEY adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER]];
+    // [IronSource initWithAppKey:kAppKey adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER]];
     
     // Scroll down the file to find out what happens when you click a button...
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark -
@@ -150,124 +135,9 @@
     });
 }
 
-#pragma mark - Rewarded Video LevelPlay Callbacks Wrapper Functions
+#pragma mark Helper Methods
 
-// Once the rewarded video is availalbe you can call the showRewardedVideoWithViewController: API
-- (void)rewardedVideoLevelPlayHasAvailableAdWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showRewardedVideoButton setEnabled:YES];
-    });
-}
-
-- (void)rewardedVideoLevelPlayHasNoAvailableAd {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showRewardedVideoButton setEnabled:NO];
-    });
-}
-
-- (void)rewardedVideoLevelPlayDidOpenWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showRewardedVideoButton setEnabled:NO];
-    });
-}
-
-// If the rewarded video fails to show check out 'error' for more information and consult
-// our knowledge center for help.
-- (void)rewardedVideoLevelPlayDidFailToShowWithError:(NSError *)error
-                                           andAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)rewardedVideoLevelPlayDidClick:(ISPlacementInfo *)placementInfo
-                            withAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)rewardedVideoLevelPlayDidReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo
-                                                withAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    self.rewardedVideoPlacementInfo = placementInfo;
-}
-
-- (void)rewardedVideoLevelPlayDidCloseWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    if (self.rewardedVideoPlacementInfo) {
-        UIViewController *rootVC = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        NSString *message = [NSString stringWithFormat:@"You have been rewarded %d %@", [self.rewardedVideoPlacementInfo.rewardAmount intValue], self.rewardedVideoPlacementInfo.rewardName];
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Video Reward"
-                                                                      message:message
-                                                               preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction * action) {
-        }];
-        
-        [alert addAction:okAction];
-        [rootVC presentViewController:alert animated:NO completion:nil];
-        
-        self.rewardedVideoPlacementInfo = nil;
-    }
-}
-
-#pragma mark - Interstitial LevelPlay Callbacks Wrapper Functions
-
-- (void)interstitialLevelPlayDidLoadWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showInterstitialButton setEnabled:YES];
-    });
-}
-
-- (void)interstitialLevelPlayDidFailToLoadWithError:(NSError *)error {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showInterstitialButton setEnabled:NO];
-    });
-}
-
-- (void)interstitialLevelPlayDidOpenWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.showInterstitialButton setEnabled:NO];
-    });
-}
-
-- (void)interstitialLevelPlayDidShowWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-// If the interstitial fails to show check out 'error' for more information and consult
-// our knowledge center for help.
-- (void)interstitialLevelPlayDidFailToShowWithError:(NSError *)error
-                                          andAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)interstitialLevelPlayDidClickWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)interstitialLevelPlayDidCloseWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-#pragma mark - Banner LevelPlay Callbacks Wrapper Functions
-
-- (void)bannerLevelPlayDidLoad:(ISBannerView *)bannerView
-                    withAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-    
+- (void)setAndBindBannerView:(ISBannerView *)bannerView {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.bannerView = bannerView;
         CGFloat y = self.view.frame.size.height - (bannerView.frame.size.height / 2.0);
@@ -278,29 +148,33 @@
         
         bannerView.center = CGPointMake(self.view.frame.size.width / 2.0, y);
         [self.view addSubview:bannerView];
-        
-        [self.destroyBannerButton setEnabled:YES];
     });
 }
 
-- (void)bannerLevelPlayDidFailToLoadWithError:(NSError *)error {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+- (void)setEnablement:(BOOL)enablement forButton:(UIButton *)button {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [button setEnabled:enablement];
+    });
 }
 
-- (void)bannerLevelPlayDidClickWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)bannerLevelPlayDidLeaveApplicationWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)bannerLevelPlayDidPresentScreenWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
-}
-
-- (void)bannerLevelPlayDidDismissScreenWithAdInfo:(ISAdInfo *)adInfo {
-    NSLog(@"%s", __PRETTY_FUNCTION__);
+- (void)showVideoRewardMessage {
+    if (self.rewardedVideoPlacementInfo) {
+        UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        NSString *message = [NSString stringWithFormat:@"You have been rewarded %d %@", [self.rewardedVideoPlacementInfo.rewardAmount intValue], self.rewardedVideoPlacementInfo.rewardName];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Video Reward"
+                                                                      message:message
+                                                               preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction *action) {
+        }];
+        
+        [alert addAction:okAction];
+        [rootViewController presentViewController:alert animated:NO completion:nil];
+        
+        self.rewardedVideoPlacementInfo = nil;
+    }
 }
 
 #pragma mark - Impression Data Delegate Functions
@@ -308,5 +182,6 @@
 - (void)impressionDataDidSucceed:(ISImpressionData *)impressionData {
     NSLog(@"impressionData %@", impressionData);
 }
+
 
 @end

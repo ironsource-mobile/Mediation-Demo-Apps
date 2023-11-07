@@ -8,28 +8,15 @@
 #import <Foundation/Foundation.h>
 #import <IronSource/IronSource.h>
 
+@class DemoViewController;
+
 NS_ASSUME_NONNULL_BEGIN
-
-@protocol RewardedVideoLevelPlayCallbacksWrapper <NSObject>
-
-- (void)rewardedVideoLevelPlayHasAvailableAdWithAdInfo:(ISAdInfo *)adInfo;
-- (void)rewardedVideoLevelPlayHasNoAvailableAd;
-- (void)rewardedVideoLevelPlayDidOpenWithAdInfo:(ISAdInfo *)adInfo;
-- (void)rewardedVideoLevelPlayDidFailToShowWithError:(NSError *)error
-                                           andAdInfo:(ISAdInfo *)adInfo;
-- (void)rewardedVideoLevelPlayDidClick:(ISPlacementInfo *)placementInfo
-                            withAdInfo:(ISAdInfo *)adInfo;
-- (void)rewardedVideoLevelPlayDidReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo
-                                                withAdInfo:(ISAdInfo *)adInfo;
-- (void)rewardedVideoLevelPlayDidCloseWithAdInfo:(ISAdInfo *)adInfo;
-
-@end
 
 @interface RewardedVideoLevelPlayCallbacksHandler : NSObject<LevelPlayRewardedVideoDelegate>
 
-@property (nonatomic, weak) id<RewardedVideoLevelPlayCallbacksWrapper> delegate;
+@property (nonatomic, weak) DemoViewController *demoViewController;
 
-- (instancetype)initWithDelegate:(id<RewardedVideoLevelPlayCallbacksWrapper>)delegate;
+- (instancetype)initWithDemoViewController:(DemoViewController *)viewController;
 
 @end
 
