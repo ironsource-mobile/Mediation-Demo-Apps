@@ -1,14 +1,13 @@
 //
-//  RewardedVideoLevelPlayCallbacksHandler.m
+//  RewardedVideoDelegate.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2023 IronSource. All rights reserved.
 //
 
-#import "RewardedVideoLevelPlayCallbacksHandler.h"
-#import "DemoViewController.h"
+#import "RewardedVideoDelegate.h"
 
-@implementation RewardedVideoLevelPlayCallbacksHandler
+@implementation RewardedVideoDelegate
 
 - (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
     self = [super init];

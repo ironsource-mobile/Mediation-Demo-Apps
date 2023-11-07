@@ -1,14 +1,13 @@
 //
-//  InterstitialLevelPlayCallbacksHandler.m
+//  InterstitialDelegate.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2023 IronSource. All rights reserved.
 //
 
-#import "InterstitialLevelPlayCallbacksHandler.h"
-#import "DemoViewController.h"
+#import "InterstitialDelegate.h"
 
-@implementation InterstitialLevelPlayCallbacksHandler
+@implementation InterstitialDelegate
 
 - (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
     self = [super init];

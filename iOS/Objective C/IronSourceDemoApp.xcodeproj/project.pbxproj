@@ -29,10 +29,12 @@
 		E80C8FCD1C16E4C400CF3C27 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FCC1C16E4C400CF3C27 /* StoreKit.framework */; };
 		E80C8FCF1C16E4C800CF3C27 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FCE1C16E4C800CF3C27 /* AdSupport.framework */; };
 		E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FD01C16E4D200CF3C27 /* Security.framework */; };
-		F15948072AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948012AF7AB010033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m */; };
-		F15948082AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948022AF7AB010033FB4D /* InterstitialLevelPlayCallbacksHandler.m */; };
-		F15948092AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */; };
 		F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FCA2AF954A20077FADE /* DemoViewController.m */; };
+		F1666FD82AFA55140077FADE /* ImpressionDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FD62AFA55140077FADE /* ImpressionDataDelegate.m */; };
+		F1666FE12AFA551D0077FADE /* InitializationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FDA2AFA551C0077FADE /* InitializationDelegate.m */; };
+		F1666FE72AFA55B50077FADE /* BannerDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FE62AFA55B50077FADE /* BannerDelegate.m */; };
+		F1666FEA2AFA55BC0077FADE /* RewardedVideoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FE92AFA55BC0077FADE /* RewardedVideoDelegate.m */; };
+		F1666FED2AFA55C40077FADE /* InterstitialDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FEC2AFA55C30077FADE /* InterstitialDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,14 +65,18 @@
 		E80C8FCC1C16E4C400CF3C27 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E80C8FCE1C16E4C800CF3C27 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		E80C8FD01C16E4D200CF3C27 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		F15948012AF7AB010033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardedVideoLevelPlayCallbacksHandler.m; sourceTree = "<group>"; };
-		F15948022AF7AB010033FB4D /* InterstitialLevelPlayCallbacksHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterstitialLevelPlayCallbacksHandler.m; sourceTree = "<group>"; };
-		F15948032AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterstitialLevelPlayCallbacksHandler.h; sourceTree = "<group>"; };
-		F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerLevelPlayCallbacksHandler.m; sourceTree = "<group>"; };
-		F15948052AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerLevelPlayCallbacksHandler.h; sourceTree = "<group>"; };
-		F15948062AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardedVideoLevelPlayCallbacksHandler.h; sourceTree = "<group>"; };
 		F1666FC92AF954A20077FADE /* DemoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
 		F1666FCA2AF954A20077FADE /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
+		F1666FD62AFA55140077FADE /* ImpressionDataDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImpressionDataDelegate.m; sourceTree = "<group>"; };
+		F1666FD72AFA55140077FADE /* ImpressionDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImpressionDataDelegate.h; sourceTree = "<group>"; };
+		F1666FDA2AFA551C0077FADE /* InitializationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitializationDelegate.m; sourceTree = "<group>"; };
+		F1666FDF2AFA551D0077FADE /* InitializationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitializationDelegate.h; sourceTree = "<group>"; };
+		F1666FE52AFA55B50077FADE /* BannerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BannerDelegate.h; sourceTree = "<group>"; };
+		F1666FE62AFA55B50077FADE /* BannerDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BannerDelegate.m; sourceTree = "<group>"; };
+		F1666FE82AFA55BC0077FADE /* RewardedVideoDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardedVideoDelegate.h; sourceTree = "<group>"; };
+		F1666FE92AFA55BC0077FADE /* RewardedVideoDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardedVideoDelegate.m; sourceTree = "<group>"; };
+		F1666FEB2AFA55C30077FADE /* InterstitialDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterstitialDelegate.h; sourceTree = "<group>"; };
+		F1666FEC2AFA55C30077FADE /* InterstitialDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterstitialDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,12 +114,16 @@
 				72E0D6451E267513009ABC1B /* AppDelegate.m */,
 				F1666FC92AF954A20077FADE /* DemoViewController.h */,
 				F1666FCA2AF954A20077FADE /* DemoViewController.m */,
-				F15948052AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.h */,
-				F15948042AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m */,
-				F15948032AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.h */,
-				F15948022AF7AB010033FB4D /* InterstitialLevelPlayCallbacksHandler.m */,
-				F15948062AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.h */,
-				F15948012AF7AB010033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m */,
+				F1666FD72AFA55140077FADE /* ImpressionDataDelegate.h */,
+				F1666FD62AFA55140077FADE /* ImpressionDataDelegate.m */,
+				F1666FDF2AFA551D0077FADE /* InitializationDelegate.h */,
+				F1666FDA2AFA551C0077FADE /* InitializationDelegate.m */,
+				F1666FE82AFA55BC0077FADE /* RewardedVideoDelegate.h */,
+				F1666FE92AFA55BC0077FADE /* RewardedVideoDelegate.m */,
+				F1666FEB2AFA55C30077FADE /* InterstitialDelegate.h */,
+				F1666FEC2AFA55C30077FADE /* InterstitialDelegate.m */,
+				F1666FE52AFA55B50077FADE /* BannerDelegate.h */,
+				F1666FE62AFA55B50077FADE /* BannerDelegate.m */,
 				72E0D6461E267513009ABC1B /* Assets.xcassets */,
 				72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */,
 				72E0D6491E267513009ABC1B /* Main.storyboard */,
@@ -281,11 +291,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F15948092AF7AB020033FB4D /* BannerLevelPlayCallbacksHandler.m in Sources */,
-				F15948082AF7AB020033FB4D /* InterstitialLevelPlayCallbacksHandler.m in Sources */,
-				F15948072AF7AB020033FB4D /* RewardedVideoLevelPlayCallbacksHandler.m in Sources */,
+				F1666FED2AFA55C40077FADE /* InterstitialDelegate.m in Sources */,
+				F1666FE72AFA55B50077FADE /* BannerDelegate.m in Sources */,
 				72E0D6601E2675C7009ABC1B /* main.m in Sources */,
+				F1666FEA2AFA55BC0077FADE /* RewardedVideoDelegate.m in Sources */,
+				F1666FD82AFA55140077FADE /* ImpressionDataDelegate.m in Sources */,
 				F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */,
+				F1666FE12AFA551D0077FADE /* InitializationDelegate.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

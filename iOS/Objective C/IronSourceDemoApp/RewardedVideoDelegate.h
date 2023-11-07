@@ -1,5 +1,5 @@
 //
-//  RewardedVideoLevelPlayCallbacksHandler.h
+//  RewardedVideoDelegate.h
 //  IronSourceDemoApp
 //
 //  Copyright © 2023 IronSource. All rights reserved.
@@ -7,12 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import <IronSource/IronSource.h>
-
-@class DemoViewController;
+#import "DemoViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RewardedVideoLevelPlayCallbacksHandler : NSObject<LevelPlayRewardedVideoDelegate>
+@interface RewardedVideoDelegate : NSObject<LevelPlayRewardedVideoDelegate>
 
 @property (nonatomic, weak) DemoViewController *demoViewController;
 

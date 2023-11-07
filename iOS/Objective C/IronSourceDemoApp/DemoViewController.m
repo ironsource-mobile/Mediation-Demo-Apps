@@ -6,10 +6,29 @@
 //
 
 #import "DemoViewController.h"
-#import <IronSource/IronSource.h>
+#import "InitializationDelegate.h"
+#import "RewardedVideoDelegate.h"
+#import "InterstitialDelegate.h"
+#import "BannerDelegate.h"
+#import "ImpressionDataDelegate.h"
 
 #define kDefaultUserId @"demoapp"
 #define kAppKey @"8545d445"
+
+@interface DemoViewController ()
+
+@property (nonatomic, strong) RewardedVideoDelegate *rewardedVideoDelegate;
+@property (nonatomic, strong) InterstitialDelegate *interstitialDelegate;
+@property (nonatomic, strong) BannerDelegate *bannerDelegate;
+
+@property (nonatomic, strong) InitializationDelegate *initializationDelegate;
+
+@property (nonatomic, strong) ImpressionDataDelegate *impressionDataDelegate;
+
+@property (nonatomic, strong) ISPlacementInfo   *rewardedVideoPlacementInfo;
+@property (nonatomic, strong) ISBannerView      *bannerView;
+
+@end
 
 @implementation DemoViewController
 
@@ -55,14 +74,16 @@
     // We're passing 'self' to our delegates because we want
     // to be able to enable/disable buttons to match ad availability.
     
-    self.rewardedVideoDelegate = [[RewardedVideoLevelPlayCallbacksHandler alloc] initWithDemoViewController:self];
-    self.interstitialDelegate = [[InterstitialLevelPlayCallbacksHandler alloc] initWithDemoViewController:self];
-    self.bannerDelegate = [[BannerLevelPlayCallbacksHandler alloc] initWithDemoViewController:self];
+    self.rewardedVideoDelegate = [[RewardedVideoDelegate alloc] initWithDemoViewController:self];
+    self.interstitialDelegate = [[InterstitialDelegate alloc] initWithDemoViewController:self];
+    self.bannerDelegate = [[BannerDelegate alloc] initWithDemoViewController:self];
     
     [IronSource setLevelPlayRewardedVideoDelegate:self.rewardedVideoDelegate];
     [IronSource setLevelPlayInterstitialDelegate:self.interstitialDelegate];
     [IronSource setLevelPlayBannerDelegate:self.bannerDelegate];
-    [IronSource addImpressionDataDelegate:self];
+    
+    self.impressionDataDelegate = [[ImpressionDataDelegate alloc] init];
+    [IronSource addImpressionDataDelegate:self.impressionDataDelegate];
     
     NSString *userId = [IronSource advertiserId];
     
@@ -73,11 +94,13 @@
     
     [IronSource setUserId:userId];
     
-    // After setting the delegates you can go ahead and initialize the SDK.
-    [IronSource initWithAppKey:kAppKey];
+    self.initializationDelegate = [[InitializationDelegate alloc] initWithDemoViewController:self];
+    
+    // After setting the delegates you can go ahead and initialize the SDK. Once the iniitaliztion callback is return you can start loading your ads
+    [IronSource initWithAppKey:kAppKey delegate:self.initializationDelegate];
     
     // To initialize specific ad units:
-    // [IronSource initWithAppKey:kAppKey adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER]];
+    // [IronSource initWithAppKey:kAppKey adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER] delegate:self.initializationDelegate];
     
     // Scroll down the file to find out what happens when you click a button...
 }
@@ -176,12 +199,5 @@
         self.rewardedVideoPlacementInfo = nil;
     }
 }
-
-#pragma mark - Impression Data Delegate Functions
-
-- (void)impressionDataDidSucceed:(ISImpressionData *)impressionData {
-    NSLog(@"impressionData %@", impressionData);
-}
-
 
 @end

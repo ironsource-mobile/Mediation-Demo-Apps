@@ -1,14 +1,13 @@
 //
-//  BannerLevelPlayCallbacksHandler.m
+//  BannerDelegate.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2023 IronSource. All rights reserved.
 
 
-#import "BannerLevelPlayCallbacksHandler.h"
-#import "DemoViewController.h"
+#import "BannerDelegate.h"
 
-@implementation BannerLevelPlayCallbacksHandler
+@implementation BannerDelegate
 
 - (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
     self = [super init];
