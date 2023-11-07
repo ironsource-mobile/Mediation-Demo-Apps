@@ -126,7 +126,7 @@
                                     <constraint firstAttribute="width" constant="210" id="BcP-M9-KhH"/>
                                     <constraint firstAttribute="height" constant="36" id="O7W-mk-hBm"/>
                                 </constraints>
-                                <state key="normal" title="NativeAd Button"/>
+                                <state key="normal" title="Native Ad Screen"/>
                                 <state key="disabled" title="Initializing"/>
                                 <connections>
                                     <action selector="nativeAdButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZrC-fp-RVv"/>
@@ -186,20 +186,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Native Ads" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58g-u4-Elr">
-                                <rect key="frame" x="127" y="105" width="129" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYl-se-5Gd" userLabel="LoadNA Button">
-                                <rect key="frame" x="158" y="142" width="62" height="35"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Load"/>
-                                <connections>
-                                    <action selector="loadNAButtonTapped:" destination="0Zx-O7-V9a" eventType="touchUpInside" id="Zqi-X8-Tmb"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="8vt-3t-hxc">
                                 <rect key="frame" x="24" y="111.5" width="327" height="547.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -208,6 +194,24 @@
                                     <outlet property="delegate" destination="0Zx-O7-V9a" id="akx-Ff-0hy"/>
                                 </connections>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Native Ads" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58g-u4-Elr">
+                                <rect key="frame" x="127" y="105" width="129" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sYl-se-5Gd" userLabel="LoadNA Button">
+                                <rect key="frame" x="158" y="68.5" width="62" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="62" id="07M-r9-KpS"/>
+                                    <constraint firstAttribute="height" constant="35" id="dLj-5j-1fR"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Load"/>
+                                <connections>
+                                    <action selector="loadNAButtonTapped:" destination="0Zx-O7-V9a" eventType="touchUpInside" id="Zqi-X8-Tmb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <accessibility key="accessibilityConfiguration" identifier="NativeAdViewController"/>

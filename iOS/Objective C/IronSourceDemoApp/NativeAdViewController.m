@@ -35,6 +35,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // add a border to the loadNAButton
+    _loadNAButton.layer.cornerRadius = 17.0f;
+    _loadNAButton.layer.masksToBounds = YES;
+    _loadNAButton.layer.borderWidth = 3.5f;
+    _loadNAButton.layer.borderColor = [[UIColor grayColor] CGColor];
 }
 
 
@@ -76,6 +82,7 @@
         [self.tableViewData removeObject:adView];
         [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         
+        // make sure remove the object from the list to prevent leak
         [self.nativeAdList removeObject:pair];
         nativeAd = nil;
         adView = nil;
