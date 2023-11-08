@@ -61,8 +61,6 @@
 }
 
 - (void)setupIronSourceSdk {
-    [ISSupersonicAdsConfiguration configurations].useClientSideCallbacks = @1;
-    
     // The ISIntegrationHelper is used to validate the integration.
     // Remove it before going live!
     [ISIntegrationHelper validateIntegration];

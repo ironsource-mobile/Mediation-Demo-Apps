@@ -31,20 +31,6 @@
             android:padding="5dp"
             android:text="initializing rewarded video" />
 
-        <Button
-            android:id="@+id/ow_button"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/rv_button"
-            android:layout_alignLeft="@+id/rv_button"
-            android:layout_alignRight="@+id/rv_button"
-            android:layout_alignStart="@+id/rv_button"
-            android:layout_below="@+id/rv_button"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/ironsource_button_shape"
-            android:text="initializing offerwall" />
-
-
         <TextView
             android:id="@+id/version_txt"
             android:layout_width="wrap_content"
@@ -58,9 +44,9 @@
             android:id="@+id/is_button_1"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ow_button"
-            android:layout_alignStart="@+id/ow_button"
-            android:layout_below="@+id/ow_button"
+            android:layout_alignLeft="@+id/rv_button"
+            android:layout_alignStart="@+id/rv_button"
+            android:layout_below="@+id/rv_button"
             android:layout_marginTop="20dp"
             android:background="@drawable/ironsource_button_shape"
             android:text="Initializing Interstitial" />
