@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ironSourceLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
-                                <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="61"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="AIm-zw-dN4"/>
                                     <constraint firstAttribute="width" constant="375" id="sDb-5O-aWJ"/>
@@ -28,10 +28,11 @@
                             </imageView>
                             <view contentMode="scaleToFill" id="xQF-eI-Igz" userLabel="Rewarded Video Container View">
                                 <rect key="frame" x="78" y="121" width="220" height="70"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-xC-13i" userLabel="Rewarded Video Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Szc-xC-13i" userLabel="Rewarded Video Label">
                                         <rect key="frame" x="10" y="0.0" width="200" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="3DF-T9-Vmt"/>
                                         </constraints>
@@ -39,8 +40,9 @@
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
                                         <rect key="frame" x="0.0" y="44" width="220" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="2St-3F-xvd"/>
                                             <constraint firstAttribute="width" constant="220" id="9Xc-Z5-ayD"/>
@@ -61,11 +63,13 @@
                                     <constraint firstAttribute="width" constant="220" id="q1J-Jp-7zE"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XOQ-ks-7Xg" userLabel="Interstitial Container View">
+                            <view contentMode="scaleToFill" id="XOQ-ks-7Xg" userLabel="Interstitial Container View">
                                 <rect key="frame" x="78" y="251" width="220" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cO-cG-V8Z" userLabel="Interstitial Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7cO-cG-V8Z" userLabel="Interstitial Label">
                                         <rect key="frame" x="10" y="0.0" width="200" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="200" id="6yv-0V-EHb"/>
                                             <constraint firstAttribute="height" constant="21" id="w2x-4t-B18"/>
@@ -74,8 +78,9 @@
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qE4-Rn-VtA" userLabel="Load Interstitial Button">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="qE4-Rn-VtA" userLabel="Load Interstitial Button">
                                         <rect key="frame" x="0.0" y="44" width="100" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="WCF-Rz-jIa"/>
                                             <constraint firstAttribute="height" constant="36" id="hlO-nJ-mfL"/>
@@ -86,8 +91,9 @@
                                             <action selector="loadInterstitialButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eIl-0B-JR5"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dhm-wI-nt6" userLabel="Show Interstitial Button">
+                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Dhm-wI-nt6" userLabel="Show Interstitial Button">
                                         <rect key="frame" x="120" y="44" width="100" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="MNH-0b-7lm"/>
                                             <constraint firstAttribute="height" constant="36" id="ae8-3f-7dz"/>
@@ -112,11 +118,13 @@
                                     <constraint firstItem="qE4-Rn-VtA" firstAttribute="leading" secondItem="XOQ-ks-7Xg" secondAttribute="leading" id="rD7-XB-lTg"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rm3-Oo-rgO" userLabel="Banner Container View">
+                            <view contentMode="scaleToFill" ambiguous="YES" id="rm3-Oo-rgO" userLabel="Banner Container View">
                                 <rect key="frame" x="78" y="381" width="220" height="70"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAA-Bc-iLn" userLabel="Banner Label">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MAA-Bc-iLn" userLabel="Banner Label">
                                         <rect key="frame" x="10" y="0.0" width="200" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="ZLj-Nq-YjX"/>
                                             <constraint firstAttribute="width" constant="200" id="bUM-X7-xSR"/>
@@ -125,8 +133,9 @@
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DN1-DN-sO8" userLabel="Load Banner Button">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="DN1-DN-sO8" userLabel="Load Banner Button">
                                         <rect key="frame" x="0.0" y="44" width="100" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="44d-C4-dmz"/>
                                             <constraint firstAttribute="height" constant="36" id="Zp6-aG-A1J"/>
@@ -137,8 +146,9 @@
                                             <action selector="loadBannerButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BlP-vd-iBr"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="424-rj-ygl" userLabel="Destroy Banner Button">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="424-rj-ygl" userLabel="Destroy Banner Button">
                                         <rect key="frame" x="120" y="44" width="100" height="36"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="36" id="6BJ-Js-DSP"/>
                                             <constraint firstAttribute="width" constant="100" id="ub4-zw-owL"/>
@@ -163,8 +173,9 @@
                                     <constraint firstAttribute="height" constant="80" id="kNT-QW-nrk"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dnw-Fv-bW3">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dnw-Fv-bW3">
                                 <rect key="frame" x="78" y="521" width="220" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" systemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -176,7 +187,7 @@
                             <constraint firstItem="rm3-Oo-rgO" firstAttribute="top" secondItem="XOQ-ks-7Xg" secondAttribute="bottom" constant="50" id="1NH-41-OYT"/>
                             <constraint firstItem="XOQ-ks-7Xg" firstAttribute="top" secondItem="xQF-eI-Igz" secondAttribute="bottom" constant="50" id="1Pb-JT-1c9"/>
                             <constraint firstItem="Dnw-Fv-bW3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Dl-sK-gxo"/>
-                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="top" secondItem="rm3-Oo-rgO" secondAttribute="bottom" constant="140" id="7MO-1L-K6n"/>
+                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="top" secondItem="rm3-Oo-rgO" secondAttribute="bottom" constant="70" id="7MO-1L-K6n"/>
                             <constraint firstItem="WUr-4g-cHl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Dtn-jb-wLu"/>
                             <constraint firstItem="rm3-Oo-rgO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P5o-NS-Nby"/>
                             <constraint firstItem="xQF-eI-Igz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Wxq-Cz-4VM"/>
