@@ -74,12 +74,14 @@
     // We're passing 'self' to our delegates because we want
     // to be able to enable/disable buttons to match ad availability.
     
-    self.rewardedVideoDelegate = [[RewardedVideoDelegate alloc] initWithDemoViewController:self];
-    self.interstitialDelegate = [[InterstitialDelegate alloc] initWithDemoViewController:self];
-    self.bannerDelegate = [[BannerDelegate alloc] initWithDemoViewController:self];
     
+    self.rewardedVideoDelegate = [[RewardedVideoDelegate alloc] initWithDemoViewController:self];
     [IronSource setLevelPlayRewardedVideoDelegate:self.rewardedVideoDelegate];
+    
+    self.interstitialDelegate = [[InterstitialDelegate alloc] initWithDemoViewController:self];
     [IronSource setLevelPlayInterstitialDelegate:self.interstitialDelegate];
+    
+    self.bannerDelegate = [[BannerDelegate alloc] initWithDemoViewController:self];
     [IronSource setLevelPlayBannerDelegate:self.bannerDelegate];
     
     self.impressionDataDelegate = [[ImpressionDataDelegate alloc] init];
@@ -102,7 +104,7 @@
     // To initialize specific ad units:
     // [IronSource initWithAppKey:kAppKey adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER] delegate:self.initializationDelegate];
     
-    // Scroll down the file to find out what happens when you click a button...
+    // Scroll down the file to find out what happens when you tap a button...
 }
 
 #pragma mark -

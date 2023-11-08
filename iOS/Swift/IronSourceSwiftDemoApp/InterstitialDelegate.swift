@@ -1,5 +1,5 @@
 //
-//  InterstitialLevelPlayCallbacksHandler.swift
+//  InterstitialDelegate.swift
 //  IronSourceSwiftDemoApp
 //
 //  Copyright © 2023 IronSource. All rights reserved.
@@ -8,22 +8,12 @@
 import Foundation
 import IronSource
 
-protocol InterstitialLevelPlayCallbacksWrapper {
-    func interstitialLevelPlayDidLoad(with adInfo: ISAdInfo!)
-    func interstitialLevelPlayDidFailToLoadWithError(_ error: Error!)
-    func interstitialLevelPlayDidOpen(with adInfo: ISAdInfo!)
-    func interstitialLevelPlayDidShow(with adInfo: ISAdInfo!)
-    func interstitialLevelPlayDidFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!)
-    func interstitialLevelPlayDidClick(with adInfo: ISAdInfo!)
-    func interstitialLevelPlayDidClose(with adInfo: ISAdInfo!)
-}
-
-class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDelegate {
+class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
     
-    var delegate: InterstitialLevelPlayCallbacksWrapper!
+    var demoViewController: DemoViewController!
 
-    init(delegate: InterstitialLevelPlayCallbacksWrapper!) {
-        self.delegate = delegate
+    init(demoViewController: DemoViewController!) {
+        self.demoViewController = demoViewController
     }
     
     /**
@@ -31,7 +21,9 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didLoad(with adInfo: ISAdInfo) {
-        delegate.interstitialLevelPlayDidLoad(with: adInfo)
+        logFunctionName()
+        
+        self.demoViewController.setButtonEnablement(self.demoViewController.showInterstitialButton, enabled: true)
     }
     
     /**
@@ -39,7 +31,9 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param error The reason for the error
      */
     func didFailToLoadWithError(_ error: Error!) {
-        delegate.interstitialLevelPlayDidFailToLoadWithError(error)
+        logFunctionName(string: String(describing: error.self))
+        
+        self.demoViewController.setButtonEnablement(self.demoViewController.showInterstitialButton, enabled: false)
     }
     
     /**
@@ -47,7 +41,9 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didOpen(with adInfo: ISAdInfo!) {
-        delegate.interstitialLevelPlayDidOpen(with: adInfo)
+        logFunctionName()
+        
+        self.demoViewController.setButtonEnablement(self.demoViewController.showInterstitialButton, enabled: false)
     }
     
     /**
@@ -55,7 +51,7 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didShow(with adInfo: ISAdInfo!) {
-        delegate.interstitialLevelPlayDidShow(with: adInfo)
+        logFunctionName()
     }
     
     /**
@@ -64,7 +60,7 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
-        delegate.interstitialLevelPlayDidFailToShowWithError(error, andAdInfo: adInfo)
+        logFunctionName(string: String(describing: error.self))
     }
     
     /**
@@ -72,7 +68,7 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didClick(with adInfo: ISAdInfo!) {
-        delegate.interstitialLevelPlayDidClick(with: adInfo)
+        logFunctionName()
     }
     
     /**
@@ -80,6 +76,12 @@ class InterstitialLevelPlayCallbacksHandler: NSObject, LevelPlayInterstitialDele
      @param adInfo The info of the ad.
      */
     func didClose(with adInfo: ISAdInfo!) {
-        delegate.interstitialLevelPlayDidClose(with: adInfo)
+        logFunctionName()
+    }
+    
+    //MARK: Helper Method
+    
+    func logFunctionName(string: String = #function) {
+        print("InterstitialDelegate: " + string)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  RewardedVideoLevelPlayCallbacksHandler.swift
+//  RewardedVideoDelegate.swift
 //  IronSourceSwiftDemoApp
 //
 //  Copyright © 2023 IronSource. All rights reserved.
@@ -8,22 +8,12 @@
 import Foundation
 import IronSource
 
-protocol RewardedVideoLevelPlayCallbacksWrapper {
-    func rewardedVideoLevelPlayHasAvailableAd(with adInfo: ISAdInfo!)
-    func rewardedVideoLevelPlayHasNoAvailableAd()
-    func rewardedVideoLevelPlayDidOpen(with adInfo: ISAdInfo!)
-    func rewardedVideoLevelPlayDidFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!)
-    func rewardedVideoLevelPlayDidClick(_ placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!)
-    func rewardedVideoLevelPlayDidReceiveRewardForPlacement(_ placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!)
-    func rewardedVideoLevelPlayDidClose(with adInfo: ISAdInfo!)
-}
-
-class RewardedVideoLevelPlayCallbacksHandler: NSObject, LevelPlayRewardedVideoDelegate {
+class RewardedVideoDelegate: NSObject, LevelPlayRewardedVideoDelegate {
     
-    var delegate: RewardedVideoLevelPlayCallbacksWrapper!
+    var demoViewController: DemoViewController!
 
-    init(delegate: RewardedVideoLevelPlayCallbacksWrapper!) {
-        self.delegate = delegate
+    init(demoViewController: DemoViewController!) {
+        self.demoViewController = demoViewController
     }
     
     /**
@@ -31,14 +21,18 @@ class RewardedVideoLevelPlayCallbacksHandler: NSObject, LevelPlayRewardedVideoDe
      @param adInfo The info of the ad.
      */
     func hasAvailableAd(with adInfo: ISAdInfo!) {
-        delegate.rewardedVideoLevelPlayHasAvailableAd(with: adInfo)
+        logFunctionName()
+        
+        self.demoViewController.setButtonEnablement(self.demoViewController.showRewardedVideoButton, enabled: true)
     }
     
     /**
      Called after a rewarded video has changed its availability to false.
      */
     func hasNoAvailableAd() {
-        delegate.rewardedVideoLevelPlayHasNoAvailableAd()
+        logFunctionName()
+        
+        self.demoViewController.setButtonEnablement(self.demoViewController.showRewardedVideoButton, enabled: false)
     }
     
     /**
@@ -46,7 +40,9 @@ class RewardedVideoLevelPlayCallbacksHandler: NSObject, LevelPlayRewardedVideoDe
      @param adInfo The info of the ad.
      */
     func didOpen(with adInfo: ISAdInfo!) {
-        delegate.rewardedVideoLevelPlayDidOpen(with: adInfo)
+        logFunctionName()
+        
+        self.demoViewController.setButtonEnablement(self.demoViewController.showRewardedVideoButton, enabled: false)
     }
     
     /**
@@ -55,7 +51,7 @@ class RewardedVideoLevelPlayCallbacksHandler: NSObject, LevelPlayRewardedVideoDe
      @param adInfo The info of the ad.
      */
     func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
-        delegate.rewardedVideoLevelPlayDidFailToShowWithError(error, andAdInfo: adInfo)
+        logFunctionName(string: #function+String(describing: error.self))
     }
     
     /**
@@ -64,7 +60,7 @@ class RewardedVideoLevelPlayCallbacksHandler: NSObject, LevelPlayRewardedVideoDe
      @param adInfo The info of the ad.
      */
     func didClick(_ placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!) {
-        delegate.rewardedVideoLevelPlayDidClick(placementInfo, with: adInfo)
+        logFunctionName(string: #function+String(describing: placementInfo.self))
     }
     
     /**
@@ -73,7 +69,7 @@ class RewardedVideoLevelPlayCallbacksHandler: NSObject, LevelPlayRewardedVideoDe
      @param adInfo The info of the ad.
      */
     func didReceiveReward(forPlacement placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!) {
-        delegate.rewardedVideoLevelPlayDidReceiveRewardForPlacement(placementInfo, with: adInfo)
+        logFunctionName(string: #function+String(describing: placementInfo.self))
     }
     
     /**
@@ -81,6 +77,12 @@ class RewardedVideoLevelPlayCallbacksHandler: NSObject, LevelPlayRewardedVideoDe
      @param adInfo The info of the ad.
      */
     func didClose(with adInfo: ISAdInfo!) {
-        delegate.rewardedVideoLevelPlayDidClose(with: adInfo)
+        logFunctionName()
+    }
+    
+    //MARK: Helper Method
+    
+    func logFunctionName(string: String = #function) {
+        print("RewardedVideoDelegate: " + string)
     }
 }

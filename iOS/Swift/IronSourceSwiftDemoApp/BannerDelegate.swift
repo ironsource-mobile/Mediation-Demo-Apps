@@ -1,5 +1,5 @@
 //
-//  BannerLevelPlayCallbacksHandler.swift
+//  BannerDelegate.swift
 //  IronSourceSwiftDemoApp
 //
 //  Copyright © 2023 IronSource. All rights reserved.
@@ -8,21 +8,12 @@
 import Foundation
 import IronSource
 
-protocol BannerLevelPlayCallbacksWrapper {
-    func bannerLevelPlayDidLoad(_ bannerView: ISBannerView!, andAdInfo adInfo: ISAdInfo!)
-    func bannerLevelPlayDidFailToLoadWithError(_ error: Error!)
-    func bannerLevelPlayDidClick(with adInfo: ISAdInfo!)
-    func bannerLevelPlayDidLeaveApplication(with adInfo: ISAdInfo!)
-    func bannerLevelPlayDidPresentScreen(with adInfo: ISAdInfo!)
-    func bannerLevelPlayDidDismissScreen(with adInfo: ISAdInfo!)
-}
+class BannerDelegate: NSObject, LevelPlayBannerDelegate {
+    
+    var demoViewController: DemoViewController!
 
-class BannerLevelPlayCallbacksHandler: NSObject, LevelPlayBannerDelegate {
-
-    var delegate: BannerLevelPlayCallbacksWrapper!
-
-    init(delegate: BannerLevelPlayCallbacksWrapper!) {
-        self.delegate = delegate
+    init(demoViewController: DemoViewController!) {
+        self.demoViewController = demoViewController
     }
     
     /**
@@ -30,7 +21,11 @@ class BannerLevelPlayCallbacksHandler: NSObject, LevelPlayBannerDelegate {
      @param adInfo The info of the ad.
      */
     func didLoad(_ bannerView: ISBannerView!, with adInfo: ISAdInfo!) {
-        delegate.bannerLevelPlayDidLoad(bannerView, andAdInfo: adInfo)
+        logFunctionName()
+        
+        self.demoViewController.setAndBindBannerView(bannerView)
+        self.demoViewController.setButtonEnablement(self.demoViewController.loadBannerButton, enabled: false)
+        self.demoViewController.setButtonEnablement(self.demoViewController.destroyBannerButton, enabled: true)
     }
     
     /**
@@ -38,7 +33,7 @@ class BannerLevelPlayCallbacksHandler: NSObject, LevelPlayBannerDelegate {
      @param error The reason for the error
      */
     func didFailToLoadWithError(_ error: Error!) {
-        delegate.bannerLevelPlayDidFailToLoadWithError(error)
+        logFunctionName(string: #function+String(describing: error.self))
     }
     
     /**
@@ -46,7 +41,7 @@ class BannerLevelPlayCallbacksHandler: NSObject, LevelPlayBannerDelegate {
      @param adInfo The info of the ad.
      */
     func didClick(with adInfo: ISAdInfo!) {
-        delegate.bannerLevelPlayDidClick(with: adInfo)
+        logFunctionName()
     }
     
     /**
@@ -54,7 +49,7 @@ class BannerLevelPlayCallbacksHandler: NSObject, LevelPlayBannerDelegate {
      @param adInfo The info of the ad.
      */
     func didLeaveApplication(with adInfo: ISAdInfo!) {
-        delegate.bannerLevelPlayDidLeaveApplication(with: adInfo)
+        logFunctionName()
     }
     
     /**
@@ -62,7 +57,7 @@ class BannerLevelPlayCallbacksHandler: NSObject, LevelPlayBannerDelegate {
      @param adInfo The info of the ad.
      */
     func didPresentScreen(with adInfo: ISAdInfo!) {
-        delegate.bannerLevelPlayDidPresentScreen(with: adInfo)
+        logFunctionName()
     }
     
     /**
@@ -70,7 +65,13 @@ class BannerLevelPlayCallbacksHandler: NSObject, LevelPlayBannerDelegate {
      @param adInfo The info of the ad.
      */
     func didDismissScreen(with adInfo: ISAdInfo!) {
-        delegate.bannerLevelPlayDidDismissScreen(with: adInfo)
+        logFunctionName()
+    }
+    
+    //MARK: Helper Method
+    
+    func logFunctionName(string: String = #function) {
+        print("BannerDelegate: " + string)
     }
 }
 
