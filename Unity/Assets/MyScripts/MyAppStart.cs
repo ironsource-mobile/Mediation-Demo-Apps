@@ -3,93 +3,91 @@ using System.Collections;
 
 public class MyAppStart : MonoBehaviour
 {
-	public static string uniqueUserId = "demoUserUnity";
+    public static string uniqueUserId = "demoUserUnity";
 
-
-	// Use this for initialization
-	void Start ()
-	{
-		#if UNITY_ANDROID
+    // Use this for initialization
+    void Start()
+    {
+#if UNITY_ANDROID
         string appKey = "85460dcd";
-		#elif UNITY_IPHONE
+#elif UNITY_IPHONE
         string appKey = "8545d445";
-		#else
+#else
         string appKey = "unexpected_platform";
-		#endif
-		Debug.Log ("unity-script: MyAppStart Start called");
+#endif
+        Debug.Log("unity-script: MyAppStart Start called");
 
-		//Dynamic config example
-		IronSourceConfig.Instance.setClientSideCallbacks (true);
+        //Dynamic config example
+        IronSourceConfig.Instance.setClientSideCallbacks(true);
 
-		string id = IronSource.Agent.getAdvertiserId ();
-		Debug.Log ("unity-script: IronSource.Agent.getAdvertiserId : " + id);
-		
-		Debug.Log ("unity-script: IronSource.Agent.validateIntegration");
-		IronSource.Agent.validateIntegration ();
+        string id = IronSource.Agent.getAdvertiserId();
+        Debug.Log("unity-script: IronSource.Agent.getAdvertiserId : " + id);
 
-		Debug.Log ("unity-script: unity version" + IronSource.unityVersion ());
+        Debug.Log("unity-script: IronSource.Agent.validateIntegration");
+        IronSource.Agent.validateIntegration();
 
-		// Add Banner Events
-		IronSourceEvents.onBannerAdLoadedEvent += BannerAdLoadedEvent;
-		IronSourceEvents.onBannerAdLoadFailedEvent += BannerAdLoadFailedEvent;		
-		IronSourceEvents.onBannerAdClickedEvent += BannerAdClickedEvent; 
-		IronSourceEvents.onBannerAdScreenPresentedEvent += BannerAdScreenPresentedEvent; 
-		IronSourceEvents.onBannerAdScreenDismissedEvent += BannerAdScreenDismissedEvent;
-		IronSourceEvents.onBannerAdLeftApplicationEvent += BannerAdLeftApplicationEvent;
+        Debug.Log("unity-script: unity version" + IronSource.unityVersion());
 
-		// SDK init
-		Debug.Log ("unity-script: IronSource.Agent.init");
-		IronSource.Agent.init (appKey);
-		//IronSource.Agent.init (appKey, IronSourceAdUnits.REWARDED_VIDEO, IronSourceAdUnits.INTERSTITIAL, IronSourceAdUnits.OFFERWALL, IronSourceAdUnits.BANNER);
+        //Add AdInfo Banner Events
+        IronSourceBannerEvents.onAdLoadedEvent += BannerOnAdLoadedEvent;
+        IronSourceBannerEvents.onAdLoadFailedEvent += BannerOnAdLoadFailedEvent;
+        IronSourceBannerEvents.onAdClickedEvent += BannerOnAdClickedEvent;
+        IronSourceBannerEvents.onAdScreenPresentedEvent += BannerOnAdScreenPresentedEvent;
+        IronSourceBannerEvents.onAdScreenDismissedEvent += BannerOnAdScreenDismissedEvent;
+        IronSourceBannerEvents.onAdLeftApplicationEvent += BannerOnAdLeftApplicationEvent;
+
+        // SDK init
+        Debug.Log("unity-script: IronSource.Agent.init");
+        IronSource.Agent.init(appKey);
+        //IronSource.Agent.init (appKey, IronSourceAdUnits.REWARDED_VIDEO, IronSourceAdUnits.INTERSTITIAL, IronSourceAdUnits.OFFERWALL, IronSourceAdUnits.BANNER);
         //IronSource.Agent.initISDemandOnly (appKey, IronSourceAdUnits.REWARDED_VIDEO, IronSourceAdUnits.INTERSTITIAL);
 
         //Set User ID For Server To Server Integration
         //// IronSource.Agent.setUserId ("UserId");
-		
-		// Load Banner example
-		IronSource.Agent.loadBanner (IronSourceBannerSize.BANNER, IronSourceBannerPosition.BOTTOM);
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
 
-	}
+        // Load Banner example
+        IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, IronSourceBannerPosition.BOTTOM);
+    }
 
-	void OnApplicationPause (bool isPaused)
-	{
-		Debug.Log ("unity-script: OnApplicationPause = " + isPaused);
-		IronSource.Agent.onApplicationPause (isPaused);
-	}
+    // Update is called once per frame
+    void Update()
+    {
+    }
 
-	//Banner Events
-	void BannerAdLoadedEvent ()
-	{
-		Debug.Log ("unity-script: I got BannerAdLoadedEvent");
-	}
-	
-	void BannerAdLoadFailedEvent (IronSourceError error)
-	{
-		Debug.Log ("unity-script: I got BannerAdLoadFailedEvent, code: " + error.getCode () + ", description : " + error.getDescription ());
-	}
-	
-	void BannerAdClickedEvent ()
-	{
-		Debug.Log ("unity-script: I got BannerAdClickedEvent");
-	}
-	
-	void BannerAdScreenPresentedEvent ()
-	{
-		Debug.Log ("unity-script: I got BannerAdScreenPresentedEvent");
-	}
-	
-	void BannerAdScreenDismissedEvent ()
-	{
-		Debug.Log ("unity-script: I got BannerAdScreenDismissedEvent");
-	}
-	
-	void BannerAdLeftApplicationEvent ()
-	{
-		Debug.Log ("unity-script: I got BannerAdLeftApplicationEvent");
-	}
+    void OnApplicationPause(bool isPaused)
+    {
+        Debug.Log("unity-script: OnApplicationPause = " + isPaused);
+        IronSource.Agent.onApplicationPause(isPaused);
+    }
+
+    //Banner Events
+    void BannerOnAdLoadedEvent(IronSourceAdInfo adInfo)
+    {
+        Debug.Log("unity-script: I got BannerOnAdLoadedEvent With AdInfo " + adInfo);
+    }
+
+    void BannerOnAdLoadFailedEvent(IronSourceError ironSourceError)
+    {
+        Debug.Log("unity-script: I got BannerOnAdLoadFailedEvent With Error " + ironSourceError);
+    }
+
+    void BannerOnAdClickedEvent(IronSourceAdInfo adInfo)
+    {
+        Debug.Log("unity-script: I got BannerOnAdClickedEvent With AdInfo " + adInfo);
+    }
+
+    void BannerOnAdScreenPresentedEvent(IronSourceAdInfo adInfo)
+    {
+        Debug.Log("unity-script: I got BannerOnAdScreenPresentedEvent With AdInfo " + adInfo);
+    }
+
+    void BannerOnAdScreenDismissedEvent(IronSourceAdInfo adInfo)
+    {
+        Debug.Log("unity-script: I got BannerOnAdScreenDismissedEvent With AdInfo " + adInfo);
+    }
+
+    void BannerOnAdLeftApplicationEvent(IronSourceAdInfo adInfo)
+    {
+        Debug.Log("unity-script: I got BannerOnAdLeftApplicationEvent With AdInfo " + adInfo);
+    }
 }
