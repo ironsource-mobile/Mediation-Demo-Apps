@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SupersonicLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ironSourceLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
                                 <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="61" id="AIm-zw-dN4"/>
@@ -200,7 +200,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="SupersonicLogo" width="205" height="43.5"/>
+        <image name="ironSourceLogo" width="205" height="43.5"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

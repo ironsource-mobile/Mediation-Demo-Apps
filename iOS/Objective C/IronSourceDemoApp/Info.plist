@@ -34,8 +34,6 @@
 			<string>su67r6k2v3.skadnetwork</string>
 		</dict>
 	</array>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
