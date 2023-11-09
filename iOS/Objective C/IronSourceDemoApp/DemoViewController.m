@@ -51,6 +51,15 @@
 
 - (void)setupUI {
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
+    
+    for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]) {
+
+        button.layer.cornerRadius = 5.0f;
+        button.layer.masksToBounds = YES;
+        button.layer.borderWidth = 2.0f;
+        button.layer.borderColor = [[UIColor grayColor] CGColor];
+        button.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 20);
+    }
 }
 
 - (void)setupIronSourceSdk {
@@ -146,8 +155,7 @@
             [IronSource destroyBanner:self.bannerView];
             self.bannerView = nil;
         }
-        
-        [self.destroyBannerButton setEnabled:NO];
+        [self setEnablement:NO forButton:self.destroyBannerButton];
     });
 }
 
@@ -155,21 +163,28 @@
 
 - (void)setAndBindBannerView:(ISBannerView *)bannerView {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.bannerView = bannerView;
-        CGFloat y = self.view.frame.size.height - (bannerView.frame.size.height / 2.0);
-        
-        if (@available(ios 11.0, *)) {
-             y -= self.view.safeAreaInsets.bottom;
+        if (self.bannerView) {
+            [self.bannerView removeFromSuperview];
         }
         
-        bannerView.center = CGPointMake(self.view.frame.size.width / 2.0, y);
-        [self.view addSubview:bannerView];
+        self.bannerView = bannerView;
+        self.bannerView.translatesAutoresizingMaskIntoConstraints = NO;
+        
+        [self.view addSubview:self.bannerView];
+
+        NSLayoutConstraint *centerX = [self.bannerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor];
+        NSLayoutConstraint *bottom = [self.bannerView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
+        NSLayoutConstraint *width = [self.bannerView.widthAnchor constraintEqualToConstant:bannerView.frame.size.width];
+        NSLayoutConstraint *height = [self.bannerView.heightAnchor constraintEqualToConstant:bannerView.frame.size.height];
+        [NSLayoutConstraint activateConstraints:@[centerX, bottom, width, height]];
     });
 }
 
 - (void)setEnablement:(BOOL)enablement forButton:(UIButton *)button {
     dispatch_async(dispatch_get_main_queue(), ^{
         [button setEnabled:enablement];
+        UIColor *borderColor = enablement ? [UIColor blueColor] : [UIColor grayColor];
+        button.layer.borderColor = borderColor.CGColor;
     });
 }
 
@@ -191,6 +206,17 @@
         
         self.rewardedVideoPlacementInfo = nil;
     }
+}
+
+- (UIImage *)imageFromColor:(UIColor *)color {
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
+    [color setFill];
+    UIRectFill(rect);
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return image;
 }
 
 @end
