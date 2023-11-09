@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,181 +19,152 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ironSourceLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
-                                <rect key="frame" x="0.0" y="28" width="375" height="61"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="61" id="AIm-zw-dN4"/>
-                                    <constraint firstAttribute="width" constant="375" id="sDb-5O-aWJ"/>
-                                </constraints>
-                            </imageView>
-                            <view contentMode="scaleToFill" id="xQF-eI-Igz" userLabel="Rewarded Video Container View">
-                                <rect key="frame" x="78" y="121" width="220" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="2mE-MQ-57a">
+                                <rect key="frame" x="20" y="20" width="335" height="627"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Szc-xC-13i" userLabel="Rewarded Video Label">
-                                        <rect key="frame" x="10" y="0.0" width="200" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ironSourceLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="53"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="3DF-T9-Vmt"/>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="61" id="AIm-zw-dN4"/>
                                         </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xyZ-In-h0k" userLabel="Rewarded Video Stack View">
+                                        <rect key="frame" x="0.0" y="53" width="335" height="56.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Szc-xC-13i" userLabel="Rewarded Video Label">
+                                                <rect key="frame" x="105.5" y="0.0" width="124.5" height="20.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
+                                                <rect key="frame" x="134.5" y="20.5" width="66" height="130"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="36" id="2St-3F-xvd"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="9Xc-Z5-ayD"/>
+                                                </constraints>
+                                                <state key="normal" title="Show"/>
+                                                <state key="disabled" title="Initializing"/>
+                                                <state key="selected" title="Show"/>
+                                                <buttonConfiguration key="configuration" style="tinted" title="Show"/>
+                                                <connections>
+                                                    <action selector="showRewardedVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rbr-Q7-Efw"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Pri-6p-Xgv" userLabel="Interstitial  Stack View">
+                                        <rect key="frame" x="0.0" y="109.5" width="335" height="56.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7cO-cG-V8Z" userLabel="Interstitial Label">
+                                                <rect key="frame" x="130" y="0.0" width="75" height="20.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="rp6-tl-sMD" userLabel="Buttons Stack View">
+                                                <rect key="frame" x="91.5" y="20.5" width="152" height="36"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="qE4-Rn-VtA" userLabel="Load Interstitial Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="130.5"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="WCF-Rz-jIa"/>
+                                                            <constraint firstAttribute="height" constant="36" id="hlO-nJ-mfL"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Load"/>
+                                                        <state key="disabled" title="Initializing"/>
+                                                        <buttonConfiguration key="configuration" style="tinted" title="Load"/>
+                                                        <connections>
+                                                            <action selector="loadInterstitialButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BWO-cy-fU5"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Dhm-wI-nt6" userLabel="Show Interstitial Button">
+                                                        <rect key="frame" x="86" y="0.0" width="66" height="130.5"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="MNH-0b-7lm"/>
+                                                            <constraint firstAttribute="height" constant="36" id="ae8-3f-7dz"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Show"/>
+                                                        <state key="disabled" title="Show"/>
+                                                        <state key="selected" title="Show"/>
+                                                        <state key="highlighted" title="Show"/>
+                                                        <buttonConfiguration key="configuration" style="tinted" title="Show"/>
+                                                        <connections>
+                                                            <action selector="showInterstitialButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fhz-yZ-mxV"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Sx0-VM-jh2" userLabel="Banner Stack View">
+                                        <rect key="frame" x="0.0" y="166" width="335" height="56.5"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MAA-Bc-iLn" userLabel="Banner Label">
+                                                <rect key="frame" x="140.5" y="0.0" width="54" height="20.5"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" systemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="lxm-FV-KdF" userLabel="Buttons Stack View">
+                                                <rect key="frame" x="74" y="20.5" width="187" height="36"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="DN1-DN-sO8" userLabel="Load Banner Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="83.5" height="130"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="44d-C4-dmz"/>
+                                                            <constraint firstAttribute="height" constant="36" id="Zp6-aG-A1J"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Load"/>
+                                                        <state key="disabled" title="Initializing"/>
+                                                        <buttonConfiguration key="configuration" style="tinted" title="Load"/>
+                                                        <connections>
+                                                            <action selector="loadBannerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7uA-Jm-DPx"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="424-rj-ygl" userLabel="Destroy Banner Button">
+                                                        <rect key="frame" x="103.5" y="0.0" width="83.5" height="130"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="36" id="6BJ-Js-DSP"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="ub4-zw-owL"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Destroy"/>
+                                                        <state key="disabled" title="Destroy"/>
+                                                        <state key="selected" title="Show"/>
+                                                        <state key="highlighted" title="Show"/>
+                                                        <buttonConfiguration key="configuration" style="tinted" title="Destroy"/>
+                                                        <connections>
+                                                            <action selector="destroyBannerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wEc-GR-syv"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dnw-Fv-bW3">
+                                        <rect key="frame" x="0.0" y="571" width="335" height="56"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
-                                        <rect key="frame" x="0.0" y="44" width="220" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="2St-3F-xvd"/>
-                                            <constraint firstAttribute="width" constant="220" id="9Xc-Z5-ayD"/>
-                                        </constraints>
-                                        <state key="normal" title="Show"/>
-                                        <state key="disabled" title="Initializing"/>
-                                        <state key="selected" title="Show"/>
-                                        <connections>
-                                            <action selector="showRewardedVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rbr-Q7-Efw"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="80" id="6Y9-8o-jBi"/>
-                                    <constraint firstAttribute="bottom" secondItem="N20-QP-8mE" secondAttribute="bottom" id="BO5-vN-sr8"/>
-                                    <constraint firstItem="Szc-xC-13i" firstAttribute="centerX" secondItem="xQF-eI-Igz" secondAttribute="centerX" id="Xey-o0-uvA"/>
-                                    <constraint firstItem="N20-QP-8mE" firstAttribute="centerX" secondItem="xQF-eI-Igz" secondAttribute="centerX" id="hvl-RG-2Au"/>
-                                    <constraint firstItem="Szc-xC-13i" firstAttribute="top" secondItem="xQF-eI-Igz" secondAttribute="top" id="lgH-9n-Rgf"/>
-                                    <constraint firstAttribute="width" constant="220" id="q1J-Jp-7zE"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" id="XOQ-ks-7Xg" userLabel="Interstitial Container View">
-                                <rect key="frame" x="78" y="251" width="220" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7cO-cG-V8Z" userLabel="Interstitial Label">
-                                        <rect key="frame" x="10" y="0.0" width="200" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="6yv-0V-EHb"/>
-                                            <constraint firstAttribute="height" constant="21" id="w2x-4t-B18"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="qE4-Rn-VtA" userLabel="Load Interstitial Button">
-                                        <rect key="frame" x="0.0" y="44" width="100" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="WCF-Rz-jIa"/>
-                                            <constraint firstAttribute="height" constant="36" id="hlO-nJ-mfL"/>
-                                        </constraints>
-                                        <state key="normal" title="Load"/>
-                                        <state key="disabled" title="Initializing"/>
-                                        <connections>
-                                            <action selector="loadInterstitialButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BWO-cy-fU5"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="Dhm-wI-nt6" userLabel="Show Interstitial Button">
-                                        <rect key="frame" x="120" y="44" width="100" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="MNH-0b-7lm"/>
-                                            <constraint firstAttribute="height" constant="36" id="ae8-3f-7dz"/>
-                                        </constraints>
-                                        <state key="normal" title="Show"/>
-                                        <state key="disabled" title="Show"/>
-                                        <state key="selected" title="Show"/>
-                                        <state key="highlighted" title="Show"/>
-                                        <connections>
-                                            <action selector="showInterstitialButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fhz-yZ-mxV"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="Dhm-wI-nt6" secondAttribute="trailing" id="9xx-cb-fCZ"/>
-                                    <constraint firstAttribute="width" constant="220" id="Acx-Nf-Y7h"/>
-                                    <constraint firstItem="7cO-cG-V8Z" firstAttribute="top" secondItem="XOQ-ks-7Xg" secondAttribute="top" id="DFy-q4-s4j"/>
-                                    <constraint firstAttribute="height" constant="80" id="Kqj-Ei-rv8"/>
-                                    <constraint firstAttribute="bottom" secondItem="Dhm-wI-nt6" secondAttribute="bottom" id="WJR-J4-ASv"/>
-                                    <constraint firstItem="7cO-cG-V8Z" firstAttribute="centerX" secondItem="XOQ-ks-7Xg" secondAttribute="centerX" id="hus-F9-bIv"/>
-                                    <constraint firstAttribute="bottom" secondItem="qE4-Rn-VtA" secondAttribute="bottom" id="oww-nO-0zh"/>
-                                    <constraint firstItem="qE4-Rn-VtA" firstAttribute="leading" secondItem="XOQ-ks-7Xg" secondAttribute="leading" id="rD7-XB-lTg"/>
-                                </constraints>
-                            </view>
-                            <view contentMode="scaleToFill" ambiguous="YES" id="rm3-Oo-rgO" userLabel="Banner Container View">
-                                <rect key="frame" x="78" y="381" width="220" height="70"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="MAA-Bc-iLn" userLabel="Banner Label">
-                                        <rect key="frame" x="10" y="0.0" width="200" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="ZLj-Nq-YjX"/>
-                                            <constraint firstAttribute="width" constant="200" id="bUM-X7-xSR"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" systemColor="darkTextColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="DN1-DN-sO8" userLabel="Load Banner Button">
-                                        <rect key="frame" x="0.0" y="44" width="100" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="44d-C4-dmz"/>
-                                            <constraint firstAttribute="height" constant="36" id="Zp6-aG-A1J"/>
-                                        </constraints>
-                                        <state key="normal" title="Load"/>
-                                        <state key="disabled" title="Initializing"/>
-                                        <connections>
-                                            <action selector="loadBannerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7uA-Jm-DPx"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="424-rj-ygl" userLabel="Destroy Banner Button">
-                                        <rect key="frame" x="120" y="44" width="100" height="36"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="36" id="6BJ-Js-DSP"/>
-                                            <constraint firstAttribute="width" constant="100" id="ub4-zw-owL"/>
-                                        </constraints>
-                                        <state key="normal" title="Destroy"/>
-                                        <state key="disabled" title="Destroy"/>
-                                        <state key="selected" title="Show"/>
-                                        <state key="highlighted" title="Show"/>
-                                        <connections>
-                                            <action selector="destroyBannerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wEc-GR-syv"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="MAA-Bc-iLn" firstAttribute="top" secondItem="rm3-Oo-rgO" secondAttribute="top" id="Sh1-Uz-Gyf"/>
-                                    <constraint firstAttribute="bottom" secondItem="424-rj-ygl" secondAttribute="bottom" id="Tue-T4-zl3"/>
-                                    <constraint firstItem="MAA-Bc-iLn" firstAttribute="centerX" secondItem="rm3-Oo-rgO" secondAttribute="centerX" id="Y8P-Cd-onZ"/>
-                                    <constraint firstItem="DN1-DN-sO8" firstAttribute="leading" secondItem="rm3-Oo-rgO" secondAttribute="leading" id="fYr-rZ-GbM"/>
-                                    <constraint firstAttribute="trailing" secondItem="424-rj-ygl" secondAttribute="trailing" id="ffb-ih-YBz"/>
-                                    <constraint firstAttribute="bottom" secondItem="DN1-DN-sO8" secondAttribute="bottom" id="guL-oR-7f5"/>
-                                    <constraint firstAttribute="width" constant="220" id="jIv-ck-Hov"/>
-                                    <constraint firstAttribute="height" constant="80" id="kNT-QW-nrk"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dnw-Fv-bW3">
-                                <rect key="frame" x="78" y="521" width="220" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="XOQ-ks-7Xg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0qQ-sd-uAj"/>
-                            <constraint firstItem="rm3-Oo-rgO" firstAttribute="top" secondItem="XOQ-ks-7Xg" secondAttribute="bottom" constant="50" id="1NH-41-OYT"/>
-                            <constraint firstItem="XOQ-ks-7Xg" firstAttribute="top" secondItem="xQF-eI-Igz" secondAttribute="bottom" constant="50" id="1Pb-JT-1c9"/>
-                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Dl-sK-gxo"/>
-                            <constraint firstItem="Dnw-Fv-bW3" firstAttribute="top" secondItem="rm3-Oo-rgO" secondAttribute="bottom" constant="70" id="7MO-1L-K6n"/>
-                            <constraint firstItem="WUr-4g-cHl" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="Dtn-jb-wLu"/>
-                            <constraint firstItem="rm3-Oo-rgO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P5o-NS-Nby"/>
-                            <constraint firstItem="xQF-eI-Igz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Wxq-Cz-4VM"/>
-                            <constraint firstItem="WUr-4g-cHl" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fjI-hK-kEr"/>
-                            <constraint firstItem="xQF-eI-Igz" firstAttribute="top" secondItem="WUr-4g-cHl" secondAttribute="bottom" constant="50" id="vIg-Qg-oKh"/>
+                            <constraint firstItem="2mE-MQ-57a" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="DGM-qA-eNS"/>
+                            <constraint firstAttribute="trailing" secondItem="2mE-MQ-57a" secondAttribute="trailing" constant="20" id="EFz-VU-KVL"/>
+                            <constraint firstAttribute="bottom" secondItem="2mE-MQ-57a" secondAttribute="bottom" constant="20" id="IdN-rg-rQw"/>
+                            <constraint firstItem="2mE-MQ-57a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="yKo-oA-8Ua"/>
                         </constraints>
                     </view>
                     <connections>

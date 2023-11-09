@@ -51,13 +51,6 @@
 
 - (void)setupUI {
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
-    
-    for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]) {
-        button.layer.cornerRadius = 17.0f;
-        button.layer.masksToBounds = YES;
-        button.layer.borderWidth = 3.5f;
-        button.layer.borderColor = [[UIColor grayColor] CGColor];
-    }
 }
 
 - (void)setupIronSourceSdk {
