@@ -13,9 +13,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RewardedVideoDelegate : NSObject<LevelPlayRewardedVideoDelegate>
 
-@property (nonatomic, weak) DemoViewController *demoViewController;
+@property (weak, nonatomic) id<DemoViewControllerDelegate> delegate;
 
-- (instancetype)initWithDemoViewController:(DemoViewController *)viewController;
+- (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate;
 
 @end
 

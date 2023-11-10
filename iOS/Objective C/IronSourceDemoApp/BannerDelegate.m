@@ -9,13 +9,11 @@
 
 @implementation BannerDelegate
 
-- (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
+- (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate {
     self = [super init];
-
     if (self) {
-        _demoViewController = viewController;
+        _delegate = delegate;
     }
-
     return self;
 }
 
@@ -27,8 +25,9 @@
      withAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.demoViewController setAndBindBannerView:bannerView];
-    [self.demoViewController setEnablement:YES forButton:self.demoViewController.destroyBannerButton];
+    [self.delegate setAndBindBannerView:bannerView];
+    [self.delegate performActionForButton:DestroyBanner
+                           withEnablement:YES];
 }
 
 /**

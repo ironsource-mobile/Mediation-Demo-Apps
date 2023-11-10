@@ -8,7 +8,23 @@
 #import <UIKit/UIKit.h>
 #import <IronSource/IronSource.h>
 
-@interface DemoViewController : UIViewController
+typedef NS_ENUM(NSInteger, ButtonAction) {
+    ShowRewardedVideo,
+    LoadInterstitial,
+    ShowInterstitial,
+    LoadBanner,
+    DestroyBanner
+};
+
+@protocol DemoViewControllerDelegate <NSObject>
+- (void)performActionForButton:(ButtonAction)action 
+                withEnablement:(BOOL)enable;
+- (void)setAndBindBannerView:(ISBannerView *)bannerView;
+- (void)showVideoRewardMessage;
+@end
+
+
+@interface DemoViewController : UIViewController <DemoViewControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *showRewardedVideoButton;
 
@@ -19,10 +35,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
 
 @property (weak, nonatomic) IBOutlet UILabel  *versionLabel;
-
-- (void)setAndBindBannerView:(ISBannerView *)bannerView;
-- (void)setEnablement:(BOOL)enablement forButton:(UIButton *)button;
-- (void)showVideoRewardMessage;
 
 @end
 

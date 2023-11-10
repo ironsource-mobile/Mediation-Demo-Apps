@@ -75,13 +75,13 @@
     // to be able to enable/disable buttons to match ad availability.
     
     
-    self.rewardedVideoDelegate = [[RewardedVideoDelegate alloc] initWithDemoViewController:self];
+    self.rewardedVideoDelegate = [[RewardedVideoDelegate alloc] initWithDelegate:self];
     [IronSource setLevelPlayRewardedVideoDelegate:self.rewardedVideoDelegate];
     
-    self.interstitialDelegate = [[InterstitialDelegate alloc] initWithDemoViewController:self];
+    self.interstitialDelegate = [[InterstitialDelegate alloc] initWithDelegate:self];
     [IronSource setLevelPlayInterstitialDelegate:self.interstitialDelegate];
     
-    self.bannerDelegate = [[BannerDelegate alloc] initWithDemoViewController:self];
+    self.bannerDelegate = [[BannerDelegate alloc] initWithDelegate:self];
     [IronSource setLevelPlayBannerDelegate:self.bannerDelegate];
     
     self.impressionDataDelegate = [[ImpressionDataDelegate alloc] init];
@@ -96,7 +96,7 @@
     
     [IronSource setUserId:userId];
     
-    self.initializationDelegate = [[InitializationDelegate alloc] initWithDemoViewController:self];
+    self.initializationDelegate = [[InitializationDelegate alloc] initWithDelegate:self];
     
     // After setting the delegates you can go ahead and initialize the SDK. Once the iniitaliztion callback is return you can start loading your ads
     [IronSource initWithAppKey:kAppKey delegate:self.initializationDelegate];
@@ -155,11 +155,43 @@
             [IronSource destroyBanner:self.bannerView];
             self.bannerView = nil;
         }
-        [self setEnablement:NO forButton:self.destroyBannerButton];
+        [self performActionForButton:DestroyBanner
+                      withEnablement:NO];
     });
 }
 
-#pragma mark Helper Methods
+#pragma mark DemoViewControllerDelegate
+
+- (void)performActionForButton:(ButtonAction)action
+                withEnablement:(BOOL)enable {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIButton *buttonToModify;
+        
+        switch (action) {
+            case ShowRewardedVideo:
+                buttonToModify = self.showRewardedVideoButton;
+                break;
+            case LoadInterstitial:
+                buttonToModify = self.loadInterstitialButton;
+                break;
+            case ShowInterstitial:
+                buttonToModify = self.showInterstitialButton;
+                break;
+            case LoadBanner:
+                buttonToModify = self.loadBannerButton;
+                break;
+            case DestroyBanner:
+                buttonToModify = self.destroyBannerButton;
+                break;
+        }
+
+        if (buttonToModify) {
+            [buttonToModify setEnabled:enable];
+            UIColor *borderColor = enable ? [UIColor blueColor] : [UIColor grayColor];
+            buttonToModify.layer.borderColor = borderColor.CGColor;
+        }
+    });
+}
 
 - (void)setAndBindBannerView:(ISBannerView *)bannerView {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -177,14 +209,6 @@
         NSLayoutConstraint *width = [self.bannerView.widthAnchor constraintEqualToConstant:bannerView.frame.size.width];
         NSLayoutConstraint *height = [self.bannerView.heightAnchor constraintEqualToConstant:bannerView.frame.size.height];
         [NSLayoutConstraint activateConstraints:@[centerX, bottom, width, height]];
-    });
-}
-
-- (void)setEnablement:(BOOL)enablement forButton:(UIButton *)button {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [button setEnabled:enablement];
-        UIColor *borderColor = enablement ? [UIColor blueColor] : [UIColor grayColor];
-        button.layer.borderColor = borderColor.CGColor;
     });
 }
 
@@ -206,17 +230,6 @@
         
         self.rewardedVideoPlacementInfo = nil;
     }
-}
-
-- (UIImage *)imageFromColor:(UIColor *)color {
-    CGRect rect = CGRectMake(0, 0, 1, 1);
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0);
-    [color setFill];
-    UIRectFill(rect);
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-
-    return image;
 }
 
 @end

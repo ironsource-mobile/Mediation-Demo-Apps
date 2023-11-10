@@ -9,13 +9,11 @@
 
 @implementation InterstitialDelegate
 
-- (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
+- (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate {
     self = [super init];
-
     if (self) {
-        _demoViewController = viewController;
+        _delegate = delegate;
     }
-
     return self;
 }
 
@@ -26,7 +24,8 @@
 - (void)didLoadWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.demoViewController setEnablement:YES forButton:self.demoViewController.showInterstitialButton];
+    [self.delegate performActionForButton:ShowInterstitial
+                           withEnablement:YES];
 }
 
 /**
@@ -36,7 +35,8 @@
 - (void)didFailToLoadWithError:(NSError *)error {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.demoViewController setEnablement:NO forButton:self.demoViewController.showInterstitialButton];
+    [self.delegate performActionForButton:ShowInterstitial
+                           withEnablement:NO];
 }
 
 /**
@@ -46,7 +46,8 @@
 - (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.demoViewController setEnablement:NO forButton:self.demoViewController.showInterstitialButton];
+    [self.delegate performActionForButton:ShowInterstitial
+                           withEnablement:NO];
 }
 
 /**

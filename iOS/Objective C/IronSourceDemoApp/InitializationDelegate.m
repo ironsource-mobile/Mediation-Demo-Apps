@@ -9,22 +9,21 @@
 
 @implementation InitializationDelegate
 
-- (instancetype)initWithDemoViewController:(DemoViewController *)viewController {
+- (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate {
     self = [super init];
-
     if (self) {
-        _demoViewController = viewController;
+        _delegate = delegate;
     }
-
     return self;
 }
 
 - (void)initializationDidComplete {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.demoViewController setEnablement:YES forButton:self.demoViewController.loadInterstitialButton];
-    
-    [self.demoViewController setEnablement:YES forButton:self.demoViewController.loadBannerButton];
+    [self.delegate performActionForButton:LoadInterstitial
+                           withEnablement:YES];
+    [self.delegate performActionForButton:LoadBanner
+                           withEnablement:YES];
 }
 
 @end
