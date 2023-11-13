@@ -25,14 +25,6 @@ public class ShowInterstitialScript : MonoBehaviour
         ShowText = GameObject.Find("ShowInterstitialText");
         ShowText.GetComponent<UnityEngine.UI.Text>().color = UnityEngine.Color.red;
 
-        // Add Interstitial DemandOnly Events
-        IronSourceEvents.onInterstitialAdReadyDemandOnlyEvent += InterstitialAdReadyDemandOnlyEvent;
-        IronSourceEvents.onInterstitialAdLoadFailedDemandOnlyEvent += InterstitialAdLoadFailedDemandOnlyEvent;
-        IronSourceEvents.onInterstitialAdShowFailedDemandOnlyEvent += InterstitialAdShowFailedDemandOnlyEvent;
-        IronSourceEvents.onInterstitialAdClickedDemandOnlyEvent += InterstitialAdClickedDemandOnlyEvent;
-        IronSourceEvents.onInterstitialAdOpenedDemandOnlyEvent += InterstitialAdOpenedDemandOnlyEvent;
-        IronSourceEvents.onInterstitialAdClosedDemandOnlyEvent += InterstitialAdClosedDemandOnlyEvent;
-
         //Add AdInfo Interstitial Events
         IronSourceInterstitialEvents.onAdReadyEvent += InterstitialOnAdReadyEvent;
         IronSourceInterstitialEvents.onAdLoadFailedEvent += InterstitialOnAdLoadFailed;
@@ -53,9 +45,6 @@ public class ShowInterstitialScript : MonoBehaviour
     {
         Debug.Log("unity-script: LoadInterstitialButtonClicked");
         IronSource.Agent.loadInterstitial();
-
-        //DemandOnly
-        // LoadDemandOnlyInterstitial ();
     }
 
     public void ShowInterstitialButtonClicked()
@@ -68,28 +57,6 @@ public class ShowInterstitialScript : MonoBehaviour
         else
         {
             Debug.Log("unity-script: IronSource.Agent.isInterstitialReady - False");
-        }
-
-        // DemandOnly
-        // ShowDemandOnlyInterstitial ();
-    }
-
-    void LoadDemandOnlyInterstitial()
-    {
-        Debug.Log("unity-script: LoadDemandOnlyInterstitialButtonClicked");
-        IronSource.Agent.loadISDemandOnlyInterstitial(INTERSTITIAL_INSTANCE_ID);
-    }
-
-    void ShowDemandOnlyInterstitial()
-    {
-        Debug.Log("unity-script: ShowDemandOnlyInterstitialButtonClicked");
-        if (IronSource.Agent.isISDemandOnlyInterstitialReady(INTERSTITIAL_INSTANCE_ID))
-        {
-            IronSource.Agent.showISDemandOnlyInterstitial(INTERSTITIAL_INSTANCE_ID);
-        }
-        else
-        {
-            Debug.Log("unity-script: IronSource.Agent.isISDemandOnlyInterstitialReady - False");
         }
     }
 
@@ -128,42 +95,5 @@ public class ShowInterstitialScript : MonoBehaviour
     void InterstitialOnAdClosedEvent(IronSourceAdInfo adInfo)
     {
         Debug.Log("unity-script: I got InterstitialOnAdClosedEvent With AdInfo " + adInfo);
-    }
-
-    /************* Interstitial DemandOnly Delegates *************/
-
-    void InterstitialAdReadyDemandOnlyEvent(string instanceId)
-    {
-        Debug.Log("unity-script: I got InterstitialAdReadyDemandOnlyEvent for instance: " + instanceId);
-        ShowText.GetComponent<UnityEngine.UI.Text>().color = UnityEngine.Color.blue;
-    }
-
-    void InterstitialAdLoadFailedDemandOnlyEvent(string instanceId, IronSourceError error)
-    {
-        Debug.Log("unity-script: I got InterstitialAdLoadFailedDemandOnlyEvent for instance: " + instanceId +
-                  ", error code: " + error.getCode() + ",error description : " + error.getDescription());
-    }
-
-    void InterstitialAdShowFailedDemandOnlyEvent(string instanceId, IronSourceError error)
-    {
-        Debug.Log("unity-script: I got InterstitialAdShowFailedDemandOnlyEvent for instance: " + instanceId +
-                  ", error code :  " + error.getCode() + ",error description : " + error.getDescription());
-        ShowText.GetComponent<UnityEngine.UI.Text>().color = UnityEngine.Color.red;
-    }
-
-    void InterstitialAdClickedDemandOnlyEvent(string instanceId)
-    {
-        Debug.Log("unity-script: I got InterstitialAdClickedDemandOnlyEvent for instance: " + instanceId);
-    }
-
-    void InterstitialAdOpenedDemandOnlyEvent(string instanceId)
-    {
-        Debug.Log("unity-script: I got InterstitialAdOpenedDemandOnlyEvent for instance: " + instanceId);
-        ShowText.GetComponent<UnityEngine.UI.Text>().color = UnityEngine.Color.red;
-    }
-
-    void InterstitialAdClosedDemandOnlyEvent(string instanceId)
-    {
-        Debug.Log("unity-script: I got InterstitialAdClosedDemandOnlyEvent for instance: " + instanceId);
     }
 }
