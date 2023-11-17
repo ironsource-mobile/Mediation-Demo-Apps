@@ -39,19 +39,12 @@ public class MyAppStart : MonoBehaviour
         // SDK init
         Debug.Log("unity-script: IronSource.Agent.init");
         IronSource.Agent.init(appKey);
-        //IronSource.Agent.init (appKey, IronSourceAdUnits.REWARDED_VIDEO, IronSourceAdUnits.INTERSTITIAL, IronSourceAdUnits.OFFERWALL, IronSourceAdUnits.BANNER);
-        //IronSource.Agent.initISDemandOnly (appKey, IronSourceAdUnits.REWARDED_VIDEO, IronSourceAdUnits.INTERSTITIAL);
 
         //Set User ID For Server To Server Integration
         //// IronSource.Agent.setUserId ("UserId");
 
         // Load Banner example
         IronSource.Agent.loadBanner(IronSourceBannerSize.BANNER, IronSourceBannerPosition.BOTTOM);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
     }
 
     void OnApplicationPause(bool isPaused)

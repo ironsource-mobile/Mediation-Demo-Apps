@@ -35,11 +35,6 @@ public class ShowInterstitialScript : MonoBehaviour
         IronSourceInterstitialEvents.onAdClosedEvent += InterstitialOnAdClosedEvent;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     /************* Interstitial API *************/
     public void LoadInterstitialButtonClicked()
     {

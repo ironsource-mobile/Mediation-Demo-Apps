@@ -33,11 +33,6 @@ public class ShowRewardedVideoScript : MonoBehaviour
         IronSourceRewardedVideoEvents.onAdClickedEvent += RewardedVideoOnAdClickedEvent;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-    }
-
     /************* RewardedVideo API *************/
     public void ShowRewardedVideoButtonClicked()
     {
