@@ -1,27 +1,19 @@
 using UnityEngine;
-using System;
-using System.Collections;
 
 public class ShowInterstitialScript : MonoBehaviour
 {
     GameObject InitText;
-    GameObject LoadButton;
     GameObject LoadText;
-    GameObject ShowButton;
     GameObject ShowText;
-
-    public static String INTERSTITIAL_INSTANCE_ID = "0";
 
     // Use this for initialization
     void Start()
     {
         Debug.Log("unity-script: ShowInterstitialScript Start called");
 
-        LoadButton = GameObject.Find("LoadInterstitial");
         LoadText = GameObject.Find("LoadInterstitialText");
         LoadText.GetComponent<UnityEngine.UI.Text>().color = UnityEngine.Color.blue;
 
-        ShowButton = GameObject.Find("ShowInterstitial");
         ShowText = GameObject.Find("ShowInterstitialText");
         ShowText.GetComponent<UnityEngine.UI.Text>().color = UnityEngine.Color.red;
 

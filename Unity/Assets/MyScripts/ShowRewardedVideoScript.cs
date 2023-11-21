@@ -1,27 +1,18 @@
 using UnityEngine;
-using System;
-using System.Collections;
 
 public class ShowRewardedVideoScript : MonoBehaviour
 {
     GameObject InitText;
-    GameObject ShowButton;
     GameObject ShowText;
-    GameObject AmountText;
     int userTotalCredits = 0;
-
-    public static String REWARDED_INSTANCE_ID = "0";
 
     // Use this for initialization
     void Start()
     {
         Debug.Log("unity-script: ShowRewardedVideoScript Start called");
-
-        ShowButton = GameObject.Find("ShowRewardedVideo");
+        
         ShowText = GameObject.Find("ShowRewardedVideoText");
         ShowText.GetComponent<UnityEngine.UI.Text>().color = UnityEngine.Color.red;
-
-        AmountText = GameObject.Find("RVAmount");
 
         //Add AdInfo Rewarded Video Events
         IronSourceRewardedVideoEvents.onAdOpenedEvent += RewardedVideoOnAdOpenedEvent;
