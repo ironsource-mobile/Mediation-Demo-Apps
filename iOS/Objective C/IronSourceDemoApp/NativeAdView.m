@@ -11,12 +11,17 @@
 @implementation NativeAdView
 
 - (instancetype)init {
-    UINib *nib = [UINib nibWithNibName:@"LevelPlayNativeAdView" bundle:[NSBundle mainBundle]];
-    NSArray *nibContents = [nib instantiateWithOwner:nil options:nil];
-    self = (NativeAdView *)[nibContents firstObject];
-    [self configDeleteButton];
-    self.translatesAutoresizingMaskIntoConstraints = NO;
-    
+    self = [super init];
+    if (self) {
+        UINib *nib = [UINib nibWithNibName:@"LevelPlayNativeAdView" bundle:[NSBundle mainBundle]];
+        NSArray *nibContents = [nib instantiateWithOwner:nil options:nil];
+        _isNativeAdView = (ISNativeAdView *)[nibContents firstObject];
+        [self configDeleteButton];
+        
+        // Avoid conflicts of constraints
+        self.translatesAutoresizingMaskIntoConstraints = NO;
+        _isNativeAdView.translatesAutoresizingMaskIntoConstraints = NO;
+    }
     return self;
 }
 
@@ -30,14 +35,12 @@
     [_deleteButton addTarget:self action:@selector(deleteButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
     _deleteButton.translatesAutoresizingMaskIntoConstraints = NO;
     
-    _topView = self.subviews[0];
-    [_topView addSubview:_deleteButton];
-
+    [_isNativeAdView addSubview:_deleteButton];
     [NSLayoutConstraint activateConstraints:@[
         [_deleteButton.widthAnchor constraintEqualToConstant:30],
-        [_deleteButton.heightAnchor constraintEqualToAnchor:_topView.heightAnchor],
-        [_deleteButton.centerYAnchor constraintEqualToAnchor:_topView.centerYAnchor],
-        [_deleteButton.trailingAnchor constraintEqualToAnchor:_topView.trailingAnchor],
+        [_deleteButton.heightAnchor constraintEqualToConstant:30],
+        [_deleteButton.topAnchor constraintEqualToAnchor:_isNativeAdView.topAnchor],
+        [_deleteButton.trailingAnchor constraintEqualToAnchor:_isNativeAdView.trailingAnchor],
     ]];
 }
 
@@ -46,32 +49,40 @@
     _levelPlayNativeAd = nativeAd;
     
     if (_levelPlayNativeAd.icon.image) {
-        self.adAppIcon.image = _levelPlayNativeAd.icon.image;
+        _isNativeAdView.adAppIcon.image = _levelPlayNativeAd.icon.image;
     } else {
-        [self.adAppIcon removeFromSuperview];
+        [_isNativeAdView.adAppIcon removeFromSuperview];
     }
     
     if (_levelPlayNativeAd.title) {
-        self.adTitleView.text = _levelPlayNativeAd.title;
+        _isNativeAdView.adTitleView.text = _levelPlayNativeAd.title;
     }
     
     if (_levelPlayNativeAd.advertiser) {
-        self.adAdvertiserView.text = _levelPlayNativeAd.advertiser;
+        _isNativeAdView.adAdvertiserView.text = _levelPlayNativeAd.advertiser;
     }
     
     if (_levelPlayNativeAd.body) {
-        self.adBodyView.text = _levelPlayNativeAd.body;
+        _isNativeAdView.adBodyView.text = _levelPlayNativeAd.body;
     }
     
     if (_levelPlayNativeAd.callToAction) {
-        [self.adCallToActionView setTitle:_levelPlayNativeAd.callToAction forState:UIControlStateNormal];
-        self.adCallToActionView.userInteractionEnabled = NO;
+        [_isNativeAdView.adCallToActionView setTitle:_levelPlayNativeAd.callToAction forState:UIControlStateNormal];
+        _isNativeAdView.adCallToActionView.userInteractionEnabled = NO;
     }
     
-    [self registerNativeAdViews:_levelPlayNativeAd];
+    [_isNativeAdView registerNativeAdViews:_levelPlayNativeAd];
     
     // Bring the delete button to the front of the layer
-    [self bringSubviewToFront:_topView];
+    [_isNativeAdView bringSubviewToFront:_deleteButton];
+    
+    [self addSubview:_isNativeAdView];
+    // Constraints between self and _isNativeAdView
+    [NSLayoutConstraint activateConstraints:@[
+        [_isNativeAdView.widthAnchor constraintEqualToAnchor:self.widthAnchor],
+        [self.heightAnchor constraintEqualToAnchor:_isNativeAdView.heightAnchor],
+        [_isNativeAdView.centerXAnchor constraintEqualToAnchor:self.centerXAnchor],
+    ]];
 }
 
 // Remove the native ad from the table view.

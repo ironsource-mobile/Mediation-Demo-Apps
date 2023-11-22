@@ -14,10 +14,11 @@
 - (void)nativeAdViewDeleteButtonTapped:(NativeAdView *)adView;
 @end
 
-@interface NativeAdView : ISNativeAdView
+@interface NativeAdView : UIView
 
 @property (nonatomic, weak) id<NativeAdViewDelegate> delegate;
 
+@property (nonatomic, strong) ISNativeAdView *isNativeAdView;
 @property (nonatomic, strong) LevelPlayNativeAd *levelPlayNativeAd;
 - (void)loadNativeAdLayout: (LevelPlayNativeAd *)nativeAd;
 
