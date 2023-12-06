@@ -17,8 +17,8 @@ typedef NS_ENUM(NSInteger, ButtonAction) {
 };
 
 @protocol DemoViewControllerDelegate <NSObject>
-- (void)performActionForButton:(ButtonAction)action 
-                withEnablement:(BOOL)enable;
+- (void)setEnablementForButton:(ButtonAction)action 
+                        enable:(BOOL)enable;
 - (void)setAndBindBannerView:(ISBannerView *)bannerView;
 - (void)showVideoRewardMessage;
 @end

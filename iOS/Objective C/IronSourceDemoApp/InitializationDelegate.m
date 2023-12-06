@@ -20,10 +20,10 @@
 - (void)initializationDidComplete {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate performActionForButton:LoadInterstitial
-                           withEnablement:YES];
-    [self.delegate performActionForButton:LoadBanner
-                           withEnablement:YES];
+    [self.delegate setEnablementForButton:LoadInterstitial
+                                   enable:YES];
+    [self.delegate setEnablementForButton:LoadBanner
+                                   enable:YES];
 }
 
 @end

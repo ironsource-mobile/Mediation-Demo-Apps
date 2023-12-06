@@ -26,8 +26,8 @@
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
     [self.delegate setAndBindBannerView:bannerView];
-    [self.delegate performActionForButton:DestroyBanner
-                           withEnablement:YES];
+    [self.delegate setEnablementForButton:DestroyBanner
+                           enable:YES];
 }
 
 /**

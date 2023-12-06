@@ -53,10 +53,9 @@
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
     
     for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]) {
-
-        button.layer.cornerRadius = 5.0f;
+        button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
-        button.layer.borderWidth = 2.0f;
+        button.layer.borderWidth = 3.5f;
         button.layer.borderColor = [[UIColor grayColor] CGColor];
         button.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 20);
     }
@@ -155,15 +154,15 @@
             [IronSource destroyBanner:self.bannerView];
             self.bannerView = nil;
         }
-        [self performActionForButton:DestroyBanner
-                      withEnablement:NO];
+        [self setEnablementForButton:DestroyBanner
+                              enable:NO];
     });
 }
 
 #pragma mark DemoViewControllerDelegate
 
-- (void)performActionForButton:(ButtonAction)action
-                withEnablement:(BOOL)enable {
+- (void)setEnablementForButton:(ButtonAction)action
+                        enable:(BOOL)enable {
     dispatch_async(dispatch_get_main_queue(), ^{
         UIButton *buttonToModify;
         
@@ -187,8 +186,6 @@
 
         if (buttonToModify) {
             [buttonToModify setEnabled:enable];
-            UIColor *borderColor = enable ? [UIColor blueColor] : [UIColor grayColor];
-            buttonToModify.layer.borderColor = borderColor.CGColor;
         }
     });
 }

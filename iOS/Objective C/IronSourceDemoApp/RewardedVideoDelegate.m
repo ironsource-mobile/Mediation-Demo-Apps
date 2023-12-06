@@ -25,8 +25,8 @@
 - (void)hasAvailableAdWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate performActionForButton:ShowRewardedVideo
-                           withEnablement:YES];
+    [self.delegate setEnablementForButton:ShowRewardedVideo
+                                   enable:YES];
 }
 
 /**
@@ -35,8 +35,8 @@
 - (void)hasNoAvailableAd {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate performActionForButton:ShowRewardedVideo
-                           withEnablement:NO];
+    [self.delegate setEnablementForButton:ShowRewardedVideo
+                                   enable:NO];
 }
 
 /**
@@ -46,8 +46,8 @@
 - (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate performActionForButton:ShowRewardedVideo
-                           withEnablement:NO];
+    [self.delegate setEnablementForButton:ShowRewardedVideo
+                                   enable:NO];
 }
 
 /**

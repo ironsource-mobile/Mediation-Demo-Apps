@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="2mE-MQ-57a">
-                                <rect key="frame" x="20" y="20" width="335" height="627"/>
+                                <rect key="frame" x="20" y="40" width="335" height="342.5"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ironSourceLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
                                         <rect key="frame" x="65" y="0.0" width="205" height="43.5"/>
@@ -29,7 +29,7 @@
                                         </constraints>
                                     </imageView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xyZ-In-h0k" userLabel="Rewarded Video Stack View">
-                                        <rect key="frame" x="105.5" y="136" width="124.5" height="60.5"/>
+                                        <rect key="frame" x="105.5" y="70" width="124.5" height="60.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rewarded Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Szc-xC-13i" userLabel="Rewarded Video Label">
                                                 <rect key="frame" x="0.0" y="0.0" width="124.5" height="24.5"/>
@@ -57,7 +57,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Pri-6p-Xgv" userLabel="Interstitial  Stack View">
-                                        <rect key="frame" x="88.5" y="289" width="158" height="66.5"/>
+                                        <rect key="frame" x="88.5" y="157" width="158" height="66.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Interstitial" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cO-cG-V8Z" userLabel="Interstitial Label">
                                                 <rect key="frame" x="41.5" y="0.0" width="75" height="20.5"/>
@@ -104,7 +104,7 @@
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Sx0-VM-jh2" userLabel="Banner Stack View">
-                                        <rect key="frame" x="88.5" y="447.5" width="158" height="66.5"/>
+                                        <rect key="frame" x="88.5" y="249.5" width="158" height="66.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banner" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAA-Bc-iLn" userLabel="Banner Label">
                                                 <rect key="frame" x="52" y="0.0" width="54" height="20.5"/>
@@ -151,7 +151,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Version" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dnw-Fv-bW3">
-                                        <rect key="frame" x="139" y="607" width="57" height="20"/>
+                                        <rect key="frame" x="139" y="342" width="57" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" systemColor="darkTextColor"/>
@@ -162,7 +162,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="2mE-MQ-57a" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="DGM-qA-eNS"/>
+                            <constraint firstItem="2mE-MQ-57a" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="DGM-qA-eNS"/>
                             <constraint firstAttribute="trailing" secondItem="2mE-MQ-57a" secondAttribute="trailing" constant="20" id="EFz-VU-KVL"/>
                             <constraint firstAttribute="bottom" secondItem="2mE-MQ-57a" secondAttribute="bottom" constant="20" id="IdN-rg-rQw"/>
                             <constraint firstItem="2mE-MQ-57a" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="yKo-oA-8Ua"/>

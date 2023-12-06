@@ -24,8 +24,8 @@
 - (void)didLoadWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate performActionForButton:ShowInterstitial
-                           withEnablement:YES];
+    [self.delegate setEnablementForButton:ShowInterstitial
+                                   enable:YES];
 }
 
 /**
@@ -35,8 +35,8 @@
 - (void)didFailToLoadWithError:(NSError *)error {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate performActionForButton:ShowInterstitial
-                           withEnablement:NO];
+    [self.delegate setEnablementForButton:ShowInterstitial
+                                   enable:NO];
 }
 
 /**
@@ -46,8 +46,8 @@
 - (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
     NSLog(@"%s", __PRETTY_FUNCTION__);
     
-    [self.delegate performActionForButton:ShowInterstitial
-                           withEnablement:NO];
+    [self.delegate setEnablementForButton:ShowInterstitial
+                                   enable:NO];
 }
 
 /**
