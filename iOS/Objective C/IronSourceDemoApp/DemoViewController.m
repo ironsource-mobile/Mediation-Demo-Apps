@@ -55,7 +55,7 @@
     for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
-        button.layer.borderWidth = 3.5f;
+        button.layer.borderWidth = 2.5f;
         button.layer.borderColor = [[UIColor grayColor] CGColor];
         button.contentEdgeInsets = UIEdgeInsetsMake(0, 20, 0, 20);
     }
