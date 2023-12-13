@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+ext {
+    sdkVersion = "7.6.1"
+}
+
 android {
     compileSdkVersion 33
     buildToolsVersion '30.0.0'
@@ -37,7 +41,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     //Add IronSource Mediation SDK dependency.
-    implementation 'com.ironsource.sdk:mediationsdk:7.6.0'
+    implementation "com.ironsource.sdk:mediationsdk:$sdkVersion"
 
     //Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
     //Make sure you also configure the AdNetworks in your dashboard.
