@@ -42,10 +42,10 @@ export GIT_SHA="`git log --pretty=format:'%h' -n 1`"
 
 
 # Checkout to master
-#bash ./scripts/update-master.sh
+bash ./scripts/update-master.sh
 
 # Create release branch checkout
-#git checkout -b $RELEASE_BRANCH
+git checkout -b $RELEASE_BRANCH
 
 # Update SDK version
 setSdkVersion "$SDK_VERSION" ./Android/Java/app/build.gradle
@@ -54,4 +54,4 @@ setSdkVersion "$SDK_VERSION" ./Android/Kotlin/app/build.gradle
 # Commit changes
 git add .
 git commit -m "Release: $RELEASE_BRANCH commit: $GIT_SHA"
-#git push origin $RELEASE_BRANCH
+git push origin $RELEASE_BRANCH
