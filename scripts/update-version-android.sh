@@ -31,6 +31,7 @@ function setSdkVersion() {
 
 if [ -z "$1" ]; then
     echo "Please provide a version number for release."
+    echo "The use is: ./scripts/update-version-android.sh 7.6.1"
     exit 1
 fi
 
