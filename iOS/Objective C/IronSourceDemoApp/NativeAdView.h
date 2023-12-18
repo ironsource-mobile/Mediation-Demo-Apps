@@ -1,0 +1,29 @@
+//
+//  NativeAdView.h
+//  IronSourceDemoApp
+//
+//  Created by Luga Wang on 9/15/23.
+//  Copyright © 2023 supersonic. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import <IronSource/IronSource.h>
+
+@class NativeAdView;
+@protocol NativeAdViewDelegate <NSObject>
+- (void)nativeAdViewDeleteButtonTapped:(NativeAdView *)adView;
+@end
+
+@interface NativeAdView : UIView
+
+@property (nonatomic, weak) id<NativeAdViewDelegate> delegate;
+
+@property (nonatomic, strong) ISNativeAdView *isNativeAdView;
+@property (nonatomic, strong) LevelPlayNativeAd *levelPlayNativeAd;
+- (void)loadNativeAdLayout: (LevelPlayNativeAd *)nativeAd;
+
+@property (nonatomic, strong) UILabel *adBadge;
+@property (nonatomic, strong) UIButton *deleteButton;
+@property (nonatomic, strong) UIView *topView;
+
+@end

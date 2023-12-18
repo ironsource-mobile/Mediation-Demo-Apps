@@ -7,9 +7,11 @@
 
 #import "ViewController.h"
 #import <IronSource/IronSource.h>
+#import "NativeAdViewController.h"
 
 #define USERID @"demoapp"
-#define APPKEY @"8545d445"
+//#define APPKEY @"8545d445"
+#define APPKEY @"9c5d9d55"
 
 @interface ViewController () <ISRewardedVideoDelegate ,ISInterstitialDelegate ,ISOfferwallDelegate ,ISBannerDelegate,ISImpressionDataDelegate>
 
@@ -17,10 +19,12 @@
 @property (weak, nonatomic) IBOutlet UIButton *showOWButton;
 @property (weak, nonatomic) IBOutlet UIButton *showISButton;
 @property (weak, nonatomic) IBOutlet UIButton *loadISButton;
+@property (weak, nonatomic) IBOutlet UIButton *nativeAdButton;
 @property (weak, nonatomic) IBOutlet UILabel  *versionLabel;
 
 @property (nonatomic, strong) ISPlacementInfo   *rvPlacementInfo;
 @property (nonatomic, strong) ISBannerView      *bannerView;
+@property (nonatomic, strong) NativeAdViewController *nativeAdViewController;
 @end
 
 @implementation ViewController
@@ -37,7 +41,7 @@
     // UI setup
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
     
-    for (UIButton *button in @[self.showISButton, self.showOWButton, self.showRVButton, self.loadISButton]) {
+    for (UIButton *button in @[self.showISButton, self.showOWButton, self.showRVButton, self.loadISButton, self.nativeAdButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 3.5f;
@@ -71,9 +75,13 @@
     
     [IronSource initWithAppKey:APPKEY];
     // To initialize specific ad units:
-    // [IronSource initWithAppKey:APPKEY adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_OFFERWALL, IS_BANNER]];
+    // [IronSource initWithAppKey:APPKEY adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_OFFERWALL, IS_BANNER, IS_NATIVE_AD]];
     
     // Scroll down the file to find out what happens when you click a button...
+    
+    // Native Ad Button will lead to a new ViewController demonstrating Native Ads.
+    UIStoryboard *storyboard = self.storyboard;
+    self.nativeAdViewController = [storyboard instantiateViewControllerWithIdentifier:@"NativeAdViewController"];
     
     /* 
      * Banner integration
@@ -144,6 +152,11 @@
         }
     });
 }
+
+- (IBAction)nativeAdButtonTapped:(id)sender {
+    [self.navigationController pushViewController:_nativeAdViewController animated:YES];
+}
+
 #pragma mark - Rewarded Video Delegate Functions
 
 // This method lets you know whether or not there is a video
