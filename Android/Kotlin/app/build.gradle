@@ -4,7 +4,7 @@ plugins {
 }
 
 ext {
-    sdkVersion = "7.6.1"
+    sdkVersion = "7.7.0"
 }
 
 android {
