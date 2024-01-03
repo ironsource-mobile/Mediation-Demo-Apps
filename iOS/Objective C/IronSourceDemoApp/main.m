@@ -2,7 +2,7 @@
 //  main.m
 //  IronSourceDemoApp
 //
-//  Copyright © 2017 IronSource. All rights reserved.
+//  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
