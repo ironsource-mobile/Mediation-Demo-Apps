@@ -428,7 +428,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
-					"-Wl,-no_warn_duplicate_libraries",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ironsrcmobile.IronSourceDemoApp;
 				PRODUCT_NAME = IronSourceDemoApp;
@@ -454,7 +453,6 @@
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
-					"-Wl,-no_warn_duplicate_libraries",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ironsrcmobile.IronSourceDemoApp;
 				PRODUCT_NAME = IronSourceDemoApp;
