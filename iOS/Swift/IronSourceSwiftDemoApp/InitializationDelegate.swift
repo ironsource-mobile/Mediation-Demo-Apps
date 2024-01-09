@@ -17,7 +17,7 @@ class InitializationDelegate: NSObject, ISInitializationDelegate {
     }
     
     /**
-     Called after the Mediation successfully complets its initialization
+     Called after the Mediation successfully completes its initialization
      */
     func initializationDidComplete() {
         print("InitializationDelegate \(#function)")

@@ -20,7 +20,7 @@
 }
 
 /**
- Called after the Mediation successfully complets its initialization
+ Called after the Mediation successfully completes its initialization
  */
 - (void)initializationDidComplete {
     logCallbackName();
