@@ -62,18 +62,18 @@ public class ShowRewardedVideoScript : MonoBehaviour
     void RewardedVideoOnAdShowFailedEvent(IronSourceError ironSourceError, IronSourceAdInfo adInfo)
     {
         Debug.Log(
-            "unity-script: I got RewardedVideoAdOpenedEvent With Error" + ironSourceError + "And AdInfo " + adInfo);
+            "unity-script: I got RewardedVideoAdOpenedEvent With Error " + ironSourceError + " And AdInfo " + adInfo);
     }
 
     void RewardedVideoOnAdRewardedEvent(IronSourcePlacement ironSourcePlacement, IronSourceAdInfo adInfo)
     {
-        Debug.Log("unity-script: I got RewardedVideoOnAdRewardedEvent With Placement" + ironSourcePlacement +
-                  "And AdInfo " + adInfo);
+        Debug.Log("unity-script: I got RewardedVideoOnAdRewardedEvent With Placement " + ironSourcePlacement +
+                  " And AdInfo " + adInfo);
     }
 
     void RewardedVideoOnAdClickedEvent(IronSourcePlacement ironSourcePlacement, IronSourceAdInfo adInfo)
     {
-        Debug.Log("unity-script: I got RewardedVideoOnAdClickedEvent With Placement" + ironSourcePlacement +
-                  "And AdInfo " + adInfo);
+        Debug.Log("unity-script: I got RewardedVideoOnAdClickedEvent With Placement " + ironSourcePlacement +
+                  " And AdInfo " + adInfo);
     }
 }

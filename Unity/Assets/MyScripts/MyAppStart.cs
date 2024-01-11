@@ -25,7 +25,7 @@ public class MyAppStart : MonoBehaviour
         Debug.Log("unity-script: IronSource.Agent.validateIntegration");
         IronSource.Agent.validateIntegration();
 
-        Debug.Log("unity-script: unity version" + IronSource.unityVersion());
+        Debug.Log("unity-script: unity version " + IronSource.unityVersion());
 
         //Add AdInfo Banner Events
         IronSourceBannerEvents.onAdLoadedEvent += BannerOnAdLoadedEvent;
