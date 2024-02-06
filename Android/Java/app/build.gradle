@@ -4,12 +4,13 @@ ext {
 }
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion '30.0.0'
+    namespace "com.ironsource.ironsourcesdkdemo"
+    compileSdkVersion 34
+    buildToolsVersion '34.0.0'
     defaultConfig {
         applicationId "com.ironsource.ironsourcesdkdemo"
         minSdkVersion 19
-        targetSdkVersion 32
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         multiDexEnabled = true
@@ -26,22 +27,24 @@ android {
     }
 }
 
-//Include IronSource maven repositories
+// Include IronSource maven repositories
 repositories {
     maven {
-        //IronSource
+        // IronSource
         url "https://android-sdk.is.com/"
     }
 }
 
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.gms:play-services-ads-identifier:18.0.1'
+    implementation 'com.google.android.gms:play-services-appset:16.0.2'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-    //Add IronSource Mediation SDK dependency.
+    // Add IronSource Mediation SDK dependency.
     implementation "com.ironsource.sdk:mediationsdk:$sdkVersion"
-    //Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
-    //Make sure you also configure the AdNetworks in your dashboard.
-    //For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
+    // Add AdNetworks adapters dependencies and matching ad networks SDKs dependencies .
+    // Make sure you also configure the AdNetworks in your dashboard.
+    // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
 }

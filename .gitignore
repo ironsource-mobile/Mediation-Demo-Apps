@@ -1,8 +1,10 @@
 .idea/
 #Android Java
-Android/Java/.gradle/*
-Android/Java/.idea/*
-Android/Java/local.properties
+/Android/Java/.gradle/*
+/Android/Java/.idea/*
+/Android/Java/app/.idea/*
+/Android/Java/app/.gradle/*
+/Android/Java/local.properties
 
 #Android Kotlin
 Android/Kotlin/.idea/*
