@@ -1,413 +1,259 @@
 package com.ironsource.ironsourcesdkdemo
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup.LayoutParams.MATCH_PARENT
+import android.widget.Button
 import android.widget.FrameLayout
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
-import com.ironsource.adapters.supersonicads.SupersonicConfig
-import com.ironsource.ironsourcesdkdemo.databinding.ActivityDemoBinding
-import com.ironsource.mediationsdk.*
-import com.ironsource.mediationsdk.impressionData.ImpressionData
-import com.ironsource.mediationsdk.impressionData.ImpressionDataListener
+import android.widget.TextView
+import androidx.multidex.BuildConfig
+import com.ironsource.mediationsdk.ISBannerSize
+import com.ironsource.mediationsdk.IronSource
+import com.ironsource.mediationsdk.IronSourceBannerLayout
 import com.ironsource.mediationsdk.integration.IntegrationHelper
-import com.ironsource.mediationsdk.logger.IronSourceError
 import com.ironsource.mediationsdk.model.Placement
-import com.ironsource.mediationsdk.sdk.*
 import com.ironsource.mediationsdk.utils.IronSourceUtils
 
-class DemoActivity : Activity(), RewardedVideoListener, OfferwallListener, InterstitialListener,ImpressionDataListener {
+
+private const val TAG = "DemoActivity"
+private const val APP_KEY = "85460dcd"
+
+class DemoActivity : Activity(), DemoActivityListener {
+
+    private lateinit var rewardedVideoShowButton: Button
+    private lateinit var interstitialLoadButton: Button
+    private lateinit var interstitialShowButton: Button
+    private lateinit var bannerLoadButton: Button
+    private lateinit var bannerDestroyButton: Button
+
+    private var bannerParentLayout: FrameLayout? = null
+    private var ironSourceBannerLayout: IronSourceBannerLayout? = null
+    private var rewardedVideoPlacementInfo: Placement? = null
 
     companion object {
-        const val APP_KEY = "85460dcd"
-        const val TAG = "DemoActivity"
+        internal fun logCallbackName(tag: String, fmt: String) {
+            Log.d(tag, String.format("%s $fmt", getMethodName()))
+        }
+
+        private fun getMethodName(): String {
+            return Thread.currentThread().stackTrace
+                .takeIf { it.size >= 5 }
+                ?.let { it[4].methodName }
+                ?: ""
+        }
     }
 
-    private lateinit var binding: ActivityDemoBinding
-
-    private var mPlacement: Placement? = null
-
+    //region Lifecycle Methods
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDemoBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        setContentView(R.layout.activity_demo)
 
-        //The integrationHelper is used to validate the integration. Remove the integrationHelper before going live!
-        IntegrationHelper.validateIntegration(this)
-        initUIElements()
-
-        val advertisingId = IronSource.getAdvertiserId(this@DemoActivity)
-        // we're using an advertisingId as the 'userId'
-        initIronSource(advertisingId)
-
-        //Network Connectivity Status
-        IronSource.shouldTrackNetworkState(this, true)
-    }
-
-
-
-    private fun initIronSource(userId: String?) {
-        // Be sure to set a listener to each product that is being initiated
-        // set the IronSource rewarded video listener
-        IronSource.setRewardedVideoListener(this)
-        // set the IronSource offerwall listener
-        IronSource.setOfferwallListener(this)
-        // set client side callbacks for the offerwall
-        SupersonicConfig.getConfigObj().clientSideCallbacks = true
-        // set the interstitial listener
-        IronSource.setInterstitialListener(this)
-        // add impression data listener
-        IronSource.addImpressionDataListener(this)
-
-        // set the IronSource user id
-        IronSource.setUserId(userId)
-        // init the IronSource SDK
-        IronSource.init(this, APP_KEY)
-        updateButtonsState()
-
-        // In order to work with IronSourceBanners you need to add Providers who support banner ad unit and uncomment next line
-         createAndloadBanner()
+        setupUI()
+        setupIronSourceSdk()
     }
 
     override fun onResume() {
         super.onResume()
         // call the IronSource onResume method
         IronSource.onResume(this)
-        updateButtonsState()
     }
 
     override fun onPause() {
         super.onPause()
         // call the IronSource onPause method
         IronSource.onPause(this)
-        updateButtonsState()
+    }
+    //endregion
+
+    //region Private Methods
+    private fun setupUI(){
+        rewardedVideoShowButton = findViewById(R.id.rv_button)
+        interstitialLoadButton = findViewById(R.id.interstitial_load_button)
+        interstitialShowButton = findViewById(R.id.interstitial_show_button)
+        bannerLoadButton = findViewById(R.id.banner_load_button)
+        bannerDestroyButton = findViewById(R.id.banner_destroy_button)
+
+        val versionTV = findViewById<TextView>(R.id.version_txt)
+        "${resources.getString(R.string.version)} ${IronSourceUtils.getSDKVersion()}".also { versionTV.text = it }
+        bannerParentLayout = findViewById(R.id.banner_footer)
     }
 
-    /**
-     * Handle the button state according to the status of the IronSource producs
-     */
-    private fun updateButtonsState() {
-        handleVideoButtonState(IronSource.isRewardedVideoAvailable())
-        handleOfferwallButtonState(IronSource.isOfferwallAvailable())
-        handleLoadInterstitialButtonState()
-        handleInterstitialShowButtonState(false)
+    private fun setupIronSourceSdk(){
+        // The integrationHelper is used to validate the integration.
+        // Remove the integrationHelper before going live!
+        if (BuildConfig.DEBUG) {
+            IntegrationHelper.validateIntegration(this)
+        }
+
+        // Before initializing any of our products (Rewarded video, Interstitial or Banner) you must set
+        // their listeners. Take a look at each of these listeners method and you will see that they each implement a product
+        // protocol. This is our way of letting you know what's going on, and if you don't set the listeners
+        // we will not be able to communicate with you.
+        // We're passing 'this' to our listeners because we want
+        // to be able to enable/disable buttons to match ad availability.
+        IronSource.setLevelPlayRewardedVideoListener(DemoRewardedVideoAdListener(this))
+        IronSource.setLevelPlayInterstitialListener(DemoInterstitialAdListener(this))
+        IronSource.addImpressionDataListener(DemoImpressionDataListener())
+
+        // After setting the listeners you can go ahead and initialize the SDK.
+        // Once the initialization callback is returned you can start loading your ads
+
+        // After setting the listeners you can go ahead and initialize the SDK.
+        // Once the initialization callback is returned you can start loading your ads
+        log("init ironSource SDK with appKey: $APP_KEY")
+        IronSource.init(this, APP_KEY, DemoInitializationListener(this))
+
+        // To initialize specific ad units:
+        // IronSource.init(this, APP_KEY, new InitializationListener(this), IronSource.AD_UNIT.REWARDED_VIDEO, IronSource.AD_UNIT.INTERSTITIAL, IronSource.AD_UNIT.BANNER);
+
+        // Scroll down the file to find out what happens when you tap a button...
+    }
+    //endregion
+
+    //region Button Handling
+    fun showRewardedVideoButtonTapped(view: View){
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if (IronSource.isRewardedVideoAvailable()) {
+            // This will present the Rewarded Video.
+
+            log("showRewardedVideo")
+            IronSource.showRewardedVideo()
+        } else {
+            // wait for the availability of rewarded video to change to true before calling show
+        }
     }
 
-    /**
-     * initialize the UI elements of the activity
-     */
-    private fun initUIElements() {
-        binding.rvButton.setOnClickListener {
-            // check if video is available
-            if (IronSource.isRewardedVideoAvailable()) //show rewarded video
-                IronSource.showRewardedVideo()
-        }
-        binding.owButton.setOnClickListener { //show the offerwall
-            if (IronSource.isOfferwallAvailable()) IronSource.showOfferwall()
-        }
-        binding.isLoadButton.setOnClickListener { IronSource.loadInterstitial() }
-        binding.isShowButton.setOnClickListener {
-            // check if interstitial is available
-            if (IronSource.isInterstitialReady()) {
-                //show the interstitial
-                IronSource.showInterstitial()
-            }
-        }
-        binding.versionTxt.text = resources.getString(R.string.version, IronSourceUtils.getSDKVersion())
+    fun loadInterstitialButtonTapped(view: View){
+        // This will load an Interstitial ad
+
+        log("loadInterstitial")
+        IronSource.loadInterstitial()
     }
 
-    /**
-     * Creates and loads IronSource Banner
-     *
-     */
-    private fun createAndloadBanner() {
+    fun showInterstitialButtonTapped(view: View){
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if (IronSource.isInterstitialReady()) {
+            // This will present the Interstitial.
+            // Unlike Rewarded Videos there are no placements.
+
+            log("showInterstitial")
+            IronSource.showInterstitial()
+        } else {
+            // load a new ad before calling show
+        }
+    }
+
+    fun loadBannerButtonTapped(view: View){
+        // call IronSource.destroyBanner() before loading a new banner
+        bannerParentLayout?.let {
+            destroyBanner()
+        }
+
         // choose banner size
+        // you can pick any banner size: ISBannerSize.BANNER, ISBannerSize.LARGE, ISBannerSize.RECTANGLE, ISBannerSize.SMART or even define a custom banner size by providing width and height
         val size = ISBannerSize.BANNER
 
-        // instantiate IronSourceBanner object, using the IronSource.createBanner API
-        val mIronSourceBannerLayout = IronSource.createBanner(this, size)
-
-        mIronSourceBannerLayout?.let {
+        // initialize IronSourceBanner object, using the IronSource.createBanner API
+        ironSourceBannerLayout = IronSource.createBanner(this, size)
+        ironSourceBannerLayout?.apply {
             // add IronSourceBanner to your container
-            val layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,
-                    FrameLayout.LayoutParams.MATCH_PARENT)
-
-            binding.bannerFooter.addView(it, 0, layoutParams)
+            val layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            bannerParentLayout?.addView(this, 0, layoutParams)
 
             // set the banner listener
-            it.bannerListener = object : BannerListener {
-                override fun onBannerAdLoaded() {
-                    Log.d(TAG, "onBannerAdLoaded")
-                    // since banner container was "gone" by default, we need to make it visible as soon as the banner is ready
-                    binding.bannerFooter.visibility = View.VISIBLE
-                }
-
-                override fun onBannerAdLoadFailed(error: IronSourceError) {
-                    Log.d(TAG, "onBannerAdLoadFailed $error")
-                }
-
-                override fun onBannerAdClicked() {
-                    Log.d(TAG, "onBannerAdClicked")
-                }
-
-                override fun onBannerAdScreenPresented() {
-                    Log.d(TAG, "onBannerAdScreenPresented")
-                }
-
-                override fun onBannerAdScreenDismissed() {
-                    Log.d(TAG, "onBannerAdScreenDismissed")
-                }
-
-                override fun onBannerAdLeftApplication() {
-                    Log.d(TAG, "onBannerAdLeftApplication")
-                }
-            }
+            levelPlayBannerListener = DemoBannerAdListener(this@DemoActivity)
 
             // load ad into the created banner
-            IronSource.loadBanner(it)
-
-        } ?: run {
-            Toast.makeText(this@DemoActivity, "IronSource.createBanner returned null", Toast.LENGTH_LONG).show()
-
+            log("loadBanner")
+            IronSource.loadBanner(this)
+        }  ?: run {
+            log("IronSource.createBanner returned null")
         }
-
-
     }
 
-    /**
-     * Set the Rewareded Video button state according to the product's state
-     *
-     * @param available if the video is available
-     */
-    private fun handleVideoButtonState(available: Boolean) {
-        val text: String
-        val color: Int
-        if (available) {
-            color = Color.BLUE
-            text = resources.getString(R.string.show) + " " + resources.getString(R.string.rv)
-        } else {
-            color = Color.BLACK
-            text = resources.getString(R.string.initializing) + " " + resources.getString(R.string.rv)
+    fun destroyBannerButtonClicked(view: View){
+        destroyBanner()
+    }
+
+    private fun destroyBanner() {
+        log("destroyBanner")
+        IronSource.destroyBanner(ironSourceBannerLayout)
+        bannerParentLayout?.removeView(ironSourceBannerLayout)
+        setBannerViewVisibility(View.GONE)
+
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
+        setEnablementForButton(DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER, false)
+    }
+    //endregion
+
+    //region Interface Handling
+
+    override fun setEnablementForButton(buttonIdentifier: DemoButtonIdentifiers, enable: Boolean) {
+        var text: String? = null
+        val color = if (enable) Color.BLUE else Color.BLACK
+        var buttonToModify: Button? = null
+
+        when (buttonIdentifier) {
+            DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER -> {
+                text =
+                    if (enable) resources.getString(R.string.show) else resources.getString(R.string.initializing)
+                buttonToModify = rewardedVideoShowButton
+            }
+
+            DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER -> buttonToModify = interstitialLoadButton
+            DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER -> buttonToModify = interstitialShowButton
+            DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER -> buttonToModify = bannerLoadButton
+            DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER -> buttonToModify = bannerDestroyButton
+            else -> {}
         }
+
+        val finalButtonToModify = buttonToModify
+        val finalText = text
+
         runOnUiThread {
-            binding.rvButton.setTextColor(color)
-            binding.rvButton.text = text
-            binding.rvButton.isEnabled = available
+            finalButtonToModify?.apply {
+                setTextColor(color)
+                finalText?.let {
+                    setText(it)
+                }
+                isEnabled = enable
+            }
         }
     }
 
-    /**
-     * Set the Rewareded Video button state according to the product's state
-     *
-     * @param available if the offerwall is available
-     */
-    private fun handleOfferwallButtonState(available: Boolean) {
-        val text: String
-        val color: Int
-        if (available) {
-            color = Color.BLUE
-            text = resources.getString(R.string.show) + " " + resources.getString(R.string.ow)
-        } else {
-            color = Color.BLACK
-            text = resources.getString(R.string.initializing) + " " + resources.getString(R.string.ow)
-        }
-        runOnUiThread {
-            binding.owButton.setTextColor(color)
-            binding.owButton.text = text
-            binding.owButton.isEnabled = available
-        }
+    override fun setBannerViewVisibility(visibility: Int){
+        bannerParentLayout?.visibility = visibility
     }
 
-    /**
-     * Set the Interstitial button state according to the product's state
-     *
-     */
-    private fun handleLoadInterstitialButtonState() {
-        Log.d(TAG, "handleInterstitialButtonState | available: true")
-        val text = resources.getString(R.string.load) + " " + resources.getString(R.string.`is`)
-        val color = Color.BLUE
-        runOnUiThread {
-            binding.isLoadButton.setTextColor(color)
-            binding.isLoadButton.text = text
-            binding.isLoadButton.isEnabled = true
-        }
+    override fun setPlacementInfo(placementInfo: Placement) {
+        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
+        rewardedVideoPlacementInfo = placementInfo
     }
 
-
-    /**
-     * Set the Show Interstitial button state according to the product's state
-     *
-     * @param available if the interstitial is available
-     */
-    private fun handleInterstitialShowButtonState(available: Boolean) {
-        val color: Int = if (available) {
-            Color.BLUE
-        } else {
-            Color.BLACK
-        }
-        runOnUiThread {
-            binding.isShowButton.setTextColor(color)
-            binding.isShowButton.isEnabled = available
-        }
-    }
-
-    // --------- IronSource Rewarded Video Listener ---------
-    override fun onRewardedVideoAdOpened() {
-        // called when the video is opened
-        Log.d(TAG, "onRewardedVideoAdOpened")
-    }
-
-    override fun onRewardedVideoAdClosed() {
-        // called when the video is closed
-        Log.d(TAG, "onRewardedVideoAdClosed")
-        // here we show a dialog to the user if he was rewarded
-        mPlacement?.let {
-            // if the user was rewarded
-            showRewardDialog(it)
-            mPlacement = null
+    override fun showRewardDialog(){
+        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+        rewardedVideoPlacementInfo?.let {
+            AlertDialog.Builder(this)
+                .setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
+                .setTitle(resources.getString(R.string.rewarded_dialog_header))
+                .setMessage("${resources.getString(R.string.rewarded_dialog_message)} ${rewardedVideoPlacementInfo!!.rewardAmount} ${rewardedVideoPlacementInfo!!.rewardName}")
+                .setCancelable(false)
+                .create()
+                .show()
         }
 
+        rewardedVideoPlacementInfo = null
+    }
+    //endregion
+
+    //region Demo Utils
+    private fun log(log: String) {
+        Log.d(TAG, log)
     }
 
-    override fun onRewardedVideoAvailabilityChanged(b: Boolean) {
-        // called when the video availbility has changed
-        Log.d(TAG, "onRewardedVideoAvailabilityChanged $b")
-        handleVideoButtonState(b)
-    }
-
-    override fun onRewardedVideoAdStarted() {
-        // called when the video has started
-        Log.d(TAG, "onRewardedVideoAdStarted")
-    }
-
-    override fun onRewardedVideoAdEnded() {
-        // called when the video has ended
-        Log.d(TAG, "onRewardedVideoAdEnded")
-    }
-
-    override fun onRewardedVideoAdRewarded(placement: Placement) {
-        // called when the video has been rewarded and a reward can be given to the user
-        Log.d(TAG, "onRewardedVideoAdRewarded $placement")
-        mPlacement = placement
-    }
-
-    override fun onRewardedVideoAdShowFailed(ironSourceError: IronSourceError) {
-        // called when the video has failed to show
-        // you can get the error data by accessing the IronSourceError object
-        // IronSourceError.getErrorCode();
-        // IronSourceError.getErrorMessage();
-        Log.d(TAG, "onRewardedVideoAdShowFailed $ironSourceError")
-    }
-
-    override fun onRewardedVideoAdClicked(placement: Placement) {}
-
-    // --------- IronSource Offerwall Listener ---------
-    override fun onOfferwallAvailable(available: Boolean) {
-        handleOfferwallButtonState(available)
-    }
-
-    override fun onOfferwallOpened() {
-        // called when the offerwall has opened
-        Log.d(TAG, "onOfferwallOpened")
-    }
-
-    override fun onOfferwallShowFailed(ironSourceError: IronSourceError) {
-        // called when the offerwall failed to show
-        // you can get the error data by accessing the IronSourceError object
-        // IronSourceError.getErrorCode();
-        // IronSourceError.getErrorMessage();
-        Log.d(TAG, "onOfferwallShowFailed $ironSourceError")
-    }
-
-    override fun onOfferwallAdCredited(credits: Int, totalCredits: Int, totalCreditsFlag: Boolean): Boolean {
-        Log.d(TAG, "onOfferwallAdCredited credits:$credits totalCredits:$totalCredits totalCreditsFlag:$totalCreditsFlag")
-        return false
-    }
-
-    override fun onGetOfferwallCreditsFailed(ironSourceError: IronSourceError) {
-        // you can get the error data by accessing the IronSourceError object
-        // IronSourceError.getErrorCode();
-        // IronSourceError.getErrorMessage();
-        Log.d(TAG, "onGetOfferwallCreditsFailed $ironSourceError")
-    }
-
-    override fun onOfferwallClosed() {
-        // called when the offerwall has closed
-        Log.d(TAG, "onOfferwallClosed")
-    }
-
-    // --------- IronSource Interstitial Listener ---------
-    override fun onInterstitialAdClicked() {
-        // called when the interstitial has been clicked
-        Log.d(TAG, "onInterstitialAdClicked")
-    }
-
-    override fun onInterstitialAdReady() {
-        // called when the interstitial is ready
-        Log.d(TAG, "onInterstitialAdReady")
-        handleInterstitialShowButtonState(true)
-    }
-
-    override fun onInterstitialAdLoadFailed(ironSourceError: IronSourceError) {
-        // called when the interstitial has failed to load
-        // you can get the error data by accessing the IronSourceError object
-        // IronSourceError.getErrorCode();
-        // IronSourceError.getErrorMessage();
-        Log.d(TAG, "onInterstitialAdLoadFailed $ironSourceError")
-        handleInterstitialShowButtonState(false)
-    }
-
-    override fun onInterstitialAdOpened() {
-        // called when the interstitial is shown
-        Log.d(TAG, "onInterstitialAdOpened")
-    }
-
-    override fun onInterstitialAdClosed() {
-        // called when the interstitial has been closed
-        Log.d(TAG, "onInterstitialAdClosed")
-        handleInterstitialShowButtonState(false)
-    }
-
-    override fun onInterstitialAdShowSucceeded() {
-        // called when the interstitial has been successfully shown
-        Log.d(TAG, "onInterstitialAdShowSucceeded")
-    }
-
-    override fun onInterstitialAdShowFailed(ironSourceError: IronSourceError) {
-        // called when the interstitial has failed to show
-        // you can get the error data by accessing the IronSourceError object
-        // IronSourceError.getErrorCode();
-        // IronSourceError.getErrorMessage();
-        Log.d(TAG, "onInterstitialAdShowFailed $ironSourceError")
-        handleInterstitialShowButtonState(false)
-    }
-
-    // --------- Impression Data Listener ---------
-
-    override fun onImpressionSuccess(impressionData: ImpressionData?) {
-        // The onImpressionSuccess will be reported when the rewarded video and interstitial ad is opened.
-        // For banners, the impression is reported on load success.
-        if (impressionData != null) {
-            Log.d(TAG, "onImpressionSuccess $impressionData")
-        }
-    }
-
-    private fun showRewardDialog(placement: Placement) {
-        val builder = AlertDialog.Builder(this@DemoActivity)
-        builder.setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
-        builder.setTitle(resources.getString(R.string.rewarded_dialog_header))
-        builder.setMessage(resources.getString(R.string.rewarded_dialog_message) + " " + placement.rewardAmount + " " + placement.rewardName)
-        builder.setCancelable(false)
-        val dialog = builder.create()
-        dialog.show()
-    }
-
-
+    //endregion
 }
-
-
-

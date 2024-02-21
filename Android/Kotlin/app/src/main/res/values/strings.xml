@@ -1,16 +1,21 @@
 <resources>
     <string name="app_name">Integration Demo</string>
-    <string name="initializing">Initializing</string>
+    <string name="initializing">Initializing…</string>
+    <string name="loading">Loading…</string>
+
     <string name="show">Show</string>
     <string name="load">Load</string>
-    <string name="rv">Rewarded Video</string>
-    <string name="ow">Offerwall</string>
-    <string name="is">Interstitial</string>
-    <string name="version">sdk version %1$s</string>
+    <string name="destroy">Destroy</string>
+
+    <string name="version">sdk version</string>
+
+    <string name="rewarded_video">Rewarded Video</string>
+    <string name="interstitial">Interstitial</string>
+    <string name="banner">Banner</string>
+
     <string name="rewarded_dialog_header">Video Rewarded</string>
     <string name="rewarded_dialog_message">You have been rewarded</string>
-
-
-
-
+    <string name="rvButtonState">rvButtonState</string>
+    <string name="isButtonState">isButtonState</string>
+    <string name="close">Close</string>
 </resources>
