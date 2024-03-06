@@ -74,7 +74,7 @@ public class DemoRewardedVideoAdListener implements LevelPlayRewardedVideoListen
     @Override
     public void onAdRewarded(Placement placement, AdInfo adInfo) {
         logCallbackName(TAG, "placement = " + placement + " | adInfo = " + adInfo);
-        listener.setPlacementInfo(placement);
+        this.listener.setPlacementInfo(placement);
     }
 
     /**

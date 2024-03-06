@@ -1,5 +1,5 @@
 //
-//  RewardedVideoDelegate.h
+//  DemoRewardedVideoAdDelegate.h
 //  IronSourceDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RewardedVideoDelegate : NSObject<LevelPlayRewardedVideoDelegate>
+@interface DemoRewardedVideoAdDelegate : NSObject<LevelPlayRewardedVideoDelegate>
 
 @property (weak, nonatomic) id<DemoViewControllerDelegate> delegate;
 

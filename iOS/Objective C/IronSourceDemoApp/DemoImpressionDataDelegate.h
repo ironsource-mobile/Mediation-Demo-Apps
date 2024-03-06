@@ -1,5 +1,5 @@
 //
-//  ImpressionDataDelegate.h
+//  DemoImpressionDataDelegate.h
 //  IronSourceDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ImpressionDataDelegate : NSObject<ISImpressionDataDelegate>
+@interface DemoImpressionDataDelegate : NSObject<ISImpressionDataDelegate>
 
 @end
 

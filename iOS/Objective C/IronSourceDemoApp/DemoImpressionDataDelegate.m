@@ -1,13 +1,13 @@
 //
-//  ImpressionDataDelegate.m
+//  DemoImpressionDataDelegate.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
 
-#import "ImpressionDataDelegate.h"
+#import "DemoImpressionDataDelegate.h"
 
-@implementation ImpressionDataDelegate
+@implementation DemoImpressionDataDelegate
 
 /**
  Called when the ad was displayed successfully and the impression data was recorded

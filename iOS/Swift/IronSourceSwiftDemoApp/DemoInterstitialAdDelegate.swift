@@ -1,5 +1,5 @@
 //
-//  InterstitialDelegate.swift
+//  DemoInterstitialAdDelegate.swift
 //  IronSourceSwiftDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
@@ -8,7 +8,7 @@
 import Foundation
 import IronSource
 
-class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
+class DemoInterstitialAdDelegate: NSObject, LevelPlayInterstitialDelegate {
     
     weak var delegate: DemoViewControllerDelegate?
 
@@ -21,8 +21,7 @@ class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
      @param adInfo The info of the ad.
      */
     func didLoad(with adInfo: ISAdInfo) {
-        logCallbackName()
-        
+        logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
         self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: true)
     }
     
@@ -31,8 +30,7 @@ class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
      @param error The reason for the error
      */
     func didFailToLoadWithError(_ error: Error!) {
-        logCallbackName(string: #function + String(describing: error.self))
-        
+        logCallbackName(string: "\(#function) error = \(String(describing:error.self))")
         self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: false)
     }
     
@@ -42,8 +40,7 @@ class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
      @param adInfo The info of the ad.
      */
     func didOpen(with adInfo: ISAdInfo!) {
-        logCallbackName()
-        
+        logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
         self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: false)
     }
     
@@ -54,7 +51,7 @@ class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
      @param adInfo The info of the ad.
      */
     func didShow(with adInfo: ISAdInfo!) {
-        logCallbackName()
+        logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
     
     /**
@@ -63,7 +60,7 @@ class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
      @param adInfo The info of the ad.
      */
     func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
-        logCallbackName(string: #function + String(describing: error.self))
+        logCallbackName(string: "\(#function) error = \(String(describing:error.self)) | adInfo =  \(String(describing:adInfo.self))")
     }
     
     /**
@@ -71,7 +68,7 @@ class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
      @param adInfo The info of the ad.
      */
     func didClick(with adInfo: ISAdInfo!) {
-        logCallbackName()
+        logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
     
     /**
@@ -79,12 +76,12 @@ class InterstitialDelegate: NSObject, LevelPlayInterstitialDelegate {
      @param adInfo The info of the ad.
      */
     func didClose(with adInfo: ISAdInfo!) {
-        logCallbackName()
+        logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
     
     //MARK: Helper Method
     
     func logCallbackName(string: String = #function) {
-        print("InterstitialDelegate " + string)
+        print("DemoInterstitialAdDelegate \(string)")
     }
 }

@@ -1,13 +1,13 @@
 //
-//  InitializationDelegate.m
+//  DemoInitializationDelegate.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
 
-#import "InitializationDelegate.h"
+#import "DemoInitializationDelegate.h"
 
-@implementation InitializationDelegate
+@implementation DemoInitializationDelegate
 
 - (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate {
     self = [super init];

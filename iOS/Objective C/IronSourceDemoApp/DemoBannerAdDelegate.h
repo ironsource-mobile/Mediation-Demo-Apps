@@ -1,5 +1,5 @@
 //
-//  BannerDelegate.h
+//  DemoBannerAdDelegate.h
 //  IronSourceDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BannerDelegate : NSObject<LevelPlayBannerDelegate>
+@interface DemoBannerAdDelegate : NSObject<LevelPlayBannerDelegate>
 
 @property (weak, nonatomic) id<DemoViewControllerDelegate> delegate;
 

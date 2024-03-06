@@ -1,13 +1,13 @@
 //
-//  BannerDelegate.m
+//  DemoBannerAdDelegate.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
 
-#import "BannerDelegate.h"
+#import "DemoBannerAdDelegate.h"
 
-@implementation BannerDelegate
+@implementation DemoBannerAdDelegate
 
 - (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate {
     self = [super init];
@@ -25,8 +25,7 @@
  */
 - (void)didLoad:(ISBannerView *)bannerView
      withAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
-    
+    logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setAndBindBannerView:bannerView];
     [self.delegate setEnablementForButton:LoadBannerButtonIdentifier
                                    enable:NO];
@@ -40,7 +39,7 @@
  @param error The reason for the error.
  */
 - (void)didFailToLoadWithError:(NSError *)error {
-    logCallbackName(@"%@", error.localizedDescription);
+    logCallbackName(@"error = %@", error.localizedDescription);
 }
 
 /**
@@ -48,7 +47,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didClickWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
+    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 /**
@@ -56,7 +55,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didLeaveApplicationWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
+    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 /**
@@ -64,7 +63,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didPresentScreenWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
+    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 /**
@@ -72,7 +71,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didDismissScreenWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
+    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 @end

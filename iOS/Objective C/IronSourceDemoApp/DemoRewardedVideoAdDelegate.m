@@ -1,13 +1,13 @@
 //
-//  RewardedVideoDelegate.m
+//  DemoRewardedVideoAdDelegate.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
 
-#import "RewardedVideoDelegate.h"
+#import "DemoRewardedVideoAdDelegate.h"
 
-@implementation RewardedVideoDelegate
+@implementation DemoRewardedVideoAdDelegate
 
 - (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate {
     self = [super init];
@@ -24,8 +24,7 @@
  @param adInfo The info of the ad.
  */
 - (void)hasAvailableAdWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
-    
+    logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowRewardedVideoButtonIdentifier
                                    enable:YES];
 }
@@ -35,7 +34,6 @@
  */
 - (void)hasNoAvailableAd {
     logCallbackName();
-    
     [self.delegate setEnablementForButton:ShowRewardedVideoButtonIdentifier
                                    enable:NO];
 }
@@ -45,8 +43,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
-    
+    logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowRewardedVideoButtonIdentifier
                                    enable:NO];
 }
@@ -58,7 +55,7 @@
  */
 - (void)didFailToShowWithError:(NSError *)error
                      andAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName(@"%@", error.localizedDescription);
+    logCallbackName(@"error = %@ | adInfo = %@", error.localizedDescription, adInfo);
 }
 
 /**
@@ -70,7 +67,7 @@
  */ 
 - (void)didClick:(ISPlacementInfo *)placementInfo
       withAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
+    logCallbackName(@"placement = %@ | adInfo = %@", placementInfo, adInfo);
 }
 
 /**
@@ -80,8 +77,7 @@
  */
 - (void)didReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo
                           withAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
-    
+    logCallbackName(@"placement = %@ | adInfo = %@", placementInfo, adInfo);
     [self.delegate setPlacementInfo:placementInfo];
 }
 
@@ -90,8 +86,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didCloseWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
-    
+    logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate showVideoRewardMessage];
 }
 

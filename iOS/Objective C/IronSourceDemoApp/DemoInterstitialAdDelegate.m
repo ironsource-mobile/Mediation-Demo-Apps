@@ -1,13 +1,13 @@
 //
-//  InterstitialDelegate.m
+//  DemoInterstitialAdDelegate.m
 //  IronSourceDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
 
-#import "InterstitialDelegate.h"
+#import "DemoInterstitialAdDelegate.h"
 
-@implementation InterstitialDelegate
+@implementation DemoInterstitialAdDelegate
 
 - (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate {
     self = [super init];
@@ -24,8 +24,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didLoadWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
-    
+    logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:YES];
 }
@@ -35,8 +34,7 @@
  @param error The reason for the error
  */
 - (void)didFailToLoadWithError:(NSError *)error {
-    logCallbackName(@"%@", error.localizedDescription);
-    
+    logCallbackName(@"error = %@", error.localizedDescription);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:NO];
 }
@@ -47,8 +45,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
-    
+    logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:NO];
 }
@@ -60,7 +57,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didShowWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
+    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 /**
@@ -70,7 +67,7 @@
  */
 - (void)didFailToShowWithError:(NSError *)error
                      andAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName(@"%@", error.localizedDescription);
+    logCallbackName(@"error = %@ | adInfo = %@", error.localizedDescription, adInfo);
 }
 
 /**
@@ -78,7 +75,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didClickWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
+    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 /**
@@ -86,7 +83,7 @@
  @param adInfo The info of the ad.
  */
 - (void)didCloseWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName();
+    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 @end

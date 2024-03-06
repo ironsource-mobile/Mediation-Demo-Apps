@@ -45,13 +45,13 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     
     @IBOutlet weak var versionLabel: UILabel!
     
-    var rewardedVideoDelegate: RewardedVideoDelegate! = nil
-    var interstitialDelegate: InterstitialDelegate! = nil
-    var bannerDelegate: BannerDelegate! = nil
+    var rewardedVideoDelegate: DemoRewardedVideoAdDelegate! = nil
+    var interstitialDelegate: DemoInterstitialAdDelegate! = nil
+    var bannerDelegate: DemoBannerAdDelegate! = nil
     
-    var initializationDelegate: InitializationDelegate! = nil
+    var initializationDelegate: DemoInitializationDelegate! = nil
     
-    var impressionDataDelegate: ImpressionDataDelegate! = nil
+    var impressionDataDelegate: DemoImpressionDataDelegate! = nil
     
     var rewardedVideoPlacementInfo: ISPlacementInfo! = nil
     var bannerView: ISBannerView! = nil
@@ -97,7 +97,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // we will not be able to communicate with you.
         // We're passing 'self' to our delegates because we want
         // to be able to enable/disable buttons to match ad availability.
-        
         rewardedVideoDelegate = .init(delegate: self)
         IronSource.setLevelPlayRewardedVideoDelegate(rewardedVideoDelegate)
         
@@ -112,8 +111,9 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         
         initializationDelegate = .init(delegate: self)
         
-        // After setting the delegates you can go ahead and initialize the SDK. Once the iniitaliztion callback is return you can start loading your ads
-        logMethodName(string: "initWithAppKey(" + String(describing: appKey) + ", initializationDelegate)")
+        // After setting the delegates you can go ahead and initialize the SDK.
+        // Once the iniitaliztion callback is return you can start loading your ads
+        logMethodName(string: "initWithAppKey(\(String(describing: appKey)), initializationDelegate)")
         IronSource.initWithAppKey(appKey, delegate: self.initializationDelegate)
         
         // To initialize specific ad units:
@@ -122,52 +122,42 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // Scroll down the file to find out what happens when you tap a button...
     }
     
-    func logMethodName(string: String = #function) {
-        print("DemoViewController " + string)
-    }
-    
-    func destroyBanner() {
-        if bannerView != nil {
-            logMethodName()
-            IronSource.destroyBanner(bannerView)
-            self.bannerView = nil
-        }
-        
-        setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
-        setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: false)
-    }
-    
     //MARK: Interface Handling
     
     @IBAction func showRewardedVideoButtonTapped(_ sender: Any) {
-        // After calling 'setLevelPlayRewardedVideoDelegate' and 'initWithAppKey'
-        // you are ready to present an ad. You can supply a placement
-        // by calling 'showRewardedVideo(with: viewController, placement: placement)', or you can simply
-        // call 'showRewardedVideo(with:viewController)'.
-        // In this case the SDK will use the default placement one created for you.
-        
-        logMethodName(string: "showRewardedVideo(with:)")
-        IronSource.showRewardedVideo(with: self)
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if IronSource.hasRewardedVideo() {
+            // This will present the Rewarded Video.
+
+            logMethodName(string: "showRewardedVideo(with:)")
+            IronSource.showRewardedVideo(with: self)
+        } else {
+            // wait for the availability of rewarded video to change to true before calling show
+        }
     }
     
     @IBAction func loadInterstitialButtonTapped(_ sender: Any) {
         // This will load an Interstitial ad
-        
+
         logMethodName(string: "loadInterstitial()")
         IronSource.loadInterstitial()
     }
 
     @IBAction func showInterstitialButtonTapped(_ sender: Any) {
-        // This will present the Interstitial. Unlike Rewarded
-        // Videos there are no placements.
-        
-        logMethodName(string: "showInterstitial(with:)")
-        IronSource.showInterstitial(with: self)
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if IronSource.hasInterstitial() {
+            // This will present the Interstitial.
+            // Unlike Rewarded Videos there are no placements.
+
+            logMethodName(string: "showInterstitial(with:)")
+            IronSource.showInterstitial(with: self)
+        } else {
+            // load a new ad before calling show
+        }
     }
     
     @IBAction func loadBannerButtonTapped(_ sender: Any) {
-        // We call destroy banner before loading a new banner
-        
+        // call IronSource.destroyBanner(bannerView) before loading a new banner
         if bannerView != nil {
             destroyBanner()
         }
@@ -178,7 +168,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // by calling 'loadBanner(with: viewControler, size: bannerSize, placement: placement)', or you can simply
         // call 'loadBanner(with: self, size: bannerSize)'.
         // In this case the SDK will use the default placement one created for you.
-        
+        // You can pick any banner size: kSizeBanner, kSizeLarge, kSizeRectangle or kSizeLeaderboard
+
         logMethodName(string: "loadBanner(with:, size:)")
         IronSource.loadBanner(with: self, size: bannerSize)
     }
@@ -187,6 +178,19 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         destroyBanner()
     }
 
+    func destroyBanner() {
+        DispatchQueue.main.async {
+            if self.bannerView != nil {
+                self.logMethodName(string: "destroyBanner(with:)")
+                IronSource.destroyBanner(self.bannerView)
+                self.bannerView = nil
+            }
+            
+            self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
+            self.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: false)
+        }
+    }
+    
     //MARK: DemoViewControllerDelegate
     
     func setButtonEnablement(_ buttonIdentifier: ButtonIdentifiers, enable: Bool) {
@@ -228,13 +232,13 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         }
     }
     
-    // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
     func setPlacementInfo(_ placementInfo: ISPlacementInfo?) {
+        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
         self.rewardedVideoPlacementInfo = placementInfo
     }
     
-    // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
     func showVideoRewardMessage() {
+        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
         if (self.rewardedVideoPlacementInfo != nil) {
             let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
             let message = String(format: "You have been rewarded %d %@", (rewardedVideoPlacementInfo.rewardAmount.intValue), rewardedVideoPlacementInfo.rewardName)
@@ -255,5 +259,11 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
             
             rewardedVideoPlacementInfo = nil
         }
+    }
+    
+    //MARK:  Demo Utils
+
+    func logMethodName(string: String = #function) {
+        print("DemoViewController \(string)")
     }
 }

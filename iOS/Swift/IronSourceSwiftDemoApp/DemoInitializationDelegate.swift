@@ -1,5 +1,5 @@
 //
-//  InitializationDelegate.swift
+//  DemoInitializationDelegate.swift
 //  IronSourceSwiftDemoApp
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
@@ -8,7 +8,7 @@
 import Foundation
 import IronSource
 
-class InitializationDelegate: NSObject, ISInitializationDelegate {
+class DemoInitializationDelegate: NSObject, ISInitializationDelegate {
     
     weak var delegate: DemoViewControllerDelegate?
 
@@ -20,7 +20,7 @@ class InitializationDelegate: NSObject, ISInitializationDelegate {
      Called after the Mediation successfully completes its initialization
      */
     func initializationDidComplete() {
-        print("InitializationDelegate \(#function)")
+        print("DemoInitializationDelegate \(#function)")
         
         self.delegate?.setButtonEnablement(ButtonIdentifiers.loadInterstitialButtonIdentifier, enable: true)
         self.delegate?.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
