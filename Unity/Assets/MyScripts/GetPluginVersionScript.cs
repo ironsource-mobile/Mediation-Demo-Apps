@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class GetPluginVersionScript : MonoBehaviour
 {
@@ -10,11 +9,5 @@ public class GetPluginVersionScript : MonoBehaviour
 	{
 		Text = GameObject.Find ("PluginVersionText");
 		Text.GetComponent<UnityEngine.UI.Text> ().text = IronSource.pluginVersion ();
-	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-	
 	}
 }
