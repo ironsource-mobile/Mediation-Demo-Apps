@@ -30,12 +30,12 @@ public class MyAppStart : MonoBehaviour
 		Debug.Log ("unity-script: unity version" + IronSource.unityVersion ());
 
 		// Add Banner Events
-		IronSourceEvents.onBannerAdLoadedEvent += BannerAdLoadedEvent;
-		IronSourceEvents.onBannerAdLoadFailedEvent += BannerAdLoadFailedEvent;		
-		IronSourceEvents.onBannerAdClickedEvent += BannerAdClickedEvent; 
-		IronSourceEvents.onBannerAdScreenPresentedEvent += BannerAdScreenPresentedEvent; 
-		IronSourceEvents.onBannerAdScreenDismissedEvent += BannerAdScreenDismissedEvent;
-		IronSourceEvents.onBannerAdLeftApplicationEvent += BannerAdLeftApplicationEvent;
+		IronSourceBannerEvents.onAdLoadedEvent += BannerOnAdLoadedEvent;
+		IronSourceBannerEvents.onAdLoadFailedEvent += BannerOnAdLoadFailedEvent;
+		IronSourceBannerEvents.onAdClickedEvent += BannerOnAdClickedEvent;
+		IronSourceBannerEvents.onAdScreenPresentedEvent += BannerOnAdScreenPresentedEvent;
+		IronSourceBannerEvents.onAdScreenDismissedEvent += BannerOnAdScreenDismissedEvent;
+		IronSourceBannerEvents.onAdLeftApplicationEvent += BannerOnAdLeftApplicationEvent;
 
 		// SDK init
 		Debug.Log ("unity-script: IronSource.Agent.init");
@@ -63,33 +63,33 @@ public class MyAppStart : MonoBehaviour
 	}
 
 	//Banner Events
-	void BannerAdLoadedEvent ()
+	void BannerOnAdLoadedEvent(IronSourceAdInfo adInfo)
 	{
-		Debug.Log ("unity-script: I got BannerAdLoadedEvent");
+		Debug.Log("unity-script: I got BannerOnAdLoadedEvent With AdInfo " + adInfo);
 	}
-	
-	void BannerAdLoadFailedEvent (IronSourceError error)
+
+	void BannerOnAdLoadFailedEvent(IronSourceError ironSourceError)
 	{
-		Debug.Log ("unity-script: I got BannerAdLoadFailedEvent, code: " + error.getCode () + ", description : " + error.getDescription ());
+		Debug.Log("unity-script: I got BannerOnAdLoadFailedEvent With Error " + ironSourceError);
 	}
-	
-	void BannerAdClickedEvent ()
+
+	void BannerOnAdClickedEvent(IronSourceAdInfo adInfo)
 	{
-		Debug.Log ("unity-script: I got BannerAdClickedEvent");
+		Debug.Log("unity-script: I got BannerOnAdClickedEvent With AdInfo " + adInfo);
 	}
-	
-	void BannerAdScreenPresentedEvent ()
+
+	void BannerOnAdScreenPresentedEvent(IronSourceAdInfo adInfo)
 	{
-		Debug.Log ("unity-script: I got BannerAdScreenPresentedEvent");
+		Debug.Log("unity-script: I got BannerOnAdScreenPresentedEvent With AdInfo " + adInfo);
 	}
-	
-	void BannerAdScreenDismissedEvent ()
+
+	void BannerOnAdScreenDismissedEvent(IronSourceAdInfo adInfo)
 	{
-		Debug.Log ("unity-script: I got BannerAdScreenDismissedEvent");
+		Debug.Log("unity-script: I got BannerOnAdScreenDismissedEvent With AdInfo " + adInfo);
 	}
-	
-	void BannerAdLeftApplicationEvent ()
+
+	void BannerOnAdLeftApplicationEvent(IronSourceAdInfo adInfo)
 	{
-		Debug.Log ("unity-script: I got BannerAdLeftApplicationEvent");
+		Debug.Log("unity-script: I got BannerOnAdLeftApplicationEvent With AdInfo " + adInfo);
 	}
 }
