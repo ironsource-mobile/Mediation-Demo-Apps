@@ -173,6 +173,8 @@
         <!-- A list of plist key/value pairs to be added to the application Info.plist -->
         <InfoAdditions>
             <![CDATA[
+            <key>MinimumOSVersion</key>
+            <string>11.0</string>
             <key>UIDeviceFamily</key>
             <array>
                 <!-- iPhone and iPod touch devices -->
