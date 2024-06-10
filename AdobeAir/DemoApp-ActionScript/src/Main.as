@@ -30,8 +30,8 @@ public class Main extends Sprite {
 
     public var btnShowInterstitial:SimpleButton;
     public var btnShowRewardedVideo:SimpleButton;
-    public var btnShowOfferwall:SimpleButton;
     public var loader:Loader;
+    public var Appkey;
 
     public function Main() {
         stage.align = StageAlign.TOP_LEFT;
@@ -47,11 +47,20 @@ public class Main extends Sprite {
         addEventListener(Event.DEACTIVATE, onPause);
         addEventListener(Event.ACTIVATE, onResume);
 
-        // Register for apple attribution and request ATT
-        IronSource.instance.registerAppForAdNetworkAttribution();
-        IronSource.instance.requestTrackingAuthorizationWithCompletionHandler();
-        var userStatus:int = IronSource.instance.trackingAuthorizationStatus();
-        trace("trackingAuthorizationStatus is "+userStatus.toString());
+
+        if (Capabilities.version.substr(0, 3) == "AND") {
+            Appkey = "1dc3db545";
+
+        }else {
+            Appkey = "1dc3deecd";
+            // Register for apple attribution and request ATT
+            IronSource.instance.registerAppForAdNetworkAttribution();
+            IronSource.instance.requestTrackingAuthorizationWithCompletionHandler();
+            var userStatus:String = IronSource.instance.trackingAuthorizationStatus();
+            trace("trackingAuthorizationStatus is "+userStatus.toString());
+        }
+
+
 
         IronSource.instance.addEventListener("onRewardedVideoAdOpened", onRewardedVideoAdOpened);
         IronSource.instance.addEventListener("onRewardedVideoAdClosed", onRewardedVideoAdClosed);
@@ -72,12 +81,6 @@ public class Main extends Sprite {
 
         IronSource.instance.addEventListener("onInterstitialAdRewarded", onInterstitialAdRewarded);
 
-        IronSource.instance.addEventListener("onOfferwallAvailable", onOfferwallAvailable);
-        IronSource.instance.addEventListener("onOfferwallOpened", onOfferwallOpened);
-        IronSource.instance.addEventListener("onOfferwallShowFailed", onOfferwallShowFailed);
-        IronSource.instance.addEventListener("onOfferwallAdCredited", onOfferwallAdCredited);
-        IronSource.instance.addEventListener("onGetOfferwallCreditsFailed", onGetOfferwallCreditsFailed);
-        IronSource.instance.addEventListener("onOfferwallClosed", onOfferwallClosed);
 
         IronSource.instance.addEventListener("onBannerAdLoaded", onBannerAdLoaded);
         IronSource.instance.addEventListener("onBannerAdLoadFailed", onBannerAdLoadFailed);
@@ -90,7 +93,7 @@ public class Main extends Sprite {
         IronSource.instance.addEventListener("onImpressionDataDidSucceed", onImpressionDataDidSucceed);
 
         IronSource.instance.setIronSourceClientSideCallbacks(true);
-        IronSource.instance.init("38760d6d");
+        IronSource.instance.init(Appkey);
         loadBanner();
         loadInterstitial();
     }
@@ -100,19 +103,13 @@ public class Main extends Sprite {
     }
 
     private function showRewardedVideo(event:MouseEvent):void {
-            if (IronSource.instance.isRewardedVideoAvailable())
-                IronSource.instance.showRewardedVideo();
-            else
-                trace("Rewarded Video is not available");
+        if (IronSource.instance.isRewardedVideoAvailable())
+            IronSource.instance.showRewardedVideo();
+        else
+            trace("Rewarded Video is not available");
     }
 
-    private function showOfferwall(event:MouseEvent):void {
-            if (IronSource.instance.isOfferwallAvailable()) {
-                IronSource.instance.showOfferwall();
-            }
-            else
-                trace("Offerwall is not available");
-    }
+
 
     private function loadInterstitial():void {
         IronSource.instance.loadInterstitial();
@@ -256,65 +253,6 @@ public class Main extends Sprite {
         trace("onInterstitialAdRewarded");
     }
 
-    //************************** Offerwall Callbacks **************************
-    private function onOfferwallAvailable(event:DataEvent):void {
-        trace("onOfferwallAvailable: " + event.data);
-
-        if (event.data == "true") {
-            btnShowOfferwall.enabled = true;
-        } else {
-            btnShowOfferwall.enabled = false;
-        }
-    }
-
-    private function onOfferwallOpened(event:DataEvent):void {
-        trace("onOfferwallOpened");
-    }
-
-    private function onOfferwallShowFailed(event:DataEvent):void {
-        var errorCode:String;
-        var errorDescription:String;
-
-        if (event.data) {
-            var error:Object = JSON.parse(event.data);
-            errorDescription = error.error_description;
-            errorCode = error.error_code;
-        }
-
-        trace("onOfferwallShowFailed. Error code: " + errorCode + " ; Description: " + errorDescription);
-    }
-
-    private function onOfferwallAdCredited(event:DataEvent):void {
-        var credits:int;
-        var totalCredits:int;
-        var totalCreditsFlag:String;
-
-        if (event.data) {
-            var creditsData:Object = JSON.parse(event.data);
-            credits = parseInt(creditsData.credits);
-            totalCredits = parseInt(creditsData.totalCredits);
-            totalCreditsFlag = creditsData.totalCreditsFlag;
-        }
-
-        trace("onOfferwallAdCredited. Credits: " + credits + " ; Total credits: " + totalCredits + " ; Total credits flag: " + totalCreditsFlag);
-    }
-
-    private function onGetOfferwallCreditsFailed(event:DataEvent):void {
-        var errorCode:String;
-        var errorDescription:String;
-
-        if (event.data) {
-            var error:Object = JSON.parse(event.data);
-            errorDescription = error.error_description;
-            errorCode = error.error_code;
-        }
-
-        trace("onGetOfferwallCreditsFailed. Error code: " + errorCode + " ; Description: " + errorDescription);
-    }
-
-    private function onOfferwallClosed(event:DataEvent):void {
-        trace("onOfferwallClosed");
-    }
 
     //************************** Banner Callbacks **************************
 
@@ -437,9 +375,7 @@ public class Main extends Sprite {
         btnShowRewardedVideo = addFullButton("Show Rewarded Video", this,Capabilities.screenResolutionY * 0.4 );
         btnShowRewardedVideo.addEventListener(MouseEvent.CLICK , showRewardedVideo);
         btnShowRewardedVideo.enabled = false;
-        btnShowOfferwall = addFullButton("Show Offerwall", this,Capabilities.screenResolutionY * 0.5 );
-        btnShowOfferwall.addEventListener(MouseEvent.CLICK , showOfferwall);
-        btnShowOfferwall.enabled = false;
+
         addLabel("Mediation SDK Version " + IronSource.instance.getPluginVersion(),this,Capabilities.screenResolutionY * 0.8);
     }
 }

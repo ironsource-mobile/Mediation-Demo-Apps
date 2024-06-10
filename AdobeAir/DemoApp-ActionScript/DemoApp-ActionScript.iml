@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="DemoApp-ActionScript">
+    <configurations>
+      <configuration name="DemoApp-ActionScript" target-platform="Mobile" pure-as="true" main-class="Main" output-file="Main.swf" output-folder="$MODULE_DIR$/out/production/DemoApp-ActionScript">
+        <dependencies target-player="32.0">
+          <entries>
+            <entry library-id="9888fc04-50c9-4adb-b0e5-fa1fc132d04c">
+              <dependency linkage="Merged" />
+            </entry>
+          </entries>
+          <sdk name="AIRSDK_MacOS" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop />
+        <packaging-android enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app.xml" package-file-name="Main" />
+        <packaging-ios enabled="true" use-generated-descriptor="false" custom-descriptor-path="$MODULE_DIR$/Main-app.xml" package-file-name="Main" />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="AIRSDK_MacOS" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" exported="">
+      <library type="flex">
+        <properties id="9888fc04-50c9-4adb-b0e5-fa1fc132d04c" />
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/IronSource_v8.1.0.ane!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>

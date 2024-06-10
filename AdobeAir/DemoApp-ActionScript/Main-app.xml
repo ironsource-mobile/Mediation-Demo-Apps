@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<application xmlns="http://ns.adobe.com/air/application/32.0">
+<application xmlns="http://ns.adobe.com/air/application/50.2">
 
 <!-- Adobe AIR Application Descriptor File Template.
      Specifies parameters for identifying, installing, and launching AIR applications.
 
-     xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/33.0.2.
+     xmlns - The Adobe AIR namespace: http://ns.adobe.com/air/application/50.2.
      The last segment of the namespace specifies the version of the AIR runtime required for this application to run.
 
      minimumPatchLevel - The minimum patch level of the AIR runtime required to run the application. Optional. -->
 
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.ironsource.AdobeTestApp</id>
-
-    <!-- Used as the filename for the application. Required. -->
-    <filename>DemoApp-Adobe</filename>
-
-    <!-- The name that is displayed in the AIR application installer. May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>DemoApp</name>
-
-    <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
-         Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
-         An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5.
-         For iOS Apps, this represents build number. -->
-    <versionNumber>2.0.0</versionNumber>
+    <id>com.ironsrcmobile.UltraApp</id>
+    <filename>AdobeTestApp</filename>
+    <name>AdobeTestApp</name>
+    <versionNumber>8.1.0</versionNumber>
 
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users.
          For iOS Apps, this represents application version number and format should be (<0-999>.<0-999>.<0-999>).
@@ -42,64 +33,7 @@
 
     <!-- Identifies the ActionScript extensions used by an application. -->
     <extensions>
-        <!--ironSourceSDK-->
         <extensionID>com.ironsource.adobeair</extensionID>
-
-        <!--Admob Android-->
-        <!--<extensionID>com.ironsource.adobeair.admob</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.google</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.googlebase</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.androidx</extensionID>-->
-
-        <!--Admob IOS-->
-        <!--<extensionID>com.ironsource.adobeair.google</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.googleappmeasurement</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.googlemobileads</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.googlegutilities</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.nanopb</extensionID>-->
-
-        <!--SDK & Adapters-->
-        <!--<extensionID>com.ironsource.adobeair.adcolony</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.adcolonysdk</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.applovin</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.applovinsdk</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.unityads</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.unityadssdk</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.vungle</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.vunglesdk</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.facebook</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.fbaudiencenetwork</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.fbsdkcorekit</extensionID>-->
-
-        <!--Vungle 3rd party-->
-        <!--<extensionID>com.ironsource.adobeair.convertergson</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.logginginterceptor</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.gson</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.okhttp</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.okio</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.retrofit</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.vunglemoat</extensionID>-->
-
-
-        <!--<extensionID>com.ironsource.adobeair.adcolony</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.admob</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.applovin</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.chartboost</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.tapjoy</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.unityads</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.vungle</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.facebook</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.google</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.support</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.recyclerview</extensionID> -->
-        <!--<extensionID>com.ironsource.adobeair.convertergson</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.gson</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.okhttp</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.okio</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.retrofit</extensionID>-->
-        <!--<extensionID>com.ironsource.adobeair.fetch</extensionID> -->
-        <!--<extensionID>com.ironsource.adobeair.logginginterceptor</extensionID> -->
-        <!--<extensionID>com.ironsource.adobeair.vunglemoat</extensionID> -->
     </extensions>
 
     <!-- Settings for the application's initial window. Required. -->
@@ -290,16 +224,20 @@
 
     <!-- Specify Android specific tags that get passed to AndroidManifest.xml file. -->
     <android>
-    <manifestAdditions>
-        <![CDATA[
+        <manifestAdditions>
+            <![CDATA[
             <manifest android:installLocation="auto">
                 <uses-permission android:name="android.permission.INTERNET"/>
                 <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
                 <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
                 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+                <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+                <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
 
+                <uses-sdk android:minSdkVersion="21" />
+
+                <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
                 <application android:enabled="true">
-
                     <activity android:excludeFromRecents="false">
                         <intent-filter>
                             <action android:name="android.intent.action.MAIN"/>
@@ -307,115 +245,49 @@
                         </intent-filter>
                     </activity>
 
-                    <activity
-                        android:name="com.ironsource.sdk.controller.ControllerActivity"
-                        android:configChanges="orientation|screenSize"
-                        android:hardwareAccelerated="true" />
-                    <activity
-                        android:name="com.ironsource.sdk.controller.InterstitialActivity"
-                        android:configChanges="orientation|screenSize"
-                        android:hardwareAccelerated="true"
-                        android:theme="@android:style/Theme.Translucent" />
-                    <activity
-                        android:name="com.ironsource.sdk.controller.OpenUrlActivity"
-                        android:configChanges="orientation|screenSize"
-                        android:hardwareAccelerated="true"
-                        android:theme="@android:style/Theme.Translucent" />
-
-                    <!-- AdColony -->
-                    <activity
-                        android:name="com.adcolony.sdk.AdColonyInterstitialActivity"
-                        android:configChanges="keyboardHidden|orientation|screenSize"
-                        android:hardwareAccelerated="true" />
-                    <activity
-                        android:name="com.adcolony.sdk.AdColonyAdViewActivity"
-                        android:configChanges="keyboardHidden|orientation|screenSize"
-                        android:hardwareAccelerated="true" />
-
-                    <!-- AdMob -->
-                    <meta-data
-                        android:name="com.google.android.gms.version"
-                        android:value="12451000" />
-
-                    <activity
-                        android:name="com.google.android.gms.ads.AdActivity"
-                        android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
-                        android:theme="@android:style/Theme.Translucent" />
-
-                    <!-- AppLovin -->
-                    <activity android:name="com.applovin.adview.AppLovinInterstitialActivity" android:configChanges="orientation|screenSize"/>
-                    <activity android:name="com.applovin.adview.AppLovinConfirmationActivity" android:configChanges="orientation|screenSize"/>
-
-                    <meta-data
-                        android:name="applovin.sdk.verbose_logging"
-                        android:value="true" />
-
-                    <!-- Chartboost -->
-                    <activity
-                        android:name="com.chartboost.sdk.CBImpressionActivity"
-                        android:configChanges="keyboardHidden|orientation|screenSize"
-                        android:excludeFromRecents="true"
-                        android:hardwareAccelerated="true"
-                        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-
-                    <!-- Tapjoy -->
-                    <activity
-                        android:name="com.tapjoy.TJAdUnitActivity"
-                        android:configChanges="orientation|keyboardHidden|screenSize"
-                        android:hardwareAccelerated="true"
-                        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-                    <activity
-                        android:name="com.tapjoy.mraid.view.ActionHandler"
-                        android:configChanges="orientation|keyboardHidden|screenSize" />
-                    <activity
-                        android:name="com.tapjoy.mraid.view.Browser"
-                        android:configChanges="orientation|keyboardHidden|screenSize" />
-                    <activity
-                        android:name="com.tapjoy.TJContentActivity"
-                        android:configChanges="orientation|keyboardHidden|screenSize"
-                        android:hardwareAccelerated="true"
-                        android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-                    <activity android:name=".activities.SegmentActivity" />
-
-                    <!-- UnityAds -->
-                    <activity
-                        android:name="com.unity3d.services.ads.adunit.AdUnitActivity"
-                        android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-                        android:hardwareAccelerated="true"
-                        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-                    <activity
-                        android:name="com.unity3d.services.ads.adunit.AdUnitTransparentActivity"
-                        android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-                        android:hardwareAccelerated="true"
-                        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-                    <activity
-                        android:name="com.unity3d.services.ads.adunit.AdUnitTransparentSoftwareActivity"
-                        android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-                        android:hardwareAccelerated="false"
-                        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-                    <activity
-                        android:name="com.unity3d.services.ads.adunit.AdUnitSoftwareActivity"
-                        android:configChanges="fontScale|keyboard|keyboardHidden|locale|mnc|mcc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode|touchscreen"
-                        android:hardwareAccelerated="false"
-                        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-
-                    <!-- Vungle -->
-                    <activity
-                        android:name="com.vungle.publisher.VideoFullScreenAdActivity"
-                        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
-                        android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-                    <activity
-                        android:name="com.vungle.publisher.MraidFullScreenAdActivity"
-                        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
-                        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
-                    <activity
-                        android:name="com.vungle.publisher.FlexViewAdActivity"
-                        android:configChanges="keyboardHidden|orientation|screenSize|screenLayout|smallestScreenSize"
-                        android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen" />
+        <!--            IronSource-->
+        <activity
+            android:name="com.ironsource.sdk.controller.ControllerActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true" />
+        <activity
+            android:name="com.ironsource.sdk.controller.InterstitialActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name="com.ironsource.sdk.controller.OpenUrlActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.Translucent" />
+        <activity
+            android:name="com.ironsource.mediationsdk.testSuite.TestSuiteActivity"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <provider
+            android:name="com.ironsource.lifecycle.IronsourceLifecycleProvider"
+            android:authorities="com.ironsrcmobile.UltraApp.IronsourceLifecycleProvider" />
 
                 </application>
             </manifest>
             ]]>
-    </manifestAdditions>
+            </manifestAdditions>
+
+        <!-- Color depth for the app (either "32bit" or "16bit"). Optional. Default 16bit before namespace 3.0, 32bit after -->
+        <!--<colorDepth></colorDepth>-->
+        <!-- Indicates if the app contains video or not. Necessary for ordering of video planes with graphics plane, especially in Jellybean - if you app does video this must be set to true - valid values are true or false -->
+        <!-- <containsVideo></containsVideo> -->
+        <!-- This app is also for Android TV (either "true" or "false"). Optional. Default is 'false' -->
+        <!-- <supportsAndroidTV></supportsAndroidTV> -->
+        <!-- Path to the image used for banner when the app is shown on TV. Optional. The banner should be a .png image of size 320*180.-->
+        <!-- <banner></banner> -->
+        <!-- Indicates if webContents (HTML/CSS/JavaScript) can be inspected in browser. Optional . Default value is 'false' -->
+        <!-- <webContentsDebuggingEnabled></webContentsDebuggingEnabled> -->
+
+        <!-- Indicates if disableMediaCodec is enabled or not. Optional . Default value is 'false' -->
+        <!-- <disableMediaCodec></disableMediaCodec> -->
+
     </android>
+
 </application>
