@@ -1,9 +1,9 @@
-# Demo apps  
+# Demo Apps  
 
-The integration demo application is an example of ironSource mediation integration. Use it to get reference how to integrate ironSource mediation in your app.
+The Integration Demo application demonstrates how to integrate the Unity LevelPlay Mediation in your app.
 
 
-Learn more about the integration for each operating system:
+Learn more about the integration for each of the operating systems:
 
 [Unity](https://developers.ironsrc.com/developer-docs/unity/)
 
@@ -12,9 +12,10 @@ Learn more about the integration for each operating system:
 [iOS](https://developers.ironsrc.com/developer-docs/ios/)
 
 
-
 ## Contact US 
-For any question please contact us [here](https://ironsrc.formtitan.com/knowledge-center#/).
+For any question please contact us [here](https://ironsrc.formtitan.com/knowledge-center#/)
 
-## License 
-https://developers.is.com/ironsource-mobile/general/ironsource-platform-online-terms-conditions/
+
+## License
+The license can be viewed [here](https://github.com/ironsource-mobile/Mediation-Demo-Apps/blob/master/LICENSE)
+
