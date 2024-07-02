@@ -12,7 +12,7 @@ Learn more about the integration for each of the operating systems:
 [iOS](https://developers.is.com/developer-docs/ios/)
 
 
-## Contact US 
+## Contact Us 
 For any question please contact us [here](https://ironsrc.my.site.com/helpcenter/s/)
 
 
