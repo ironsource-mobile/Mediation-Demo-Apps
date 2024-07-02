@@ -13,7 +13,7 @@ Learn more about the integration for each of the operating systems:
 
 
 ## Contact US 
-For any question please contact us [here](https://ironsrc.formtitan.com/knowledge-center#/)
+For any question please contact us [here](https://ironsrc.my.site.com/helpcenter/s/)
 
 
 ## License
