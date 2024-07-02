@@ -5,11 +5,11 @@ The Integration Demo application demonstrates how to integrate the Unity LevelPl
 
 Learn more about the integration for each of the operating systems:
 
-[Unity](https://developers.ironsrc.com/developer-docs/unity/)
+[Unity](https://developers.is.com/developer-docs/unity/)
 
-[Android](https://developers.ironsrc.com/developer-docs/android/)
+[Android](https://developers.is.com/developer-docs/android/)
 
-[iOS](https://developers.ironsrc.com/developer-docs/ios/)
+[iOS](https://developers.is.com/developer-docs/ios/)
 
 
 ## Contact US 
