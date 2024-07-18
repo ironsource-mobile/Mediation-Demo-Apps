@@ -9,10 +9,6 @@ java {
     }
 }
 
-ext {
-    sdkVersion = "8.2.0"
-}
-
 android {
     namespace "com.ironsource.ironsourcesdkdemo"
     compileSdkVersion 34
@@ -59,7 +55,7 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     // Add IronSource Mediation SDK dependency.
-    implementation "com.ironsource.sdk:mediationsdk:$sdkVersion"
+    implementation "com.ironsource.sdk:mediationsdk:8.+"
     // Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
     // Make sure you also configure the AdNetworks in your dashboard.
     // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
