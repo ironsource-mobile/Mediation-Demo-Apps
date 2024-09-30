@@ -101,6 +101,8 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         IronSource.addImpressionDataListener(new DemoImpressionDataListener());
 
         // After setting the listeners you can go ahead and initialize the SDK.
+        // Once the initialization callback is returned you can start loading your ads
+        log("init ironSource SDK with appKey: " + APP_KEY);
 
         // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
         List<LevelPlay.AdFormat> legacyAdFormats = Arrays.asList(LevelPlay.AdFormat.REWARDED);
@@ -111,8 +113,6 @@ public class DemoActivity extends Activity implements DemoActivityListener {
                 .build();
         LevelPlay.init(this, initRequest, new DemoInitializationListener(this));
 
-        // Once the initialization callback is returned you can start loading your ads
-        log("init ironSource SDK with appKey: " + APP_KEY);
 
         // Scroll down the file to find out what happens when you tap a button...
     }
