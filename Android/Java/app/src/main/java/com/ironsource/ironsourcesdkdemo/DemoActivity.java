@@ -156,7 +156,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     public void loadBannerButtonTapped(View view) {
         // call destroy() before loading a new banner
         if (mBannerAd != null) {
-            mBannerAd.destroy();
+            destroyBanner();
         }
 
         // choose banner size
