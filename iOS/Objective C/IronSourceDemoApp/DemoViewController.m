@@ -84,8 +84,7 @@
         
     // After setting the delegates you can go ahead and initialize the SDK. 
     // Once the iniitaliztion callback is return you can start loading your ads
-    [self logMethodName:@"initWithAppKey:delegate:"];
-    
+    logCallbackName(@"init ironSource SDK with appKey: %@", kAppKey);
     
     // Create a request builder with app key and ad formats. Add User ID if available
     LPMInitRequestBuilder *requestBuilder = [[LPMInitRequestBuilder alloc] initWithAppKey:kAppKey];
@@ -175,8 +174,6 @@
     // Create the banner view and set the ad unit id and ad size
     self.bannerAdView = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
     [self.bannerAdView setAdSize:bannerSize];
-//    self.bannerAdView.frame = CGRectMake(0, 0, bannerSize.width, bannerSize.height);
-
 
     
     // set the banner listener

@@ -41,6 +41,12 @@
                                    enable:NO];
 
 }
+
+/**
+ Called after an interstitial has attempted to load but failed.
+ @param adUnitId The ad unit id of the ad.
+ @param error The reason for the error
+ */
 - (void)didChangeAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
