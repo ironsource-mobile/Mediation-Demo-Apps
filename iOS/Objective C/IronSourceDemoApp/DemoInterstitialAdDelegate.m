@@ -23,41 +23,41 @@
  Called after an interstitial has been loaded
  @param adInfo The info of the ad.
  */
-- (void)didLoadWithAdInfo:(ISAdInfo *)adInfo {
+- (void)didLoadAdWithAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:YES];
+
 }
 
 /**
  Called after an interstitial has attempted to load but failed.
+ @param adUnitId The ad unit id of the ad.
  @param error The reason for the error
  */
-- (void)didFailToLoadWithError:(NSError *)error {
-    logCallbackName(@"error = %@", error.localizedDescription);
+- (void)didFailToLoadAdWithAdUnitId:(NSString *)adUnitId error:(NSError *)error {
+    logCallbackName(@"error = %@ | adUnitId = %@", error.localizedDescription, adUnitId);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:NO];
+
+}
+- (void)didChangeAdInfo:(LPMAdInfo *)adInfo {
+    logCallbackName(@"adInfo = %@", adInfo);
+    [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
+                                   enable:NO];
+
 }
 
 /**
- Called after an interstitial has been opened.
+ Called after an interstitial has been displayed.
  This is the indication for impression.
  @param adInfo The info of the ad.
  */
-- (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
+- (void)didDisplayAdWithAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:NO];
-}
 
-/**
- Called after an interstitial has been displayed on the screen.
- This callback is not supported by all networks, and we recommend using it
- only if it's supported by all networks you included in your build.
- @param adInfo The info of the ad.
- */
-- (void)didShowWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 /**
@@ -65,25 +65,30 @@
  @param error The reason for the error.
  @param adInfo The info of the ad.
  */
-- (void)didFailToShowWithError:(NSError *)error
-                     andAdInfo:(ISAdInfo *)adInfo {
+- (void)didFailToDisplayAdWithAdInfo:(LPMAdInfo *)adInfo error:(NSError *)error {
     logCallbackName(@"error = %@ | adInfo = %@", error.localizedDescription, adInfo);
+
 }
 
 /**
  Called after an interstitial has been clicked.
  @param adInfo The info of the ad.
  */
-- (void)didClickWithAdInfo:(ISAdInfo *)adInfo {
+- (void)didClickAdWithAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
+
 }
 
 /**
  Called after an interstitial has been dismissed.
  @param adInfo The info of the ad.
  */
-- (void)didCloseWithAdInfo:(ISAdInfo *)adInfo {
+- (void)didCloseAdWithAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
+
 }
+
+
+
 
 @end

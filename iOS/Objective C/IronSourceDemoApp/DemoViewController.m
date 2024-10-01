@@ -7,14 +7,14 @@
 //
 
 #import "DemoViewController.h"
-#import "DemoInitializationDelegate.h"
 #import "DemoRewardedVideoAdDelegate.h"
 #import "DemoInterstitialAdDelegate.h"
 #import "DemoBannerAdDelegate.h"
 #import "DemoImpressionDataDelegate.h"
 
-#define kDefaultUserId @"demoapp"
 #define kAppKey @"8545d445"
+#define kInterstitialAdUnitId @"wmgt0712uuux8ju4"
+#define kBannerAdUnitId @"iep3rxsyp9na3rw8"
 
 @interface DemoViewController ()
 
@@ -22,12 +22,13 @@
 @property (nonatomic, strong) DemoInterstitialAdDelegate      *interstitialDelegate;
 @property (nonatomic, strong) DemoBannerAdDelegate            *bannerDelegate;
 
-@property (nonatomic, strong) DemoInitializationDelegate    *initializationDelegate;
-
 @property (nonatomic, strong) DemoImpressionDataDelegate    *impressionDataDelegate;
 
 @property (nonatomic, strong) ISPlacementInfo           *rewardedVideoPlacementInfo;
-@property (nonatomic, strong) ISBannerView              *bannerView;
+
+@property (nonatomic, strong) LPMBannerAdView             *bannerAdView;
+@property (nonatomic, strong) LPMInterstitialAd           *interstitialAd;
+
 
 @end
 
@@ -77,25 +78,39 @@
     self.rewardedVideoDelegate = [[DemoRewardedVideoAdDelegate alloc] initWithDelegate:self];
     [IronSource setLevelPlayRewardedVideoDelegate:self.rewardedVideoDelegate];
     
-    self.interstitialDelegate = [[DemoInterstitialAdDelegate alloc] initWithDelegate:self];
-    [IronSource setLevelPlayInterstitialDelegate:self.interstitialDelegate];
-    
-    self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
-    [IronSource setLevelPlayBannerDelegate:self.bannerDelegate];
     
     self.impressionDataDelegate = [[DemoImpressionDataDelegate alloc] init];
     [IronSource addImpressionDataDelegate:self.impressionDataDelegate];
-    
-    self.initializationDelegate = [[DemoInitializationDelegate alloc] initWithDelegate:self];
-    
+        
     // After setting the delegates you can go ahead and initialize the SDK. 
     // Once the iniitaliztion callback is return you can start loading your ads
     [self logMethodName:@"initWithAppKey:delegate:"];
-    [IronSource initWithAppKey:kAppKey 
-                      delegate:self.initializationDelegate];
     
-    // To initialize specific ad units:
-    // [IronSource initWithAppKey:kAppKey adUnits:@[IS_REWARDED_VIDEO, IS_INTERSTITIAL, IS_BANNER] delegate:self.initializationDelegate];
+    
+    // Create a request builder with app key and ad formats. Add User ID if available
+    LPMInitRequestBuilder *requestBuilder = [[LPMInitRequestBuilder alloc] initWithAppKey:kAppKey];
+    [requestBuilder withLegacyAdFormats:@[IS_REWARDED_VIDEO]];
+
+    // Build the initial request
+    LPMInitRequest *initRequest = [requestBuilder build];
+    // Initialize LevelPlay with the prepared request
+    [LevelPlay initWithRequest:initRequest completion:^(LPMConfiguration *_Nullable config, NSError *_Nullable error){
+    
+        if(error) {
+            // There was an error on initialization. Take necessary actions or retry
+            logCallbackName(@"sdk initialization failed, error = %@", error.localizedDescription);
+        } else {
+            // Initialization was successful. You can now load banner ad or perform other tasks
+            logCallbackName(@"sdk initialization succeeded");
+            
+            [self setEnablementForButton:LoadInterstitialButtonIdentifier
+                                           enable:YES];
+            [self setEnablementForButton:LoadBannerButtonIdentifier
+                                           enable:YES];
+
+        }
+    }];
+    
     
     // Scroll down the file to find out what happens when you tap a button...
 }
@@ -117,18 +132,24 @@
 - (IBAction)loadInterstitialButtonTapped:(id)sender {
     // This will load an Interstitial ad
 
+    self.interstitialAd = [[LPMInterstitialAd alloc] initWithAdUnitId:kInterstitialAdUnitId];
+    self.interstitialDelegate = [[DemoInterstitialAdDelegate alloc] initWithDelegate:self];
+    self.interstitialAd.delegate = self.interstitialDelegate;
+
+    
     [self logMethodName:@"loadInterstitial"];
-    [IronSource loadInterstitial];
+    [self.interstitialAd loadAd];
 }
+
 
 - (IBAction)showInterstitialButtonTapped:(id)sender {
     // It is advised to make sure there is available ad before attempting to show an ad
-    if ([IronSource hasInterstitial]) {
+    if ([self.interstitialAd isAdReady]) {
         // This will present the Interstitial.
         // Unlike Rewarded Videos there are no placements.
 
         [self logMethodName:@"showInterstitialWithViewController:"];
-        [IronSource showInterstitialWithViewController:self];
+        [self.interstitialAd showAdWithViewController:self placementName:NULL];
     } else {
         // load a new ad before calling show
     }
@@ -136,19 +157,38 @@
 
 - (IBAction)loadBannerButtonTapped:(id)sender {
     // call [IronSource destroyBanner:self.bannerView] before loading a new banner
-    if (self.bannerView) {
+    if (self.bannerAdView) {
         [self destroyBanner];
     }
     
-    // This will load the Banner. You can supply a placement
-    // by calling 'loadBannerWithViewController:size:placement', or you can simply
-    // call 'loadBannerWithViewController:size'.
-    // In this case the SDK will use the default placement one created for you.
-    // You can pick any banner size: ISBannerSize_BANNER, ISBannerSize_LARGE, ISBannerSize_RECTANGLE or ISBannerSize_LEADERBOARD
+
+    // choose banner size
+    // 1. recommended - Adaptive ad size that adjusts to the screen width
+    // 2. Adaptive ad size using fixed width ad size
+    // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
+    LPMAdSize *bannerSize = [LPMAdSize createAdaptiveAdSize];
+
+
+//    LPMAdSize *bannerSize = [LPMAdSize createAdaptiveAdSizeWithWidth:400];
+//    LPMAdSize *bannerSize = [LPMAdSize mediumRectangleSize];
+
+    // Create the banner view and set the ad unit id and ad size
+    self.bannerAdView = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
+    [self.bannerAdView setAdSize:bannerSize];
+//    self.bannerAdView.frame = CGRectMake(0, 0, bannerSize.width, bannerSize.height);
+
+
+    
+    // set the banner listener
+    self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self
+                                                              bannerView:self.bannerAdView
+                                                              bannerSize:bannerSize];
+
+    [self.bannerAdView setDelegate:self.bannerDelegate];
+
     
     [self logMethodName:@"loadBannerWithViewController:size:"];
-    [IronSource loadBannerWithViewController:self
-                                        size:ISBannerSize_BANNER];
+    [self.bannerAdView loadAdWithViewController:self];
 }
 
 - (IBAction)destroyBannerButtonTapped:(id)sender {
@@ -157,10 +197,10 @@
 
 - (void)destroyBanner {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.bannerView) {
+        if (self.bannerAdView) {
             [self logMethodName:@"destroyBanner:"];
-            [IronSource destroyBanner:self.bannerView];
-            self.bannerView = nil;
+            [self.bannerAdView destroy];
+            self.bannerAdView = nil;
         }
         
         [self setEnablementForButton:LoadBannerButtonIdentifier
@@ -201,22 +241,28 @@
     });
 }
 
-- (void)setAndBindBannerView:(ISBannerView *)bannerView {
+- (void)setAndBindBannerView:(LPMBannerAdView *)bannerView
+                  bannerSize:(LPMAdSize *)bannerSize {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.bannerView) {
-            [self.bannerView removeFromSuperview];
+        if (self.bannerAdView) {
+            [self.bannerAdView removeFromSuperview];
         }
         
-        self.bannerView = bannerView;
-        self.bannerView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.bannerAdView = bannerView;
+        self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
         
-        [self.view addSubview:self.bannerView];
+        [self.view addSubview:self.bannerAdView];
 
-        NSLayoutConstraint *centerX = [self.bannerView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor];
-        NSLayoutConstraint *bottom = [self.bannerView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor];
-        NSLayoutConstraint *width = [self.bannerView.widthAnchor constraintEqualToConstant:bannerView.frame.size.width];
-        NSLayoutConstraint *height = [self.bannerView.heightAnchor constraintEqualToConstant:bannerView.frame.size.height];
-        [NSLayoutConstraint activateConstraints:@[centerX, bottom, width, height]];
+        
+        self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
+
+        [NSLayoutConstraint activateConstraints:@[
+            [self.bannerAdView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
+            [self.bannerAdView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+            [self.bannerAdView.widthAnchor constraintEqualToConstant:bannerSize.width],
+            [self.bannerAdView.heightAnchor constraintEqualToConstant:bannerSize.height]
+        ]];
+
     });
 }
 
