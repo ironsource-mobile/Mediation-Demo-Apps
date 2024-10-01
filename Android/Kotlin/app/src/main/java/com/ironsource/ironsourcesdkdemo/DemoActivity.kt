@@ -11,16 +11,21 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.multidex.BuildConfig
-import com.ironsource.mediationsdk.ISBannerSize
 import com.ironsource.mediationsdk.IronSource
-import com.ironsource.mediationsdk.IronSourceBannerLayout
 import com.ironsource.mediationsdk.integration.IntegrationHelper
 import com.ironsource.mediationsdk.model.Placement
 import com.ironsource.mediationsdk.utils.IronSourceUtils
+import com.unity3d.mediation.LevelPlay
+import com.unity3d.mediation.LevelPlayAdSize
+import com.unity3d.mediation.LevelPlayInitRequest
+import com.unity3d.mediation.banner.LevelPlayBannerAdView
+import com.unity3d.mediation.interstitial.LevelPlayInterstitialAd
 
 
 private const val TAG = "DemoActivity"
 private const val APP_KEY = "85460dcd"
+private const val INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9"
+private const val BANNER_AD_UNIT_ID = "thnfvcsog13bhn08"
 
 class DemoActivity : Activity(), DemoActivityListener {
 
@@ -31,8 +36,10 @@ class DemoActivity : Activity(), DemoActivityListener {
     private lateinit var bannerDestroyButton: Button
 
     private var bannerParentLayout: FrameLayout? = null
-    private var ironSourceBannerLayout: IronSourceBannerLayout? = null
     private var rewardedVideoPlacementInfo: Placement? = null
+
+    private var mInterstitialAd : LevelPlayInterstitialAd? = null
+    private var mBannerAd : LevelPlayBannerAdView? = null
 
     companion object {
         internal fun logCallbackName(tag: String, fmt: String) {
@@ -89,26 +96,24 @@ class DemoActivity : Activity(), DemoActivityListener {
             IntegrationHelper.validateIntegration(this)
         }
 
-        // Before initializing any of our products (Rewarded video, Interstitial or Banner) you must set
+        // Before initializing any of our legacy products (Rewarded video, Interstitial or Banner) you must set
         // their listeners. Take a look at each of these listeners method and you will see that they each implement a product
         // protocol. This is our way of letting you know what's going on, and if you don't set the listeners
         // we will not be able to communicate with you.
         // We're passing 'this' to our listeners because we want
         // to be able to enable/disable buttons to match ad availability.
         IronSource.setLevelPlayRewardedVideoListener(DemoRewardedVideoAdListener(this))
-        IronSource.setLevelPlayInterstitialListener(DemoInterstitialAdListener(this))
         IronSource.addImpressionDataListener(DemoImpressionDataListener())
 
         // After setting the listeners you can go ahead and initialize the SDK.
         // Once the initialization callback is returned you can start loading your ads
-
-        // After setting the listeners you can go ahead and initialize the SDK.
-        // Once the initialization callback is returned you can start loading your ads
         log("init ironSource SDK with appKey: $APP_KEY")
-        IronSource.init(this, APP_KEY, DemoInitializationListener(this))
 
-        // To initialize specific ad units:
-        // IronSource.init(this, APP_KEY, new InitializationListener(this), IronSource.AD_UNIT.REWARDED_VIDEO, IronSource.AD_UNIT.INTERSTITIAL, IronSource.AD_UNIT.BANNER);
+        val legacyAdFormats = listOf(LevelPlay.AdFormat.REWARDED)
+        val initRequest = LevelPlayInitRequest.Builder(APP_KEY)
+            .withLegacyAdFormats(legacyAdFormats)
+            .build()
+        LevelPlay.init(this, initRequest, DemoInitializationListener(this))
 
         // Scroll down the file to find out what happens when you tap a button...
     }
@@ -131,48 +136,60 @@ class DemoActivity : Activity(), DemoActivityListener {
         // This will load an Interstitial ad
 
         log("loadInterstitial")
-        IronSource.loadInterstitial()
+        mInterstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
+        mInterstitialAd?.setListener(DemoInterstitialAdListener(this));
+        mInterstitialAd?.loadAd()
     }
 
     fun showInterstitialButtonTapped(view: View){
         // It is advised to make sure there is available ad before attempting to show an ad
-        if (IronSource.isInterstitialReady()) {
+        if (mInterstitialAd?.isAdReady() == true) {
             // This will present the Interstitial.
             // Unlike Rewarded Videos there are no placements.
 
             log("showInterstitial")
-            IronSource.showInterstitial()
+            mInterstitialAd?.showAd(this)
         } else {
             // load a new ad before calling show
         }
     }
 
-    fun loadBannerButtonTapped(view: View){
-        // call IronSource.destroyBanner() before loading a new banner
-        bannerParentLayout?.let {
-            destroyBanner()
-        }
+    fun loadBannerButtonTapped(view: View) {
+        // call destroy() before loading a new banner
+        destroyBanner()
 
         // choose banner size
-        // you can pick any banner size: ISBannerSize.BANNER, ISBannerSize.LARGE, ISBannerSize.RECTANGLE, ISBannerSize.SMART or even define a custom banner size by providing width and height
-        val size = ISBannerSize.BANNER
+        // 1. recommended - Adaptive ad size that adjusts to the screen width
+        // 2. Adaptive ad size using fixed width ad size
+        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
+        // choose banner size
+        // 1. recommended - Adaptive ad size that adjusts to the screen width
+        // 2. Adaptive ad size using fixed width ad size
+        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
+        val adSize = LevelPlayAdSize.createAdaptiveAdSize(this)
 
-        // initialize IronSourceBanner object, using the IronSource.createBanner API
-        ironSourceBannerLayout = IronSource.createBanner(this, size)
-        ironSourceBannerLayout?.apply {
-            // add IronSourceBanner to your container
-            val layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-            bannerParentLayout?.addView(this, 0, layoutParams)
+//        val  adSize = LevelPlayAdSize.createAdaptiveAdSize(this, 400)
+//        val adSize = LevelPlayAdSize.BANNER
 
-            // set the banner listener
-            levelPlayBannerListener = DemoBannerAdListener(this@DemoActivity)
-
-            // load ad into the created banner
-            log("loadBanner")
-            IronSource.loadBanner(this)
-        }  ?: run {
-            log("IronSource.createBanner returned null")
+        // Create the banner view and set the ad unit id and ad size
+        mBannerAd = LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID)
+        adSize?.let {
+            mBannerAd?.setAdSize(adSize)
         }
+
+        // add LevelPlayBannerAdView to your container
+        val layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+        bannerParentLayout?.addView(mBannerAd, 0, layoutParams)
+
+
+        // set the banner listener
+        mBannerAd?.setBannerListener(DemoBannerAdListener(this))
+
+
+        // load ad into the created banner
+        log("loadBanner")
+        mBannerAd?.loadAd()
+
     }
 
     fun destroyBannerButtonClicked(view: View){
@@ -181,8 +198,8 @@ class DemoActivity : Activity(), DemoActivityListener {
 
     private fun destroyBanner() {
         log("destroyBanner")
-        IronSource.destroyBanner(ironSourceBannerLayout)
-        bannerParentLayout?.removeView(ironSourceBannerLayout)
+        mBannerAd?.destroy()
+        bannerParentLayout?.removeView(mBannerAd)
         setBannerViewVisibility(View.GONE)
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
