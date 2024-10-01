@@ -13,7 +13,6 @@
 		471A2A491E66D27A00217BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */; };
 		F1666FFE2AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */; };
 		F1666FFF2AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */; };
-		F16670002AFA6FCC0077FADE /* DemoInitializationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFA2AFA6FCC0077FADE /* DemoInitializationDelegate.swift */; };
 		F16670012AFA6FCC0077FADE /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */; };
 		F16670022AFA6FCC0077FADE /* DemoBannerAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFC2AFA6FCC0077FADE /* DemoBannerAdDelegate.swift */; };
 		F16670032AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFD2AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift */; };
@@ -32,7 +31,6 @@
 		B5111310BE6147BB80A95CF4 /* Pods-IronSourceSwiftDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceSwiftDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-IronSourceSwiftDemoApp/Pods-IronSourceSwiftDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoRewardedVideoAdDelegate.swift; sourceTree = "<group>"; };
 		F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoImpressionDataDelegate.swift; sourceTree = "<group>"; };
-		F1666FFA2AFA6FCC0077FADE /* DemoInitializationDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoInitializationDelegate.swift; sourceTree = "<group>"; };
 		F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		F1666FFC2AFA6FCC0077FADE /* DemoBannerAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoBannerAdDelegate.swift; sourceTree = "<group>"; };
 		F1666FFD2AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoInterstitialAdDelegate.swift; sourceTree = "<group>"; };
@@ -73,7 +71,6 @@
 			children = (
 				471A2A3E1E66D27900217BE4 /* AppDelegate.swift */,
 				F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */,
-				F1666FFA2AFA6FCC0077FADE /* DemoInitializationDelegate.swift */,
 				F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */,
 				F1666FFD2AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift */,
 				F1666FFC2AFA6FCC0077FADE /* DemoBannerAdDelegate.swift */,
@@ -114,6 +111,7 @@
 				471A2A371E66D27900217BE4 /* Sources */,
 				471A2A381E66D27900217BE4 /* Frameworks */,
 				471A2A391E66D27900217BE4 /* Resources */,
+				B16395DE6055E75BC05470A9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -207,7 +205,6 @@
 				F16670022AFA6FCC0077FADE /* DemoBannerAdDelegate.swift in Sources */,
 				F1666FFE2AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift in Sources */,
 				471A2A3F1E66D27900217BE4 /* AppDelegate.swift in Sources */,
-				F16670002AFA6FCC0077FADE /* DemoInitializationDelegate.swift in Sources */,
 				F1666FFF2AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift in Sources */,
 				F16670012AFA6FCC0077FADE /* DemoViewController.swift in Sources */,
 				F16670032AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift in Sources */,
