@@ -134,10 +134,14 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     public void loadInterstitialButtonTapped(View view) {
         // This will load an Interstitial ad
-        mInterstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
-        mInterstitialAd.setListener(new DemoInterstitialAdListener(this));
+        createInterstitialAd();
         mInterstitialAd.loadAd();
         log("loadInterstitial");
+    }
+
+    private void createInterstitialAd() {
+        mInterstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
+        mInterstitialAd.setListener(new DemoInterstitialAdListener(this));
     }
 
     public void showInterstitialButtonTapped(View view) {
@@ -159,6 +163,18 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             destroyBanner();
         }
 
+        createBannerAd();
+        // add LevelPlayBannerAdView to your container
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+        bannerParentLayout.addView(mBannerAd, 0, layoutParams);
+
+
+        // load ad into the created banner
+        log("loadBanner");
+        mBannerAd.loadAd();
+    }
+
+    private void createBannerAd() {
         // choose banner size
         // 1. recommended - Adaptive ad size that adjusts to the screen width
         // 2. Adaptive ad size using fixed width ad size
@@ -171,17 +187,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         // Create the banner view and set the ad unit id and ad size
         mBannerAd = new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID);
         mBannerAd.setAdSize(adSize);
-
-        // add LevelPlayBannerAdView to your container
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-        bannerParentLayout.addView(mBannerAd, 0, layoutParams);
-
+        
         // set the banner listener
         mBannerAd.setBannerListener(new DemoBannerAdListener(this));
-
-        // load ad into the created banner
-        log("loadBanner");
-        mBannerAd.loadAd();
     }
 
     public void destroyBannerButtonTapped(View view) {
