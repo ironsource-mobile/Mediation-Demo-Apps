@@ -53,6 +53,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
         setupUI();
         setupIronSourceSdk();
+
+        createInterstitialAd();
+        createBannerAd();
     }
 
     @Override
@@ -134,7 +137,6 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     public void loadInterstitialButtonTapped(View view) {
         // This will load an Interstitial ad
-        createInterstitialAd();
         mInterstitialAd.loadAd();
         log("loadInterstitial");
     }
@@ -163,7 +165,6 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             destroyBanner();
         }
 
-        createBannerAd();
         // add LevelPlayBannerAdView to your container
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
         bannerParentLayout.addView(mBannerAd, 0, layoutParams);
