@@ -147,7 +147,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     }
 
     public void showInterstitialButtonTapped(View view) {
-        // It is advised to make sure there is available ad before attempting to show an ad
+        // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (mInterstitialAd.isAdReady()) {
             // This will present the Interstitial.
             // Unlike Rewarded Videos there are no placements.
