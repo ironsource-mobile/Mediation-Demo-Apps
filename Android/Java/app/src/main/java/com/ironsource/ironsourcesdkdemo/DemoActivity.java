@@ -28,8 +28,11 @@ import java.util.List;
 public class DemoActivity extends Activity implements DemoActivityListener {
 
     public static final String TAG = "DemoActivity";
+
+    // Replace with your app key as available in the LevelPlay dashboard
     public static final String APP_KEY = "85460dcd";
 
+    // Replace with your ad unit ids as available in the LevelPlay dashboard
     public static final String INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9";
     public static final String BANNER_AD_UNIT_ID = "thnfvcsog13bhn08";
 
