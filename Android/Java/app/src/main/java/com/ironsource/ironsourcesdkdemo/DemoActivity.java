@@ -144,18 +144,22 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     public void loadInterstitialButtonTapped(View view) {
         // This will load an Interstitial ad
-        mInterstitialAd.loadAd();
         log("loadInterstitial");
+        if (mInterstitialAd != null) {
+            mInterstitialAd.loadAd();
+        }
     }
 
     public void createInterstitialAd() {
         mInterstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
         mInterstitialAd.setListener(new DemoInterstitialAdListener(this));
+
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true);
     }
 
     public void showInterstitialButtonTapped(View view) {
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
-        if (mInterstitialAd.isAdReady()) {
+        if (mInterstitialAd != null && mInterstitialAd.isAdReady()) {
             // This will present the Interstitial.
             // Unlike Rewarded Videos there are no placements.
 
@@ -167,31 +171,42 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     }
 
     public void loadBannerButtonTapped(View view) {
-        // load ad into the created banner
+        // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
+        // otherwise, the banner will remain static until manually destroyed
         log("loadBanner");
-        mBannerAd.loadAd();
+        if (mBannerAd != null) {
+            mBannerAd.loadAd();
+        }
     }
 
     public void createBannerAd() {
         // choose banner size
+
         // 1. recommended - Adaptive ad size that adjusts to the screen width
-        // 2. Adaptive ad size using fixed width ad size
-        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
         LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(this);
 
-//        LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(this, 400);
+        // 2. Adaptive ad size using fixed width ad size
+//         LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(this, 400);
+
+        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
 //        LevelPlayAdSize adSize = LevelPlayAdSize.BANNER;
 
         // Create the banner view and set the ad unit id and ad size
-        mBannerAd = new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID);
-        mBannerAd.setAdSize(adSize);
-        
-        // set the banner listener
-        mBannerAd.setBannerListener(new DemoBannerAdListener(this));
+        if (adSize != null) {
+            mBannerAd = new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID);
+            mBannerAd.setAdSize(adSize);
 
-        // add LevelPlayBannerAdView to your container
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-        bannerParentLayout.addView(mBannerAd, 0, layoutParams);
+            // set the banner listener
+            mBannerAd.setBannerListener(new DemoBannerAdListener(this));
+
+            // add LevelPlayBannerAdView to your container
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+            bannerParentLayout.addView(mBannerAd, 0, layoutParams);
+            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true);
+        }
+        else {
+            log( "Failed to create banner ad");
+        }
     }
 
     public void destroyBannerButtonTapped(View view) {
@@ -199,7 +214,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     }
 
     private void destroyBanner() {
-        if (bannerParentLayout != null) {
+        if (bannerParentLayout != null && mBannerAd != null) {
             log("destroyBanner");
 
             bannerParentLayout.removeView(mBannerAd);
