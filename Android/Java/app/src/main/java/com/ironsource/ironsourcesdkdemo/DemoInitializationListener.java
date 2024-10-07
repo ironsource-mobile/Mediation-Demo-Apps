@@ -23,6 +23,8 @@ public class DemoInitializationListener implements LevelPlayInitListener {
     @Override
     public void onInitSuccess(LevelPlayConfiguration configuration) {
         logCallbackName(TAG, "");
+        this.listener.createInterstitialAd();
+        this.listener.createBannerAd();
         this.listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true);
         this.listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true);
     }
