@@ -44,8 +44,8 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     private FrameLayout bannerParentLayout;
     private Placement rewardedVideoPlacementInfo;
 
-    LevelPlayInterstitialAd mInterstitialAd;
-    LevelPlayBannerAdView mBannerAd;
+    private LevelPlayInterstitialAd mInterstitialAd;
+    private LevelPlayBannerAdView mBannerAd;
 
     //region Lifecycle Methods
     @Override
@@ -112,17 +112,16 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
         // After setting the listeners you can go ahead and initialize the SDK.
         // Once the initialization callback is returned you can start loading your ads
-        log("init ironSource SDK with appKey: " + APP_KEY);
 
         // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
         List<LevelPlay.AdFormat> legacyAdFormats = Arrays.asList(LevelPlay.AdFormat.REWARDED);
 
-
         LevelPlayInitRequest initRequest = new LevelPlayInitRequest.Builder(APP_KEY)
                 .withLegacyAdFormats(legacyAdFormats)
                 .build();
-        LevelPlay.init(this, initRequest, new DemoInitializationListener(this));
 
+        log("init ironSource SDK with appKey: " + APP_KEY);
+        LevelPlay.init(this, initRequest, new DemoInitializationListener(this));
 
         // Scroll down the file to find out what happens when you tap a button...
     }
@@ -142,19 +141,19 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         }
     }
 
-    public void loadInterstitialButtonTapped(View view) {
-        // This will load an Interstitial ad
-        log("loadInterstitial");
-        if (mInterstitialAd != null) {
-            mInterstitialAd.loadAd();
-        }
-    }
-
     public void createInterstitialAd() {
         mInterstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
         mInterstitialAd.setListener(new DemoInterstitialAdListener(this));
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true);
+    }
+
+    public void loadInterstitialButtonTapped(View view) {
+        // This will load an Interstitial ad
+        if (mInterstitialAd != null) {
+            log("loadAd for interstitial");
+            mInterstitialAd.loadAd();
+        }
     }
 
     public void showInterstitialButtonTapped(View view) {
@@ -163,19 +162,10 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             // This will present the Interstitial.
             // Unlike Rewarded Videos there are no placements.
 
-            log("showInterstitial");
+            log("showAd for interstitial");
             mInterstitialAd.showAd(this);
         } else {
             // load a new ad before calling show
-        }
-    }
-
-    public void loadBannerButtonTapped(View view) {
-        // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
-        // otherwise, the banner will remain static until manually destroyed
-        log("loadBanner");
-        if (mBannerAd != null) {
-            mBannerAd.loadAd();
         }
     }
 
@@ -209,20 +199,15 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         }
     }
 
-    public void destroyBannerButtonTapped(View view) {
-        destroyBanner();
-    }
-
-    private void destroyBanner() {
-        if (bannerParentLayout != null && mBannerAd != null) {
-            log("destroyBanner");
-
-            bannerParentLayout.removeView(mBannerAd);
-            this.setBannerViewVisibility(View.GONE);
+    public void loadBannerButtonTapped(View view) {
+        // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
+        // otherwise, the banner will remain static until manually destroyed
+        if (mBannerAd != null) {
+            log("loadAd for banner");
+            mBannerAd.loadAd();
         }
-
-        setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true);
     }
+
     //endregion
 
     //region Demo Callbacks
