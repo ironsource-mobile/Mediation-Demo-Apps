@@ -237,9 +237,6 @@
 - (void)setAndBindBannerView:(LPMBannerAdView *)bannerView
                   bannerSize:(LPMAdSize *)bannerSize {
     dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.bannerAdView) {
-            [self.bannerAdView removeFromSuperview];
-        }
         
         self.bannerAdView = bannerView;
         self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
