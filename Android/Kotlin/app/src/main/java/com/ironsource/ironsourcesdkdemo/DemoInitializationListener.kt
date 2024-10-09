@@ -17,8 +17,8 @@ class DemoInitializationListener(private val listener: DemoActivityListener) :
      */
     override fun onInitSuccess(configuration: LevelPlayConfiguration) {
         logCallbackName(TAG, "")
-        listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true)
-        listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
+        this.listener.createInterstitialAd()
+        this.listener.createBannerAd()
     }
 
     /**
