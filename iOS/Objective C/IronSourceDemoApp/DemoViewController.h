@@ -14,8 +14,7 @@ typedef NS_ENUM(NSInteger, ButtonIdentifiers) {
     ShowRewardedVideoButtonIdentifier,
     LoadInterstitialButtonIdentifier,
     ShowInterstitialButtonIdentifier,
-    LoadBannerButtonIdentifier,
-    DestroyBannerButtonIdentifier
+    LoadBannerButtonIdentifier
 };
 
 @protocol DemoViewControllerDelegate <NSObject>
@@ -36,7 +35,6 @@ typedef NS_ENUM(NSInteger, ButtonIdentifiers) {
 @property (weak, nonatomic) IBOutlet UIButton *showInterstitialButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *loadBannerButton;
-@property (weak, nonatomic) IBOutlet UIButton *destroyBannerButton;
 
 @property (weak, nonatomic) IBOutlet UILabel  *versionLabel;
 

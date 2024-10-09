@@ -33,8 +33,6 @@
                              bannerSize:self.bannerSize];
     [self.delegate setEnablementForButton:LoadBannerButtonIdentifier
                                    enable:NO];
-    [self.delegate setEnablementForButton:DestroyBannerButtonIdentifier
-                                   enable:YES];
 
 }
 

@@ -12,7 +12,10 @@
 #import "DemoBannerAdDelegate.h"
 #import "DemoImpressionDataDelegate.h"
 
+// Replace with your app key as available in the LevelPlay dashboard
 #define kAppKey @"8545d445"
+
+// Replace with your ad unit ids as available in the LevelPlay dashboard
 #define kInterstitialAdUnitId @"wmgt0712uuux8ju4"
 #define kBannerAdUnitId @"iep3rxsyp9na3rw8"
 
@@ -48,12 +51,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+- (void)dealloc {
+    [self.bannerAdView destroy];
+    self.bannerAdView = nil;
+}
+
 #pragma mark Private Methods
 
 - (void)setupUI {
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
     
-    for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]) {
+    for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 2.5f;
@@ -84,15 +93,14 @@
         
     // After setting the delegates you can go ahead and initialize the SDK. 
     // Once the iniitaliztion callback is return you can start loading your ads
-    logCallbackName(@"init ironSource SDK with appKey: %@", kAppKey);
     
-    // Create a request builder with app key and ad formats. Add User ID if available
+    // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
     LPMInitRequestBuilder *requestBuilder = [[LPMInitRequestBuilder alloc] initWithAppKey:kAppKey];
     [requestBuilder withLegacyAdFormats:@[IS_REWARDED_VIDEO]];
 
-    // Build the initial request
     LPMInitRequest *initRequest = [requestBuilder build];
-    // Initialize LevelPlay with the prepared request
+    
+    [self logMethodName:[NSString stringWithFormat:@"init ironSource SDK with appKey: %@", kAppKey]];
     [LevelPlay initWithRequest:initRequest completion:^(LPMConfiguration *_Nullable config, NSError *_Nullable error){
     
         if(error) {
@@ -101,12 +109,8 @@
         } else {
             // Initialization was successful. You can now load banner ad or perform other tasks
             logCallbackName(@"sdk initialization succeeded");
-            
-            [self setEnablementForButton:LoadInterstitialButtonIdentifier
-                                           enable:YES];
-            [self setEnablementForButton:LoadBannerButtonIdentifier
-                                           enable:YES];
-
+            [self createInterstititalAd];
+            [self createBannerAd];
         }
     }];
     
@@ -128,84 +132,79 @@
     }
 }
 
-- (IBAction)loadInterstitialButtonTapped:(id)sender {
-    // This will load an Interstitial ad
-
+- (void) createInterstititalAd {
     self.interstitialAd = [[LPMInterstitialAd alloc] initWithAdUnitId:kInterstitialAdUnitId];
     self.interstitialDelegate = [[DemoInterstitialAdDelegate alloc] initWithDelegate:self];
     self.interstitialAd.delegate = self.interstitialDelegate;
-
     
-    [self logMethodName:@"loadInterstitial"];
+    [self setEnablementForButton:LoadInterstitialButtonIdentifier
+                                   enable:YES];
+
+}
+
+- (IBAction)loadInterstitialButtonTapped:(id)sender {
+    // This will load an Interstitial ad
+    [self logMethodName:@"loadAd for interstitial"];
     [self.interstitialAd loadAd];
 }
 
 
 - (IBAction)showInterstitialButtonTapped:(id)sender {
-    // It is advised to make sure there is available ad before attempting to show an ad
+    // It is advised to make sure there is available ad that isn't capped before attempting to show it
     if ([self.interstitialAd isAdReady]) {
         // This will present the Interstitial.
         // Unlike Rewarded Videos there are no placements.
 
-        [self logMethodName:@"showInterstitialWithViewController:"];
+        [self logMethodName:@"showAdWithViewController for interstitial:"];
         [self.interstitialAd showAdWithViewController:self placementName:NULL];
     } else {
         // load a new ad before calling show
     }
 }
 
-- (IBAction)loadBannerButtonTapped:(id)sender {
-    // call [IronSource destroyBanner:self.bannerView] before loading a new banner
-    if (self.bannerAdView) {
-        [self destroyBanner];
-    }
-    
 
+- (void) createBannerAd {
     // choose banner size
+    
     // 1. recommended - Adaptive ad size that adjusts to the screen width
-    // 2. Adaptive ad size using fixed width ad size
-    // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
     LPMAdSize *bannerSize = [LPMAdSize createAdaptiveAdSize];
 
 
+    // 2. Adaptive ad size using fixed width ad size
 //    LPMAdSize *bannerSize = [LPMAdSize createAdaptiveAdSizeWithWidth:400];
-//    LPMAdSize *bannerSize = [LPMAdSize mediumRectangleSize];
+
+    // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
+//        LPMAdSize *bannerSize = [LPMAdSize mediumRectangleSize];
 
     // Create the banner view and set the ad unit id and ad size
-    self.bannerAdView = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
-    [self.bannerAdView setAdSize:bannerSize];
+    if (bannerSize != nil) {
+        self.bannerAdView = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
+        [self.bannerAdView setAdSize:bannerSize];
 
+        
+        // set the banner listener
+        self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self
+                                                                  bannerView:self.bannerAdView
+                                                                  bannerSize:bannerSize];
+
+        [self.bannerAdView setDelegate:self.bannerDelegate];
+
+        
+        [self setEnablementForButton:LoadBannerButtonIdentifier
+                                       enable:YES];
+    }
+    else {
+        NSLog(@"Error creating banner size");
+    }
     
-    // set the banner listener
-    self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self
-                                                              bannerView:self.bannerAdView
-                                                              bannerSize:bannerSize];
+}
 
-    [self.bannerAdView setDelegate:self.bannerDelegate];
-
-    
-    [self logMethodName:@"loadBannerWithViewController:size:"];
+- (IBAction)loadBannerButtonTapped:(id)sender {
+    [self logMethodName:@"loadAdWithViewController for banner"];
     [self.bannerAdView loadAdWithViewController:self];
 }
 
-- (IBAction)destroyBannerButtonTapped:(id)sender {
-    [self destroyBanner];
-}
 
-- (void)destroyBanner {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (self.bannerAdView) {
-            [self logMethodName:@"destroyBanner:"];
-            [self.bannerAdView destroy];
-            self.bannerAdView = nil;
-        }
-        
-        [self setEnablementForButton:LoadBannerButtonIdentifier
-                              enable:YES];
-        [self setEnablementForButton:DestroyBannerButtonIdentifier
-                              enable:NO];
-    });
-}
 
 #pragma mark DemoViewControllerDelegate
 
@@ -226,9 +225,6 @@
                 break;
             case LoadBannerButtonIdentifier:
                 buttonToModify = self.loadBannerButton;
-                break;
-            case DestroyBannerButtonIdentifier:
-                buttonToModify = self.destroyBannerButton;
                 break;
         }
 
