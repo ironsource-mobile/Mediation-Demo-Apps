@@ -32,7 +32,6 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
 
         self.delegate?.setAndBindBannerView(bannerView, bannerSize)
         self.delegate?.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: false)
-        self.delegate?.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: true)
     }
     
     /**

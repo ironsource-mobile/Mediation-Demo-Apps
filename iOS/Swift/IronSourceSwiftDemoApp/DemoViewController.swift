@@ -10,7 +10,10 @@ import Foundation
 import ObjectiveC.runtime
 import IronSource
 
+// Replace with your app key as available in the LevelPlay dashboard
 let appKey = "8545d445"
+
+// Replace with your ad unit ids as available in the LevelPlay dashboard
 let interstitialAdUnitId = "wmgt0712uuux8ju4"
 let bannerAdUnitId = "iep3rxsyp9na3rw8"
 
@@ -19,7 +22,6 @@ enum ButtonIdentifiers : Int {
     case loadInterstitialButtonIdentifier
     case showInterstitialButtonIdentifier
     case loadBannerButtonIdentifier
-    case destroyBannerButtonIdentifier
 }
 
 protocol DemoViewControllerDelegate: NSObjectProtocol {
@@ -30,6 +32,8 @@ protocol DemoViewControllerDelegate: NSObjectProtocol {
     func setAndBindBannerView(_ bannerView: LPMBannerAdView!, _ bannerSize: LPMAdSize!)
     func setPlacementInfo(_ placementInfo: ISPlacementInfo?)
     func showVideoRewardMessage()
+    func createInterstititalAd()
+    func createBannerAd()
 }
 
 class DemoViewController: UIViewController, DemoViewControllerDelegate {
@@ -42,7 +46,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     @IBOutlet weak var showInterstitialButton: UIButton!
     
     @IBOutlet weak var loadBannerButton: UIButton!
-    @IBOutlet weak var destroyBannerButton: UIButton!
     
     @IBOutlet weak var versionLabel: UILabel!
     
@@ -71,11 +74,16 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    deinit {
+        self.bannerAdView.destroy()
+        self.bannerAdView = nil
+    }
+
     //MARK: Private Methods
     
     func setupUI() {
         self.versionLabel.text =  String(format: "sdk version %@", IronSource.sdkVersion());
-        let buttons = [self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]
+        let buttons = [self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton]
 
         for button in buttons {
             button?.layer.cornerRadius = 17.0
@@ -101,35 +109,33 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // to be able to enable/disable buttons to match ad availability.
         rewardedVideoDelegate = .init(delegate: self)
         IronSource.setLevelPlayRewardedVideoDelegate(rewardedVideoDelegate)
-                
+        
         impressionDataDelegate = .init()
         IronSource.add(self.impressionDataDelegate)
-                
+        
         // After setting the delegates you can go ahead and initialize the SDK.
         // Once the iniitaliztion callback is return you can start loading your ads
+        
+        // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
+        let requestBuilder = LPMInitRequestBuilder(appKey: appKey)
+            .withLegacyAdFormats([IS_REWARDED_VIDEO])
+        
+        let initRequest = requestBuilder.build()
+        
         self.logMethodName(string: "init ironSource SDK with appKey:  \(appKey)")
-
-        // Create a request builder with app key and ad formats. Add User ID if available
-           let requestBuilder = LPMInitRequestBuilder(appKey: appKey)
-                   .withLegacyAdFormats([IS_REWARDED_VIDEO])
-           // Build the initial request
-           let initRequest = requestBuilder.build()
-           // Initialize LevelPlay with the prepared request
-           LevelPlay.initWith(initRequest)
-           { config, error in
-               if let error = error {
-                   self.logMethodName(string: "sdk initialization failed, error =\(error.localizedDescription)")
-
-               } else {
-                   self.logMethodName(string: "sdk initialization succeeded")
-                   self.setButtonEnablement(ButtonIdentifiers.loadInterstitialButtonIdentifier, enable: true)
-                   self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
-
-
-             }
-       }
+        LevelPlay.initWith(initRequest)
+        { config, error in
+            if let error = error {
+                self.logMethodName(string: "sdk initialization failed, error =\(error.localizedDescription)")
                 
-// Scroll down the file to find out what happens when you tap a button...
+            } else {
+                self.logMethodName(string: "sdk initialization succeeded")
+                self.createInterstititalAd()
+                self.createBannerAd()
+            }
+        }
+        
+        // Scroll down the file to find out what happens when you tap a button...
     }
     
     //MARK: Interface Handling
@@ -146,84 +152,77 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         }
     }
     
-    @IBAction func loadInterstitialButtonTapped(_ sender: Any) {
-        // This will load an Interstitial ad
-
-        logMethodName(string: "loadInterstitial()")
+    func createInterstititalAd() {
         self.interstitialAd = LPMInterstitialAd(adUnitId: interstitialAdUnitId)
         interstitialDelegate = .init(delegate: self)
         self.interstitialAd.setDelegate(interstitialDelegate)
-        self.interstitialAd.loadAd()
+
+        self.setButtonEnablement(ButtonIdentifiers.loadInterstitialButtonIdentifier, enable: true)
+    }
+    
+    @IBAction func loadInterstitialButtonTapped(_ sender: Any) {
+        guard let interstitialAd = self.interstitialAd else {
+            return
+        }
+
+        // This will load an Interstitial ad
+        logMethodName(string: "loadAd for interstitial")
+        interstitialAd.loadAd()
     }
 
     @IBAction func showInterstitialButtonTapped(_ sender: Any) {
         // It is advised to make sure there is available ad before attempting to show an ad
-        if self.interstitialAd.isAdReady() {
+        if (self.interstitialAd != nil && self.interstitialAd.isAdReady()) {
             // This will present the Interstitial.
             // Unlike Rewarded Videos there are no placements.
 
-            logMethodName(string: "showInterstitial(with:)")
+            logMethodName(string: "showAd for interstitial")
             self.interstitialAd.showAd(viewController: self, placementName: nil)
         } else {
             // load a new ad before calling show
         }
     }
     
-    @IBAction func loadBannerButtonTapped(_ sender: Any) {
-        // call IronSource.destroyBanner(bannerView) before loading a new banner
-        if bannerAdView != nil {
-            destroyBanner()
-        }
-        
+    
+    func createBannerAd() {
         // choose banner size
         // 1. recommended - Adaptive ad size that adjusts to the screen width
-        // 2. Adaptive ad size using fixed width ad size
-        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
         let bannerSize = LPMAdSize.createAdaptive()
         
-        //        let bannerSize = LPMAdSize.createAdaptiveAdSize(withWidth: 400)
-        //        let bannerSize = LPMAdSize.mediumRectangle()
+        // 2. Adaptive ad size using fixed width ad size
+//        let bannerSize = LPMAdSize.createAdaptiveAdSize(withWidth: 400)
+        
+        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
+//        let bannerSize = LPMAdSize.mediumRectangle()
 
         
         guard let bannerSize = bannerSize else {
+            print("Error creating banner size")
             return
         }
-
-
-
 
         //  Create the banner ad view object with required & optional params
         self.bannerAdView = LPMBannerAdView(adUnitId: bannerAdUnitId)
         self.bannerAdView.setAdSize(bannerSize)
 
-    
         
         // set the banner listener
         bannerDelegate = .init(delegate: self, bannerView: bannerAdView, bannerSize: bannerSize)
 
         self.bannerAdView.setDelegate(bannerDelegate)
 
-        logMethodName(string: "load banner Ad")
-        self.bannerAdView.loadAd(with: self)
-
+        self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
 
     }
     
-    @IBAction func destroyBannerButtonTapped(_ sender: Any) {
-        destroyBanner()
-    }
-
-    func destroyBanner() {
-        DispatchQueue.main.async {
-            if self.bannerAdView != nil {
-                self.logMethodName(string: "destroyBanner(with:)")
-                self.bannerAdView.destroy()
-                self.bannerAdView = nil
-            }
-            
-            self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
-            self.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: false)
+    @IBAction func loadBannerButtonTapped(_ sender: Any) {
+        
+        guard let bannerAdView = self.bannerAdView else {
+            return
         }
+
+        logMethodName(string: "loadAd for banner")
+        bannerAdView.loadAd(with: self)
     }
     
     //MARK: DemoViewControllerDelegate
@@ -241,8 +240,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
                 buttonToModify = self.showInterstitialButton
             case .loadBannerButtonIdentifier:
                 buttonToModify = self.loadBannerButton
-            case .destroyBannerButtonIdentifier:
-                buttonToModify = self.destroyBannerButton
             }
             
             buttonToModify?.isEnabled = enable
@@ -252,9 +249,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     func setAndBindBannerView(_ bannerView: LPMBannerAdView!,
                               _ bannerSize: LPMAdSize!) {
         DispatchQueue.main.async {
-            if (self.bannerAdView != nil) {
-                self.bannerAdView.removeFromSuperview()
-            }
             
             self.bannerAdView = bannerView
             self.bannerAdView.translatesAutoresizingMaskIntoConstraints = false
