@@ -16,7 +16,6 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
         self.delegate = delegate
     }
     
-    
     /**
      Called after each banner ad has been successfully loaded, either a manual load or banner refresh
      @param adInfo The info of the ad.
@@ -42,9 +41,11 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
     func didClickAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
+    
     func didDisplayAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
+    
     func didFailToDisplayAd(with adInfo: LPMAdInfo, error: Error) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
@@ -72,8 +73,6 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
     func didCollapseAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
-
-  
     
     //MARK: Helper Method
     

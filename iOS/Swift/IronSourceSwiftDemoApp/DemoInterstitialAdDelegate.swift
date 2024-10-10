@@ -47,7 +47,6 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
     func didDisplayAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
         self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: false)
-
     }
     
     /**
@@ -57,7 +56,6 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
      */
     func didFailToDisplayAd(with adInfo: LPMAdInfo, error: Error) {
         logCallbackName(string: "\(#function) error = \(String(describing:error.self)) | adInfo =  \(String(describing:adInfo.self))")
-
     }
     
     /**
@@ -66,7 +64,6 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
      */
     func didClickAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
-
     }
     
     /**
@@ -75,10 +72,8 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
      */
     func didCloseAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
-
     }
 
-    
     //MARK: Helper Method
     
     func logCallbackName(string: String = #function) {
