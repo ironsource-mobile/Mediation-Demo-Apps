@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, ButtonIdentifiers) {
 };
 
 @protocol DemoViewControllerDelegate <NSObject>
-- (void)didLoadAdWithAdInfo;
+- (void)didLoadBannerAdWithAdInfo;
 - (void)setEnablementForButton:(ButtonIdentifiers)buttonIdentifier
                         enable:(BOOL)enable;
 - (void)setPlacementInfo:(ISPlacementInfo *)placementInfo;
