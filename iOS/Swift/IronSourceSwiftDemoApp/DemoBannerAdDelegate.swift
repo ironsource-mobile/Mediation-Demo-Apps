@@ -42,10 +42,19 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
     
+    /**
+     Called after a banner was displayed and visible on screen.
+     @param adInfo The info of the ad.
+     */
     func didDisplayAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
     
+    /**
+     Called after a banner failed to be displayed on screen.
+     @param adInfo The info of the ad.
+     @param error The reason for the error.
+     */
     func didFailToDisplayAd(with adInfo: LPMAdInfo, error: Error) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }

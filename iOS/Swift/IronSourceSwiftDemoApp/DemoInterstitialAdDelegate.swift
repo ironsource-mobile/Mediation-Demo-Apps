@@ -23,7 +23,6 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
     func didLoadAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
         self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: true)
-
     }
     
     /**
@@ -33,8 +32,13 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
     func didFailToLoadAd(withAdUnitId adUnitId: String, error: Error) {
         logCallbackName(string: "\(#function) error = \(String(describing:error.self))")
         self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: false)
-
     }
+    
+    /**
+     Called after an interstitial has attempted to load but failed.
+     @param adUnitId The ad unit id of the ad.
+     @param error The reason for the error
+     */
     func didChangeAdInfo(_ adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }

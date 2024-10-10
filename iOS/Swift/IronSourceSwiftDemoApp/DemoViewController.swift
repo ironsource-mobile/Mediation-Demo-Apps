@@ -73,7 +73,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     
     deinit {
         self.bannerAdView.destroy()
-        self.bannerAdView = nil
     }
 
     //MARK: Private Methods
@@ -190,7 +189,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
 //        self.bannerSize = LPMAdSize.mediumRectangle()
 
-        
         guard let bannerSize = bannerSize else {
             print("Error creating banner size")
             return
@@ -200,14 +198,11 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         self.bannerAdView = LPMBannerAdView(adUnitId: bannerAdUnitId)
         self.bannerAdView.setAdSize(bannerSize)
 
-        
         // set the banner listener
         bannerAdViewDelegate = .init(delegate: self)
-
         self.bannerAdView.setDelegate(bannerAdViewDelegate)
 
         self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
-
     }
     
     @IBAction func loadBannerButtonTapped(_ sender: Any) {
@@ -245,7 +240,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         DispatchQueue.main.async {
             self.bannerAdView.translatesAutoresizingMaskIntoConstraints = false
             self.view.addSubview(self.bannerAdView)
-            
             let centerX = self.bannerAdView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
             let bottom = self.bannerAdView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
             let width = self.bannerAdView.widthAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.width))
