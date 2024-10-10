@@ -242,7 +242,8 @@
             [self.bannerAdView.widthAnchor constraintEqualToConstant:self.bannerSize.width],
             [self.bannerAdView.heightAnchor constraintEqualToConstant:self.bannerSize.height]
         ]];
-
+        [self setEnablementForButton:LoadBannerButtonIdentifier
+                                       enable:NO];
     });
 }
 
