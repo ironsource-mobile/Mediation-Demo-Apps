@@ -106,14 +106,14 @@
         if(error) {
             // There was an error on initialization. Take necessary actions or retry
             logCallbackName(@"sdk initialization failed, error = %@", error.localizedDescription);
-        } else {
-            // Initialization was successful. You can now load banner ad or perform other tasks
-            logCallbackName(@"sdk initialization succeeded");
-            [self createInterstititalAd];
-            [self createBannerAd];
+            return;
         }
+        
+        // Initialization was successful. You can now load banner ad or perform other tasks
+        logCallbackName(@"sdk initialization succeeded");
+        [self createInterstititalAd];
+        [self createBannerAd];
     }];
-    
     
     // Scroll down the file to find out what happens when you tap a button...
 }
@@ -229,7 +229,7 @@
     });
 }
 
-- (void)didLoadBannerAdWithAdInfo {
+- (void)didLoadBannerAd {
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
