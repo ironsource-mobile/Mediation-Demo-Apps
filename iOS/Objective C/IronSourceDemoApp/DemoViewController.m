@@ -21,18 +21,17 @@
 
 @interface DemoViewController ()
 
-@property (nonatomic, strong) DemoRewardedVideoAdDelegate     *rewardedVideoDelegate;
-@property (nonatomic, strong) DemoInterstitialAdDelegate      *interstitialAdDelegate;
-@property (nonatomic, strong) DemoBannerAdDelegate            *bannerAdViewDelegate;
+@property (nonatomic, strong) DemoRewardedVideoAdDelegate         *rewardedVideoDelegate;
+@property (nonatomic, strong) ISPlacementInfo                     *rewardedVideoPlacementInfo;
 
-@property (nonatomic, strong) DemoImpressionDataDelegate    *impressionDataDelegate;
+@property (nonatomic, strong) DemoInterstitialAdDelegate          *interstitialAdDelegate;
+@property (nonatomic, strong) LPMInterstitialAd                   *interstitialAd;
 
-@property (nonatomic, strong) ISPlacementInfo           *rewardedVideoPlacementInfo;
+@property (nonatomic, strong) DemoBannerAdDelegate                *bannerAdViewDelegate;
+@property (nonatomic, strong) LPMBannerAdView                     *bannerAdView;
+@property (nonatomic, strong) LPMAdSize                           *bannerSize;
 
-@property (nonatomic, strong) LPMBannerAdView             *bannerAdView;
-@property (nonatomic, strong) LPMAdSize                   *bannerSize;
-
-@property (nonatomic, strong) LPMInterstitialAd           *interstitialAd;
+@property (nonatomic, strong) DemoImpressionDataDelegate          *impressionDataDelegate;
 
 @end
 
