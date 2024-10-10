@@ -17,9 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) LPMBannerAdView *bannerView;
 @property (weak, nonatomic) LPMAdSize *bannerSize;
 
-- (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate
-                      bannerView:(LPMBannerAdView *)bannerView
-                      bannerSize:(LPMAdSize *)bannerSize;
+- (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate;
 
 @end
 

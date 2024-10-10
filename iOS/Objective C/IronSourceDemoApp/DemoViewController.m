@@ -30,6 +30,7 @@
 @property (nonatomic, strong) ISPlacementInfo           *rewardedVideoPlacementInfo;
 
 @property (nonatomic, strong) LPMBannerAdView             *bannerAdView;
+@property (nonatomic, strong) LPMAdSize                   *bannerSize;
 @property (nonatomic, strong) LPMInterstitialAd           *interstitialAd;
 
 
@@ -167,25 +168,23 @@
     // choose banner size
     
     // 1. recommended - Adaptive ad size that adjusts to the screen width
-    LPMAdSize *bannerSize = [LPMAdSize createAdaptiveAdSize];
+    self.bannerSize = [LPMAdSize createAdaptiveAdSize];
 
 
     // 2. Adaptive ad size using fixed width ad size
-//    LPMAdSize *bannerSize = [LPMAdSize createAdaptiveAdSizeWithWidth:400];
+//    self.bannerSize = [LPMAdSize createAdaptiveAdSizeWithWidth:400];
 
     // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
-//        LPMAdSize *bannerSize = [LPMAdSize mediumRectangleSize];
+//    self.bannerSize = [LPMAdSize mediumRectangleSize];
 
     // Create the banner view and set the ad unit id and ad size
-    if (bannerSize != nil) {
+    if (self.bannerSize != nil) {
         self.bannerAdView = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
-        [self.bannerAdView setAdSize:bannerSize];
+        [self.bannerAdView setAdSize:self.bannerSize];
 
         
         // set the banner listener
-        self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self
-                                                                  bannerView:self.bannerAdView
-                                                                  bannerSize:bannerSize];
+        self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
 
         [self.bannerAdView setDelegate:self.bannerDelegate];
 
@@ -234,11 +233,9 @@
     });
 }
 
-- (void)setAndBindBannerView:(LPMBannerAdView *)bannerView
-                  bannerSize:(LPMAdSize *)bannerSize {
+- (void)didLoadAdWithAdInfo {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.bannerAdView = bannerView;
         self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
         
         [self.view addSubview:self.bannerAdView];
@@ -249,8 +246,8 @@
         [NSLayoutConstraint activateConstraints:@[
             [self.bannerAdView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
             [self.bannerAdView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-            [self.bannerAdView.widthAnchor constraintEqualToConstant:bannerSize.width],
-            [self.bannerAdView.heightAnchor constraintEqualToConstant:bannerSize.height]
+            [self.bannerAdView.widthAnchor constraintEqualToConstant:self.bannerSize.width],
+            [self.bannerAdView.heightAnchor constraintEqualToConstant:self.bannerSize.height]
         ]];
 
     });

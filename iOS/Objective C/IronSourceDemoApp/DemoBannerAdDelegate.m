@@ -9,15 +9,11 @@
 
 @implementation DemoBannerAdDelegate
 
-- (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate
-                      bannerView:(LPMBannerAdView *)bannerView
-                      bannerSize:(LPMAdSize *)bannerSize{
+- (instancetype)initWithDelegate:(id<DemoViewControllerDelegate>)delegate{
     self = [super init];
     
     if (self) {
         _delegate = delegate;
-        _bannerView = bannerView;
-        _bannerSize = bannerSize;
     }
     
     return self;
@@ -29,8 +25,7 @@
  */
 - (void)didLoadAdWithAdInfo:(nonnull LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
-    [self.delegate setAndBindBannerView:self.bannerView
-                             bannerSize:self.bannerSize];
+    [self.delegate didLoadAdWithAdInfo];
     [self.delegate setEnablementForButton:LoadBannerButtonIdentifier
                                    enable:NO];
 
