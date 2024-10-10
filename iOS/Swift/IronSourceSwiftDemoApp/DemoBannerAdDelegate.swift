@@ -11,15 +11,9 @@ import IronSource
 class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
     
     weak var delegate: DemoViewControllerDelegate?
-    weak var bannerView: LPMBannerAdView?
-    weak var bannerSize: LPMAdSize?
 
-    init(delegate: DemoViewControllerDelegate!,
-         bannerView: LPMBannerAdView!,
-         bannerSize: LPMAdSize!) {
+    init(delegate: DemoViewControllerDelegate!) {
         self.delegate = delegate
-        self.bannerView = bannerView
-        self.bannerSize = bannerSize
     }
     
     
@@ -29,9 +23,7 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
      */
     func didLoadAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
-
-        self.delegate?.setAndBindBannerView(bannerView, bannerSize)
-        self.delegate?.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: false)
+        self.delegate?.didLoadBannerAd()
     }
     
     /**

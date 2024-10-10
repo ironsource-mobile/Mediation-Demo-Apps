@@ -29,7 +29,7 @@ protocol DemoViewControllerDelegate: NSObjectProtocol {
             _ buttonIdentifier: ButtonIdentifiers,
             enable: Bool
         )
-    func setAndBindBannerView(_ bannerView: LPMBannerAdView!, _ bannerSize: LPMAdSize!)
+    func didLoadBannerAd()
     func setPlacementInfo(_ placementInfo: ISPlacementInfo?)
     func showVideoRewardMessage()
     func createInterstititalAd()
@@ -41,26 +41,23 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     //MARK: IBOutlets
     
     @IBOutlet weak var showRewardedVideoButton: UIButton!
-    
+    var rewardedVideoDelegate: DemoRewardedVideoAdDelegate! = nil
+    var rewardedVideoPlacementInfo: ISPlacementInfo! = nil
+
     @IBOutlet weak var loadInterstitialButton: UIButton!
     @IBOutlet weak var showInterstitialButton: UIButton!
-    
-    @IBOutlet weak var loadBannerButton: UIButton!
-    
-    @IBOutlet weak var versionLabel: UILabel!
-    
-    var rewardedVideoDelegate: DemoRewardedVideoAdDelegate! = nil
-    var interstitialDelegate: DemoInterstitialAdDelegate! = nil
-    var bannerDelegate: DemoBannerAdDelegate! = nil
-        
-    var impressionDataDelegate: DemoImpressionDataDelegate! = nil
-    
-    var rewardedVideoPlacementInfo: ISPlacementInfo! = nil
-    var bannerAdView: LPMBannerAdView! = nil
+    var interstitialAdDelegate: DemoInterstitialAdDelegate! = nil
     var interstitialAd: LPMInterstitialAd! = nil
 
+    @IBOutlet weak var loadBannerButton: UIButton!
+    var bannerAdViewDelegate: DemoBannerAdDelegate! = nil
+    var bannerAdView: LPMBannerAdView! = nil
+    var bannerSize: LPMAdSize! = nil
+
+    var impressionDataDelegate: DemoImpressionDataDelegate! = nil
+
+    @IBOutlet weak var versionLabel: UILabel!
     
-        
     //MARK: Lifecycle Methods
     
     override func viewDidLoad() {
@@ -125,14 +122,14 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         self.logMethodName(string: "init ironSource SDK with appKey:  \(appKey)")
         LevelPlay.initWith(initRequest)
         { config, error in
-            if let error = error {
-                self.logMethodName(string: "sdk initialization failed, error =\(error.localizedDescription)")
-                
-            } else {
-                self.logMethodName(string: "sdk initialization succeeded")
-                self.createInterstititalAd()
-                self.createBannerAd()
+
+            guard error == nil else {
+                self.logMethodName(string: "sdk initialization failed, error =\(error?.localizedDescription ?? "unknown error")")
+                return
             }
+            self.logMethodName(string: "sdk initialization succeeded")
+            self.createInterstititalAd()
+            self.createBannerAd()
         }
         
         // Scroll down the file to find out what happens when you tap a button...
@@ -154,8 +151,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     
     func createInterstititalAd() {
         self.interstitialAd = LPMInterstitialAd(adUnitId: interstitialAdUnitId)
-        interstitialDelegate = .init(delegate: self)
-        self.interstitialAd.setDelegate(interstitialDelegate)
+        interstitialAdDelegate = .init(delegate: self)
+        self.interstitialAd.setDelegate(interstitialAdDelegate)
 
         self.setButtonEnablement(ButtonIdentifiers.loadInterstitialButtonIdentifier, enable: true)
     }
@@ -187,13 +184,13 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     func createBannerAd() {
         // choose banner size
         // 1. recommended - Adaptive ad size that adjusts to the screen width
-        let bannerSize = LPMAdSize.createAdaptive()
+        self.bannerSize = LPMAdSize.createAdaptive()
         
         // 2. Adaptive ad size using fixed width ad size
-//        let bannerSize = LPMAdSize.createAdaptiveAdSize(withWidth: 400)
+//        self.bannerSize = LPMAdSize.createAdaptiveAdSize(withWidth: 400)
         
         // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
-//        let bannerSize = LPMAdSize.mediumRectangle()
+//        self.bannerSize = LPMAdSize.mediumRectangle()
 
         
         guard let bannerSize = bannerSize else {
@@ -207,9 +204,9 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
         
         // set the banner listener
-        bannerDelegate = .init(delegate: self, bannerView: bannerAdView, bannerSize: bannerSize)
+        bannerAdViewDelegate = .init(delegate: self)
 
-        self.bannerAdView.setDelegate(bannerDelegate)
+        self.bannerAdView.setDelegate(bannerAdViewDelegate)
 
         self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
 
@@ -246,19 +243,17 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         }
     }
     
-    func setAndBindBannerView(_ bannerView: LPMBannerAdView!,
-                              _ bannerSize: LPMAdSize!) {
+    func didLoadBannerAd() {
         DispatchQueue.main.async {
-            
-            self.bannerAdView = bannerView
             self.bannerAdView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(bannerView)
+            self.view.addSubview(self.bannerAdView)
             
             let centerX = self.bannerAdView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
             let bottom = self.bannerAdView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            let width = self.bannerAdView.widthAnchor.constraint(equalToConstant: CGFloat(bannerSize.width))
-            let height = self.bannerAdView.heightAnchor.constraint(equalToConstant: CGFloat(bannerSize.height))
+            let width = self.bannerAdView.widthAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.width))
+            let height = self.bannerAdView.heightAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.height))
             NSLayoutConstraint.activate([centerX, bottom, width, height])
+            self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: false)
         }
     }
     
