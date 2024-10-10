@@ -22,8 +22,8 @@
 @interface DemoViewController ()
 
 @property (nonatomic, strong) DemoRewardedVideoAdDelegate     *rewardedVideoDelegate;
-@property (nonatomic, strong) DemoInterstitialAdDelegate      *interstitialDelegate;
-@property (nonatomic, strong) DemoBannerAdDelegate            *bannerDelegate;
+@property (nonatomic, strong) DemoInterstitialAdDelegate      *interstitialAdDelegate;
+@property (nonatomic, strong) DemoBannerAdDelegate            *bannerAdViewDelegate;
 
 @property (nonatomic, strong) DemoImpressionDataDelegate    *impressionDataDelegate;
 
@@ -134,8 +134,8 @@
 
 - (void) createInterstititalAd {
     self.interstitialAd = [[LPMInterstitialAd alloc] initWithAdUnitId:kInterstitialAdUnitId];
-    self.interstitialDelegate = [[DemoInterstitialAdDelegate alloc] initWithDelegate:self];
-    self.interstitialAd.delegate = self.interstitialDelegate;
+    self.interstitialAdDelegate = [[DemoInterstitialAdDelegate alloc] initWithDelegate:self];
+    self.interstitialAd.delegate = self.interstitialAdDelegate;
     
     [self setEnablementForButton:LoadInterstitialButtonIdentifier
                                    enable:YES];
@@ -182,8 +182,8 @@
         [self.bannerAdView setAdSize:self.bannerSize];
 
         // set the banner listener
-        self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
-        [self.bannerAdView setDelegate:self.bannerDelegate];
+        self.bannerAdViewDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
+        [self.bannerAdView setDelegate:self.bannerAdViewDelegate];
         
         [self setEnablementForButton:LoadBannerButtonIdentifier
                                        enable:YES];
