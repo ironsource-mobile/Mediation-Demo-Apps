@@ -183,9 +183,7 @@
 
         // set the banner listener
         self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
-
         [self.bannerAdView setDelegate:self.bannerDelegate];
-
         
         [self setEnablementForButton:LoadBannerButtonIdentifier
                                        enable:YES];
