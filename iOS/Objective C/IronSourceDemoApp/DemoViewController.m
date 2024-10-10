@@ -181,7 +181,6 @@
         self.bannerAdView = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
         [self.bannerAdView setAdSize:self.bannerSize];
 
-        
         // set the banner listener
         self.bannerDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
 
