@@ -114,12 +114,10 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // Once the iniitaliztion callback is return you can start loading your ads
         
         // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
+        self.logMethodName(string: "init ironSource SDK with appKey:  \(appKey)")
         let requestBuilder = LPMInitRequestBuilder(appKey: appKey)
             .withLegacyAdFormats([IS_REWARDED_VIDEO])
-        
         let initRequest = requestBuilder.build()
-        
-        self.logMethodName(string: "init ironSource SDK with appKey:  \(appKey)")
         LevelPlay.initWith(initRequest)
         { config, error in
 
