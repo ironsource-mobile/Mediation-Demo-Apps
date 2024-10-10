@@ -31,8 +31,8 @@
 
 @property (nonatomic, strong) LPMBannerAdView             *bannerAdView;
 @property (nonatomic, strong) LPMAdSize                   *bannerSize;
-@property (nonatomic, strong) LPMInterstitialAd           *interstitialAd;
 
+@property (nonatomic, strong) LPMInterstitialAd           *interstitialAd;
 
 @end
 
@@ -95,12 +95,10 @@
     // Once the iniitaliztion callback is return you can start loading your ads
     
     // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
+    [self logMethodName:[NSString stringWithFormat:@"init ironSource SDK with appKey: %@", kAppKey]];
     LPMInitRequestBuilder *requestBuilder = [[LPMInitRequestBuilder alloc] initWithAppKey:kAppKey];
     [requestBuilder withLegacyAdFormats:@[IS_REWARDED_VIDEO]];
-
     LPMInitRequest *initRequest = [requestBuilder build];
-    
-    [self logMethodName:[NSString stringWithFormat:@"init ironSource SDK with appKey: %@", kAppKey]];
     [LevelPlay initWithRequest:initRequest completion:^(LPMConfiguration *_Nullable config, NSError *_Nullable error){
     
         if(error) {
@@ -114,7 +112,6 @@
         [self createInterstititalAd];
         [self createBannerAd];
     }];
-    
     // Scroll down the file to find out what happens when you tap a button...
 }
 
@@ -139,7 +136,6 @@
     
     [self setEnablementForButton:LoadInterstitialButtonIdentifier
                                    enable:YES];
-
 }
 
 - (IBAction)loadInterstitialButtonTapped:(id)sender {
