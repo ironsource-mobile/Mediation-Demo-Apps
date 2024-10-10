@@ -91,6 +91,4 @@
     logCallbackName(@"adInfo = %@", adInfo);
 }
 
-
-
 @end
