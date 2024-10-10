@@ -27,7 +27,6 @@
     logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:YES];
-
 }
 
 /**
@@ -39,7 +38,6 @@
     logCallbackName(@"error = %@ | adUnitId = %@", error.localizedDescription, adUnitId);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:NO];
-
 }
 
 /**
@@ -51,7 +49,6 @@
     logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:NO];
-
 }
 
 /**
@@ -63,7 +60,6 @@
     logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowInterstitialButtonIdentifier
                                    enable:NO];
-
 }
 
 /**
@@ -73,7 +69,6 @@
  */
 - (void)didFailToDisplayAdWithAdInfo:(LPMAdInfo *)adInfo error:(NSError *)error {
     logCallbackName(@"error = %@ | adInfo = %@", error.localizedDescription, adInfo);
-
 }
 
 /**
@@ -82,7 +77,6 @@
  */
 - (void)didClickAdWithAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
-
 }
 
 /**
@@ -91,7 +85,6 @@
  */
 - (void)didCloseAdWithAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
-
 }
 
 

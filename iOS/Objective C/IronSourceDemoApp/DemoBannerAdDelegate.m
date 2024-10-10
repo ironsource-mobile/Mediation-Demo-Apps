@@ -28,7 +28,6 @@
     [self.delegate didLoadAdWithAdInfo];
     [self.delegate setEnablementForButton:LoadBannerButtonIdentifier
                                    enable:NO];
-
 }
 
 /**
@@ -40,7 +39,6 @@
 - (void)didFailToLoadAdWithAdUnitId:(nonnull NSString *)adUnitId error:(nonnull NSError *)error {
 // Ad load failed
     logCallbackName(@"error = %@ | adUnitId = %@", error.localizedDescription, adUnitId);
-
 }
 
 /**
