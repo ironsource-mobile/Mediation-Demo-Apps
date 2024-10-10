@@ -55,7 +55,6 @@
 
 - (void)dealloc {
     [self.bannerAdView destroy];
-    self.bannerAdView = nil;
 }
 
 #pragma mark Private Methods
