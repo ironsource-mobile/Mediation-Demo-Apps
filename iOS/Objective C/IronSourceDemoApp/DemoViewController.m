@@ -233,10 +233,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
-        
         [self.view addSubview:self.bannerAdView];
-
-        
         self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
 
         [NSLayoutConstraint activateConstraints:@[
