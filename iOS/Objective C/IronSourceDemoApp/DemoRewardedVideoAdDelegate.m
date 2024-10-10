@@ -35,7 +35,7 @@
 - (void)hasNoAvailableAd {
     logCallbackName();
      [self.delegate setEnablementForButton:ShowRewardedVideoButtonIdentifier
-                                   enable:NO];
+                                    enable:NO];
 }
 
 /**
