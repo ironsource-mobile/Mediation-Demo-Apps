@@ -84,7 +84,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     }
     //endregion
 
-    //region Private Methods
+    //region Initialization Methods
     private fun setupUI(){
         rewardedVideoShowButton = findViewById(R.id.rv_button)
         interstitialLoadButton = findViewById(R.id.interstitial_load_button)
@@ -127,19 +127,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     }
     //endregion
 
-    //region Button Handling
-    fun showRewardedVideoButtonTapped(view: View){
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if (IronSource.isRewardedVideoAvailable()) {
-            // This will present the Rewarded Video.
-
-            log("showRewardedVideo")
-            IronSource.showRewardedVideo()
-        } else {
-            // wait for the availability of rewarded video to change to true before calling show
-        }
-    }
-
+    //region Interstitial Methods
     override fun createInterstitialAd() {
         mInterstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID)
         mInterstitialAd?.setListener(DemoInterstitialAdListener(this))
@@ -165,7 +153,9 @@ class DemoActivity : Activity(), DemoActivityListener {
             // load a new ad before calling show
         }
     }
+    //endregion
 
+    //region Banner Methods
     override fun createBannerAd() {
         // choose banner size
 
@@ -195,6 +185,7 @@ class DemoActivity : Activity(), DemoActivityListener {
             log("Failed to create banner ad")
         }
     }
+
     fun loadBannerButtonTapped(view: View) {
         // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
         // otherwise, the banner will remain static until manually destroyed
@@ -202,10 +193,46 @@ class DemoActivity : Activity(), DemoActivityListener {
         mBannerAd?.loadAd()
     }
 
+    override fun setBannerViewVisibility(visibility: Int){
+        bannerParentLayout?.visibility = visibility
+    }
     //endregion
 
-    //region Interface Handling
+    //region Rewarded Video Methods
+    fun showRewardedVideoButtonTapped(view: View){
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if (IronSource.isRewardedVideoAvailable()) {
+            // This will present the Rewarded Video.
 
+            log("showRewardedVideo")
+            IronSource.showRewardedVideo()
+        } else {
+            // wait for the availability of rewarded video to change to true before calling show
+        }
+    }
+
+    override fun setPlacementInfo(placementInfo: Placement) {
+        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
+        rewardedVideoPlacementInfo = placementInfo
+    }
+
+    override fun showRewardDialog(){
+        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+        rewardedVideoPlacementInfo?.let {
+            AlertDialog.Builder(this)
+                .setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
+                .setTitle(resources.getString(R.string.rewarded_dialog_header))
+                .setMessage("${resources.getString(R.string.rewarded_dialog_message)} ${rewardedVideoPlacementInfo!!.rewardAmount} ${rewardedVideoPlacementInfo!!.rewardName}")
+                .setCancelable(false)
+                .create()
+                .show()
+        }
+
+        rewardedVideoPlacementInfo = null
+    }
+    //endregion
+
+    //region Utility Methods
     override fun setEnablementForButton(buttonIdentifier: DemoButtonIdentifiers, enable: Boolean) {
         var text: String? = null
         val color = if (enable) Color.BLUE else Color.BLACK
@@ -238,35 +265,8 @@ class DemoActivity : Activity(), DemoActivityListener {
         }
     }
 
-    override fun setBannerViewVisibility(visibility: Int){
-        bannerParentLayout?.visibility = visibility
-    }
-
-    override fun setPlacementInfo(placementInfo: Placement) {
-        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
-        rewardedVideoPlacementInfo = placementInfo
-    }
-
-    override fun showRewardDialog(){
-        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
-        rewardedVideoPlacementInfo?.let {
-            AlertDialog.Builder(this)
-                .setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
-                .setTitle(resources.getString(R.string.rewarded_dialog_header))
-                .setMessage("${resources.getString(R.string.rewarded_dialog_message)} ${rewardedVideoPlacementInfo!!.rewardAmount} ${rewardedVideoPlacementInfo!!.rewardName}")
-                .setCancelable(false)
-                .create()
-                .show()
-        }
-
-        rewardedVideoPlacementInfo = null
-    }
-    //endregion
-
-    //region Demo Utils
     private fun log(log: String) {
         Log.d(TAG, log)
     }
-
     //endregion
 }
