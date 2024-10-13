@@ -31,8 +31,6 @@ protocol DemoViewControllerDelegate: NSObjectProtocol {
         )
     func setPlacementInfo(_ placementInfo: ISPlacementInfo?)
     func showVideoRewardMessage()
-    func createInterstititalAd()
-    func createBannerAd()
 }
 
 class DemoViewController: UIViewController, DemoViewControllerDelegate {
@@ -131,19 +129,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // Scroll down the file to find out what happens when you tap a button...
     }
     
-    //MARK: Interface Handling
-    
-    @IBAction func showRewardedVideoButtonTapped(_ sender: Any) {
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if IronSource.hasRewardedVideo() {
-            // This will present the Rewarded Video.
-
-            logMethodName(string: "showRewardedVideo(with:)")
-            IronSource.showRewardedVideo(with: self)
-        } else {
-            // wait for the availability of rewarded video to change to true before calling show
-        }
-    }
     
     func createInterstititalAd() {
         self.interstitialAd = LPMInterstitialAd(adUnitId: interstitialAdUnitId)
@@ -152,30 +137,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
         self.setButtonEnablement(ButtonIdentifiers.loadInterstitialButtonIdentifier, enable: true)
     }
-    
-    @IBAction func loadInterstitialButtonTapped(_ sender: Any) {
-        guard let interstitialAd = self.interstitialAd else {
-            return
-        }
 
-        // This will load an Interstitial ad
-        logMethodName(string: "loadAd for interstitial")
-        interstitialAd.loadAd()
-    }
-
-    @IBAction func showInterstitialButtonTapped(_ sender: Any) {
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if (self.interstitialAd != nil && self.interstitialAd.isAdReady()) {
-            // This will present the Interstitial.
-            // Unlike Rewarded Videos there are no placements.
-
-            logMethodName(string: "showAd for interstitial")
-            self.interstitialAd.showAd(viewController: self, placementName: nil)
-        } else {
-            // load a new ad before calling show
-        }
-    }
-    
     
     func createBannerAd() {
         // choose banner size
@@ -205,6 +167,61 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         
         self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
     }
+
+    
+    func addBannerToView() {
+        DispatchQueue.main.async {
+            self.bannerAdView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(self.bannerAdView)
+
+            let centerX = self.bannerAdView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            let bottom = self.bannerAdView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            let width = self.bannerAdView.widthAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.width))
+            let height = self.bannerAdView.heightAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.height))
+            NSLayoutConstraint.activate([centerX, bottom, width, height])
+        }
+
+    }
+
+    //MARK: Interface Handling
+    
+    @IBAction func showRewardedVideoButtonTapped(_ sender: Any) {
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if IronSource.hasRewardedVideo() {
+            // This will present the Rewarded Video.
+
+            logMethodName(string: "showRewardedVideo(with:)")
+            IronSource.showRewardedVideo(with: self)
+        } else {
+            // wait for the availability of rewarded video to change to true before calling show
+        }
+    }
+    
+    
+    @IBAction func loadInterstitialButtonTapped(_ sender: Any) {
+        guard let interstitialAd = self.interstitialAd else {
+            return
+        }
+
+        // This will load an Interstitial ad
+        logMethodName(string: "loadAd for interstitial")
+        interstitialAd.loadAd()
+    }
+
+    @IBAction func showInterstitialButtonTapped(_ sender: Any) {
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if (self.interstitialAd != nil && self.interstitialAd.isAdReady()) {
+            // This will present the Interstitial.
+            // Unlike Rewarded Videos there are no placements.
+
+            logMethodName(string: "showAd for interstitial")
+            self.interstitialAd.showAd(viewController: self, placementName: nil)
+        } else {
+            // load a new ad before calling show
+        }
+    }
+    
+    
     
     @IBAction func loadBannerButtonTapped(_ sender: Any) {
         
@@ -272,19 +289,4 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     func logMethodName(string: String = #function) {
         print("DemoViewController \(string)")
     }
-    
-    func addBannerToView() {
-        DispatchQueue.main.async {
-            self.bannerAdView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(self.bannerAdView)
-
-            let centerX = self.bannerAdView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-            let bottom = self.bannerAdView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            let width = self.bannerAdView.widthAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.width))
-            let height = self.bannerAdView.heightAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.height))
-            NSLayoutConstraint.activate([centerX, bottom, width, height])
-        }
-
-    }
-
 }
