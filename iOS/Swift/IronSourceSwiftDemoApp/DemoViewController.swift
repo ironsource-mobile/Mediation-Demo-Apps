@@ -29,7 +29,6 @@ protocol DemoViewControllerDelegate: NSObjectProtocol {
             _ buttonIdentifier: ButtonIdentifiers,
             enable: Bool
         )
-    func didLoadBannerAd()
     func setPlacementInfo(_ placementInfo: ISPlacementInfo?)
     func showVideoRewardMessage()
     func createInterstititalAd()
@@ -201,7 +200,9 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // set the banner listener
         bannerAdViewDelegate = .init(delegate: self)
         self.bannerAdView.setDelegate(bannerAdViewDelegate)
-
+        
+        addBannerToView()
+        
         self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
     }
     
@@ -236,18 +237,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         }
     }
     
-    func didLoadBannerAd() {
-        DispatchQueue.main.async {
-            self.bannerAdView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(self.bannerAdView)
-            let centerX = self.bannerAdView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-            let bottom = self.bannerAdView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            let width = self.bannerAdView.widthAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.width))
-            let height = self.bannerAdView.heightAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.height))
-            NSLayoutConstraint.activate([centerX, bottom, width, height])
-            self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: false)
-        }
-    }
     
     func setPlacementInfo(_ placementInfo: ISPlacementInfo?) {
         // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
@@ -283,4 +272,19 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     func logMethodName(string: String = #function) {
         print("DemoViewController \(string)")
     }
+    
+    func addBannerToView() {
+        DispatchQueue.main.async {
+            self.bannerAdView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(self.bannerAdView)
+
+            let centerX = self.bannerAdView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            let bottom = self.bannerAdView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            let width = self.bannerAdView.widthAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.width))
+            let height = self.bannerAdView.heightAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.height))
+            NSLayoutConstraint.activate([centerX, bottom, width, height])
+        }
+
+    }
+
 }

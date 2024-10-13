@@ -22,7 +22,7 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
      */
     func didLoadAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
-        self.delegate?.didLoadBannerAd()
+        self.delegate?.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: false)
     }
     
     /**
