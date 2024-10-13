@@ -72,7 +72,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         self.bannerAdView.destroy()
     }
 
-    //MARK: Private Methods
+    //MARK: Initialization Methods
     
     func setupUI() {
         self.versionLabel.text =  String(format: "sdk version %@", IronSource.sdkVersion());
@@ -130,6 +130,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     }
     
     
+    //MARK: Interstitial Methods
+
     func createInterstititalAd() {
         self.interstitialAd = LPMInterstitialAd(adUnitId: interstitialAdUnitId)
         interstitialAdDelegate = .init(delegate: self)
@@ -137,8 +139,33 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
         self.setButtonEnablement(ButtonIdentifiers.loadInterstitialButtonIdentifier, enable: true)
     }
-
     
+    @IBAction func loadInterstitialButtonTapped(_ sender: Any) {
+        guard let interstitialAd = self.interstitialAd else {
+            return
+        }
+
+        // This will load an Interstitial ad
+        logMethodName(string: "loadAd for interstitial")
+        interstitialAd.loadAd()
+    }
+    
+    @IBAction func showInterstitialButtonTapped(_ sender: Any) {
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if (self.interstitialAd != nil && self.interstitialAd.isAdReady()) {
+            // This will present the Interstitial.
+            // Unlike Rewarded Videos there are no placements.
+
+            logMethodName(string: "showAd for interstitial")
+            self.interstitialAd.showAd(viewController: self, placementName: nil)
+        } else {
+            // load a new ad before calling show
+        }
+    }
+
+
+    //MARK: Banner Methods
+
     func createBannerAd() {
         // choose banner size
         // 1. recommended - Adaptive ad size that adjusts to the screen width
@@ -167,7 +194,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         
         self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
     }
-
     
     func addBannerToView() {
         DispatchQueue.main.async {
@@ -183,8 +209,19 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
     }
 
-    //MARK: Interface Handling
-    
+    @IBAction func loadBannerButtonTapped(_ sender: Any) {
+        
+        guard let bannerAdView = self.bannerAdView else {
+            return
+        }
+
+        logMethodName(string: "loadAd for banner")
+        bannerAdView.loadAd(with: self)
+    }
+
+
+    //MARK: Rewarded Video Methods
+
     @IBAction func showRewardedVideoButtonTapped(_ sender: Any) {
         // It is advised to make sure there is available ad before attempting to show an ad
         if IronSource.hasRewardedVideo() {
@@ -196,64 +233,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
             // wait for the availability of rewarded video to change to true before calling show
         }
     }
-    
-    
-    @IBAction func loadInterstitialButtonTapped(_ sender: Any) {
-        guard let interstitialAd = self.interstitialAd else {
-            return
-        }
-
-        // This will load an Interstitial ad
-        logMethodName(string: "loadAd for interstitial")
-        interstitialAd.loadAd()
-    }
-
-    @IBAction func showInterstitialButtonTapped(_ sender: Any) {
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if (self.interstitialAd != nil && self.interstitialAd.isAdReady()) {
-            // This will present the Interstitial.
-            // Unlike Rewarded Videos there are no placements.
-
-            logMethodName(string: "showAd for interstitial")
-            self.interstitialAd.showAd(viewController: self, placementName: nil)
-        } else {
-            // load a new ad before calling show
-        }
-    }
-    
-    
-    
-    @IBAction func loadBannerButtonTapped(_ sender: Any) {
-        
-        guard let bannerAdView = self.bannerAdView else {
-            return
-        }
-
-        logMethodName(string: "loadAd for banner")
-        bannerAdView.loadAd(with: self)
-    }
-    
-    //MARK: DemoViewControllerDelegate
-    
-    func setButtonEnablement(_ buttonIdentifier: ButtonIdentifiers, enable: Bool) {
-        DispatchQueue.main.async {
-            var buttonToModify: UIButton?
-
-            switch buttonIdentifier {
-            case .showRewardedVideoButtonIdentifier:
-                buttonToModify = self.showRewardedVideoButton
-            case .loadInterstitialButtonIdentifier:
-                buttonToModify = self.loadInterstitialButton
-            case .showInterstitialButtonIdentifier:
-                buttonToModify = self.showInterstitialButton
-            case .loadBannerButtonIdentifier:
-                buttonToModify = self.loadBannerButton
-            }
-            
-            buttonToModify?.isEnabled = enable
-        }
-    }
-    
     
     func setPlacementInfo(_ placementInfo: ISPlacementInfo?) {
         // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
@@ -284,7 +263,26 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         }
     }
     
-    //MARK:  Demo Utils
+    //MARK: Utility methods
+
+    func setButtonEnablement(_ buttonIdentifier: ButtonIdentifiers, enable: Bool) {
+        DispatchQueue.main.async {
+            var buttonToModify: UIButton?
+
+            switch buttonIdentifier {
+            case .showRewardedVideoButtonIdentifier:
+                buttonToModify = self.showRewardedVideoButton
+            case .loadInterstitialButtonIdentifier:
+                buttonToModify = self.loadInterstitialButton
+            case .showInterstitialButtonIdentifier:
+                buttonToModify = self.showInterstitialButton
+            case .loadBannerButtonIdentifier:
+                buttonToModify = self.loadBannerButton
+            }
+            
+            buttonToModify?.isEnabled = enable
+        }
+    }
 
     func logMethodName(string: String = #function) {
         print("DemoViewController \(string)")
