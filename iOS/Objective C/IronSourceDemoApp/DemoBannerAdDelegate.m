@@ -25,7 +25,8 @@
  */
 - (void)didLoadAdWithAdInfo:(nonnull LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
-    [self.delegate didLoadBannerAd];
+    [self.delegate setEnablementForButton:LoadBannerButtonIdentifier
+                                   enable:NO];
 }
 
 /**

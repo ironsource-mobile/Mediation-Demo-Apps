@@ -51,12 +51,11 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 - (void)dealloc {
     [self.bannerAdView destroy];
 }
 
-#pragma mark Private Methods
+#pragma mark Initialization Methods
 
 - (void)setupUI {
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
@@ -114,19 +113,7 @@
     // Scroll down the file to find out what happens when you tap a button...
 }
 
-#pragma mark Interface Handling
-
-- (IBAction)showRewardedVideoButtonTapped:(id)sender {
-    // It is advised to make sure there is available ad before attempting to show an ad
-    if ([IronSource hasRewardedVideo]) {
-        // This will present the Rewarded Video.
-
-        [self logMethodName:@"showRewardedVideoWithViewController:"];
-        [IronSource showRewardedVideoWithViewController:self];
-    } else {
-        // wait for the availability of rewarded video to change to true before calling show
-    }
-}
+#pragma mark Interstitial Methods
 
 - (void) createInterstititalAd {
     self.interstitialAd = [[LPMInterstitialAd alloc] initWithAdUnitId:kInterstitialAdUnitId];
@@ -143,7 +130,6 @@
     [self.interstitialAd loadAd];
 }
 
-
 - (IBAction)showInterstitialButtonTapped:(id)sender {
     // It is advised to make sure there is available ad that isn't capped before attempting to show it
     if ([self.interstitialAd isAdReady]) {
@@ -157,6 +143,8 @@
     }
 }
 
+
+#pragma mark Banner Methods
 
 - (void) createBannerAd {
     // choose banner size
@@ -180,6 +168,8 @@
         self.bannerAdViewDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
         [self.bannerAdView setDelegate:self.bannerAdViewDelegate];
         
+        [self addBannerToView];
+        
         [self setEnablementForButton:LoadBannerButtonIdentifier
                                        enable:YES];
     }
@@ -189,14 +179,71 @@
     
 }
 
+- (void)addBannerToView {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:self.bannerAdView];
+        self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
+
+        [NSLayoutConstraint activateConstraints:@[
+            [self.bannerAdView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
+            [self.bannerAdView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+            [self.bannerAdView.widthAnchor constraintEqualToConstant:self.bannerSize.width],
+            [self.bannerAdView.heightAnchor constraintEqualToConstant:self.bannerSize.height]
+        ]];
+    });
+}
+
 - (IBAction)loadBannerButtonTapped:(id)sender {
     [self logMethodName:@"loadAdWithViewController for banner"];
     [self.bannerAdView loadAdWithViewController:self];
 }
 
 
+#pragma mark Rewarded Video Methods
 
-#pragma mark DemoViewControllerDelegate
+- (IBAction)showRewardedVideoButtonTapped:(id)sender {
+    // It is advised to make sure there is available ad before attempting to show an ad
+    if ([IronSource hasRewardedVideo]) {
+        // This will present the Rewarded Video.
+
+        [self logMethodName:@"showRewardedVideoWithViewController:"];
+        [IronSource showRewardedVideoWithViewController:self];
+    } else {
+        // wait for the availability of rewarded video to change to true before calling show
+    }
+}
+
+- (void)setPlacementInfo:(ISPlacementInfo *)placementInfo {
+    // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
+    self.rewardedVideoPlacementInfo = placementInfo;
+}
+
+- (void)showVideoRewardMessage {
+    // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+    if (self.rewardedVideoPlacementInfo) {
+        UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        NSString *message = [NSString stringWithFormat:@"You have been rewarded %d %@", [self.rewardedVideoPlacementInfo.rewardAmount intValue], self.rewardedVideoPlacementInfo.rewardName];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Video Reward"
+                                                                       message:message
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+        }];
+        
+        [alert addAction:okAction];
+        [rootViewController presentViewController:alert
+                                         animated:NO
+                                       completion:nil];
+        
+        self.rewardedVideoPlacementInfo = nil;
+    }
+}
+
+#pragma mark Utility methods
 
 - (void)setEnablementForButton:(ButtonIdentifiers)buttonIdentifier
                         enable:(BOOL)enable {
@@ -223,54 +270,6 @@
         }
     });
 }
-
-- (void)didLoadBannerAd {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        
-        self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.view addSubview:self.bannerAdView];
-        self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
-
-        [NSLayoutConstraint activateConstraints:@[
-            [self.bannerAdView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
-            [self.bannerAdView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-            [self.bannerAdView.widthAnchor constraintEqualToConstant:self.bannerSize.width],
-            [self.bannerAdView.heightAnchor constraintEqualToConstant:self.bannerSize.height]
-        ]];
-        [self setEnablementForButton:LoadBannerButtonIdentifier
-                                       enable:NO];
-    });
-}
-
-- (void)setPlacementInfo:(ISPlacementInfo *)placementInfo {
-    // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
-    self.rewardedVideoPlacementInfo = placementInfo;
-}
-
-- (void)showVideoRewardMessage {
-    // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
-    if (self.rewardedVideoPlacementInfo) {
-        UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        NSString *message = [NSString stringWithFormat:@"You have been rewarded %d %@", [self.rewardedVideoPlacementInfo.rewardAmount intValue], self.rewardedVideoPlacementInfo.rewardName];
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Video Reward"
-                                                                       message:message
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction *action) {
-        }];
-        
-        [alert addAction:okAction];
-        [rootViewController presentViewController:alert 
-                                         animated:NO
-                                       completion:nil];
-        
-        self.rewardedVideoPlacementInfo = nil;
-    }
-}
-
-#pragma mark Demo Utils
 
 - (void)logMethodName:(NSString *)methodName {
     NSLog(@"DemoViewController %@", methodName);
