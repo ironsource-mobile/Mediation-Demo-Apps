@@ -78,10 +78,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             mBannerAd.destroy();
         }
     }
-
     //endregion
 
-    //region Private Methods
+    //region Initialization Methods
     private void setupUI() {
         rewardedVideoShowButton = findViewById(R.id.rewarded_video_show_button);
         interstitialLoadButton = findViewById(R.id.interstitial_load_button);
@@ -125,22 +124,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
         // Scroll down the file to find out what happens when you tap a button...
     }
-
     //endregion
 
-    //region Button Handling
-    public void showRewardedVideoButtonTapped(View view) {
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if (IronSource.isRewardedVideoAvailable()) {
-            // This will present the Rewarded Video.
-
-            log("showRewardedVideo");
-            IronSource.showRewardedVideo();
-        } else {
-            // wait for the availability of rewarded video to change to true before calling show
-        }
-    }
-
+    //region Interstitial Methods
     public void createInterstitialAd() {
         mInterstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
         mInterstitialAd.setListener(new DemoInterstitialAdListener(this));
@@ -168,7 +154,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             // load a new ad before calling show
         }
     }
+    //endregion
 
+    //region Banner Methods
     public void createBannerAd() {
         // choose banner size
 
@@ -208,9 +196,49 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         }
     }
 
+    @Override
+    public void setBannerViewVisibility(int visibility) {
+        this.bannerParentLayout.setVisibility(visibility);
+    }
     //endregion
 
-    //region Demo Callbacks
+    //region Rewarded Video Methods
+    public void showRewardedVideoButtonTapped(View view) {
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if (IronSource.isRewardedVideoAvailable()) {
+            // This will present the Rewarded Video.
+
+            log("showRewardedVideo");
+            IronSource.showRewardedVideo();
+        } else {
+            // wait for the availability of rewarded video to change to true before calling show
+        }
+    }
+
+    @Override
+    public void setPlacementInfo(Placement placementInfo) {
+        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
+        this.rewardedVideoPlacementInfo = placementInfo;
+    }
+
+    @Override
+    public void showRewardDialog() {
+        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+        if (this.rewardedVideoPlacementInfo != null) {
+            new AlertDialog.Builder(DemoActivity.this)
+                    .setPositiveButton("ok", (dialog, id) -> dialog.dismiss())
+                    .setTitle(getResources().getString(R.string.rewarded_dialog_header))
+                    .setMessage(getResources().getString(R.string.rewarded_dialog_message) + " " + this.rewardedVideoPlacementInfo.getRewardAmount() + " " + this.rewardedVideoPlacementInfo.getRewardName())
+                    .setCancelable(false)
+                    .create()
+                    .show();
+
+            this.rewardedVideoPlacementInfo = null;
+        }
+    }
+    //endregion
+
+    //region Utility Methods
     @Override
     public void setEnablementForButton(DemoButtonIdentifiers identifier, boolean enable) {
         String text = null;
@@ -242,36 +270,6 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         });
     }
 
-    @Override
-    public void setBannerViewVisibility(int visibility) {
-        this.bannerParentLayout.setVisibility(visibility);
-    }
-
-    @Override
-    public void setPlacementInfo(Placement placementInfo) {
-        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
-        this.rewardedVideoPlacementInfo = placementInfo;
-    }
-
-    @Override
-    public void showRewardDialog() {
-        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
-        if (this.rewardedVideoPlacementInfo != null) {
-            new AlertDialog.Builder(DemoActivity.this)
-                    .setPositiveButton("ok", (dialog, id) -> dialog.dismiss())
-                    .setTitle(getResources().getString(R.string.rewarded_dialog_header))
-                    .setMessage(getResources().getString(R.string.rewarded_dialog_message) + " " + this.rewardedVideoPlacementInfo.getRewardAmount() + " " + this.rewardedVideoPlacementInfo.getRewardName())
-                    .setCancelable(false)
-                    .create()
-                    .show();
-
-            this.rewardedVideoPlacementInfo = null;
-        }
-    }
-
-    //endregion
-
-    //region Demo Utils
     private void log(String log) {
         Log.d(TAG, log);
     }
@@ -288,4 +286,5 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         return "";
     }
     //endregion
+
 }
