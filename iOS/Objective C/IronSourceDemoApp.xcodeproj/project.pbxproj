@@ -31,7 +31,6 @@
 		E80C8FD11C16E4D200CF3C27 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FD01C16E4D200CF3C27 /* Security.framework */; };
 		F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FCA2AF954A20077FADE /* DemoViewController.m */; };
 		F1666FD82AFA55140077FADE /* DemoImpressionDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FD62AFA55140077FADE /* DemoImpressionDataDelegate.m */; };
-		F1666FE12AFA551D0077FADE /* DemoInitializationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FDA2AFA551C0077FADE /* DemoInitializationDelegate.m */; };
 		F1666FE72AFA55B50077FADE /* DemoBannerAdDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FE62AFA55B50077FADE /* DemoBannerAdDelegate.m */; };
 		F1666FEA2AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FE92AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m */; };
 		F1666FED2AFA55C40077FADE /* DemoInterstitialAdDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FEC2AFA55C30077FADE /* DemoInterstitialAdDelegate.m */; };
@@ -69,8 +68,6 @@
 		F1666FCA2AF954A20077FADE /* DemoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		F1666FD62AFA55140077FADE /* DemoImpressionDataDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoImpressionDataDelegate.m; sourceTree = "<group>"; };
 		F1666FD72AFA55140077FADE /* DemoImpressionDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoImpressionDataDelegate.h; sourceTree = "<group>"; };
-		F1666FDA2AFA551C0077FADE /* DemoInitializationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoInitializationDelegate.m; sourceTree = "<group>"; };
-		F1666FDF2AFA551D0077FADE /* DemoInitializationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoInitializationDelegate.h; sourceTree = "<group>"; };
 		F1666FE52AFA55B50077FADE /* DemoBannerAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoBannerAdDelegate.h; sourceTree = "<group>"; };
 		F1666FE62AFA55B50077FADE /* DemoBannerAdDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoBannerAdDelegate.m; sourceTree = "<group>"; };
 		F1666FE82AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoRewardedVideoAdDelegate.h; sourceTree = "<group>"; };
@@ -114,8 +111,6 @@
 				72E0D6451E267513009ABC1B /* AppDelegate.m */,
 				F1666FC92AF954A20077FADE /* DemoViewController.h */,
 				F1666FCA2AF954A20077FADE /* DemoViewController.m */,
-				F1666FDF2AFA551D0077FADE /* DemoInitializationDelegate.h */,
-				F1666FDA2AFA551C0077FADE /* DemoInitializationDelegate.m */,
 				F1666FE82AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.h */,
 				F1666FE92AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m */,
 				F1666FEB2AFA55C30077FADE /* DemoInterstitialAdDelegate.h */,
@@ -297,7 +292,6 @@
 				F1666FEA2AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m in Sources */,
 				F1666FD82AFA55140077FADE /* DemoImpressionDataDelegate.m in Sources */,
 				F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */,
-				F1666FE12AFA551D0077FADE /* DemoInitializationDelegate.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DemoBannerAdDelegate : NSObject<LevelPlayBannerDelegate>
+@interface DemoBannerAdDelegate : NSObject<LPMBannerAdViewDelegate>
 
 @property (weak, nonatomic) id<DemoViewControllerDelegate> delegate;
 
