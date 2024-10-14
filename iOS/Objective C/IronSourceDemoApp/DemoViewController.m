@@ -28,7 +28,7 @@
 @property (nonatomic, strong) LPMInterstitialAd                   *interstitialAd;
 
 @property (nonatomic, strong) DemoBannerAdDelegate                *bannerAdViewDelegate;
-@property (nonatomic, strong) LPMBannerAdView                     *bannerAdView;
+@property (nonatomic, strong) LPMBannerAdView                     *bannerAd;
 @property (nonatomic, strong) LPMAdSize                           *bannerSize;
 
 @property (nonatomic, strong) DemoImpressionDataDelegate          *impressionDataDelegate;
@@ -52,7 +52,7 @@
 }
 
 - (void)dealloc {
-    [self.bannerAdView destroy];
+    [self.bannerAd destroy];
 }
 
 #pragma mark Initialization Methods
@@ -161,12 +161,12 @@
 
     // Create the banner view and set the ad unit id and ad size
     if (self.bannerSize != nil) {
-        self.bannerAdView = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
-        [self.bannerAdView setAdSize:self.bannerSize];
+        self.bannerAd = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
+        [self.bannerAd setAdSize:self.bannerSize];
 
         // set the banner listener
         self.bannerAdViewDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
-        [self.bannerAdView setDelegate:self.bannerAdViewDelegate];
+        [self.bannerAd setDelegate:self.bannerAdViewDelegate];
         
         [self addBannerToView];
         
@@ -182,22 +182,22 @@
 - (void)addBannerToView {
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.view addSubview:self.bannerAdView];
-        self.bannerAdView.translatesAutoresizingMaskIntoConstraints = NO;
+        self.bannerAd.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.view addSubview:self.bannerAd];
+        self.bannerAd.translatesAutoresizingMaskIntoConstraints = NO;
 
         [NSLayoutConstraint activateConstraints:@[
-            [self.bannerAdView.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
-            [self.bannerAdView.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
-            [self.bannerAdView.widthAnchor constraintEqualToConstant:self.bannerSize.width],
-            [self.bannerAdView.heightAnchor constraintEqualToConstant:self.bannerSize.height]
+            [self.bannerAd.bottomAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.bottomAnchor],
+            [self.bannerAd.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
+            [self.bannerAd.widthAnchor constraintEqualToConstant:self.bannerSize.width],
+            [self.bannerAd.heightAnchor constraintEqualToConstant:self.bannerSize.height]
         ]];
     });
 }
 
 - (IBAction)loadBannerButtonTapped:(id)sender {
     [self logMethodName:@"loadAdWithViewController for banner"];
-    [self.bannerAdView loadAdWithViewController:self];
+    [self.bannerAd loadAdWithViewController:self];
 }
 
 
