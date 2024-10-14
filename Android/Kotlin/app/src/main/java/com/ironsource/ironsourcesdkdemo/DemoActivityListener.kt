@@ -7,4 +7,6 @@ interface DemoActivityListener {
     fun setBannerViewVisibility(visibility: Int)
     fun setPlacementInfo(placementInfo: Placement)
     fun showRewardDialog()
+    fun createInterstitialAd()
+    fun createBannerAd()
 }

@@ -1,76 +1,77 @@
 package com.ironsource.ironsourcesdkdemo
 
 import com.ironsource.ironsourcesdkdemo.DemoActivity.Companion.logCallbackName
-import com.ironsource.mediationsdk.adunit.adapter.utility.AdInfo
-import com.ironsource.mediationsdk.logger.IronSourceError
-import com.ironsource.mediationsdk.sdk.LevelPlayInterstitialListener
+import com.unity3d.mediation.LevelPlayAdError
+import com.unity3d.mediation.LevelPlayAdInfo
+import com.unity3d.mediation.interstitial.LevelPlayInterstitialAdListener
 
 class DemoInterstitialAdListener(private val listener: DemoActivityListener) :
-        LevelPlayInterstitialListener {
+    LevelPlayInterstitialAdListener {
 
     private val TAG = DemoInterstitialAdListener::class.java.name
 
 
     /**
-    Called after an interstitial has been loaded
-    @param adInfo The info of the ad.
+    Called after an interstitial ad has been loaded
+    @param adInfo The info of the ad
      */
-    override fun onAdReady(adInfo: AdInfo) {
+    override fun onAdLoaded(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
         listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, true)
     }
 
     /**
-    Called after an interstitial has attempted to load but failed.
-    @param ironSourceError The reason for the error
+    Called after an interstitial ad has attempted to load but failed
+    @param error The reason for the error
      */
-    override fun onAdLoadFailed(ironSourceError: IronSourceError) {
-        logCallbackName(TAG, "error = $ironSourceError")
+    override fun onAdLoadFailed(error: LevelPlayAdError) {
+        logCallbackName(TAG, "error = $error")
+        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false)
+    }
+
+
+    /**
+    Called after an interstitial ad has been displayed
+    This is the indication for impression
+    @param adInfo The info of the ad
+     */
+    override fun onAdDisplayed(adInfo: LevelPlayAdInfo) {
+        logCallbackName(TAG, "adInfo = $adInfo")
         listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false)
     }
 
     /**
-    Called after an interstitial has been opened.
-    This is the indication for impression.
-    @param adInfo The info of the ad.
+    Called after an interstitial ad has attempted to display but failed
+    @param error The reason for the error
+    @param adInfo The info of the ad
      */
-    override fun onAdOpened(adInfo: AdInfo) {
-        logCallbackName(TAG, "adInfo = $adInfo")
-        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false)
+    override fun onAdDisplayFailed(error: LevelPlayAdError, adInfo: LevelPlayAdInfo) {
+        logCallbackName(TAG, "error = $error | adInfo = $adInfo")
+
     }
 
     /**
-    Called after an interstitial has been displayed on the screen.
-    This callback is not supported by all networks, and we recommend using it
-    only if it's supported by all networks you included in your build.
-    @param adInfo The info of the ad.
+    Called after an interstitial ad has been clicked
+    @param adInfo The info of the ad
      */
-    override fun onAdShowSucceeded(adInfo: AdInfo) {
+    override fun onAdClicked(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
     }
 
     /**
-    Called after an interstitial has attempted to show but failed.
-    @param ironSourceError The reason for the error.
-    @param adInfo The info of the ad.
+    Called after an interstitial ad has been closed
+    @param adInfo The info of the ad
      */
-    override fun onAdShowFailed(ironSourceError: IronSourceError, adInfo: AdInfo) {
-        logCallbackName(TAG, "error = $ironSourceError | adInfo = $adInfo")
-    }
-
-    /**
-    Called after an interstitial has been clicked.
-    @param adInfo The info of the ad.
-     */
-    override fun onAdClicked(adInfo: AdInfo) {
+    override fun onAdClosed(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
     }
 
     /**
-    Called after an interstitial has been dismissed.
-    @param adInfo The info of the ad.
+    Called after the ad info is updated. Available when another interstitial ad has loaded, and includes a higher CPM/Rate
+    @param adInfo The info of the ad
      */
-    override fun onAdClosed(adInfo: AdInfo) {
+    override fun onAdInfoChanged(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
     }
+
 }
