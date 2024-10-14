@@ -7,4 +7,7 @@ interface DemoActivityListener {
     void setBannerViewVisibility(int visibility);
     void setPlacementInfo(Placement placementInfo);
     void showRewardDialog();
+    void createInterstitialAd();
+    void createBannerAd();
+
 }
