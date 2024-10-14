@@ -34,15 +34,15 @@ private const val BANNER_AD_UNIT_ID = "thnfvcsog13bhn08"
 class DemoActivity : Activity(), DemoActivityListener {
 
     private lateinit var rewardedVideoShowButton: Button
-    private lateinit var interstitialLoadButton: Button
-    private lateinit var interstitialShowButton: Button
-    private lateinit var bannerLoadButton: Button
-
-    private var bannerParentLayout: FrameLayout? = null
     private var rewardedVideoPlacementInfo: Placement? = null
 
-    private var mInterstitialAd : LevelPlayInterstitialAd? = null
-    private var mBannerAd : LevelPlayBannerAdView? = null
+    private lateinit var interstitialLoadButton: Button
+    private lateinit var interstitialShowButton: Button
+    private var interstitialAd : LevelPlayInterstitialAd? = null
+
+    private lateinit var bannerLoadButton: Button
+    private var bannerParentLayout: FrameLayout? = null
+    private var bannerAd : LevelPlayBannerAdView? = null
 
     companion object {
         internal fun logCallbackName(tag: String, fmt: String) {
@@ -80,7 +80,7 @@ class DemoActivity : Activity(), DemoActivityListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        mBannerAd?.destroy()
+        bannerAd?.destroy()
     }
     //endregion
 
@@ -129,8 +129,8 @@ class DemoActivity : Activity(), DemoActivityListener {
 
     //region Interstitial Methods
     override fun createInterstitialAd() {
-        mInterstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID)
-        mInterstitialAd?.setListener(DemoInterstitialAdListener(this))
+        interstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID)
+        interstitialAd?.setListener(DemoInterstitialAdListener(this))
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true)
     }
@@ -138,17 +138,17 @@ class DemoActivity : Activity(), DemoActivityListener {
     fun loadInterstitialButtonTapped(view: View){
         // This will load an Interstitial ad
         log("loadAd for interstitial")
-        mInterstitialAd?.loadAd()
+        interstitialAd?.loadAd()
     }
 
     fun showInterstitialButtonTapped(view: View){
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
-        if (mInterstitialAd?.isAdReady() == true) {
+        if (interstitialAd?.isAdReady() == true) {
             // This will present the Interstitial.
             // Unlike Rewarded Videos there are no placements.
 
             log("showAd for interstitial")
-            mInterstitialAd?.showAd(this)
+            interstitialAd?.showAd(this)
         } else {
             // load a new ad before calling show
         }
@@ -170,15 +170,15 @@ class DemoActivity : Activity(), DemoActivityListener {
 
         // Create the banner view and set the ad unit id and ad size
         adSize?.let {
-            mBannerAd = LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID)
-            mBannerAd?.setAdSize(adSize)
+            bannerAd = LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID)
+            bannerAd?.setAdSize(adSize)
 
             // set the banner listener
-            mBannerAd?.setBannerListener(DemoBannerAdListener(this))
+            bannerAd?.setBannerListener(DemoBannerAdListener(this))
 
             // add LevelPlayBannerAdView to your container
             val layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-            bannerParentLayout?.addView(mBannerAd, 0, layoutParams)
+            bannerParentLayout?.addView(bannerAd, 0, layoutParams)
 
             setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
         }?: run {
@@ -190,7 +190,7 @@ class DemoActivity : Activity(), DemoActivityListener {
         // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
         // otherwise, the banner will remain static until manually destroyed
         log("loadAd for banner")
-        mBannerAd?.loadAd()
+        bannerAd?.loadAd()
     }
 
     override fun setBannerViewVisibility(visibility: Int){
