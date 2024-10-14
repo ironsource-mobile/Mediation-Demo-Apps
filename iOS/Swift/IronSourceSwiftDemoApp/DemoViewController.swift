@@ -48,7 +48,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
     @IBOutlet weak var loadBannerButton: UIButton!
     var bannerAdViewDelegate: DemoBannerAdDelegate! = nil
-    var bannerAdView: LPMBannerAdView! = nil
+    var bannerAd: LPMBannerAdView! = nil
     var bannerSize: LPMAdSize! = nil
 
     var impressionDataDelegate: DemoImpressionDataDelegate! = nil
@@ -69,7 +69,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     }
     
     deinit {
-        self.bannerAdView.destroy()
+        self.bannerAd.destroy()
     }
 
     //MARK: Initialization Methods
@@ -183,12 +183,12 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         }
 
         //  Create the banner ad view object with required & optional params
-        self.bannerAdView = LPMBannerAdView(adUnitId: bannerAdUnitId)
-        self.bannerAdView.setAdSize(bannerSize)
+        self.bannerAd = LPMBannerAdView(adUnitId: bannerAdUnitId)
+        self.bannerAd.setAdSize(bannerSize)
 
         // set the banner listener
         bannerAdViewDelegate = .init(delegate: self)
-        self.bannerAdView.setDelegate(bannerAdViewDelegate)
+        self.bannerAd.setDelegate(bannerAdViewDelegate)
         
         addBannerToView()
         
@@ -197,13 +197,13 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     
     func addBannerToView() {
         DispatchQueue.main.async {
-            self.bannerAdView.translatesAutoresizingMaskIntoConstraints = false
-            self.view.addSubview(self.bannerAdView)
+            self.bannerAd.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(self.bannerAd)
 
-            let centerX = self.bannerAdView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
-            let bottom = self.bannerAdView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-            let width = self.bannerAdView.widthAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.width))
-            let height = self.bannerAdView.heightAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.height))
+            let centerX = self.bannerAd.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+            let bottom = self.bannerAd.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            let width = self.bannerAd.widthAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.width))
+            let height = self.bannerAd.heightAnchor.constraint(equalToConstant: CGFloat(self.bannerSize.height))
             NSLayoutConstraint.activate([centerX, bottom, width, height])
         }
 
@@ -211,12 +211,12 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
     @IBAction func loadBannerButtonTapped(_ sender: Any) {
         
-        guard let bannerAdView = self.bannerAdView else {
+        guard let bannerAd = self.bannerAd else {
             return
         }
 
         logMethodName(string: "loadAd for banner")
-        bannerAdView.loadAd(with: self)
+        bannerAd.loadAd(with: self)
     }
 
 
