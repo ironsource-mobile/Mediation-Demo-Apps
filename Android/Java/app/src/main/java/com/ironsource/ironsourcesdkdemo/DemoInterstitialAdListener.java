@@ -1,12 +1,13 @@
 package com.ironsource.ironsourcesdkdemo;
 
 import static com.ironsource.ironsourcesdkdemo.DemoActivity.logCallbackName;
+import androidx.annotation.NonNull;
+import com.unity3d.mediation.LevelPlayAdError;
+import com.unity3d.mediation.LevelPlayAdInfo;
+import com.unity3d.mediation.interstitial.LevelPlayInterstitialAdListener;
 
-import com.ironsource.mediationsdk.adunit.adapter.utility.AdInfo;
-import com.ironsource.mediationsdk.logger.IronSourceError;
-import com.ironsource.mediationsdk.sdk.LevelPlayInterstitialListener;
 
-public class DemoInterstitialAdListener implements LevelPlayInterstitialListener {
+public class DemoInterstitialAdListener implements LevelPlayInterstitialAdListener {
     private final String TAG = DemoInterstitialAdListener.class.getSimpleName();
 
     private final DemoActivityListener listener;
@@ -16,72 +17,72 @@ public class DemoInterstitialAdListener implements LevelPlayInterstitialListener
     }
 
     /**
-     Called after an interstitial has been loaded
-     @param adInfo The info of the ad.
+     Called after an interstitial ad has been loaded
+     @param adInfo The info of the ad
      */
     @Override
-    public void onAdReady(AdInfo adInfo) {
+    public void onAdLoaded(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
         this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, true);
+
     }
 
     /**
-     Called after an interstitial has attempted to load but failed.
-     @param ironSourceError The reason for the error
+     Called after an interstitial ad has attempted to load but failed
+     @param error The reason for the error
      */
     @Override
-    public void onAdLoadFailed(IronSourceError ironSourceError) {
-        logCallbackName(TAG, "error = " + ironSourceError);
+    public void onAdLoadFailed(@NonNull LevelPlayAdError error) {
+        logCallbackName(TAG, "error = " + error);
         this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false);
     }
 
     /**
-     Called after an interstitial has been opened.
-     This is the indication for impression.
-     @param adInfo The info of the ad.
+     Called after an interstitial ad has been displayed
+     This is the indication for impression
+     @param adInfo The info of the ad
      */
     @Override
-    public void onAdOpened(AdInfo adInfo) {
+    public void onAdDisplayed(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
         this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false);
     }
 
     /**
-     Called after an interstitial has been displayed on the screen.
-     This callback is not supported by all networks, and we recommend using it
-     only if it's supported by all networks you included in your build.
-     @param adInfo The info of the ad.
+     Called after an interstitial ad has attempted to display but failed
+     @param error The reason for the error
+     @param adInfo The info of the ad
      */
     @Override
-    public void onAdShowSucceeded(AdInfo adInfo) {
+    public void onAdDisplayFailed(@NonNull LevelPlayAdError error, @NonNull LevelPlayAdInfo adInfo) {
+        logCallbackName(TAG, "error = " + error + " | adInfo = " + adInfo);
+
+    }
+
+    /**
+     Called after an interstitial ad has been closed
+     @param adInfo The info of the ad
+     */
+    @Override public void onAdClosed(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
     }
 
     /**
-     Called after an interstitial has attempted to show but failed.
-     @param ironSourceError The reason for the error.
-     @param adInfo The info of the ad.
+     Called after an interstitial ad has been clicked
+     @param adInfo The info of the ad
      */
-    @Override
-    public void onAdShowFailed(IronSourceError ironSourceError, AdInfo adInfo) {
-        logCallbackName(TAG, "error = " + ironSourceError + " | adInfo = " + adInfo);
+    @Override public void onAdClicked(@NonNull LevelPlayAdInfo adInfo) {
+        logCallbackName(TAG, "adInfo = " + adInfo);
+
     }
 
     /**
-     Called after an interstitial has been clicked.
-     @param adInfo The info of the ad.
+     Called after the ad info is updated. Available when another interstitial ad has loaded, and includes a higher CPM/Rate
+     @param adInfo The info of the ad
      */
     @Override
-    public void onAdClicked(AdInfo adInfo) {
+    public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
     }
 
-    /**
-     Called after an interstitial has been dismissed.
-     @param adInfo The info of the ad.
-     */
-    @Override
-    public void onAdClosed(AdInfo adInfo) {
-        logCallbackName(TAG, "adInfo = " + adInfo);
-    }
 }

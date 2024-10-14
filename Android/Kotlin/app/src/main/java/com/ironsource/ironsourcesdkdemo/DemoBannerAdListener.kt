@@ -2,20 +2,20 @@ package com.ironsource.ironsourcesdkdemo
 
 import android.view.View
 import com.ironsource.ironsourcesdkdemo.DemoActivity.Companion.logCallbackName
-import com.ironsource.mediationsdk.adunit.adapter.utility.AdInfo
-import com.ironsource.mediationsdk.logger.IronSourceError
-import com.ironsource.mediationsdk.sdk.LevelPlayBannerListener
+import com.unity3d.mediation.LevelPlayAdError
+import com.unity3d.mediation.LevelPlayAdInfo
+import com.unity3d.mediation.banner.LevelPlayBannerAdViewListener
 
 class DemoBannerAdListener(private val listener: DemoActivityListener) :
-    LevelPlayBannerListener {
+    LevelPlayBannerAdViewListener {
 
     private val TAG = DemoBannerAdListener::class.java.name
 
     /**
     Called after each banner ad has been successfully loaded, either a manual load or banner refresh
-    @param adInfo The info of the ad.
+    @param adInfo The info of the ad
      */
-    override fun onAdLoaded(adInfo: AdInfo) {
+    override fun onAdLoaded(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
         listener.setBannerViewVisibility(View.VISIBLE)
         listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, false)
@@ -23,43 +23,60 @@ class DemoBannerAdListener(private val listener: DemoActivityListener) :
     }
 
     /**
-    Called after a banner has attempted to load an ad but failed.
-    This delegate will be sent both for manual load and refreshed banner failures.
-    @param ironSourceError The reason for the error.
+    Called after a banner has attempted to load an ad but failed
+    This delegate will be sent both for manual load and refreshed banner failures
+    @param error The reason for the error
      */
-    override fun onAdLoadFailed(ironSourceError: IronSourceError) {
-        logCallbackName(TAG, "error = $ironSourceError")
+    override fun onAdLoadFailed(error: LevelPlayAdError) {
+        logCallbackName(TAG, "error = $error")
     }
 
     /**
-    Called after a banner has been clicked.
-    @param adInfo The info of the ad.
+    Called after a banner was displayed and visible on screen
+    @param adInfo The info of the ad
      */
-    override fun onAdClicked(adInfo: AdInfo) {
+    override fun onAdDisplayed(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
     }
 
     /**
-    Called when a user was taken out of the application context.
-    @param adInfo The info of the ad.
+    Called after a banner failed to be displayed on screen
+    @param adInfo The info of the ad
+    @param error The reason for the error
      */
-    override fun onAdLeftApplication(adInfo: AdInfo) {
+    override fun onAdDisplayFailed(adInfo: LevelPlayAdInfo, error: LevelPlayAdError) {
+        logCallbackName(TAG, "error = $error | adInfo = $adInfo")
+    }
+
+    /**
+    Called after a banner has been clicked
+    @param adInfo The info of the ad
+     */
+    override fun onAdClicked(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
     }
 
     /**
-    Called when a banner presented a full screen content.
-    @param adInfo The info of the ad.
+    Called when a banner opened on full screen
+    @param adInfo The info of the ad
      */
-    override fun onAdScreenPresented(adInfo: AdInfo) {
+    override fun onAdExpanded(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
     }
 
     /**
-    Called after a full screen content has been dismissed.
-    @param adInfo The info of the ad.
+    Called after a banner is restored to its original size
+    @param adInfo The info of the ad
      */
-    override fun onAdScreenDismissed(adInfo: AdInfo) {
+    override fun onAdCollapsed(adInfo: LevelPlayAdInfo) {
+        logCallbackName(TAG, "adInfo = $adInfo")
+    }
+
+    /**
+    Called when a user pressed on the ad and was navigated out of the app
+    @param adInfo The info of the ad
+     */
+    override fun onAdLeftApplication(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
     }
 }
