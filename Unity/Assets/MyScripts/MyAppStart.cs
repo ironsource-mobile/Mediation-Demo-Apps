@@ -1,22 +1,29 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using System.Collections;
+using com.unity3d.mediation;
+using Unity.VisualScripting;
 
 public class MyAppStart : MonoBehaviour
 {
 	public static string uniqueUserId = "demoUserUnity";
-
-
-	// Use this for initialization
-	void Start ()
-	{
-		#if UNITY_ANDROID
-        string appKey = "85460dcd";
-		#elif UNITY_IPHONE
+	private LevelPlayBannerAd bannerAd;
+	
+#if UNITY_ANDROID
+	string appKey = "85460dcd";
+	string bannerAdUnitId = "thnfvcsog13bhn08";
+#elif UNITY_IPHONE
         string appKey = "8545d445";
-		#else
+		string bannerAdUnitId = "iep3rxsyp9na3rw8";
+#else
         string appKey = "unexpected_platform";
-		#endif
-		Debug.Log ("unity-script: MyAppStart Start called");
+		string bannerAdUnitId = "unexpected_platform";
+        string interstitialAdUnitId = "unexpected_platform";
+#endif
+	
+	private void Awake()
+	{
+		Debug.Log ("unity-script: Awake called");
 
 		//Dynamic config example
 		IronSourceConfig.Instance.setClientSideCallbacks (true);
@@ -29,67 +36,84 @@ public class MyAppStart : MonoBehaviour
 
 		Debug.Log ("unity-script: unity version" + IronSource.unityVersion ());
 
-		// Add Banner Events
-		IronSourceBannerEvents.onAdLoadedEvent += BannerOnAdLoadedEvent;
-		IronSourceBannerEvents.onAdLoadFailedEvent += BannerOnAdLoadFailedEvent;
-		IronSourceBannerEvents.onAdClickedEvent += BannerOnAdClickedEvent;
-		IronSourceBannerEvents.onAdScreenPresentedEvent += BannerOnAdScreenPresentedEvent;
-		IronSourceBannerEvents.onAdScreenDismissedEvent += BannerOnAdScreenDismissedEvent;
-		IronSourceBannerEvents.onAdLeftApplicationEvent += BannerOnAdLeftApplicationEvent;
-
 		// SDK init
 		Debug.Log ("unity-script: IronSource.Agent.init");
-		IronSource.Agent.init (appKey);
-		//IronSource.Agent.init (appKey, IronSourceAdUnits.REWARDED_VIDEO, IronSourceAdUnits.INTERSTITIAL, IronSourceAdUnits.OFFERWALL, IronSourceAdUnits.BANNER);
-        //IronSource.Agent.initISDemandOnly (appKey, IronSourceAdUnits.REWARDED_VIDEO, IronSourceAdUnits.INTERSTITIAL);
-
-        //Set User ID For Server To Server Integration
-        //// IronSource.Agent.setUserId ("UserId");
 		
-		// Load Banner example
-		IronSource.Agent.loadBanner (IronSourceBannerSize.BANNER, IronSourceBannerPosition.BOTTOM);
+		LevelPlay.Init(appKey,uniqueUserId,new []{LevelPlayAdFormat.REWARDED});
+		
+		LevelPlay.OnInitSuccess += OnInitializationCompleted;
+		LevelPlay.OnInitFailed += (error => Debug.Log("Initialization error: " + error));
 	}
 	
-	// Update is called once per frame
-	void Update ()
+	void LoadBanner ()
 	{
+		// Create object
+		bannerAd = new LevelPlayBannerAd(bannerAdUnitId);
+		
+		bannerAd.OnAdLoaded += BannerOnAdLoadedEvent;
+		bannerAd.OnAdLoadFailed += BannerOnAdLoadFailedEvent;
+		bannerAd.OnAdDisplayed += BannerOnAdDisplayedEvent;
+		bannerAd.OnAdDisplayFailed += BannerOnAdDisplayFailedEvent;
+		bannerAd.OnAdClicked += BannerOnAdClickedEvent;
+		bannerAd.OnAdCollapsed += BannerOnAdCollapsedEvent;
+		bannerAd.OnAdLeftApplication += BannerOnAdLeftApplicationEvent;
+		bannerAd.OnAdExpanded += BannerOnAdExpandedEvent;
+		
+		// Ad load
+		bannerAd.LoadAd();
 
 	}
 
-	void OnApplicationPause (bool isPaused)
+	void OnInitializationCompleted(LevelPlayConfiguration configuration)
 	{
-		Debug.Log ("unity-script: OnApplicationPause = " + isPaused);
-		IronSource.Agent.onApplicationPause (isPaused);
+		Debug.Log("Initialization completed");
+		LoadBanner();
+
 	}
 
 	//Banner Events
-	void BannerOnAdLoadedEvent(IronSourceAdInfo adInfo)
+	void BannerOnAdLoadedEvent(LevelPlayAdInfo adInfo)
 	{
 		Debug.Log("unity-script: I got BannerOnAdLoadedEvent With AdInfo " + adInfo);
 	}
 
-	void BannerOnAdLoadFailedEvent(IronSourceError ironSourceError)
+	void BannerOnAdLoadFailedEvent(LevelPlayAdError ironSourceError)
 	{
 		Debug.Log("unity-script: I got BannerOnAdLoadFailedEvent With Error " + ironSourceError);
 	}
 
-	void BannerOnAdClickedEvent(IronSourceAdInfo adInfo)
+	void BannerOnAdClickedEvent(LevelPlayAdInfo adInfo)
 	{
 		Debug.Log("unity-script: I got BannerOnAdClickedEvent With AdInfo " + adInfo);
 	}
 
-	void BannerOnAdScreenPresentedEvent(IronSourceAdInfo adInfo)
+	void BannerOnAdDisplayedEvent(LevelPlayAdInfo adInfo)
 	{
-		Debug.Log("unity-script: I got BannerOnAdScreenPresentedEvent With AdInfo " + adInfo);
+		Debug.Log("unity-script: I got BannerOnAdDisplayedEvent With AdInfo " + adInfo);
+	}
+	
+	void BannerOnAdDisplayFailedEvent(LevelPlayAdDisplayInfoError adInfoError)
+	{
+		Debug.Log("unity-script: I got BannerOnAdDisplayFailedEvent With AdInfoError " + adInfoError);
 	}
 
-	void BannerOnAdScreenDismissedEvent(IronSourceAdInfo adInfo)
+	void BannerOnAdCollapsedEvent(LevelPlayAdInfo adInfo)
 	{
-		Debug.Log("unity-script: I got BannerOnAdScreenDismissedEvent With AdInfo " + adInfo);
+		Debug.Log("unity-script: I got BannerOnAdCollapsedEvent With AdInfo " + adInfo);
 	}
 
-	void BannerOnAdLeftApplicationEvent(IronSourceAdInfo adInfo)
+	void BannerOnAdLeftApplicationEvent(LevelPlayAdInfo adInfo)
 	{
 		Debug.Log("unity-script: I got BannerOnAdLeftApplicationEvent With AdInfo " + adInfo);
+	}
+
+	void BannerOnAdExpandedEvent(LevelPlayAdInfo adInfo)
+	{
+		Debug.Log("unity-script: I got BannerOnAdExpandedEvent With AdInfo " + adInfo);
+	}
+
+	private void OnDestroy()
+	{
+		bannerAd.DestroyAd();
 	}
 }
