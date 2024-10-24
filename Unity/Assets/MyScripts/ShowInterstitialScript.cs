@@ -26,7 +26,6 @@ public class ShowInterstitialScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
 		Debug.Log ("unity-script: ShowInterstitialScript Start called");
 
 		LoadButton = GameObject.Find ("LoadInterstitial");
@@ -36,9 +35,6 @@ public class ShowInterstitialScript : MonoBehaviour
 		ShowButton = GameObject.Find ("ShowInterstitial");
 		ShowText = GameObject.Find ("ShowInterstitialText");
 		ShowText.GetComponent<UnityEngine.UI.Text> ().color = UnityEngine.Color.red;
-
-		
-
 	}
 
 	/************* Interstitial API *************/ 
@@ -110,4 +106,3 @@ public class ShowInterstitialScript : MonoBehaviour
 		interstitialAd.DestroyAd();
 	}
 }
-

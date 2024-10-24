@@ -37,8 +37,7 @@ public class MyAppStart : MonoBehaviour
 		Debug.Log ("unity-script: unity version" + IronSource.unityVersion ());
 
 		// SDK init
-		Debug.Log ("unity-script: IronSource.Agent.init");
-		
+		Debug.Log ("unity-script: LevelPlay Init");
 		LevelPlay.Init(appKey,uniqueUserId,new []{LevelPlayAdFormat.REWARDED});
 		
 		LevelPlay.OnInitSuccess += OnInitializationCompleted;
@@ -61,7 +60,6 @@ public class MyAppStart : MonoBehaviour
 		
 		// Ad load
 		bannerAd.LoadAd();
-
 	}
 
 	void OnInitializationCompleted(LevelPlayConfiguration configuration)
@@ -77,9 +75,9 @@ public class MyAppStart : MonoBehaviour
 		Debug.Log("unity-script: I got BannerOnAdLoadedEvent With AdInfo " + adInfo);
 	}
 
-	void BannerOnAdLoadFailedEvent(LevelPlayAdError ironSourceError)
+	void BannerOnAdLoadFailedEvent(LevelPlayAdError error)
 	{
-		Debug.Log("unity-script: I got BannerOnAdLoadFailedEvent With Error " + ironSourceError);
+		Debug.Log("unity-script: I got BannerOnAdLoadFailedEvent With Error " + error);
 	}
 
 	void BannerOnAdClickedEvent(LevelPlayAdInfo adInfo)
