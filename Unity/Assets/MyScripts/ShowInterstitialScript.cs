@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using com.unity3d.mediation;
 
 public class ShowInterstitialScript : MonoBehaviour
 {
@@ -9,8 +10,18 @@ public class ShowInterstitialScript : MonoBehaviour
 	GameObject LoadText;
 	GameObject ShowButton;
 	GameObject ShowText;
+	
+#if UNITY_ANDROID
+	string interstitialAdUnitId = "aeyqi3vqlv6o8sh9";
+#elif UNITY_IPHONE
+	string interstitialAdUnitId = "wmgt0712uuux8ju4";
+#else
+	string interstitialAdUnitId = "unexpected_platform";
+#endif
 
  	public static String INTERSTITIAL_INSTANCE_ID = "0";
+
+    private LevelPlayInterstitialAd interstitialAd;
 
 	// Use this for initialization
 	void Start ()
@@ -24,68 +35,74 @@ public class ShowInterstitialScript : MonoBehaviour
 		ShowButton = GameObject.Find ("ShowInterstitial");
 		ShowText = GameObject.Find ("ShowInterstitialText");
 		ShowText.GetComponent<UnityEngine.UI.Text> ().color = UnityEngine.Color.red;
-
-		// Add Interstitial Events
-		IronSourceInterstitialEvents.onAdReadyEvent += InterstitialOnAdReadyEvent;
-		IronSourceInterstitialEvents.onAdLoadFailedEvent += InterstitialOnAdLoadFailed;
-		IronSourceInterstitialEvents.onAdOpenedEvent += InterstitialOnAdOpenedEvent;
-		IronSourceInterstitialEvents.onAdClickedEvent += InterstitialOnAdClickedEvent;
-		IronSourceInterstitialEvents.onAdShowSucceededEvent += InterstitialOnAdShowSucceededEvent;
-		IronSourceInterstitialEvents.onAdShowFailedEvent += InterstitialOnAdShowFailedEvent;
-		IronSourceInterstitialEvents.onAdClosedEvent += InterstitialOnAdClosedEvent;
-
 	}
 
 	/************* Interstitial API *************/ 
 	public void LoadInterstitialButtonClicked ()
 	{
+		// Create interstitial Ad
+		interstitialAd = new LevelPlayInterstitialAd(interstitialAdUnitId);
+		
+		// Register to events
+		interstitialAd.OnAdLoaded += InterstitialOnAdLoadedEvent;
+		interstitialAd.OnAdLoadFailed += InterstitialOnAdLoadFailedEvent;
+		interstitialAd.OnAdDisplayed += InterstitialOnAdDisplayedEvent;
+		interstitialAd.OnAdDisplayFailed += InterstitialOnAdDisplayFailedEvent;
+		interstitialAd.OnAdClicked += InterstitialOnAdClickedEvent;
+		interstitialAd.OnAdClosed += InterstitialOnAdClosedEvent;
+		interstitialAd.OnAdInfoChanged += InterstitialOnAdInfoChangedEvent;
+		
 		Debug.Log ("unity-script: LoadInterstitialButtonClicked");
-		IronSource.Agent.loadInterstitial ();
+		interstitialAd.LoadAd();
 	}
 	
 	public void ShowInterstitialButtonClicked ()
 	{
 		Debug.Log ("unity-script: ShowInterstitialButtonClicked");
-		if (IronSource.Agent.isInterstitialReady ()) {
-			IronSource.Agent.showInterstitial ();
+		if (interstitialAd.IsAdReady()) {
+			interstitialAd.ShowAd();
 		} else {
-			Debug.Log ("unity-script: IronSource.Agent.isInterstitialReady - False");
+			Debug.Log ("unity-script: interstitialAd.IsAdReady - False");
 		}
 	}
 	
-	void InterstitialOnAdReadyEvent(IronSourceAdInfo adInfo)
+	void InterstitialOnAdLoadedEvent(LevelPlayAdInfo adInfo)
 	{
-		Debug.Log("unity-script: I got InterstitialOnAdReadyEvent With AdInfo " + adInfo);
+		Debug.Log("unity-script: I got InterstitialOnAdLoadedEvent With AdInfo " + adInfo);
 	}
 
-	void InterstitialOnAdLoadFailed(IronSourceError ironSourceError)
+	void InterstitialOnAdLoadFailedEvent(LevelPlayAdError error)
 	{
-		Debug.Log("unity-script: I got InterstitialOnAdLoadFailed With Error " + ironSourceError);
+		Debug.Log("unity-script: I got InterstitialOnAdLoadFailedEvent With Error " + error);
 	}
-
-	void InterstitialOnAdOpenedEvent(IronSourceAdInfo adInfo)
+	
+	void InterstitialOnAdDisplayedEvent(LevelPlayAdInfo adInfo)
 	{
-		Debug.Log("unity-script: I got InterstitialOnAdOpenedEvent With AdInfo " + adInfo);
+		Debug.Log("unity-script: I got InterstitialOnAdDisplayedEvent With AdInfo " + adInfo);
 	}
-
-	void InterstitialOnAdClickedEvent(IronSourceAdInfo adInfo)
+	
+	void InterstitialOnAdDisplayFailedEvent(LevelPlayAdDisplayInfoError infoError)
+	{
+		Debug.Log("unity-script: I got InterstitialOnAdDisplayFailedEvent With InfoError " + infoError);
+	}
+	
+	void InterstitialOnAdClickedEvent(LevelPlayAdInfo adInfo)
 	{
 		Debug.Log("unity-script: I got InterstitialOnAdClickedEvent With AdInfo " + adInfo);
 	}
 
-	void InterstitialOnAdShowSucceededEvent(IronSourceAdInfo adInfo)
-	{
-		Debug.Log("unity-script: I got InterstitialOnAdShowSucceededEvent With AdInfo " + adInfo);
-	}
-
-	void InterstitialOnAdShowFailedEvent(IronSourceError ironSourceError, IronSourceAdInfo adInfo)
-	{
-		Debug.Log("unity-script: I got InterstitialOnAdShowFailedEvent With Error " + ironSourceError + " And AdInfo " + adInfo);
-	}
-
-	void InterstitialOnAdClosedEvent(IronSourceAdInfo adInfo)
+	void InterstitialOnAdClosedEvent(LevelPlayAdInfo adInfo)
 	{
 		Debug.Log("unity-script: I got InterstitialOnAdClosedEvent With AdInfo " + adInfo);
 	}
+	
+	void InterstitialOnAdInfoChangedEvent(LevelPlayAdInfo adInfo)
+	{
+		Debug.Log("unity-script: I got InterstitialOnAdInfoChangedEvent With AdInfo " + adInfo);
+	}
+	
+	private void OnDestroy()
+	{
+		interstitialAd.DestroyAd();
+	}
 }
-
