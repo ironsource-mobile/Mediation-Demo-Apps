@@ -14,16 +14,16 @@ import android.widget.TextView;
 import androidx.multidex.BuildConfig;
 import com.ironsource.mediationsdk.IronSource;
 import com.ironsource.mediationsdk.integration.IntegrationHelper;
-import com.ironsource.mediationsdk.model.Placement;
 import com.ironsource.mediationsdk.utils.IronSourceUtils;
 import com.unity3d.mediation.LevelPlay;
 import com.unity3d.mediation.LevelPlayAdSize;
 import com.unity3d.mediation.LevelPlayInitRequest;
 import com.unity3d.mediation.banner.LevelPlayBannerAdView;
 import com.unity3d.mediation.interstitial.LevelPlayInterstitialAd;
+import com.unity3d.mediation.rewarded.LevelPlayReward;
+import com.unity3d.mediation.rewarded.LevelPlayRewardedAd;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class DemoActivity extends Activity implements DemoActivityListener {
 
@@ -34,14 +34,17 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     // Replace with your ad unit ids as available in the LevelPlay dashboard
     public static final String INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9";
+    public static final String REWARDED_AD_UNIT_ID = "76yy3nay3ceui2a3";
     public static final String BANNER_AD_UNIT_ID = "thnfvcsog13bhn08";
 
-    private Button rewardedVideoShowButton;
-    private Placement rewardedVideoPlacementInfo;
+    private Button rewardedLoadButton;
+    private Button rewardedShowButton;
+    private LevelPlayReward reward;
 
     private Button interstitialLoadButton;
     private Button interstitialShowButton;
     private LevelPlayInterstitialAd interstitialAd;
+    private LevelPlayRewardedAd rewardedAd;
 
     private Button bannerLoadButton;
     private FrameLayout bannerParentLayout;
@@ -82,7 +85,8 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     //region Initialization Methods
     private void setupUI() {
-        rewardedVideoShowButton = findViewById(R.id.rewarded_video_show_button);
+        rewardedLoadButton = findViewById(R.id.rewarded_load_button);
+        rewardedShowButton = findViewById(R.id.rewarded_show_button);
         interstitialLoadButton = findViewById(R.id.interstitial_load_button);
         interstitialShowButton = findViewById(R.id.interstitial_show_button);
         bannerLoadButton = findViewById(R.id.banner_load_button);
@@ -100,26 +104,13 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             IntegrationHelper.validateIntegration(this);
         }
 
-        // Before initializing any of our legacy products (Rewarded video, Interstitial or Banner) you must set
-        // their listeners. Take a look at each of these listeners method and you will see that they each implement a product
-        // protocol. This is our way of letting you know what's going on, and if you don't set the listeners
-        // we will not be able to communicate with you.
-        // We're passing 'this' to our listeners because we want
-        // to be able to enable/disable buttons to match ad availability.
-        IronSource.setLevelPlayRewardedVideoListener(new DemoRewardedVideoAdListener(this));
+        // Set the impression data listener
         IronSource.addImpressionDataListener(new DemoImpressionDataListener());
 
-        // After setting the listeners you can go ahead and initialize the SDK.
-        // Once the initialization callback is returned you can start loading your ads
-
-        // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
-        List<LevelPlay.AdFormat> legacyAdFormats = Arrays.asList(LevelPlay.AdFormat.REWARDED);
-
+        // Create the init request with the appKey and init the SDK
         LevelPlayInitRequest initRequest = new LevelPlayInitRequest.Builder(APP_KEY)
-                .withLegacyAdFormats(legacyAdFormats)
                 .build();
-
-        log("init ironSource SDK with appKey: " + APP_KEY);
+        log("init levelPlay SDK with appKey: " + APP_KEY);
         LevelPlay.init(this, initRequest, new DemoInitializationListener(this));
 
         // Scroll down the file to find out what happens when you tap a button...
@@ -202,38 +193,52 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     }
     //endregion
 
-    //region Rewarded Video Methods
-    public void showRewardedVideoButtonTapped(View view) {
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if (IronSource.isRewardedVideoAvailable()) {
-            // This will present the Rewarded Video.
+    //region Rewarded  Methods
+    public void createRewardedAd() {
+        rewardedAd = new LevelPlayRewardedAd(REWARDED_AD_UNIT_ID);
+        rewardedAd.setListener(new DemoRewardedAdListener(this));
 
-            log("showRewardedVideo");
-            IronSource.showRewardedVideo();
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER, true);
+    }
+
+    public void loadRewardedButtonTapped(View view) {
+        // This will load a Rewarded ad
+        if (rewardedAd != null) {
+            log("loadAd for rewarded");
+            rewardedAd.loadAd();
+        }
+    }
+
+    public void showRewardedButtonTapped(View view) {
+        // It is advised to make sure there is available ad that isn't capped before attempting to show it
+        if (rewardedAd != null && rewardedAd.isAdReady()) {
+
+            log("showAd for rewarded");
+            rewardedAd.showAd(this);
         } else {
-            // wait for the availability of rewarded video to change to true before calling show
+            // load a new ad before calling show
         }
     }
 
     @Override
-    public void setPlacementInfo(Placement placementInfo) {
-        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
-        this.rewardedVideoPlacementInfo = placementInfo;
+    public void setReward(LevelPlayReward reward) {
+        // Setting the reward, an object that contains the reward name and amount
+        this.reward = reward;
     }
 
     @Override
     public void showRewardDialog() {
         // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
-        if (this.rewardedVideoPlacementInfo != null) {
+        if (this.reward != null) {
             new AlertDialog.Builder(DemoActivity.this)
                     .setPositiveButton("ok", (dialog, id) -> dialog.dismiss())
                     .setTitle(getResources().getString(R.string.rewarded_dialog_header))
-                    .setMessage(getResources().getString(R.string.rewarded_dialog_message) + " " + this.rewardedVideoPlacementInfo.getRewardAmount() + " " + this.rewardedVideoPlacementInfo.getRewardName())
+                    .setMessage(getResources().getString(R.string.rewarded_dialog_message) + " " + this.reward.getAmount() + " " + this.reward.getName())
                     .setCancelable(false)
                     .create()
                     .show();
 
-            this.rewardedVideoPlacementInfo = null;
+            this.reward = null;
         }
     }
     //endregion
@@ -246,9 +251,11 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         Button buttonToModify = null;
 
         switch (identifier) {
+            case LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER:
+                buttonToModify = rewardedLoadButton;
+                break;
             case SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER:
-                text = enable ? getResources().getString(R.string.show) : getResources().getString(R.string.initializing);
-                buttonToModify = rewardedVideoShowButton;
+                buttonToModify = rewardedShowButton;
                 break;
             case LOAD_INTERSTITIAL_BUTTON_IDENTIFIER:
                 buttonToModify = interstitialLoadButton;
