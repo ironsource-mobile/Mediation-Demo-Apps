@@ -16,7 +16,7 @@ class DemoRewardedAdListener(private val listener: DemoActivityListener) : Level
     override fun onAdLoaded(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
         listener.setEnablementForButton(
-            DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER,
+            DemoButtonIdentifiers.SHOW_REWARDED_AD_BUTTON_IDENTIFIER,
             true
         )
     }
@@ -28,9 +28,17 @@ class DemoRewardedAdListener(private val listener: DemoActivityListener) : Level
     override fun onAdLoadFailed(error: LevelPlayAdError) {
         logCallbackName(TAG, "error = $error")
         listener.setEnablementForButton(
-            DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER,
+            DemoButtonIdentifiers.SHOW_REWARDED_AD_BUTTON_IDENTIFIER,
             false
         )
+    }
+
+    /**
+     * Called after the ad info is updated. Available when another rewarded ad has loaded, and includes a higher CPM/Rate
+     * @param adInfo The info of the ad
+     */
+    override fun onAdInfoChanged(adInfo: LevelPlayAdInfo) {
+        logCallbackName(TAG, "adInfo = $adInfo")
     }
 
     /**
@@ -41,7 +49,7 @@ class DemoRewardedAdListener(private val listener: DemoActivityListener) : Level
     override fun onAdDisplayed(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
         listener.setEnablementForButton(
-            DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER,
+            DemoButtonIdentifiers.SHOW_REWARDED_AD_BUTTON_IDENTIFIER,
             false
         )
     }
@@ -56,24 +64,6 @@ class DemoRewardedAdListener(private val listener: DemoActivityListener) : Level
     }
 
     /**
-     * Called after a rewarded ad has been closed.
-     * @param adInfo The info of the ad.
-     */
-    override fun onAdClosed(adInfo: LevelPlayAdInfo) {
-        logCallbackName(TAG, "adInfo = $adInfo")
-        listener.showRewardDialog()
-    }
-
-    /**
-     * Called after a rewarded ad has been clicked.
-     * @param adInfo The info of the ad.
-     */
-    override fun onAdClicked(adInfo: LevelPlayAdInfo) {
-        logCallbackName(TAG, "adInfo = $adInfo")
-    }
-
-
-    /**
      * Called after a rewarded video has been viewed completely and the user is eligible for a reward.
      * @param reward The reward info.
      * @param adInfo The info of the ad.
@@ -84,10 +74,19 @@ class DemoRewardedAdListener(private val listener: DemoActivityListener) : Level
     }
 
     /**
-     * Called after the ad info is updated. Available when another rewarded ad has loaded, and includes a higher CPM/Rate
-     * @param adInfo The info of the ad
+     * Called after a rewarded ad has been clicked.
+     * @param adInfo The info of the ad.
      */
-    override fun onAdInfoChanged(adInfo: LevelPlayAdInfo) {
+    override fun onAdClicked(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
+    }
+
+    /**
+     * Called after a rewarded ad has been closed.
+     * @param adInfo The info of the ad.
+     */
+    override fun onAdClosed(adInfo: LevelPlayAdInfo) {
+        logCallbackName(TAG, "adInfo = $adInfo")
+        listener.showRewardDialog()
     }
 }

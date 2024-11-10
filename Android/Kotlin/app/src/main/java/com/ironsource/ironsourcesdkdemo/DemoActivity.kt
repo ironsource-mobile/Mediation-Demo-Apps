@@ -30,22 +30,22 @@ private const val TAG = "DemoActivity"
 private const val APP_KEY = "85460dcd"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-private const val INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9"
-private const val REWARDED_AD_UNIT_ID = "76yy3nay3ceui2a3"
-private const val BANNER_AD_UNIT_ID = "thnfvcsog13bhn08"
+private const val INTERSTITIAL_AD_AD_UNIT_ID = "aeyqi3vqlv6o8sh9"
+private const val REWARDED_AD_AD_UNIT_ID = "76yy3nay3ceui2a3"
+private const val BANNER_AD_AD_UNIT_ID = "thnfvcsog13bhn08"
 
 class DemoActivity : Activity(), DemoActivityListener {
 
-    private lateinit var rewardedVideoLoadButton: Button
-    private lateinit var rewardedVideoShowButton: Button
+    private lateinit var rewardedAdLoadButton: Button
+    private lateinit var rewardedAdShowButton: Button
     private var reward: LevelPlayReward? = null
     private var rewardedAd: LevelPlayRewardedAd? = null
 
-    private lateinit var interstitialLoadButton: Button
-    private lateinit var interstitialShowButton: Button
+    private lateinit var interstitialAdLoadButton: Button
+    private lateinit var interstitialAdShowButton: Button
     private var interstitialAd : LevelPlayInterstitialAd? = null
 
-    private lateinit var bannerLoadButton: Button
+    private lateinit var bannerAdLoadButton: Button
     private var bannerParentLayout: FrameLayout? = null
     private var bannerAd : LevelPlayBannerAdView? = null
 
@@ -91,11 +91,11 @@ class DemoActivity : Activity(), DemoActivityListener {
 
     //region Initialization Methods
     private fun setupUI(){
-        rewardedVideoLoadButton = findViewById(R.id.rewarded_load_button)
-        rewardedVideoShowButton = findViewById(R.id.rewarded_show_button)
-        interstitialLoadButton = findViewById(R.id.interstitial_load_button)
-        interstitialShowButton = findViewById(R.id.interstitial_show_button)
-        bannerLoadButton = findViewById(R.id.banner_load_button)
+        rewardedAdLoadButton = findViewById(R.id.rewarded_ad_load_button)
+        rewardedAdShowButton = findViewById(R.id.rewarded_ad_show_button)
+        interstitialAdLoadButton = findViewById(R.id.interstitial_ad_load_button)
+        interstitialAdShowButton = findViewById(R.id.interstitial_ad_show_button)
+        bannerAdLoadButton = findViewById(R.id.banner_ad_load_button)
 
         val versionTV = findViewById<TextView>(R.id.version_txt)
         "${resources.getString(R.string.version)} ${IronSourceUtils.getSDKVersion()}".also { versionTV.text = it }
@@ -109,12 +109,11 @@ class DemoActivity : Activity(), DemoActivityListener {
             IntegrationHelper.validateIntegration(this)
         }
 
-        // Set the impression data listener
+        // Register a listener for all impressions within the current session
         IronSource.addImpressionDataListener(DemoImpressionDataListener())
-        // Create the init request with the appKey and init the SDK
+
         val initRequest = LevelPlayInitRequest.Builder(APP_KEY)
             .build()
-
         log("init ironSource SDK with appKey: $APP_KEY")
         LevelPlay.init(this, initRequest, DemoInitializationListener(this))
 
@@ -124,19 +123,19 @@ class DemoActivity : Activity(), DemoActivityListener {
 
     //region Interstitial Methods
     override fun createInterstitialAd() {
-        interstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID)
+        interstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_AD_UNIT_ID)
         interstitialAd?.setListener(DemoInterstitialAdListener(this))
 
-        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true)
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_AD_BUTTON_IDENTIFIER, true)
     }
 
-    fun loadInterstitialButtonTapped(view: View){
+    fun loadInterstitialAdButtonTapped(view: View){
         // This will load an Interstitial ad
         log("loadAd for interstitial")
         interstitialAd?.loadAd()
     }
 
-    fun showInterstitialButtonTapped(view: View){
+    fun showInterstitialAdButtonTapped(view: View){
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (interstitialAd?.isAdReady() == true) {
             // This will present the Interstitial.
@@ -150,64 +149,21 @@ class DemoActivity : Activity(), DemoActivityListener {
     }
     //endregion
 
-    //region Banner Methods
-    override fun createBannerAd() {
-        // choose banner size
-
-        // 1. recommended - Adaptive ad size that adjusts to the screen width
-        val adSize = LevelPlayAdSize.createAdaptiveAdSize(this)
-
-        // 2. Adaptive ad size using fixed width ad size
-//        val  adSize = LevelPlayAdSize.createAdaptiveAdSize(this, 400)
-
-        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
-//        val adSize = LevelPlayAdSize.BANNER
-
-        // Create the banner view and set the ad unit id and ad size
-        adSize?.let {
-            bannerAd = LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID)
-            bannerAd?.setAdSize(adSize)
-
-            // set the banner listener
-            bannerAd?.setBannerListener(DemoBannerAdListener(this))
-
-            // add LevelPlayBannerAdView to your container
-            val layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-            bannerParentLayout?.addView(bannerAd, 0, layoutParams)
-
-            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
-        }?: run {
-            log("Failed to create banner ad")
-        }
-    }
-
-    fun loadBannerButtonTapped(view: View) {
-        // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
-        // otherwise, the banner will remain static until manually destroyed
-        log("loadAd for banner")
-        bannerAd?.loadAd()
-    }
-
-    override fun setBannerViewVisibility(visibility: Int){
-        bannerParentLayout?.visibility = visibility
-    }
-    //endregion
-
     //region Rewarded  Methods
     override fun createRewardedAd() {
-        rewardedAd = LevelPlayRewardedAd(REWARDED_AD_UNIT_ID)
+        rewardedAd = LevelPlayRewardedAd(REWARDED_AD_AD_UNIT_ID)
         rewardedAd?.setListener(DemoRewardedAdListener(this))
 
-        setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER, true)
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_AD_BUTTON_IDENTIFIER, true)
     }
 
-    fun loadRewardedButtonTapped(view: View) {
+    fun loadRewardedAdButtonTapped(view: View) {
         // This will load an Interstitial ad
         log("loadAd for interstitial")
         rewardedAd?.loadAd()
     }
 
-    fun showRewardedButtonTapped(view: View) {
+    fun showRewardedAdButtonTapped(view: View) {
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (rewardedAd?.isAdReady() == true) {
             log("showAd for rewarded")
@@ -238,6 +194,49 @@ class DemoActivity : Activity(), DemoActivityListener {
     }
     //endregion
 
+    //region Banner Methods
+    override fun createBannerAd() {
+        // choose banner size
+
+        // 1. recommended - Adaptive ad size that adjusts to the screen width
+        val adSize = LevelPlayAdSize.createAdaptiveAdSize(this)
+
+        // 2. Adaptive ad size using fixed width ad size
+//        val  adSize = LevelPlayAdSize.createAdaptiveAdSize(this, 400)
+
+        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
+//        val adSize = LevelPlayAdSize.BANNER
+
+        // Create the banner view and set the ad unit id and ad size
+        adSize?.let {
+            bannerAd = LevelPlayBannerAdView(this, BANNER_AD_AD_UNIT_ID)
+            bannerAd?.setAdSize(adSize)
+
+            // set the banner listener
+            bannerAd?.setBannerListener(DemoBannerAdListener(this))
+
+            // add LevelPlayBannerAdView to your container
+            val layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            bannerParentLayout?.addView(bannerAd, 0, layoutParams)
+
+            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER, true)
+        }?: run {
+            log("Failed to create banner ad")
+        }
+    }
+
+    fun loadBannerAdButtonTapped(view: View) {
+        // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
+        // otherwise, the banner will remain static until manually destroyed
+        log("loadAd for banner")
+        bannerAd?.loadAd()
+    }
+
+    override fun setBannerViewVisibility(visibility: Int){
+        bannerParentLayout?.visibility = visibility
+    }
+    //endregion
+
     //region Utility Methods
     override fun setEnablementForButton(buttonIdentifier: DemoButtonIdentifiers, enable: Boolean) {
         var text: String? = null
@@ -245,11 +244,11 @@ class DemoActivity : Activity(), DemoActivityListener {
         var buttonToModify: Button? = null
 
         when (buttonIdentifier) {
-            DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER -> buttonToModify = rewardedVideoLoadButton
-            DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER -> buttonToModify = rewardedVideoShowButton
-            DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER -> buttonToModify = interstitialLoadButton
-            DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER -> buttonToModify = interstitialShowButton
-            DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER -> buttonToModify = bannerLoadButton
+            DemoButtonIdentifiers.LOAD_REWARDED_AD_BUTTON_IDENTIFIER -> buttonToModify = rewardedAdLoadButton
+            DemoButtonIdentifiers.SHOW_REWARDED_AD_BUTTON_IDENTIFIER -> buttonToModify = rewardedAdShowButton
+            DemoButtonIdentifiers.LOAD_INTERSTITIAL_AD_BUTTON_IDENTIFIER -> buttonToModify = interstitialAdLoadButton
+            DemoButtonIdentifiers.SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER -> buttonToModify = interstitialAdShowButton
+            DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER -> buttonToModify = bannerAdLoadButton
             else -> {}
         }
 

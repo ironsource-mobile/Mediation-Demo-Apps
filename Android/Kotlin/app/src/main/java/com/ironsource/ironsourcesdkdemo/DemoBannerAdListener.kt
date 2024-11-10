@@ -18,7 +18,7 @@ class DemoBannerAdListener(private val listener: DemoActivityListener) :
     override fun onAdLoaded(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
         listener.setBannerViewVisibility(View.VISIBLE)
-        listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, false)
+        listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER, false)
         listener.setEnablementForButton(DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER, true)
     }
 
