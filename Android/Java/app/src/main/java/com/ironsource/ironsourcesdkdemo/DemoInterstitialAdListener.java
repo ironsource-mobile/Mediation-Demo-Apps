@@ -23,7 +23,7 @@ public class DemoInterstitialAdListener implements LevelPlayInterstitialAdListen
     @Override
     public void onAdLoaded(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
-        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, true);
+        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER, true);
 
     }
 
@@ -34,7 +34,7 @@ public class DemoInterstitialAdListener implements LevelPlayInterstitialAdListen
     @Override
     public void onAdLoadFailed(@NonNull LevelPlayAdError error) {
         logCallbackName(TAG, "error = " + error);
-        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false);
+        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER, false);
     }
 
     /**
@@ -45,7 +45,7 @@ public class DemoInterstitialAdListener implements LevelPlayInterstitialAdListen
     @Override
     public void onAdDisplayed(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
-        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false);
+        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER, false);
     }
 
     /**

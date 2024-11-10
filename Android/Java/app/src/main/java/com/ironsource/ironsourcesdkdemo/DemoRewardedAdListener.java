@@ -23,7 +23,7 @@ public class DemoRewardedAdListener implements LevelPlayRewardedAdListener {
     @Override
     public void onAdLoaded(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
-        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER, true);
+        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_AD_BUTTON_IDENTIFIER, true);
     }
 
     /**
@@ -33,7 +33,16 @@ public class DemoRewardedAdListener implements LevelPlayRewardedAdListener {
     @Override
     public void onAdLoadFailed(@NonNull LevelPlayAdError error) {
         logCallbackName(TAG, "error = " + error);
-        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER, false);
+        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_AD_BUTTON_IDENTIFIER, false);
+    }
+
+    /**
+     Called after the ad info is updated. Available when another rewarded ad has loaded, and includes a higher CPM/Rate
+     @param adInfo The info of the ad
+     */
+    @Override
+    public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {
+        logCallbackName(TAG, "adInfo = " + adInfo);
     }
 
     /**
@@ -44,7 +53,7 @@ public class DemoRewardedAdListener implements LevelPlayRewardedAdListener {
     @Override
     public void onAdDisplayed(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
-        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER, false);
+        this.listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_AD_BUTTON_IDENTIFIER, false);
     }
 
     /**
@@ -55,25 +64,6 @@ public class DemoRewardedAdListener implements LevelPlayRewardedAdListener {
     @Override
     public void onAdDisplayFailed(@NonNull LevelPlayAdError error, @NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "error = " + error + " | adInfo = " + adInfo);
-    }
-
-    /**
-     Called after a rewarded ad has been closed.
-     @param adInfo The info of the ad.
-     */
-    @Override
-    public void onAdClosed(@NonNull LevelPlayAdInfo adInfo) {
-        logCallbackName(TAG, "adInfo = " + adInfo);
-        this.listener.showRewardDialog();
-    }
-
-    /**
-     Called after a rewarded ad has been clicked.
-     @param adInfo The info of the ad.
-     */
-    @Override
-    public void onAdClicked(@NonNull LevelPlayAdInfo adInfo) {
-        logCallbackName(TAG, "adInfo = " + adInfo);
     }
 
     /**
@@ -88,11 +78,21 @@ public class DemoRewardedAdListener implements LevelPlayRewardedAdListener {
     }
 
     /**
-     Called after the ad info is updated. Available when another rewarded ad has loaded, and includes a higher CPM/Rate
-     @param adInfo The info of the ad
+     Called after a rewarded ad has been clicked.
+     @param adInfo The info of the ad.
      */
     @Override
-    public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {
+    public void onAdClicked(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
+    }
+
+    /**
+     Called after a rewarded ad has been closed.
+     @param adInfo The info of the ad.
+     */
+    @Override
+    public void onAdClosed(@NonNull LevelPlayAdInfo adInfo) {
+        logCallbackName(TAG, "adInfo = " + adInfo);
+        this.listener.showRewardDialog();
     }
 }

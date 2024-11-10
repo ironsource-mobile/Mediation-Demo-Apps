@@ -33,20 +33,20 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     public static final String APP_KEY = "85460dcd";
 
     // Replace with your ad unit ids as available in the LevelPlay dashboard
-    public static final String INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9";
-    public static final String REWARDED_AD_UNIT_ID = "76yy3nay3ceui2a3";
-    public static final String BANNER_AD_UNIT_ID = "thnfvcsog13bhn08";
+    public static final String INTERSTITIAL_AD_AD_UNIT_ID = "aeyqi3vqlv6o8sh9";
+    public static final String REWARDED_AD_AD_UNIT_ID = "76yy3nay3ceui2a3";
+    public static final String BANNER_AD_AD_UNIT_ID = "thnfvcsog13bhn08";
 
-    private Button rewardedLoadButton;
-    private Button rewardedShowButton;
+    private Button rewardedAdLoadButton;
+    private Button rewardedAdShowButton;
+    private LevelPlayRewardedAd rewardedAd;
     private LevelPlayReward reward;
 
-    private Button interstitialLoadButton;
-    private Button interstitialShowButton;
+    private Button interstitialAdLoadButton;
+    private Button interstitialAdShowButton;
     private LevelPlayInterstitialAd interstitialAd;
-    private LevelPlayRewardedAd rewardedAd;
 
-    private Button bannerLoadButton;
+    private Button bannerAdLoadButton;
     private FrameLayout bannerParentLayout;
     private LevelPlayBannerAdView bannerAd;
 
@@ -85,11 +85,11 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     //region Initialization Methods
     private void setupUI() {
-        rewardedLoadButton = findViewById(R.id.rewarded_load_button);
-        rewardedShowButton = findViewById(R.id.rewarded_show_button);
-        interstitialLoadButton = findViewById(R.id.interstitial_load_button);
-        interstitialShowButton = findViewById(R.id.interstitial_show_button);
-        bannerLoadButton = findViewById(R.id.banner_load_button);
+        rewardedAdLoadButton = findViewById(R.id.rewarded_ad_load_button);
+        rewardedAdShowButton = findViewById(R.id.rewarded_ad_show_button);
+        interstitialAdLoadButton = findViewById(R.id.interstitial_ad_load_button);
+        interstitialAdShowButton = findViewById(R.id.interstitial_ad_show_button);
+        bannerAdLoadButton = findViewById(R.id.banner_ad_load_button);
 
         TextView versionTextView = findViewById(R.id.version_txt);
         versionTextView.setText(String.format("%s %s", getResources().getString(R.string.version), IronSourceUtils.getSDKVersion()));
@@ -104,10 +104,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             IntegrationHelper.validateIntegration(this);
         }
 
-        // Set the impression data listener
+        // Register a listener for all impressions within the current session
         IronSource.addImpressionDataListener(new DemoImpressionDataListener());
 
-        // Create the init request with the appKey and init the SDK
         LevelPlayInitRequest initRequest = new LevelPlayInitRequest.Builder(APP_KEY)
                 .build();
         log("init levelPlay SDK with appKey: " + APP_KEY);
@@ -119,13 +118,13 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     //region Interstitial Methods
     public void createInterstitialAd() {
-        interstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
+        interstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_AD_UNIT_ID);
         interstitialAd.setListener(new DemoInterstitialAdListener(this));
 
-        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true);
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_AD_BUTTON_IDENTIFIER, true);
     }
 
-    public void loadInterstitialButtonTapped(View view) {
+    public void loadInterstitialAdButtonTapped(View view) {
         // This will load an Interstitial ad
         if (interstitialAd != null) {
             log("loadAd for interstitial");
@@ -133,7 +132,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         }
     }
 
-    public void showInterstitialButtonTapped(View view) {
+    public void showInterstitialAdButtonTapped(View view) {
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (interstitialAd != null && interstitialAd.isAdReady()) {
             // This will present the Interstitial.
@@ -147,61 +146,15 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     }
     //endregion
 
-    //region Banner Methods
-    public void createBannerAd() {
-        // choose banner size
-
-        // 1. recommended - Adaptive ad size that adjusts to the screen width
-        LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(this);
-
-        // 2. Adaptive ad size using fixed width ad size
-//         LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(this, 400);
-
-        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
-//        LevelPlayAdSize adSize = LevelPlayAdSize.BANNER;
-
-        // Create the banner view and set the ad unit id and ad size
-        if (adSize != null) {
-            bannerAd = new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID);
-            bannerAd.setAdSize(adSize);
-
-            // set the banner listener
-            bannerAd.setBannerListener(new DemoBannerAdListener(this));
-
-            // add LevelPlayBannerAdView to your container
-            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-            bannerParentLayout.addView(bannerAd, 0, layoutParams);
-            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true);
-        }
-        else {
-            log( "Failed to create banner ad");
-        }
-    }
-
-    public void loadBannerButtonTapped(View view) {
-        // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
-        // otherwise, the banner will remain static until manually destroyed
-        if (bannerAd != null) {
-            log("loadAd for banner");
-            bannerAd.loadAd();
-        }
-    }
-
-    @Override
-    public void setBannerViewVisibility(int visibility) {
-        this.bannerParentLayout.setVisibility(visibility);
-    }
-    //endregion
-
     //region Rewarded  Methods
     public void createRewardedAd() {
-        rewardedAd = new LevelPlayRewardedAd(REWARDED_AD_UNIT_ID);
+        rewardedAd = new LevelPlayRewardedAd(REWARDED_AD_AD_UNIT_ID);
         rewardedAd.setListener(new DemoRewardedAdListener(this));
 
-        setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER, true);
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_AD_BUTTON_IDENTIFIER, true);
     }
 
-    public void loadRewardedButtonTapped(View view) {
+    public void loadRewardedAdButtonTapped(View view) {
         // This will load a Rewarded ad
         if (rewardedAd != null) {
             log("loadAd for rewarded");
@@ -209,7 +162,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         }
     }
 
-    public void showRewardedButtonTapped(View view) {
+    public void showRewardedAdButtonTapped(View view) {
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (rewardedAd != null && rewardedAd.isAdReady()) {
 
@@ -243,6 +196,52 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     }
     //endregion
 
+    //region Banner Methods
+    public void createBannerAd() {
+        // choose banner size
+
+        // 1. recommended - Adaptive ad size that adjusts to the screen width
+        LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(this);
+
+        // 2. Adaptive ad size using fixed width ad size
+//         LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(this, 400);
+
+        // 3. Specific banner size - BANNER, LARGE, MEDIUM_RECTANGLE
+//        LevelPlayAdSize adSize = LevelPlayAdSize.BANNER;
+
+        // Create the banner view and set the ad unit id and ad size
+        if (adSize != null) {
+            bannerAd = new LevelPlayBannerAdView(this, BANNER_AD_AD_UNIT_ID);
+            bannerAd.setAdSize(adSize);
+
+            // set the banner listener
+            bannerAd.setBannerListener(new DemoBannerAdListener(this));
+
+            // add LevelPlayBannerAdView to your container
+            FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+            bannerParentLayout.addView(bannerAd, 0, layoutParams);
+            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER, true);
+        }
+        else {
+            log( "Failed to create banner ad");
+        }
+    }
+
+    public void loadBannerAdButtonTapped(View view) {
+        // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
+        // otherwise, the banner will remain static until manually destroyed
+        if (bannerAd != null) {
+            log("loadAd for banner");
+            bannerAd.loadAd();
+        }
+    }
+
+    @Override
+    public void setBannerViewVisibility(int visibility) {
+        this.bannerParentLayout.setVisibility(visibility);
+    }
+    //endregion
+
     //region Utility Methods
     @Override
     public void setEnablementForButton(DemoButtonIdentifiers identifier, boolean enable) {
@@ -251,20 +250,20 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         Button buttonToModify = null;
 
         switch (identifier) {
-            case LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER:
-                buttonToModify = rewardedLoadButton;
+            case LOAD_REWARDED_AD_BUTTON_IDENTIFIER:
+                buttonToModify = rewardedAdLoadButton;
                 break;
-            case SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER:
-                buttonToModify = rewardedShowButton;
+            case SHOW_REWARDED_AD_BUTTON_IDENTIFIER:
+                buttonToModify = rewardedAdShowButton;
                 break;
-            case LOAD_INTERSTITIAL_BUTTON_IDENTIFIER:
-                buttonToModify = interstitialLoadButton;
+            case LOAD_INTERSTITIAL_AD_BUTTON_IDENTIFIER:
+                buttonToModify = interstitialAdLoadButton;
                 break;
-            case SHOW_INTERSTITIAL_BUTTON_IDENTIFIER:
-                buttonToModify = interstitialShowButton;
+            case SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER:
+                buttonToModify = interstitialAdShowButton;
                 break;
-            case LOAD_BANNER_BUTTON_IDENTIFIER:
-                buttonToModify = bannerLoadButton;
+            case LOAD_BANNER_AD_BUTTON_IDENTIFIER:
+                buttonToModify = bannerAdLoadButton;
                 break;
         }
 
