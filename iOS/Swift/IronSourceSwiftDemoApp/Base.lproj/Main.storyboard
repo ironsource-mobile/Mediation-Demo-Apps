@@ -37,31 +37,48 @@
                                                 <color key="textColor" systemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cl3-aC-wSG" userLabel="Buttons Stack View">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="IK7-ly-dwU" userLabel="Buttons Stack View">
                                                 <rect key="frame" x="0.0" y="30.5" width="220" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="30"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AkV-kT-JiG" userLabel="Load Interstitial Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="lAN-1u-Ze6"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Tq7-jx-vfb"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Load">
+                                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <state key="disabled" title="Load">
+                                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="loadRewardedAdButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QsF-UR-cXP"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVv-PB-vQc" userLabel="Show Interstitial Button">
+                                                        <rect key="frame" x="120" y="0.0" width="100" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="y3W-vB-9Cn"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Show">
                                                             <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <state key="disabled" title="Initializing">
+                                                        <state key="disabled" title="Show">
                                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <state key="selected" title="Show"/>
                                                         <state key="highlighted" title="Show"/>
                                                         <connections>
-                                                            <action selector="showRewardedVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="guv-d3-Lxh"/>
+                                                            <action selector="showRewardedAdButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cSS-Qo-2RF"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="smx-X3-aLJ"/>
+                                                    <constraint firstAttribute="height" constant="30" id="cI9-GT-fOR"/>
                                                 </constraints>
                                             </stackView>
                                         </subviews>
@@ -147,7 +164,7 @@
                                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <connections>
-                                                            <action selector="loadBannerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JxN-za-vS6"/>
+                                                            <action selector="loadBannerAdButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JxN-za-vS6"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -174,10 +191,11 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="loadBannerButton" destination="DN1-DN-sO8" id="rHw-dA-GPy"/>
-                        <outlet property="loadInterstitialButton" destination="qE4-Rn-VtA" id="5Wh-Ea-XS0"/>
-                        <outlet property="showInterstitialButton" destination="Dhm-wI-nt6" id="lZv-jU-P6G"/>
-                        <outlet property="showRewardedVideoButton" destination="N20-QP-8mE" id="TcG-9c-34W"/>
+                        <outlet property="loadBannerAdButton" destination="DN1-DN-sO8" id="rHw-dA-GPy"/>
+                        <outlet property="loadInterstitialAdButton" destination="qE4-Rn-VtA" id="5Wh-Ea-XS0"/>
+                        <outlet property="loadRewardedAdButton" destination="AkV-kT-JiG" id="Xv1-Bi-xIb"/>
+                        <outlet property="showInterstitialAdButton" destination="Dhm-wI-nt6" id="lZv-jU-P6G"/>
+                        <outlet property="showRewardedAdButton" destination="XVv-PB-vQc" id="yqM-TZ-TFh"/>
                         <outlet property="versionLabel" destination="Dnw-Fv-bW3" id="eDm-X0-027"/>
                         <outlet property="view" destination="8bC-Xf-vdC" id="QcE-Fc-CwI"/>
                     </connections>
