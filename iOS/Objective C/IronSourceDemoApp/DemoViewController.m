@@ -7,7 +7,7 @@
 //
 
 #import "DemoViewController.h"
-#import "DemoRewardedVideoAdDelegate.h"
+#import "DemoRewardedAdDelegate.h"
 #import "DemoInterstitialAdDelegate.h"
 #import "DemoBannerAdDelegate.h"
 #import "DemoImpressionDataDelegate.h"
@@ -16,13 +16,15 @@
 #define kAppKey @"8545d445"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-#define kInterstitialAdUnitId @"wmgt0712uuux8ju4"
-#define kBannerAdUnitId @"iep3rxsyp9na3rw8"
+#define kInterstitialAdAdUnitId @"wmgt0712uuux8ju4"
+#define kBannerAdAdUnitId @"iep3rxsyp9na3rw8"
+#define kRewardedAdAdUnitId @"qwouvdrkuwivay5q"
 
 @interface DemoViewController ()
 
-@property (nonatomic, strong) DemoRewardedVideoAdDelegate         *rewardedVideoDelegate;
-@property (nonatomic, strong) ISPlacementInfo                     *rewardedVideoPlacementInfo;
+@property (nonatomic, strong) DemoRewardedAdDelegate              *rewardedAdAdDelegate;
+@property (nonatomic, strong) LPMRewardedAd                       *rewardedAd;
+@property (nonatomic, strong) LPMReward                           *reward;
 
 @property (nonatomic, strong) DemoInterstitialAdDelegate          *interstitialAdDelegate;
 @property (nonatomic, strong) LPMInterstitialAd                   *interstitialAd;
@@ -60,7 +62,7 @@
 - (void)setupUI {
     self.versionLabel.text = [NSString stringWithFormat:@"sdk version %@", [IronSource sdkVersion]];
     
-    for (UIButton *button in @[self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton]) {
+    for (UIButton *button in @[self.loadRewardedAdButton, self.showRewardedAdButton, self.loadInterstitialAdButton, self.showInterstitialAdButton, self.loadBannerAdButton]) {
         button.layer.cornerRadius = 17.0f;
         button.layer.masksToBounds = YES;
         button.layer.borderWidth = 2.5f;
@@ -76,26 +78,15 @@
     [ISIntegrationHelper validateIntegration];
 #endif
     
-    // Before initializing any of our products (Rewarded video, Interstitial or Banner) you must set
-    // their delegates. Take a look at each of these delegates method and you will see that they each implement a product
-    // protocol. This is our way of letting you know what's going on, and if you don't set the delegates
-    // we will not be able to communicate with you.
-    // We're passing 'self' to our delegates because we want
-    // to be able to enable/disable buttons to match ad availability.
-    self.rewardedVideoDelegate = [[DemoRewardedVideoAdDelegate alloc] initWithDelegate:self];
-    [IronSource setLevelPlayRewardedVideoDelegate:self.rewardedVideoDelegate];
-    
-    
+        
     self.impressionDataDelegate = [[DemoImpressionDataDelegate alloc] init];
     [IronSource addImpressionDataDelegate:self.impressionDataDelegate];
         
     // After setting the delegates you can go ahead and initialize the SDK. 
     // Once the iniitaliztion callback is return you can start loading your ads
     
-    // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
-    [self logMethodName:[NSString stringWithFormat:@"init ironSource SDK with appKey: %@", kAppKey]];
+    [self logMethodName:[NSString stringWithFormat:@"init LevelPlay SDK with appKey: %@", kAppKey]];
     LPMInitRequestBuilder *requestBuilder = [[LPMInitRequestBuilder alloc] initWithAppKey:kAppKey];
-    [requestBuilder withLegacyAdFormats:@[IS_REWARDED_VIDEO]];
     LPMInitRequest *initRequest = [requestBuilder build];
     [LevelPlay initWithRequest:initRequest completion:^(LPMConfiguration *_Nullable config, NSError *_Nullable error){
     
@@ -105,9 +96,10 @@
             return;
         }
         
-        // Initialization was successful. You can now load banner ad or perform other tasks
+        // Initialization was successful. You can now load ads or perform other tasks
         logCallbackName(@"sdk initialization succeeded");
         [self createInterstititalAd];
+        [self createRewardedAd];
         [self createBannerAd];
     }];
     // Scroll down the file to find out what happens when you tap a button...
@@ -116,12 +108,12 @@
 #pragma mark Interstitial Methods
 
 - (void) createInterstititalAd {
-    self.interstitialAd = [[LPMInterstitialAd alloc] initWithAdUnitId:kInterstitialAdUnitId];
+    self.interstitialAd = [[LPMInterstitialAd alloc] initWithAdUnitId:kInterstitialAdAdUnitId];
     self.interstitialAdDelegate = [[DemoInterstitialAdDelegate alloc] initWithDelegate:self];
     self.interstitialAd.delegate = self.interstitialAdDelegate;
     
-    [self setEnablementForButton:LoadInterstitialButtonIdentifier
-                                   enable:YES];
+    [self setEnablementForButton:LoadInterstitialAdButtonIdentifier
+                          enable:YES];
 }
 
 - (IBAction)loadInterstitialButtonTapped:(id)sender {
@@ -143,6 +135,62 @@
     }
 }
 
+#pragma mark Rewarded Video Methods
+
+- (void) createRewardedAd {
+    self.rewardedAd = [[LPMRewardedAd alloc] initWithAdUnitId:kRewardedAdAdUnitId];
+    self.rewardedAdAdDelegate = [[DemoRewardedAdDelegate alloc] initWithDelegate:self];
+    self.rewardedAd.delegate = self.rewardedAdAdDelegate;
+    
+    [self setEnablementForButton:LoadRewardedAdButtonIdentifier
+                          enable:YES];
+}
+
+- (IBAction)loadRewardedAdButtonTapped:(id)sender {
+    // This will load an Rewarded ad
+    [self logMethodName:@"loadAd for rewarded"];
+    [self.rewardedAd loadAd];
+}
+
+- (IBAction)showRewardedAdButtonTapped:(id)sender {
+    // It is advised to make sure there is available ad before attempting to show an ad
+    if ([self.rewardedAd isAdReady]) {
+        // This will present the Rewarded Video.
+
+        [self logMethodName:@"showAdWithViewController for: rewarded video"];
+        [self.rewardedAd showAdWithViewController:self placementName:NULL];
+    } else {
+        // wait for the availability of rewarded video to change to true before calling show
+    }
+}
+
+- (void)setRewardInfo:(LPMReward *)reward {
+    // Setting the reward, an object that contains the placement's reward name and amount
+    self.reward = reward;
+}
+
+- (void)showVideoRewardMessage {
+    // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+    if (self.reward) {
+        UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
+        NSString *message = [NSString stringWithFormat:@"You have been rewarded %d %@", (int)self.reward.amount, self.reward.name];
+        
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Video Reward"
+                                                                       message:message
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction *action) {
+        }];
+        
+        [alert addAction:okAction];
+        [rootViewController presentViewController:alert
+                                         animated:NO
+                                       completion:nil];
+        
+        self.reward = nil;
+    }
+}
 
 #pragma mark Banner Methods
 
@@ -161,7 +209,7 @@
 
     // Create the banner view and set the ad unit id and ad size
     if (self.bannerSize != nil) {
-        self.bannerAd = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
+        self.bannerAd = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdAdUnitId];
         [self.bannerAd setAdSize:self.bannerSize];
 
         // set the banner listener
@@ -170,8 +218,8 @@
         
         [self addBannerToView];
         
-        [self setEnablementForButton:LoadBannerButtonIdentifier
-                                       enable:YES];
+        [self setEnablementForButton:LoadBannerAdButtonIdentifier
+                              enable:YES];
     }
     else {
         NSLog(@"Error creating banner size");
@@ -200,49 +248,6 @@
     [self.bannerAd loadAdWithViewController:self];
 }
 
-
-#pragma mark Rewarded Video Methods
-
-- (IBAction)showRewardedVideoButtonTapped:(id)sender {
-    // It is advised to make sure there is available ad before attempting to show an ad
-    if ([IronSource hasRewardedVideo]) {
-        // This will present the Rewarded Video.
-
-        [self logMethodName:@"showRewardedVideoWithViewController:"];
-        [IronSource showRewardedVideoWithViewController:self];
-    } else {
-        // wait for the availability of rewarded video to change to true before calling show
-    }
-}
-
-- (void)setPlacementInfo:(ISPlacementInfo *)placementInfo {
-    // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
-    self.rewardedVideoPlacementInfo = placementInfo;
-}
-
-- (void)showVideoRewardMessage {
-    // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
-    if (self.rewardedVideoPlacementInfo) {
-        UIViewController *rootViewController = [[[[UIApplication sharedApplication] delegate] window] rootViewController];
-        NSString *message = [NSString stringWithFormat:@"You have been rewarded %d %@", [self.rewardedVideoPlacementInfo.rewardAmount intValue], self.rewardedVideoPlacementInfo.rewardName];
-        
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Video Reward"
-                                                                       message:message
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault
-                                                         handler:^(UIAlertAction *action) {
-        }];
-        
-        [alert addAction:okAction];
-        [rootViewController presentViewController:alert
-                                         animated:NO
-                                       completion:nil];
-        
-        self.rewardedVideoPlacementInfo = nil;
-    }
-}
-
 #pragma mark Utility methods
 
 - (void)setEnablementForButton:(ButtonIdentifiers)buttonIdentifier
@@ -251,17 +256,20 @@
         UIButton *buttonToModify;
         
         switch (buttonIdentifier) {
-            case ShowRewardedVideoButtonIdentifier:
-                buttonToModify = self.showRewardedVideoButton;
+            case LoadRewardedAdButtonIdentifier:
+                buttonToModify = self.loadRewardedAdButton;
                 break;
-            case LoadInterstitialButtonIdentifier:
-                buttonToModify = self.loadInterstitialButton;
+            case ShowRewardedAdButtonIdentifier:
+                buttonToModify = self.showRewardedAdButton;
                 break;
-            case ShowInterstitialButtonIdentifier:
-                buttonToModify = self.showInterstitialButton;
+            case LoadInterstitialAdButtonIdentifier:
+                buttonToModify = self.loadInterstitialAdButton;
                 break;
-            case LoadBannerButtonIdentifier:
-                buttonToModify = self.loadBannerButton;
+            case ShowInterstitialAdButtonIdentifier:
+                buttonToModify = self.showInterstitialAdButton;
+                break;
+            case LoadBannerAdButtonIdentifier:
+                buttonToModify = self.loadBannerAdButton;
                 break;
         }
 
