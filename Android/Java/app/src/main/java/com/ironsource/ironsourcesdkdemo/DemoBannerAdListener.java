@@ -23,7 +23,7 @@ public class DemoBannerAdListener implements LevelPlayBannerAdViewListener {
     public void onAdLoaded(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
         this.listener.setBannerViewVisibility(View.VISIBLE);
-        this.listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, false);
+        this.listener.setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER, false);
     }
 
     /**
