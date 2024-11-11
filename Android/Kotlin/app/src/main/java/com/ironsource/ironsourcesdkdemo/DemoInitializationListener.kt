@@ -18,6 +18,7 @@ class DemoInitializationListener(private val listener: DemoActivityListener) :
     override fun onInitSuccess(configuration: LevelPlayConfiguration) {
         logCallbackName(TAG, "")
         this.listener.createInterstitialAd()
+        this.listener.createRewardedAd()
         this.listener.createBannerAd()
     }
 
