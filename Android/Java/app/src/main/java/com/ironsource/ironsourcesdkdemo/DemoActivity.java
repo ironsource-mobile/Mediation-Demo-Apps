@@ -47,7 +47,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     private LevelPlayInterstitialAd interstitialAd;
 
     private Button bannerAdLoadButton;
-    private FrameLayout bannerParentLayout;
+    private FrameLayout bannerAdParentLayout;
     private LevelPlayBannerAdView bannerAd;
 
     //region Lifecycle Methods
@@ -94,7 +94,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         TextView versionTextView = findViewById(R.id.version_txt);
         versionTextView.setText(String.format("%s %s", getResources().getString(R.string.version), IronSourceUtils.getSDKVersion()));
 
-        bannerParentLayout = findViewById(R.id.banner_frame_layout);
+        bannerAdParentLayout = findViewById(R.id.banner_ad_frame_layout);
     }
 
     private void setupIronSourceSdk() {
@@ -219,7 +219,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
             // add LevelPlayBannerAdView to your container
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-            bannerParentLayout.addView(bannerAd, 0, layoutParams);
+            bannerAdParentLayout.addView(bannerAd, 0, layoutParams);
             setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER, true);
         }
         else {
@@ -238,7 +238,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     @Override
     public void setBannerViewVisibility(int visibility) {
-        this.bannerParentLayout.setVisibility(visibility);
+        this.bannerAdParentLayout.setVisibility(visibility);
     }
     //endregion
 

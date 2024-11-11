@@ -197,7 +197,7 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/banner_frame_layout"
+            android:id="@+id/banner_ad_frame_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
