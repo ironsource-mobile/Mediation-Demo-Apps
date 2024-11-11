@@ -46,7 +46,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     private var interstitialAd : LevelPlayInterstitialAd? = null
 
     private lateinit var bannerAdLoadButton: Button
-    private var bannerParentLayout: FrameLayout? = null
+    private var bannerAdParentLayout: FrameLayout? = null
     private var bannerAd : LevelPlayBannerAdView? = null
 
     companion object {
@@ -99,7 +99,7 @@ class DemoActivity : Activity(), DemoActivityListener {
 
         val versionTV = findViewById<TextView>(R.id.version_txt)
         "${resources.getString(R.string.version)} ${IronSourceUtils.getSDKVersion()}".also { versionTV.text = it }
-        bannerParentLayout = findViewById(R.id.banner_footer)
+        bannerAdParentLayout = findViewById(R.id.banner_footer)
     }
 
     private fun setupIronSourceSdk(){
@@ -217,7 +217,7 @@ class DemoActivity : Activity(), DemoActivityListener {
 
             // add LevelPlayBannerAdView to your container
             val layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-            bannerParentLayout?.addView(bannerAd, 0, layoutParams)
+            bannerAdParentLayout?.addView(bannerAd, 0, layoutParams)
 
             setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER, true)
         }?: run {
@@ -233,7 +233,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     }
 
     override fun setBannerViewVisibility(visibility: Int){
-        bannerParentLayout?.visibility = visibility
+        bannerAdParentLayout?.visibility = visibility
     }
     //endregion
 
