@@ -26,10 +26,7 @@ android {
 
 // Include IronSource maven repositories
 repositories {
-    maven {
-        // IronSource
-        url "https://android-sdk.is.com/"
-    }
+    mavenCentral()
 }
 
 
@@ -40,7 +37,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     // Add IronSource Mediation SDK dependency.
-    implementation "com.ironsource.sdk:mediationsdk:8.+"
+    implementation "com.unity3d.ads-mediation:mediation-sdk:8.+"
     // Add AdNetworks adapters dependencies and matching ad networks SDKs dependencies .
     // Make sure you also configure the AdNetworks in your dashboard.
     // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
