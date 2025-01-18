@@ -10,11 +10,17 @@ public class MyAppStart : MonoBehaviour
 	private LevelPlayBannerAd bannerAd;
 	
 #if UNITY_ANDROID
-	string appKey = "85460dcd";
-	string bannerAdUnitId = "thnfvcsog13bhn08";
+	const string appKey = "19a0d2e8d";
+    const string bannerAdUnitId = "2sl8h7evrpm7vohp";
 #elif UNITY_IPHONE
-        string appKey = "8545d445";
-		string bannerAdUnitId = "iep3rxsyp9na3rw8";
+    const string appKey = "19a0da19d";
+    const string bannerAdUnitId = "4b9fldhmt9jgeb5j";
+//#if UNITY_ANDROID
+//	string appKey = "85460dcd";
+//	string bannerAdUnitId = "thnfvcsog13bhn08";
+//#elif UNITY_IPHONE
+//        string appKey = "8545d445";
+//		string bannerAdUnitId = "iep3rxsyp9na3rw8";
 #else
         string appKey = "unexpected_platform";
 		string bannerAdUnitId = "unexpected_platform";
@@ -38,7 +44,8 @@ public class MyAppStart : MonoBehaviour
 
 		// SDK init
 		Debug.Log ("unity-script: LevelPlay Init");
-		LevelPlay.Init(appKey,uniqueUserId,new []{LevelPlayAdFormat.REWARDED});
+        LevelPlay.Init(appKey, adFormats: new[] { LevelPlayAdFormat.REWARDED });
+        //LevelPlay.Init(appKey,uniqueUserId,new []{LevelPlayAdFormat.REWARDED});
 		
 		LevelPlay.OnInitSuccess += OnInitializationCompleted;
 		LevelPlay.OnInitFailed += (error => Debug.Log("Initialization error: " + error));

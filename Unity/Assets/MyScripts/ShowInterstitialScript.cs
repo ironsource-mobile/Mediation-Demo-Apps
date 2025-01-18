@@ -10,16 +10,20 @@ public class ShowInterstitialScript : MonoBehaviour
 	GameObject LoadText;
 	GameObject ShowButton;
 	GameObject ShowText;
-	
+
 #if UNITY_ANDROID
-	string interstitialAdUnitId = "aeyqi3vqlv6o8sh9";
+    string interstitialAdUnitId = "5oairr7p0zffyhw7";
 #elif UNITY_IPHONE
-	string interstitialAdUnitId = "wmgt0712uuux8ju4";
+	string interstitialAdUnitId = "aqfm843a19c95imq";
+//#if UNITY_ANDROID
+//	string interstitialAdUnitId = "aeyqi3vqlv6o8sh9";
+//#elif UNITY_IPHONE
+//	string interstitialAdUnitId = "wmgt0712uuux8ju4";
 #else
 	string interstitialAdUnitId = "unexpected_platform";
 #endif
 
- 	public static String INTERSTITIAL_INSTANCE_ID = "0";
+    public static String INTERSTITIAL_INSTANCE_ID = "0";
 
     private LevelPlayInterstitialAd interstitialAd;
 

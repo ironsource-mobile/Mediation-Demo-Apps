@@ -1,0 +1,66 @@
+apply plugin: 'com.android.application'
+
+dependencies {
+    implementation project(':unityLibrary')
+    implementation 'com.unity3d.ads-mediation:mediation-sdk:8.6.1' 
+    implementation 'com.unity3d.ads-mediation:adquality-sdk:7.22.3'
+    implementation 'com.google.android.gms:play-services-appset:16.0.0' 
+    implementation 'com.google.android.gms:play-services-ads-identifier:18.1.0' 
+    implementation 'com.google.android.gms:play-services-basement:18.1.0' 
+    }
+
+android {
+    namespace "**NAMESPACE**"
+    ndkPath "**NDKPATH**"
+    compileSdkVersion **APIVERSION**
+    buildToolsVersion '**BUILDTOOLS**'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    defaultConfig {
+        minSdkVersion **MINSDKVERSION**
+        targetSdkVersion **TARGETSDKVERSION**
+        applicationId '**APPLICATIONID**'
+        ndk {
+            abiFilters **ABIFILTERS**
+        }
+        versionCode **VERSIONCODE**
+        versionName '**VERSIONNAME**'
+    }
+
+    aaptOptions {
+        noCompress = **BUILTIN_NOCOMPRESS** + unityStreamingAssets.tokenize(', ')
+        ignoreAssetsPattern = "!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~"
+    }**SIGN**
+
+    lintOptions {
+        abortOnError false
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled **MINIFY_DEBUG**
+            proguardFiles getDefaultProguardFile('proguard-android.txt')**SIGNCONFIG**
+            jniDebuggable true
+        }
+        release {
+            minifyEnabled **MINIFY_RELEASE**
+            proguardFiles getDefaultProguardFile('proguard-android.txt')**SIGNCONFIG**
+        }
+    }**PACKAGING_OPTIONS****PLAY_ASSET_PACKS****SPLITS**
+**BUILT_APK_LOCATION**
+    bundle {
+        language {
+            enableSplit = false
+        }
+        density {
+            enableSplit = false
+        }
+        abi {
+            enableSplit = true
+        }
+    }
+}**SPLITS_VERSION_CODE****LAUNCHER_SOURCE_BUILD_SETUP**
