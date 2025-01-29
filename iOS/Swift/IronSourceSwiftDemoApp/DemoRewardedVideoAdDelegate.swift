@@ -12,7 +12,7 @@ class DemoRewardedVideoAdDelegate: NSObject, LevelPlayRewardedVideoDelegate {
     
     weak var delegate: DemoViewControllerDelegate?
 
-    init(delegate: DemoViewControllerDelegate!) {
+init(delegate: DemoViewControllerDelegate!) {
         self.delegate = delegate
     }
     

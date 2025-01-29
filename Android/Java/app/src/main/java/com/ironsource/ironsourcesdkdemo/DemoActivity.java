@@ -30,11 +30,11 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     public static final String TAG = "DemoActivity";
 
     // Replace with your app key as available in the LevelPlay dashboard
-    public static final String APP_KEY = "85460dcd";
+    public static final String APP_KEY = "123b1172d";
 
     // Replace with your ad unit ids as available in the LevelPlay dashboard
-    public static final String INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9";
-    public static final String BANNER_AD_UNIT_ID = "thnfvcsog13bhn08";
+    public static final String INTERSTITIAL_AD_UNIT_ID = "e2cf506ghi4sn2aa";
+    public static final String BANNER_AD_UNIT_ID = "54ip4pak9p4ijwnl";
 
     private Button rewardedVideoShowButton;
     private Placement rewardedVideoPlacementInfo;
@@ -44,9 +44,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     private LevelPlayInterstitialAd interstitialAd;
 
     private Button bannerLoadButton;
+    private Button bannerDestroyButton;
     private FrameLayout bannerParentLayout;
     private LevelPlayBannerAdView bannerAd;
-
     //region Lifecycle Methods
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +86,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         interstitialLoadButton = findViewById(R.id.interstitial_load_button);
         interstitialShowButton = findViewById(R.id.interstitial_show_button);
         bannerLoadButton = findViewById(R.id.banner_load_button);
+        bannerDestroyButton = findViewById(R.id.banner_destroy_button);
 
         TextView versionTextView = findViewById(R.id.version_txt);
         versionTextView.setText(String.format("%s %s", getResources().getString(R.string.version), IronSourceUtils.getSDKVersion()));
@@ -139,6 +140,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         if (interstitialAd != null) {
             log("loadAd for interstitial");
             interstitialAd.loadAd();
+            setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, false);
         }
     }
 
@@ -150,6 +152,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
             log("showAd for interstitial");
             interstitialAd.showAd(this);
+            setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true);
+            setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false);
+
         } else {
             // load a new ad before calling show
         }
@@ -181,6 +186,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
             bannerParentLayout.addView(bannerAd, 0, layoutParams);
             setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true);
+            setEnablementForButton(DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER, false);
         }
         else {
             log( "Failed to create banner ad");
@@ -190,9 +196,29 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     public void loadBannerButtonTapped(View view) {
         // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
         // otherwise, the banner will remain static until manually destroyed
+
+        bannerAd =  new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID);
+        bannerAd.setBannerListener(new DemoBannerAdListener(this));
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+        bannerParentLayout.addView(bannerAd, 0, layoutParams);
+
         if (bannerAd != null) {
             log("loadAd for banner");
             bannerAd.loadAd();
+            setEnablementForButton(DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER, true);
+        }
+    }
+
+    public void destroyBannerButtonTapped(View view) {
+        // Destroy a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
+        // otherwise, the banner will remain static until manually destroyed
+        if (bannerAd != null) {
+            log("destroy for banner");
+            bannerAd.destroy();
+            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true);
+            setEnablementForButton(DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER, false);
+
+
         }
     }
 
@@ -258,6 +284,9 @@ public class DemoActivity extends Activity implements DemoActivityListener {
                 break;
             case LOAD_BANNER_BUTTON_IDENTIFIER:
                 buttonToModify = bannerLoadButton;
+                break;
+            case DESTROY_BANNER_BUTTON_IDENTIFIER:
+                buttonToModify = bannerDestroyButton;
                 break;
         }
 

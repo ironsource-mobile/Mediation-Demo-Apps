@@ -11,17 +11,21 @@ import ObjectiveC.runtime
 import IronSource
 
 // Replace with your app key as available in the LevelPlay dashboard
-let appKey = "8545d445"
+//let appKey = "8545d445"
+let appKey = "123b1172d"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-let interstitialAdUnitId = "wmgt0712uuux8ju4"
-let bannerAdUnitId = "iep3rxsyp9na3rw8"
+//let interstitialAdUnitId = "wmgt0712uuux8ju4"
+//let bannerAdUnitId = "iep3rxsyp9na3rw8"
+let interstitialAdUnitId = "e2cf506ghi4sn2aa"
+let bannerAdUnitId = "54ip4pak9p4ijwnl"
 
 enum ButtonIdentifiers : Int {
     case showRewardedVideoButtonIdentifier
     case loadInterstitialButtonIdentifier
     case showInterstitialButtonIdentifier
     case loadBannerButtonIdentifier
+    case destroyBannerButtonIdentifier
 }
 
 protocol DemoViewControllerDelegate: NSObjectProtocol {
@@ -50,6 +54,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     var bannerAdViewDelegate: DemoBannerAdDelegate! = nil
     var bannerAd: LPMBannerAdView! = nil
     var bannerSize: LPMAdSize! = nil
+    
+    @IBOutlet weak var destroyBannerButton: UIButton!
 
     var impressionDataDelegate: DemoImpressionDataDelegate! = nil
 
@@ -70,13 +76,14 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     
     deinit {
         self.bannerAd.destroy()
+        self.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: false)
     }
 
     //MARK: Initialization Methods
     
     func setupUI() {
         self.versionLabel.text =  String(format: "sdk version %@", IronSource.sdkVersion());
-        let buttons = [self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton]
+        let buttons = [self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]
 
         for button in buttons {
             button?.layer.cornerRadius = 17.0
@@ -110,6 +117,15 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // Once the iniitaliztion callback is return you can start loading your ads
         
         // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
+        guard let ironSrcSdkClass = NSClassFromString("IronSourceSdk") else {
+          return
+        }
+
+        guard let ironSrcSdkObject = ironSrcSdkClass.value(forKey: "sharedInstance") else {
+          return
+        }
+
+        (ironSrcSdkObject as AnyObject).setValue(0, forKey: "serr")
         self.logMethodName(string: "init ironSource SDK with appKey:  \(appKey)")
         let requestBuilder = LPMInitRequestBuilder(appKey: appKey)
             .withLegacyAdFormats([IS_REWARDED_VIDEO])
@@ -166,7 +182,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
     //MARK: Banner Methods
 
-    func createBannerAd() {
+func createBannerAd() {
         // choose banner size
         // 1. recommended - Adaptive ad size that adjusts to the screen width
         self.bannerSize = LPMAdSize.createAdaptive()
@@ -210,13 +226,30 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     }
 
     @IBAction func loadBannerButtonTapped(_ sender: Any) {
-        
+        self.createBannerAd()
+
         guard let bannerAd = self.bannerAd else {
             return
         }
 
         logMethodName(string: "loadAd for banner")
         bannerAd.loadAd(with: self)
+        self.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: true)
+
+
+    }
+    
+    @IBAction func destroyBannerButtonTapped(_ sender: Any) {
+        
+        guard let bannerAd = self.bannerAd else {
+            return
+        }
+
+        logMethodName(string: "destroy for banner")
+        bannerAd.destroy()
+        self.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: false)
+        self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
+
     }
 
 
@@ -278,6 +311,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
                 buttonToModify = self.showInterstitialButton
             case .loadBannerButtonIdentifier:
                 buttonToModify = self.loadBannerButton
+            case .destroyBannerButtonIdentifier:
+                buttonToModify = self.destroyBannerButton
             }
             
             buttonToModify?.isEnabled = enable

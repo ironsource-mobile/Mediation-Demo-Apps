@@ -143,6 +143,19 @@
                 android:text="@string/load"
                 tools:ignore="ButtonStyle" />
 
+            <Button
+                android:id="@+id/banner_destroy_button"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/ironsource_button_shape"
+                android:enabled="false"
+                android:onClick="destroyBannerButtonTapped"
+                android:text="destroy"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                tools:ignore="ButtonStyle" />
+
         </LinearLayout>
     </LinearLayout>
 

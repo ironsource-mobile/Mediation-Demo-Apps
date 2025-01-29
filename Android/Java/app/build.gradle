@@ -40,8 +40,19 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     // Add IronSource Mediation SDK dependency.
-    implementation "com.ironsource.sdk:mediationsdk:8.+"
+    //implementation "com.ironsource.sdk:mediationsdk:8.+"
     // Add AdNetworks adapters dependencies and matching ad networks SDKs dependencies .
     // Make sure you also configure the AdNetworks in your dashboard.
     // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
+    //implementation 'com.android.support.constraint:constraint-layout:2.0.4'
+    //implementation fileTree(dir: "libs", include: ["*.aar"])
+    // debug om server
+    implementation fileTree(dir: "libs", includes: ["mediationsdk-debug.aar"])
+    //implementation fileTree(dir: "libs", includes: ["mediationsdk-8.5.0.aar"])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.8.0"
+
+
+
+
+
 }
