@@ -1,4 +1,4 @@
-﻿using Unity.Services.LevelPlay.Runtime;
+﻿using Unity.Services.LevelPlay;
 using UnityEngine;
 
 public class MyAppStart : MonoBehaviour
@@ -35,7 +35,7 @@ public class MyAppStart : MonoBehaviour
 
         // SDK init
         Debug.Log("unity-script: LevelPlay Init");
-        LevelPlay.Init(appKey, uniqueUserId, new[] { LevelPlayAdFormat.REWARDED });
+        LevelPlay.Init(appKey, uniqueUserId, new[] { com.unity3d.mediation.LevelPlayAdFormat.REWARDED });
 
         LevelPlay.OnInitSuccess += OnInitializationCompleted;
         LevelPlay.OnInitFailed += error => Debug.Log("Initialization error: " + error);
