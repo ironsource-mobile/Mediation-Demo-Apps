@@ -15,14 +15,14 @@ public class DemoInitializationListener implements LevelPlayInitListener {
         this.listener = listener;
     }
 
-
     /**
      triggered when the initialization is completed successfully. After you receive this indication, ads can be loaded
      @param configuration The configuration
      */
     @Override
-    public void onInitSuccess(LevelPlayConfiguration configuration) {
+    public void onInitSuccess(@NonNull LevelPlayConfiguration configuration) {
         logCallbackName(TAG, "");
+        this.listener.createRewardedAd();
         this.listener.createInterstitialAd();
         this.listener.createBannerAd();
     }
@@ -34,7 +34,6 @@ public class DemoInitializationListener implements LevelPlayInitListener {
     @Override
     public void onInitFailed(@NonNull LevelPlayInitError error) {
         logCallbackName(TAG, "error = " + error);
-
     }
 
 }

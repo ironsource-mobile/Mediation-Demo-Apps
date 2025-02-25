@@ -14,16 +14,16 @@ import android.widget.TextView;
 import androidx.multidex.BuildConfig;
 import com.ironsource.mediationsdk.IronSource;
 import com.ironsource.mediationsdk.integration.IntegrationHelper;
-import com.ironsource.mediationsdk.model.Placement;
 import com.ironsource.mediationsdk.utils.IronSourceUtils;
 import com.unity3d.mediation.LevelPlay;
 import com.unity3d.mediation.LevelPlayAdSize;
 import com.unity3d.mediation.LevelPlayInitRequest;
 import com.unity3d.mediation.banner.LevelPlayBannerAdView;
 import com.unity3d.mediation.interstitial.LevelPlayInterstitialAd;
+import com.unity3d.mediation.rewarded.LevelPlayReward;
+import com.unity3d.mediation.rewarded.LevelPlayRewardedAd;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class DemoActivity extends Activity implements DemoActivityListener {
 
@@ -33,18 +33,21 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     public static final String APP_KEY = "85460dcd";
 
     // Replace with your ad unit ids as available in the LevelPlay dashboard
-    public static final String INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9";
-    public static final String BANNER_AD_UNIT_ID = "thnfvcsog13bhn08";
+    public static final String INTERSTITIAL_AD_AD_UNIT_ID = "aeyqi3vqlv6o8sh9";
+    public static final String REWARDED_AD_AD_UNIT_ID = "76yy3nay3ceui2a3";
+    public static final String BANNER_AD_AD_UNIT_ID = "thnfvcsog13bhn08";
 
-    private Button rewardedVideoShowButton;
-    private Placement rewardedVideoPlacementInfo;
+    private Button rewardedAdLoadButton;
+    private Button rewardedAdShowButton;
+    private LevelPlayRewardedAd rewardedAd;
+    private LevelPlayReward reward;
 
-    private Button interstitialLoadButton;
-    private Button interstitialShowButton;
+    private Button interstitialAdLoadButton;
+    private Button interstitialAdShowButton;
     private LevelPlayInterstitialAd interstitialAd;
 
-    private Button bannerLoadButton;
-    private FrameLayout bannerParentLayout;
+    private Button bannerAdLoadButton;
+    private FrameLayout bannerAdParentLayout;
     private LevelPlayBannerAdView bannerAd;
 
     //region Lifecycle Methods
@@ -82,15 +85,16 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     //region Initialization Methods
     private void setupUI() {
-        rewardedVideoShowButton = findViewById(R.id.rewarded_video_show_button);
-        interstitialLoadButton = findViewById(R.id.interstitial_load_button);
-        interstitialShowButton = findViewById(R.id.interstitial_show_button);
-        bannerLoadButton = findViewById(R.id.banner_load_button);
+        rewardedAdLoadButton = findViewById(R.id.rewarded_ad_load_button);
+        rewardedAdShowButton = findViewById(R.id.rewarded_ad_show_button);
+        interstitialAdLoadButton = findViewById(R.id.interstitial_ad_load_button);
+        interstitialAdShowButton = findViewById(R.id.interstitial_ad_show_button);
+        bannerAdLoadButton = findViewById(R.id.banner_ad_load_button);
 
         TextView versionTextView = findViewById(R.id.version_txt);
         versionTextView.setText(String.format("%s %s", getResources().getString(R.string.version), IronSourceUtils.getSDKVersion()));
 
-        bannerParentLayout = findViewById(R.id.banner_frame_layout);
+        bannerAdParentLayout = findViewById(R.id.banner_ad_frame_layout);
     }
 
     private void setupIronSourceSdk() {
@@ -100,26 +104,12 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             IntegrationHelper.validateIntegration(this);
         }
 
-        // Before initializing any of our legacy products (Rewarded video, Interstitial or Banner) you must set
-        // their listeners. Take a look at each of these listeners method and you will see that they each implement a product
-        // protocol. This is our way of letting you know what's going on, and if you don't set the listeners
-        // we will not be able to communicate with you.
-        // We're passing 'this' to our listeners because we want
-        // to be able to enable/disable buttons to match ad availability.
-        IronSource.setLevelPlayRewardedVideoListener(new DemoRewardedVideoAdListener(this));
+        // Register a listener for all impressions within the current session
         IronSource.addImpressionDataListener(new DemoImpressionDataListener());
 
-        // After setting the listeners you can go ahead and initialize the SDK.
-        // Once the initialization callback is returned you can start loading your ads
-
-        // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
-        List<LevelPlay.AdFormat> legacyAdFormats = Arrays.asList(LevelPlay.AdFormat.REWARDED);
-
         LevelPlayInitRequest initRequest = new LevelPlayInitRequest.Builder(APP_KEY)
-                .withLegacyAdFormats(legacyAdFormats)
                 .build();
-
-        log("init ironSource SDK with appKey: " + APP_KEY);
+        log("init levelPlay SDK with appKey: " + APP_KEY);
         LevelPlay.init(this, initRequest, new DemoInitializationListener(this));
 
         // Scroll down the file to find out what happens when you tap a button...
@@ -128,13 +118,13 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     //region Interstitial Methods
     public void createInterstitialAd() {
-        interstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
+        interstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_AD_UNIT_ID);
         interstitialAd.setListener(new DemoInterstitialAdListener(this));
 
-        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true);
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_AD_BUTTON_IDENTIFIER, true);
     }
 
-    public void loadInterstitialButtonTapped(View view) {
+    public void loadInterstitialAdButtonTapped(View view) {
         // This will load an Interstitial ad
         if (interstitialAd != null) {
             log("loadAd for interstitial");
@@ -142,7 +132,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         }
     }
 
-    public void showInterstitialButtonTapped(View view) {
+    public void showInterstitialAdButtonTapped(View view) {
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (interstitialAd != null && interstitialAd.isAdReady()) {
             // This will present the Interstitial.
@@ -152,6 +142,56 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             interstitialAd.showAd(this);
         } else {
             // load a new ad before calling show
+        }
+    }
+    //endregion
+
+    //region Rewarded  Methods
+    public void createRewardedAd() {
+        rewardedAd = new LevelPlayRewardedAd(REWARDED_AD_AD_UNIT_ID);
+        rewardedAd.setListener(new DemoRewardedAdListener(this));
+
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_AD_BUTTON_IDENTIFIER, true);
+    }
+
+    public void loadRewardedAdButtonTapped(View view) {
+        // This will load a Rewarded ad
+        if (rewardedAd != null) {
+            log("loadAd for rewarded");
+            rewardedAd.loadAd();
+        }
+    }
+
+    public void showRewardedAdButtonTapped(View view) {
+        // It is advised to make sure there is available ad that isn't capped before attempting to show it
+        if (rewardedAd != null && rewardedAd.isAdReady()) {
+
+            log("showAd for rewarded");
+            rewardedAd.showAd(this);
+        } else {
+            // load a new ad before calling show
+        }
+    }
+
+    @Override
+    public void setReward(LevelPlayReward reward) {
+        // Setting the reward, an object that contains the reward name and amount
+        this.reward = reward;
+    }
+
+    @Override
+    public void showRewardDialog() {
+        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+        if (this.reward != null) {
+            new AlertDialog.Builder(DemoActivity.this)
+                    .setPositiveButton("ok", (dialog, id) -> dialog.dismiss())
+                    .setTitle(getResources().getString(R.string.rewarded_dialog_header))
+                    .setMessage(getResources().getString(R.string.rewarded_dialog_message) + " " + this.reward.getAmount() + " " + this.reward.getName())
+                    .setCancelable(false)
+                    .create()
+                    .show();
+
+            this.reward = null;
         }
     }
     //endregion
@@ -171,7 +211,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
         // Create the banner view and set the ad unit id and ad size
         if (adSize != null) {
-            bannerAd = new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID);
+            bannerAd = new LevelPlayBannerAdView(this, BANNER_AD_AD_UNIT_ID);
             bannerAd.setAdSize(adSize);
 
             // set the banner listener
@@ -179,15 +219,15 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
             // add LevelPlayBannerAdView to your container
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-            bannerParentLayout.addView(bannerAd, 0, layoutParams);
-            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true);
+            bannerAdParentLayout.addView(bannerAd, 0, layoutParams);
+            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER, true);
         }
         else {
             log( "Failed to create banner ad");
         }
     }
 
-    public void loadBannerButtonTapped(View view) {
+    public void loadBannerAdButtonTapped(View view) {
         // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
         // otherwise, the banner will remain static until manually destroyed
         if (bannerAd != null) {
@@ -198,43 +238,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
     @Override
     public void setBannerViewVisibility(int visibility) {
-        this.bannerParentLayout.setVisibility(visibility);
-    }
-    //endregion
-
-    //region Rewarded Video Methods
-    public void showRewardedVideoButtonTapped(View view) {
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if (IronSource.isRewardedVideoAvailable()) {
-            // This will present the Rewarded Video.
-
-            log("showRewardedVideo");
-            IronSource.showRewardedVideo();
-        } else {
-            // wait for the availability of rewarded video to change to true before calling show
-        }
-    }
-
-    @Override
-    public void setPlacementInfo(Placement placementInfo) {
-        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
-        this.rewardedVideoPlacementInfo = placementInfo;
-    }
-
-    @Override
-    public void showRewardDialog() {
-        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
-        if (this.rewardedVideoPlacementInfo != null) {
-            new AlertDialog.Builder(DemoActivity.this)
-                    .setPositiveButton("ok", (dialog, id) -> dialog.dismiss())
-                    .setTitle(getResources().getString(R.string.rewarded_dialog_header))
-                    .setMessage(getResources().getString(R.string.rewarded_dialog_message) + " " + this.rewardedVideoPlacementInfo.getRewardAmount() + " " + this.rewardedVideoPlacementInfo.getRewardName())
-                    .setCancelable(false)
-                    .create()
-                    .show();
-
-            this.rewardedVideoPlacementInfo = null;
-        }
+        this.bannerAdParentLayout.setVisibility(visibility);
     }
     //endregion
 
@@ -246,18 +250,20 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         Button buttonToModify = null;
 
         switch (identifier) {
-            case SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER:
-                text = enable ? getResources().getString(R.string.show) : getResources().getString(R.string.initializing);
-                buttonToModify = rewardedVideoShowButton;
+            case LOAD_REWARDED_AD_BUTTON_IDENTIFIER:
+                buttonToModify = rewardedAdLoadButton;
                 break;
-            case LOAD_INTERSTITIAL_BUTTON_IDENTIFIER:
-                buttonToModify = interstitialLoadButton;
+            case SHOW_REWARDED_AD_BUTTON_IDENTIFIER:
+                buttonToModify = rewardedAdShowButton;
                 break;
-            case SHOW_INTERSTITIAL_BUTTON_IDENTIFIER:
-                buttonToModify = interstitialShowButton;
+            case LOAD_INTERSTITIAL_AD_BUTTON_IDENTIFIER:
+                buttonToModify = interstitialAdLoadButton;
                 break;
-            case LOAD_BANNER_BUTTON_IDENTIFIER:
-                buttonToModify = bannerLoadButton;
+            case SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER:
+                buttonToModify = interstitialAdShowButton;
+                break;
+            case LOAD_BANNER_AD_BUTTON_IDENTIFIER:
+                buttonToModify = bannerAdLoadButton;
                 break;
         }
 

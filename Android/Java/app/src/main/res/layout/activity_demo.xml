@@ -39,17 +39,40 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="@string/rewarded_video" />
 
-        <Button
-            android:id="@+id/rewarded_video_show_button"
-            android:layout_width="270dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:enabled="false"
-            android:textAllCaps="false"
-            android:textColor="#000000"
-            android:onClick="showRewardedVideoButtonTapped"
-            android:background="@drawable/ironsource_button_shape"
-            android:text="@string/initializing" />
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/rewarded_ad_load_button"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/ironsource_button_shape"
+                android:enabled="false"
+                android:onClick="loadRewardedAdButtonTapped"
+                android:text="@string/load"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                tools:ignore="ButtonStyle" />
+
+            <Button
+                android:id="@+id/rewarded_ad_show_button"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/ironsource_button_shape"
+                android:enabled="false"
+                android:onClick="showRewardedAdButtonTapped"
+                android:text="@string/show"
+                android:textAllCaps="false"
+                android:textColor="#000000"
+                tools:ignore="ButtonStyle" />
+
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Interstitial Layout -->
@@ -77,7 +100,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/interstitial_load_button"
+                android:id="@+id/interstitial_ad_load_button"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -85,19 +108,19 @@
                 android:textAllCaps="false"
                 android:textColor="#000000"
                 android:background="@drawable/ironsource_button_shape"
-                android:onClick="loadInterstitialButtonTapped"
+                android:onClick="loadInterstitialAdButtonTapped"
                 android:text="@string/load"
                 tools:ignore="ButtonStyle" />
 
             <Button
-                android:id="@+id/interstitial_show_button"
+                android:id="@+id/interstitial_ad_show_button"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:enabled="false"
                 android:textAllCaps="false"
                 android:textColor="#000000"
-                android:onClick="showInterstitialButtonTapped"
+                android:onClick="showInterstitialAdButtonTapped"
                 android:background="@drawable/ironsource_button_shape"
                 android:text="@string/show"
                 tools:ignore="ButtonStyle" />
@@ -130,7 +153,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/banner_load_button"
+                android:id="@+id/banner_ad_load_button"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
@@ -138,7 +161,7 @@
                 android:textAllCaps="false"
                 android:textColor="#000000"
                 android:layout_gravity="center_horizontal"
-                android:onClick="loadBannerButtonTapped"
+                android:onClick="loadBannerAdButtonTapped"
                 android:background="@drawable/ironsource_button_shape"
                 android:text="@string/load"
                 tools:ignore="ButtonStyle" />
@@ -174,7 +197,7 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/banner_frame_layout"
+            android:id="@+id/banner_ad_frame_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
