@@ -22,7 +22,7 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
      */
     func didLoadAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
-        self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: true)
+        self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialAdButtonIdentifier, enable: true)
     }
     
     /**
@@ -31,7 +31,7 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
      */
     func didFailToLoadAd(withAdUnitId adUnitId: String, error: Error) {
         logCallbackName(string: "\(#function) error = \(String(describing:error.self))")
-        self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: false)
+        self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialAdButtonIdentifier, enable: false)
     }
     
     /**
@@ -50,7 +50,7 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
      */
     func didDisplayAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
-        self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialButtonIdentifier, enable: false)
+        self.delegate?.setButtonEnablement(ButtonIdentifiers.showInterstitialAdButtonIdentifier, enable: false)
     }
     
     /**

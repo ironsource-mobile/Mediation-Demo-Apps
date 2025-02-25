@@ -14,14 +14,17 @@ import IronSource
 let appKey = "8545d445"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-let interstitialAdUnitId = "wmgt0712uuux8ju4"
-let bannerAdUnitId = "iep3rxsyp9na3rw8"
+let interstitialAdAdUnitId = "wmgt0712uuux8ju4"
+let bannerAdAdUnitId = "iep3rxsyp9na3rw8"
+let rewardedAdAdUnitId = "qwouvdrkuwivay5q"
+
 
 enum ButtonIdentifiers : Int {
-    case showRewardedVideoButtonIdentifier
-    case loadInterstitialButtonIdentifier
-    case showInterstitialButtonIdentifier
-    case loadBannerButtonIdentifier
+    case loadRewardedAdButtonIdentifier
+    case showRewardedAdButtonIdentifier
+    case loadInterstitialAdButtonIdentifier
+    case showInterstitialAdButtonIdentifier
+    case loadBannerAdButtonIdentifier
 }
 
 protocol DemoViewControllerDelegate: NSObjectProtocol {
@@ -29,7 +32,7 @@ protocol DemoViewControllerDelegate: NSObjectProtocol {
             _ buttonIdentifier: ButtonIdentifiers,
             enable: Bool
         )
-    func setPlacementInfo(_ placementInfo: ISPlacementInfo?)
+    func setRewardInfo(_ reward: LPMReward?)
     func showVideoRewardMessage()
 }
 
@@ -37,16 +40,18 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     
     //MARK: IBOutlets
     
-    @IBOutlet weak var showRewardedVideoButton: UIButton!
-    var rewardedVideoDelegate: DemoRewardedVideoAdDelegate! = nil
-    var rewardedVideoPlacementInfo: ISPlacementInfo! = nil
+    @IBOutlet weak var loadRewardedAdButton: UIButton!
+    @IBOutlet weak var showRewardedAdButton: UIButton!
+    var rewardedAdDelegate: DemoRewardedVideoAdDelegate! = nil
+    var reward: LPMReward! = nil
+    var rewardedAd: LPMRewardedAd! = nil
 
-    @IBOutlet weak var loadInterstitialButton: UIButton!
-    @IBOutlet weak var showInterstitialButton: UIButton!
+    @IBOutlet weak var loadInterstitialAdButton: UIButton!
+    @IBOutlet weak var showInterstitialAdButton: UIButton!
     var interstitialAdDelegate: DemoInterstitialAdDelegate! = nil
     var interstitialAd: LPMInterstitialAd! = nil
 
-    @IBOutlet weak var loadBannerButton: UIButton!
+    @IBOutlet weak var loadBannerAdButton: UIButton!
     var bannerAdViewDelegate: DemoBannerAdDelegate! = nil
     var bannerAd: LPMBannerAdView! = nil
     var bannerSize: LPMAdSize! = nil
@@ -76,7 +81,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     
     func setupUI() {
         self.versionLabel.text =  String(format: "sdk version %@", IronSource.sdkVersion());
-        let buttons = [self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton]
+        let buttons = [self.loadRewardedAdButton, self.showRewardedAdButton, self.loadInterstitialAdButton, self.showInterstitialAdButton, self.loadBannerAdButton]
 
         for button in buttons {
             button?.layer.cornerRadius = 17.0
@@ -93,26 +98,16 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // Remove it before going live!
         ISIntegrationHelper.validateIntegration()
 #endif
-        
-        // Before initializing any of our products (Rewarded video, Interstitial or Banner) you must set
-        // their delegates. Take a look at each of these delegates method and you will see that they each implement a product
-        // protocol. This is our way of letting you know what's going on, and if you don't set the delegates
-        // we will not be able to communicate with you.
-        // We're passing 'self' to our delegates because we want
-        // to be able to enable/disable buttons to match ad availability.
-        rewardedVideoDelegate = .init(delegate: self)
-        IronSource.setLevelPlayRewardedVideoDelegate(rewardedVideoDelegate)
-        
+
+        // Register a listener for all impressions within the current session
         impressionDataDelegate = .init()
         IronSource.add(self.impressionDataDelegate)
         
         // After setting the delegates you can go ahead and initialize the SDK.
         // Once the iniitaliztion callback is return you can start loading your ads
         
-        // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
-        self.logMethodName(string: "init ironSource SDK with appKey:  \(appKey)")
+        self.logMethodName(string: "init LevePlay SDK with appKey:  \(appKey)")
         let requestBuilder = LPMInitRequestBuilder(appKey: appKey)
-            .withLegacyAdFormats([IS_REWARDED_VIDEO])
         let initRequest = requestBuilder.build()
         LevelPlay.initWith(initRequest)
         { config, error in
@@ -122,6 +117,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
                 return
             }
             self.logMethodName(string: "sdk initialization succeeded")
+            self.createRewardedAd()
             self.createInterstititalAd()
             self.createBannerAd()
         }
@@ -133,11 +129,11 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     //MARK: Interstitial Methods
 
     func createInterstititalAd() {
-        self.interstitialAd = LPMInterstitialAd(adUnitId: interstitialAdUnitId)
+        self.interstitialAd = LPMInterstitialAd(adUnitId: interstitialAdAdUnitId)
         interstitialAdDelegate = .init(delegate: self)
         self.interstitialAd.setDelegate(interstitialAdDelegate)
 
-        self.setButtonEnablement(ButtonIdentifiers.loadInterstitialButtonIdentifier, enable: true)
+        self.setButtonEnablement(ButtonIdentifiers.loadInterstitialAdButtonIdentifier, enable: true)
     }
     
     @IBAction func loadInterstitialButtonTapped(_ sender: Any) {
@@ -163,6 +159,67 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         }
     }
 
+    //MARK: Rewarded Video Methods
+    
+    func createRewardedAd() {
+        self.rewardedAd = LPMRewardedAd(adUnitId: rewardedAdAdUnitId)
+        rewardedAdDelegate = .init(delegate: self)
+        self.rewardedAd.setDelegate(rewardedAdDelegate)
+
+        self.setButtonEnablement(ButtonIdentifiers.loadRewardedAdButtonIdentifier, enable: true)
+    }
+    
+    @IBAction func loadRewardedAdButtonTapped(_ sender: Any) {
+        guard let rewardedAd = self.rewardedAd else {
+            return
+        }
+
+        // This will load a rewarded ad
+        logMethodName(string: "loadAd for rewarded")
+        rewardedAd.loadAd()
+    }
+
+    @IBAction func showRewardedAdButtonTapped(_ sender: Any) {
+        // It is advised to make sure there is available ad before attempting to show an ad
+        if (self.rewardedAd != nil && self.rewardedAd.isAdReady()) {
+            // This will present the Rewarded ad.
+
+            logMethodName(string: "showAd for rewarded")
+            self.rewardedAd.showAd(viewController: self, placementName: nil)
+        } else {
+            // load a new ad before calling show
+        }
+    }
+    
+    func setRewardInfo(_ reward: LPMReward?) {
+        // Setting the rewarded ad info, an object that contains the reward name and amount
+        self.reward = reward
+    }
+    
+    func showVideoRewardMessage() {
+        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+        if (self.reward != nil) {
+            let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
+            let message = String(format: "You have been rewarded %d %@", reward.amount as Int, reward.name)
+            
+            let alert = UIAlertController(
+                title: "Video Reward",
+                message: message,
+                preferredStyle: .alert)
+            
+            let okAction = UIAlertAction(
+                title: "OK",
+                style: .default,
+                handler: { action in
+                })
+            
+            alert.addAction(okAction)
+            rootViewController?.present(alert, animated: false)
+            
+            reward = nil
+        }
+    }
+    
 
     //MARK: Banner Methods
 
@@ -183,7 +240,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         }
 
         //  Create the banner ad view object with required & optional params
-        self.bannerAd = LPMBannerAdView(adUnitId: bannerAdUnitId)
+        self.bannerAd = LPMBannerAdView(adUnitId: bannerAdAdUnitId)
         self.bannerAd.setAdSize(bannerSize)
 
         // set the banner listener
@@ -192,7 +249,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         
         addBannerToView()
         
-        self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
+        self.setButtonEnablement(ButtonIdentifiers.loadBannerAdButtonIdentifier, enable: true)
     }
     
     func addBannerToView() {
@@ -209,7 +266,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
     }
 
-    @IBAction func loadBannerButtonTapped(_ sender: Any) {
+    @IBAction func loadBannerAdButtonTapped(_ sender: Any) {
         
         guard let bannerAd = self.bannerAd else {
             return
@@ -219,50 +276,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         bannerAd.loadAd(with: self)
     }
 
-
-    //MARK: Rewarded Video Methods
-
-    @IBAction func showRewardedVideoButtonTapped(_ sender: Any) {
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if IronSource.hasRewardedVideo() {
-            // This will present the Rewarded Video.
-
-            logMethodName(string: "showRewardedVideo(with:)")
-            IronSource.showRewardedVideo(with: self)
-        } else {
-            // wait for the availability of rewarded video to change to true before calling show
-        }
-    }
-    
-    func setPlacementInfo(_ placementInfo: ISPlacementInfo?) {
-        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
-        self.rewardedVideoPlacementInfo = placementInfo
-    }
-    
-    func showVideoRewardMessage() {
-        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
-        if (self.rewardedVideoPlacementInfo != nil) {
-            let rootViewController = UIApplication.shared.delegate?.window?!.rootViewController
-            let message = String(format: "You have been rewarded %d %@", (rewardedVideoPlacementInfo.rewardAmount.intValue), rewardedVideoPlacementInfo.rewardName)
-            
-            let alert = UIAlertController(
-                title: "Video Reward",
-                message: message,
-                preferredStyle: .alert)
-            
-            let okAction = UIAlertAction(
-                title: "OK",
-                style: .default,
-                handler: { action in
-                })
-            
-            alert.addAction(okAction)
-            rootViewController?.present(alert, animated: false)
-            
-            rewardedVideoPlacementInfo = nil
-        }
-    }
-    
     //MARK: Utility methods
 
     func setButtonEnablement(_ buttonIdentifier: ButtonIdentifiers, enable: Bool) {
@@ -270,14 +283,16 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
             var buttonToModify: UIButton?
 
             switch buttonIdentifier {
-            case .showRewardedVideoButtonIdentifier:
-                buttonToModify = self.showRewardedVideoButton
-            case .loadInterstitialButtonIdentifier:
-                buttonToModify = self.loadInterstitialButton
-            case .showInterstitialButtonIdentifier:
-                buttonToModify = self.showInterstitialButton
-            case .loadBannerButtonIdentifier:
-                buttonToModify = self.loadBannerButton
+            case .loadRewardedAdButtonIdentifier:
+                buttonToModify = self.loadRewardedAdButton
+            case .showRewardedAdButtonIdentifier:
+                buttonToModify = self.showRewardedAdButton
+            case .loadInterstitialAdButtonIdentifier:
+                buttonToModify = self.loadInterstitialAdButton
+            case .showInterstitialAdButtonIdentifier:
+                buttonToModify = self.showInterstitialAdButton
+            case .loadBannerAdButtonIdentifier:
+                buttonToModify = self.loadBannerAdButton
             }
             
             buttonToModify?.isEnabled = enable
