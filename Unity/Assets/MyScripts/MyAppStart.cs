@@ -5,6 +5,7 @@ public class MyAppStart : MonoBehaviour
 {
     static string uniqueUserId = "demoUserUnity";
     LevelPlayBannerAd bannerAd;
+    LevelPlayBannerAd bannerAdCostom;
 
 #if UNITY_ANDROID
 	string appKey = "85460dcd";
@@ -43,8 +44,14 @@ public class MyAppStart : MonoBehaviour
 
     void LoadBanner()
     {
-        // Create the banner object
+        // Create the banner object, with default settings.
         bannerAd = new LevelPlayBannerAd(bannerAdUnitId);
+        
+        // Create the banner object, with custom settings.
+        com.unity3d.mediation.LevelPlayAdSize size = com.unity3d.mediation.LevelPlayAdSize.LARGE;
+        com.unity3d.mediation.LevelPlayBannerPosition po = com.unity3d.mediation.LevelPlayBannerPosition.TopLeft;
+        //com.unity3d.mediation.LevelPlayBannerPosition po = new com.unity3d.mediation.LevelPlayBannerPosition(new Vector2(80f, 300f));
+        bannerAdCostom = new LevelPlayBannerAd(bannerAdUnitId, size: size, position:po);
 
         bannerAd.OnAdLoaded += BannerOnAdLoadedEvent;
         bannerAd.OnAdLoadFailed += BannerOnAdLoadFailedEvent;
@@ -54,9 +61,19 @@ public class MyAppStart : MonoBehaviour
         bannerAd.OnAdCollapsed += BannerOnAdCollapsedEvent;
         bannerAd.OnAdLeftApplication += BannerOnAdLeftApplicationEvent;
         bannerAd.OnAdExpanded += BannerOnAdExpandedEvent;
+        
+        bannerAdCostom.OnAdLoaded += BannerOnAdLoadedEvent;
+        bannerAdCostom.OnAdLoadFailed += BannerOnAdLoadFailedEvent;
+        bannerAdCostom.OnAdDisplayed += BannerOnAdDisplayedEvent;
+        bannerAdCostom.OnAdDisplayFailed += BannerOnAdDisplayFailedEvent;
+        bannerAdCostom.OnAdClicked += BannerOnAdClickedEvent;
+        bannerAdCostom.OnAdCollapsed += BannerOnAdCollapsedEvent;
+        bannerAdCostom.OnAdLeftApplication += BannerOnAdLeftApplicationEvent;
+        bannerAdCostom.OnAdExpanded += BannerOnAdExpandedEvent;
 
         // Ad load
         bannerAd.LoadAd();
+        bannerAdCostom.LoadAd();
     }
 
     void OnInitializationCompleted(LevelPlayConfiguration configuration)
