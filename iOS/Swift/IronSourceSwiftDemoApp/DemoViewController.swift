@@ -67,12 +67,41 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         super.viewDidLoad()
         self.setupUI()
         self.setupIronSourceSdk()
+        registerForAudioVolumeChanges()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unregisterForAudioVolumeChanges()
+    }
+    
+
+    func registerForAudioVolumeChanges() {
+            let audioSession = AVAudioSession.sharedInstance()
+            do {
+                try audioSession.setCategory(.playback, mode: .default, options: .mixWithOthers)
+                try audioSession.setActive(true)
+            } catch {
+                
+            logMethodName(string: "Error setting the AVAudioSession as active: \(error.localizedDescription)")
+            }
+        }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func unregisterForAudioVolumeChanges() {
+        logMethodName(string: "unregisterForAudioVolumeChanges")
+//        let audioSession = AVAudioSession.sharedInstance()
+//        do {
+//            try audioSession.setActive(false)
+//        } catch {
+//            logMethodName(string: "Error unsetting the AVAudioSession as inactive: \(error.localizedDescription)")
+//        }
+    }
+    
     
     deinit {
         self.bannerAd.destroy()
@@ -321,5 +350,5 @@ func createBannerAd() {
 
     func logMethodName(string: String = #function) {
         print("DemoViewController \(string)")
-    }
+}
 }

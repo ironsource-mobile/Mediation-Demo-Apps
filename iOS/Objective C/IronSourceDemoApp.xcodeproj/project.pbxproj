@@ -199,6 +199,7 @@
 				E80C8F941C16E28400CF3C27 /* Sources */,
 				E80C8F951C16E28400CF3C27 /* Frameworks */,
 				E80C8F961C16E28400CF3C27 /* Resources */,
+				127FB29BCD3ADA1EA720D517 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -257,6 +258,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		127FB29BCD3ADA1EA720D517 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourcePrivacyInfo.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		53A1FA3CA9EEF0EB40EA8105 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;

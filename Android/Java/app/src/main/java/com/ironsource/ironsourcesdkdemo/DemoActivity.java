@@ -184,7 +184,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
             // add LevelPlayBannerAdView to your container
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-            bannerParentLayout.addView(bannerAd, 0, layoutParams);
+            bannerParentLayout.addView(bannerAd);
             setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true);
             setEnablementForButton(DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER, false);
         }
@@ -200,7 +200,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         bannerAd =  new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID);
         bannerAd.setBannerListener(new DemoBannerAdListener(this));
         FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-        bannerParentLayout.addView(bannerAd, 0, layoutParams);
+        bannerParentLayout.addView(bannerAd);
 
         if (bannerAd != null) {
             log("loadAd for banner");
