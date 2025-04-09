@@ -5,6 +5,7 @@ public class MyAppStart : MonoBehaviour
 {
     static string uniqueUserId = "demoUserUnity";
     LevelPlayBannerAd bannerAd;
+    LevelPlayBannerAd bannerAdCustom;
 
 #if UNITY_ANDROID
 	string appKey = "85460dcd";
@@ -43,8 +44,14 @@ public class MyAppStart : MonoBehaviour
 
     void LoadBanner()
     {
-        // Create the banner object
+        // Create the banner object, with default settings.
         bannerAd = new LevelPlayBannerAd(bannerAdUnitId);
+        
+        // Create the banner object, with custom settings.
+        com.unity3d.mediation.LevelPlayAdSize size = com.unity3d.mediation.LevelPlayAdSize.LARGE;
+        com.unity3d.mediation.LevelPlayBannerPosition pos = com.unity3d.mediation.LevelPlayBannerPosition.TopLeft;
+        //com.unity3d.mediation.LevelPlayBannerPosition po = new com.unity3d.mediation.LevelPlayBannerPosition(new Vector2(80f, 300f));
+        bannerAdCustom = new LevelPlayBannerAd(bannerAdUnitId, size: size, position:pos);
 
         bannerAd.OnAdLoaded += BannerOnAdLoadedEvent;
         bannerAd.OnAdLoadFailed += BannerOnAdLoadFailedEvent;
@@ -54,9 +61,19 @@ public class MyAppStart : MonoBehaviour
         bannerAd.OnAdCollapsed += BannerOnAdCollapsedEvent;
         bannerAd.OnAdLeftApplication += BannerOnAdLeftApplicationEvent;
         bannerAd.OnAdExpanded += BannerOnAdExpandedEvent;
+        
+        bannerAdCustom.OnAdLoaded += BannerOnAdLoadedEvent;
+        bannerAdCustom.OnAdLoadFailed += BannerOnAdLoadFailedEvent;
+        bannerAdCustom.OnAdDisplayed += BannerOnAdDisplayedEvent;
+        bannerAdCustom.OnAdDisplayFailed += BannerOnAdDisplayFailedEvent;
+        bannerAdCustom.OnAdClicked += BannerOnAdClickedEvent;
+        bannerAdCustom.OnAdCollapsed += BannerOnAdCollapsedEvent;
+        bannerAdCustom.OnAdLeftApplication += BannerOnAdLeftApplicationEvent;
+        bannerAdCustom.OnAdExpanded += BannerOnAdExpandedEvent;
 
         // Ad load
         bannerAd.LoadAd();
+        bannerAdCustom.LoadAd();
     }
 
     void OnInitializationCompleted(LevelPlayConfiguration configuration)
