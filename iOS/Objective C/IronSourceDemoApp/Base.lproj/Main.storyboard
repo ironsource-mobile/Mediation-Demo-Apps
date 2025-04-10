@@ -37,25 +37,41 @@
                                                 <color key="textColor" systemColor="darkTextColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cl3-aC-wSG" userLabel="Buttons Stack View">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="BS6-zZ-ICv" userLabel="Buttons Stack View">
                                                 <rect key="frame" x="0.0" y="30.5" width="220" height="27"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="27"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGu-Be-obJ" userLabel="Load Interstitial Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="27"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="XQp-1b-8jb"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="of3-f3-e5B"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Load">
+                                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <state key="disabled" title="Load">
+                                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="loadRewardedAdButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s81-Gb-JDR"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHv-0s-gPf" userLabel="Show Interstitial Button">
+                                                        <rect key="frame" x="120" y="0.0" width="100" height="27"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="QiN-V0-ZKR"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Show">
                                                             <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <state key="disabled" title="Initializing">
+                                                        <state key="disabled">
                                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
-                                                        <state key="selected" title="Show"/>
                                                         <connections>
-                                                            <action selector="showRewardedVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rbr-Q7-Efw"/>
+                                                            <action selector="showRewardedAdButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jBU-kB-3zs"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -164,16 +180,17 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="loadBannerButton" destination="DN1-DN-sO8" id="rHw-dA-GPy"/>
-                        <outlet property="loadInterstitialButton" destination="qE4-Rn-VtA" id="5Wh-Ea-XS0"/>
-                        <outlet property="showInterstitialButton" destination="Dhm-wI-nt6" id="lZv-jU-P6G"/>
-                        <outlet property="showRewardedVideoButton" destination="N20-QP-8mE" id="TcG-9c-34W"/>
+                        <outlet property="loadBannerAdButton" destination="DN1-DN-sO8" id="rHw-dA-GPy"/>
+                        <outlet property="loadInterstitialAdButton" destination="qE4-Rn-VtA" id="5Wh-Ea-XS0"/>
+                        <outlet property="loadRewardedAdButton" destination="TGu-Be-obJ" id="UDq-v4-KPd"/>
+                        <outlet property="showInterstitialAdButton" destination="Dhm-wI-nt6" id="lZv-jU-P6G"/>
+                        <outlet property="showRewardedAdButton" destination="YHv-0s-gPf" id="1LJ-0m-W5H"/>
                         <outlet property="versionLabel" destination="Dnw-Fv-bW3" id="eDm-X0-027"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="499.5" y="313.5"/>
+            <point key="canvasLocation" x="498.39999999999998" y="313.49325337331339"/>
         </scene>
     </scenes>
     <resources>

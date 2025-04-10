@@ -32,7 +32,7 @@
 		F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FCA2AF954A20077FADE /* DemoViewController.m */; };
 		F1666FD82AFA55140077FADE /* DemoImpressionDataDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FD62AFA55140077FADE /* DemoImpressionDataDelegate.m */; };
 		F1666FE72AFA55B50077FADE /* DemoBannerAdDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FE62AFA55B50077FADE /* DemoBannerAdDelegate.m */; };
-		F1666FEA2AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FE92AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m */; };
+		F1666FEA2AFA55BC0077FADE /* DemoRewardedAdDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FE92AFA55BC0077FADE /* DemoRewardedAdDelegate.m */; };
 		F1666FED2AFA55C40077FADE /* DemoInterstitialAdDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FEC2AFA55C30077FADE /* DemoInterstitialAdDelegate.m */; };
 /* End PBXBuildFile section */
 
@@ -70,8 +70,8 @@
 		F1666FD72AFA55140077FADE /* DemoImpressionDataDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoImpressionDataDelegate.h; sourceTree = "<group>"; };
 		F1666FE52AFA55B50077FADE /* DemoBannerAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoBannerAdDelegate.h; sourceTree = "<group>"; };
 		F1666FE62AFA55B50077FADE /* DemoBannerAdDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoBannerAdDelegate.m; sourceTree = "<group>"; };
-		F1666FE82AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoRewardedVideoAdDelegate.h; sourceTree = "<group>"; };
-		F1666FE92AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoRewardedVideoAdDelegate.m; sourceTree = "<group>"; };
+		F1666FE82AFA55BC0077FADE /* DemoRewardedAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoRewardedAdDelegate.h; sourceTree = "<group>"; };
+		F1666FE92AFA55BC0077FADE /* DemoRewardedAdDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoRewardedAdDelegate.m; sourceTree = "<group>"; };
 		F1666FEB2AFA55C30077FADE /* DemoInterstitialAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoInterstitialAdDelegate.h; sourceTree = "<group>"; };
 		F1666FEC2AFA55C30077FADE /* DemoInterstitialAdDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoInterstitialAdDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,8 +111,8 @@
 				72E0D6451E267513009ABC1B /* AppDelegate.m */,
 				F1666FC92AF954A20077FADE /* DemoViewController.h */,
 				F1666FCA2AF954A20077FADE /* DemoViewController.m */,
-				F1666FE82AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.h */,
-				F1666FE92AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m */,
+				F1666FE82AFA55BC0077FADE /* DemoRewardedAdDelegate.h */,
+				F1666FE92AFA55BC0077FADE /* DemoRewardedAdDelegate.m */,
 				F1666FEB2AFA55C30077FADE /* DemoInterstitialAdDelegate.h */,
 				F1666FEC2AFA55C30077FADE /* DemoInterstitialAdDelegate.m */,
 				F1666FE52AFA55B50077FADE /* DemoBannerAdDelegate.h */,
@@ -199,6 +199,7 @@
 				E80C8F941C16E28400CF3C27 /* Sources */,
 				E80C8F951C16E28400CF3C27 /* Frameworks */,
 				E80C8F961C16E28400CF3C27 /* Resources */,
+				60814640F0447BD81E1B094D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -279,6 +280,24 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		60814640F0447BD81E1B094D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourcePrivacyInfo.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -289,7 +308,7 @@
 				F1666FED2AFA55C40077FADE /* DemoInterstitialAdDelegate.m in Sources */,
 				F1666FE72AFA55B50077FADE /* DemoBannerAdDelegate.m in Sources */,
 				72E0D6601E2675C7009ABC1B /* main.m in Sources */,
-				F1666FEA2AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m in Sources */,
+				F1666FEA2AFA55BC0077FADE /* DemoRewardedAdDelegate.m in Sources */,
 				F1666FD82AFA55140077FADE /* DemoImpressionDataDelegate.m in Sources */,
 				F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,
