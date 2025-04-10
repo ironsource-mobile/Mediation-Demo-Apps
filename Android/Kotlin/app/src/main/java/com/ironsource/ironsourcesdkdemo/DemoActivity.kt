@@ -2,6 +2,7 @@ package com.ironsource.ironsourcesdkdemo
 
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -13,13 +14,14 @@ import android.widget.TextView
 import androidx.multidex.BuildConfig
 import com.ironsource.mediationsdk.IronSource
 import com.ironsource.mediationsdk.integration.IntegrationHelper
-import com.ironsource.mediationsdk.model.Placement
 import com.ironsource.mediationsdk.utils.IronSourceUtils
 import com.unity3d.mediation.LevelPlay
 import com.unity3d.mediation.LevelPlayAdSize
 import com.unity3d.mediation.LevelPlayInitRequest
 import com.unity3d.mediation.banner.LevelPlayBannerAdView
 import com.unity3d.mediation.interstitial.LevelPlayInterstitialAd
+import com.unity3d.mediation.rewarded.LevelPlayReward
+import com.unity3d.mediation.rewarded.LevelPlayRewardedAd
 
 
 private const val TAG = "DemoActivity"
@@ -28,20 +30,23 @@ private const val TAG = "DemoActivity"
 private const val APP_KEY = "85460dcd"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-private const val INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9"
-private const val BANNER_AD_UNIT_ID = "thnfvcsog13bhn08"
+private const val INTERSTITIAL_AD_AD_UNIT_ID = "aeyqi3vqlv6o8sh9"
+private const val REWARDED_AD_AD_UNIT_ID = "76yy3nay3ceui2a3"
+private const val BANNER_AD_AD_UNIT_ID = "thnfvcsog13bhn08"
 
 class DemoActivity : Activity(), DemoActivityListener {
 
-    private lateinit var rewardedVideoShowButton: Button
-    private var rewardedVideoPlacementInfo: Placement? = null
+    private lateinit var rewardedAdLoadButton: Button
+    private lateinit var rewardedAdShowButton: Button
+    private var reward: LevelPlayReward? = null
+    private var rewardedAd: LevelPlayRewardedAd? = null
 
-    private lateinit var interstitialLoadButton: Button
-    private lateinit var interstitialShowButton: Button
+    private lateinit var interstitialAdLoadButton: Button
+    private lateinit var interstitialAdShowButton: Button
     private var interstitialAd : LevelPlayInterstitialAd? = null
 
-    private lateinit var bannerLoadButton: Button
-    private var bannerParentLayout: FrameLayout? = null
+    private lateinit var bannerAdLoadButton: Button
+    private var bannerAdParentLayout: FrameLayout? = null
     private var bannerAd : LevelPlayBannerAdView? = null
 
     companion object {
@@ -86,14 +91,15 @@ class DemoActivity : Activity(), DemoActivityListener {
 
     //region Initialization Methods
     private fun setupUI(){
-        rewardedVideoShowButton = findViewById(R.id.rv_button)
-        interstitialLoadButton = findViewById(R.id.interstitial_load_button)
-        interstitialShowButton = findViewById(R.id.interstitial_show_button)
-        bannerLoadButton = findViewById(R.id.banner_load_button)
+        rewardedAdLoadButton = findViewById(R.id.rewarded_ad_load_button)
+        rewardedAdShowButton = findViewById(R.id.rewarded_ad_show_button)
+        interstitialAdLoadButton = findViewById(R.id.interstitial_ad_load_button)
+        interstitialAdShowButton = findViewById(R.id.interstitial_ad_show_button)
+        bannerAdLoadButton = findViewById(R.id.banner_ad_load_button)
 
         val versionTV = findViewById<TextView>(R.id.version_txt)
         "${resources.getString(R.string.version)} ${IronSourceUtils.getSDKVersion()}".also { versionTV.text = it }
-        bannerParentLayout = findViewById(R.id.banner_footer)
+        bannerAdParentLayout = findViewById(R.id.banner_footer)
     }
 
     private fun setupIronSourceSdk(){
@@ -103,23 +109,11 @@ class DemoActivity : Activity(), DemoActivityListener {
             IntegrationHelper.validateIntegration(this)
         }
 
-        // Before initializing any of our legacy products (Rewarded video, Interstitial or Banner) you must set
-        // their listeners. Take a look at each of these listeners method and you will see that they each implement a product
-        // protocol. This is our way of letting you know what's going on, and if you don't set the listeners
-        // we will not be able to communicate with you.
-        // We're passing 'this' to our listeners because we want
-        // to be able to enable/disable buttons to match ad availability.
-        IronSource.setLevelPlayRewardedVideoListener(DemoRewardedVideoAdListener(this))
+        // Register a listener for all impressions within the current session
         IronSource.addImpressionDataListener(DemoImpressionDataListener())
 
-        // After setting the listeners you can go ahead and initialize the SDK.
-        // Once the initialization callback is returned you can start loading your ads
-
-        val legacyAdFormats = listOf(LevelPlay.AdFormat.REWARDED)
         val initRequest = LevelPlayInitRequest.Builder(APP_KEY)
-            .withLegacyAdFormats(legacyAdFormats)
             .build()
-
         log("init ironSource SDK with appKey: $APP_KEY")
         LevelPlay.init(this, initRequest, DemoInitializationListener(this))
 
@@ -129,19 +123,19 @@ class DemoActivity : Activity(), DemoActivityListener {
 
     //region Interstitial Methods
     override fun createInterstitialAd() {
-        interstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID)
+        interstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_AD_UNIT_ID)
         interstitialAd?.setListener(DemoInterstitialAdListener(this))
 
-        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true)
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_AD_BUTTON_IDENTIFIER, true)
     }
 
-    fun loadInterstitialButtonTapped(view: View){
+    fun loadInterstitialAdButtonTapped(view: View){
         // This will load an Interstitial ad
         log("loadAd for interstitial")
         interstitialAd?.loadAd()
     }
 
-    fun showInterstitialButtonTapped(view: View){
+    fun showInterstitialAdButtonTapped(view: View){
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (interstitialAd?.isAdReady() == true) {
             // This will present the Interstitial.
@@ -151,6 +145,51 @@ class DemoActivity : Activity(), DemoActivityListener {
             interstitialAd?.showAd(this)
         } else {
             // load a new ad before calling show
+        }
+    }
+    //endregion
+
+    //region Rewarded  Methods
+    override fun createRewardedAd() {
+        rewardedAd = LevelPlayRewardedAd(REWARDED_AD_AD_UNIT_ID)
+        rewardedAd?.setListener(DemoRewardedAdListener(this))
+
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_AD_BUTTON_IDENTIFIER, true)
+    }
+
+    fun loadRewardedAdButtonTapped(view: View) {
+        // This will load an Interstitial ad
+        log("loadAd for interstitial")
+        rewardedAd?.loadAd()
+    }
+
+    fun showRewardedAdButtonTapped(view: View) {
+        // It is advised to make sure there is available ad that isn't capped before attempting to show it
+        if (rewardedAd?.isAdReady() == true) {
+            log("showAd for rewarded")
+            rewardedAd?.showAd(this)
+        } else {
+            // load a new ad before calling show
+        }
+    }
+
+    override fun setReward(reward: LevelPlayReward) {
+        // Setting the reward info, an object that contains the reward name and amount
+        this.reward = reward
+    }
+
+    override fun showRewardDialog() {
+        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+        if (this.reward != null) {
+            AlertDialog.Builder(this@DemoActivity)
+                .setPositiveButton("ok") { dialog: DialogInterface, id: Int -> dialog.dismiss() }
+                .setTitle(resources.getString(R.string.rewarded_dialog_header))
+                .setMessage(resources.getString(R.string.rewarded_dialog_message) + " " + reward!!.amount + " " + reward!!.name)
+                .setCancelable(false)
+                .create()
+                .show()
+
+            this.reward = null
         }
     }
     //endregion
@@ -170,7 +209,7 @@ class DemoActivity : Activity(), DemoActivityListener {
 
         // Create the banner view and set the ad unit id and ad size
         adSize?.let {
-            bannerAd = LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID)
+            bannerAd = LevelPlayBannerAdView(this, BANNER_AD_AD_UNIT_ID)
             bannerAd?.setAdSize(adSize)
 
             // set the banner listener
@@ -178,15 +217,15 @@ class DemoActivity : Activity(), DemoActivityListener {
 
             // add LevelPlayBannerAdView to your container
             val layoutParams = FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
-            bannerParentLayout?.addView(bannerAd, 0, layoutParams)
+            bannerAdParentLayout?.addView(bannerAd, 0, layoutParams)
 
-            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
+            setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER, true)
         }?: run {
             log("Failed to create banner ad")
         }
     }
 
-    fun loadBannerButtonTapped(view: View) {
+    fun loadBannerAdButtonTapped(view: View) {
         // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
         // otherwise, the banner will remain static until manually destroyed
         log("loadAd for banner")
@@ -194,41 +233,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     }
 
     override fun setBannerViewVisibility(visibility: Int){
-        bannerParentLayout?.visibility = visibility
-    }
-    //endregion
-
-    //region Rewarded Video Methods
-    fun showRewardedVideoButtonTapped(view: View){
-        // It is advised to make sure there is available ad before attempting to show an ad
-        if (IronSource.isRewardedVideoAvailable()) {
-            // This will present the Rewarded Video.
-
-            log("showRewardedVideo")
-            IronSource.showRewardedVideo()
-        } else {
-            // wait for the availability of rewarded video to change to true before calling show
-        }
-    }
-
-    override fun setPlacementInfo(placementInfo: Placement) {
-        // Setting the rewarded video placement info, an object that contains the placement's reward name and amount
-        rewardedVideoPlacementInfo = placementInfo
-    }
-
-    override fun showRewardDialog(){
-        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
-        rewardedVideoPlacementInfo?.let {
-            AlertDialog.Builder(this)
-                .setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
-                .setTitle(resources.getString(R.string.rewarded_dialog_header))
-                .setMessage("${resources.getString(R.string.rewarded_dialog_message)} ${rewardedVideoPlacementInfo!!.rewardAmount} ${rewardedVideoPlacementInfo!!.rewardName}")
-                .setCancelable(false)
-                .create()
-                .show()
-        }
-
-        rewardedVideoPlacementInfo = null
+        bannerAdParentLayout?.visibility = visibility
     }
     //endregion
 
@@ -239,15 +244,11 @@ class DemoActivity : Activity(), DemoActivityListener {
         var buttonToModify: Button? = null
 
         when (buttonIdentifier) {
-            DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER -> {
-                text =
-                    if (enable) resources.getString(R.string.show) else resources.getString(R.string.initializing)
-                buttonToModify = rewardedVideoShowButton
-            }
-
-            DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER -> buttonToModify = interstitialLoadButton
-            DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER -> buttonToModify = interstitialShowButton
-            DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER -> buttonToModify = bannerLoadButton
+            DemoButtonIdentifiers.LOAD_REWARDED_AD_BUTTON_IDENTIFIER -> buttonToModify = rewardedAdLoadButton
+            DemoButtonIdentifiers.SHOW_REWARDED_AD_BUTTON_IDENTIFIER -> buttonToModify = rewardedAdShowButton
+            DemoButtonIdentifiers.LOAD_INTERSTITIAL_AD_BUTTON_IDENTIFIER -> buttonToModify = interstitialAdLoadButton
+            DemoButtonIdentifiers.SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER -> buttonToModify = interstitialAdShowButton
+            DemoButtonIdentifiers.LOAD_BANNER_AD_BUTTON_IDENTIFIER -> buttonToModify = bannerAdLoadButton
             else -> {}
         }
 

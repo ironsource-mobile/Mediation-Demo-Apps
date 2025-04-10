@@ -17,7 +17,7 @@ class DemoInterstitialAdListener(private val listener: DemoActivityListener) :
      */
     override fun onAdLoaded(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
-        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, true)
+        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER, true)
     }
 
     /**
@@ -26,7 +26,7 @@ class DemoInterstitialAdListener(private val listener: DemoActivityListener) :
      */
     override fun onAdLoadFailed(error: LevelPlayAdError) {
         logCallbackName(TAG, "error = $error")
-        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false)
+        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER, false)
     }
 
 
@@ -37,7 +37,7 @@ class DemoInterstitialAdListener(private val listener: DemoActivityListener) :
      */
     override fun onAdDisplayed(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
-        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false)
+        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_AD_BUTTON_IDENTIFIER, false)
     }
 
     /**
