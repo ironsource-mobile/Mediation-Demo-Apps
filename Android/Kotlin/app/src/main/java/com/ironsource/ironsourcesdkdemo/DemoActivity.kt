@@ -25,11 +25,11 @@ import com.unity3d.mediation.interstitial.LevelPlayInterstitialAd
 private const val TAG = "DemoActivity"
 
 // Replace with your app key as available in the LevelPlay dashboard
-private const val APP_KEY = "85460dcd"
+private const val APP_KEY = "22019395d"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-private const val INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9"
-private const val BANNER_AD_UNIT_ID = "thnfvcsog13bhn08"
+private const val INTERSTITIAL_AD_UNIT_ID = "gcvq1v3oub694wby"
+private const val BANNER_AD_UNIT_ID = "3o5w7mihrktmnt4l"
 
 class DemoActivity : Activity(), DemoActivityListener {
 
@@ -99,9 +99,13 @@ class DemoActivity : Activity(), DemoActivityListener {
     private fun setupIronSourceSdk(){
         // The integrationHelper is used to validate the integration.
         // Remove the integrationHelper before going live!
+
+
         if (BuildConfig.DEBUG) {
             IntegrationHelper.validateIntegration(this)
         }
+
+        IronSource.setMetaData("is_test_suite", "enable")
 
         // Before initializing any of our legacy products (Rewarded video, Interstitial or Banner) you must set
         // their listeners. Take a look at each of these listeners method and you will see that they each implement a product
@@ -121,7 +125,7 @@ class DemoActivity : Activity(), DemoActivityListener {
             .build()
 
         log("init ironSource SDK with appKey: $APP_KEY")
-        LevelPlay.init(this, initRequest, DemoInitializationListener(this))
+        LevelPlay.init(this, initRequest, DemoInitializationListener(this, this))
 
         // Scroll down the file to find out what happens when you tap a button...
     }

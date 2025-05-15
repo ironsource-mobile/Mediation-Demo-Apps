@@ -3,12 +3,6 @@ plugins {
     id 'kotlin-android'
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
-    }
-}
-
 android {
     namespace "com.ironsource.ironsourcesdkdemo"
     compileSdkVersion 34
@@ -33,8 +27,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -52,7 +46,9 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     // Add IronSource Mediation SDK dependency.
-    implementation "com.unity3d.ads-mediation:mediation-sdk:8.+"
+    implementation "com.unity3d.ads-mediation:mediation-sdk:8.8.0"
+    implementation 'com.unity3d.ads-mediation:hyprmx-adapter:4.3.13'
+    implementation 'com.hyprmx.android:HyprMX-SDK:6.4.2'
     // Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
     // Make sure you also configure the AdNetworks in your dashboard.
     // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/

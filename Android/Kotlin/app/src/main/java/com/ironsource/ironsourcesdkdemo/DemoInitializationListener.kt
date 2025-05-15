@@ -1,11 +1,13 @@
 package com.ironsource.ironsourcesdkdemo
 
+import android.content.Context
 import com.ironsource.ironsourcesdkdemo.DemoActivity.Companion.logCallbackName
+import com.ironsource.mediationsdk.IronSource
 import com.unity3d.mediation.LevelPlayConfiguration
 import com.unity3d.mediation.LevelPlayInitError
 import com.unity3d.mediation.LevelPlayInitListener
 
-class DemoInitializationListener(private val listener: DemoActivityListener) :
+class DemoInitializationListener(private val listener: DemoActivityListener, private val context: Context) :
     LevelPlayInitListener {
 
     private val TAG = DemoInitializationListener::class.java.name
@@ -17,8 +19,9 @@ class DemoInitializationListener(private val listener: DemoActivityListener) :
      */
     override fun onInitSuccess(configuration: LevelPlayConfiguration) {
         logCallbackName(TAG, "")
-        this.listener.createInterstitialAd()
-        this.listener.createBannerAd()
+        IronSource.launchTestSuite(context);
+//        this.listener.createInterstitialAd()
+//        this.listener.createBannerAd()
     }
 
     /**
