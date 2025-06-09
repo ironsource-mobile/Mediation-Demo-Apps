@@ -6,10 +6,10 @@ import com.unity3d.mediation.LevelPlayAdInfo
 import com.unity3d.mediation.rewarded.LevelPlayReward
 import com.unity3d.mediation.rewarded.LevelPlayRewardedAdListener
 
-class DemoRewardedVideoAdListener(private val listener: DemoActivityListener) :
+class DemoRewardedAdListener(private val listener: DemoActivityListener) :
     LevelPlayRewardedAdListener {
 
-    private val TAG = DemoRewardedVideoAdListener::class.java.name
+    private val TAG = DemoRewardedAdListener::class.java.name
 
 
     /**

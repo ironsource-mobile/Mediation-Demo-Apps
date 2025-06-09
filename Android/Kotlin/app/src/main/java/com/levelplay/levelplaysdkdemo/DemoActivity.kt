@@ -130,7 +130,7 @@ class DemoActivity : Activity(), DemoActivityListener {
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (interstitialAd?.isAdReady() == true) {
             // This will present the Interstitial.
-            // Unlike Rewarded Videos there are no placements.
+            // Unlike Rewarded there are no placements.
 
             log("showAd for interstitial")
             interstitialAd?.showAd(this)
@@ -186,11 +186,11 @@ class DemoActivity : Activity(), DemoActivityListener {
     }
     //endregion
 
-    //region Rewarded Video Methods
+    //region Rewarded Methods
 
     override fun createRewardedAd() {
         rewardedAd = LevelPlayRewardedAd(REWARDED_AD_UNIT_ID)
-        rewardedAd?.setListener(DemoRewardedVideoAdListener(this))
+        rewardedAd?.setListener(DemoRewardedAdListener(this))
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER, true)
     }
@@ -219,7 +219,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     }
 
     override fun showRewardDialog(){
-        // Showing a graphical indication of the reward name and amount after the user closed the rewarded video ad
+        // Showing a graphical indication of the reward name and amount after the user closed the rewarded ad
         reward?.let {
             AlertDialog.Builder(this)
                 .setPositiveButton("ok") { dialog, _ -> dialog.dismiss() }
