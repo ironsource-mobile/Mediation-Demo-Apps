@@ -10,7 +10,7 @@ java {
 }
 
 ext {
-    sdkVersion = "8.9.0"
+    sdkVersion = "8.+"
 }
 
 android {
