@@ -9,12 +9,16 @@ java {
     }
 }
 
+ext {
+    sdkVersion = "8.+"
+}
+
 android {
-    namespace "com.ironsource.ironsourcesdkdemo"
+    namespace "com.levelplay.levelplaysdkdemo"
     compileSdkVersion 34
     buildToolsVersion '34.0.0'
     defaultConfig {
-        applicationId "com.ironsource.ironsourcesdkdemo"
+        applicationId "com.levelplay.levelplaysdkdemo"
         minSdkVersion 19
         targetSdkVersion 34
         versionCode 1
@@ -38,7 +42,6 @@ android {
     }
 }
 
-// Include IronSource maven repositories
 repositories {
     mavenCentral()
 }
@@ -51,8 +54,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-appset:16.0.2'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
-    // Add IronSource Mediation SDK dependency.
-    implementation "com.unity3d.ads-mediation:mediation-sdk:8.+"
+    // Add LevelPlay Mediation SDK dependency.
+    implementation "com.unity3d.ads-mediation:mediation-sdk:$sdkVersion"
+
     // Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
     // Make sure you also configure the AdNetworks in your dashboard.
     // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/

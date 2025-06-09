@@ -1,7 +1,7 @@
-package com.ironsource.ironsourcesdkdemo
+package com.levelplay.levelplaysdkdemo
 
 import android.view.View
-import com.ironsource.ironsourcesdkdemo.DemoActivity.Companion.logCallbackName
+import com.levelplay.levelplaysdkdemo.DemoActivity.Companion.logCallbackName
 import com.unity3d.mediation.LevelPlayAdError
 import com.unity3d.mediation.LevelPlayAdInfo
 import com.unity3d.mediation.banner.LevelPlayBannerAdViewListener
