@@ -1,6 +1,6 @@
-package com.ironsource.ironsourcesdkdemo
+package com.levelplay.levelplaysdkdemo
 
-import com.ironsource.ironsourcesdkdemo.DemoActivity.Companion.logCallbackName
+import com.levelplay.levelplaysdkdemo.DemoActivity.Companion.logCallbackName
 import com.unity3d.mediation.LevelPlayConfiguration
 import com.unity3d.mediation.LevelPlayInitError
 import com.unity3d.mediation.LevelPlayInitListener
@@ -18,11 +18,12 @@ class DemoInitializationListener(private val listener: DemoActivityListener) :
     override fun onInitSuccess(configuration: LevelPlayConfiguration) {
         logCallbackName(TAG, "")
         this.listener.createInterstitialAd()
+        this.listener.createRewardedAd()
         this.listener.createBannerAd()
     }
 
     /**
-    the configuration was not retrieved successfully and ads cannot be loaded. It is recommended to try and initialize the ironSource SDK later (when internet connection is available, or when the failure reason is resolved)
+    the configuration was not retrieved successfully and ads cannot be loaded. It is recommended to try and initialize the levelPlay SDK later (when internet connection is available, or when the failure reason is resolved)
     @param error The reason for the error
      */
     override fun onInitFailed(error: LevelPlayInitError) {

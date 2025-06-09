@@ -1,10 +1,10 @@
-package com.ironsource.ironsourcesdkdemo
+package com.levelplay.levelplaysdkdemo
 
 enum class DemoButtonIdentifiers {
+    LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER,
     SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER,
     LOAD_INTERSTITIAL_BUTTON_IDENTIFIER,
     SHOW_INTERSTITIAL_BUTTON_IDENTIFIER,
     LOAD_BANNER_BUTTON_IDENTIFIER,
     DESTROY_BANNER_BUTTON_IDENTIFIER
 }
-
