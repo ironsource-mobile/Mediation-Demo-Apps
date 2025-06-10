@@ -1,4 +1,4 @@
-package com.levelplay.levelplaysdkdemo
+package com.levelplay.levelplaydemo
 
 import android.app.Activity
 import android.app.AlertDialog

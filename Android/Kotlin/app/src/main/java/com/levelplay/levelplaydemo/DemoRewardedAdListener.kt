@@ -1,47 +1,53 @@
-package com.levelplay.levelplaysdkdemo
+package com.levelplay.levelplaydemo
 
-import com.levelplay.levelplaysdkdemo.DemoActivity.Companion.logCallbackName
+import com.levelplay.levelplaydemo.DemoActivity.Companion.logCallbackName
 import com.unity3d.mediation.LevelPlayAdError
 import com.unity3d.mediation.LevelPlayAdInfo
-import com.unity3d.mediation.interstitial.LevelPlayInterstitialAdListener
+import com.unity3d.mediation.rewarded.LevelPlayReward
+import com.unity3d.mediation.rewarded.LevelPlayRewardedAdListener
 
-class DemoInterstitialAdListener(private val listener: DemoActivityListener) :
-    LevelPlayInterstitialAdListener {
+class DemoRewardedAdListener(private val listener: DemoActivityListener) :
+    LevelPlayRewardedAdListener {
 
-    private val TAG = DemoInterstitialAdListener::class.java.name
+    private val TAG = DemoRewardedAdListener::class.java.name
 
 
     /**
-    Called after an interstitial ad has been loaded
+    Called after an rewarded ad has been loaded
     @param adInfo The info of the ad
      */
     override fun onAdLoaded(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
-        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, true)
+        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER, true)
+    }
+
+    override fun onAdRewarded(reward: LevelPlayReward, adInfo: LevelPlayAdInfo) {
+        listener.setReward(reward)
+        logCallbackName(TAG, "adInfo = $adInfo")
     }
 
     /**
-    Called after an interstitial ad has attempted to load but failed
+    Called after an rewarded ad has attempted to load but failed
     @param error The reason for the error
      */
     override fun onAdLoadFailed(error: LevelPlayAdError) {
         logCallbackName(TAG, "error = $error")
-        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false)
+        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER, false)
     }
 
 
     /**
-    Called after an interstitial ad has been displayed
+    Called after an rewarded ad has been displayed
     This is the indication for impression
     @param adInfo The info of the ad
      */
     override fun onAdDisplayed(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
-        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_INTERSTITIAL_BUTTON_IDENTIFIER, false)
+        listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER, false)
     }
 
     /**
-    Called after an interstitial ad has attempted to display but failed
+    Called after an rewarded ad has attempted to display but failed
     @param error The reason for the error
     @param adInfo The info of the ad
      */
@@ -51,7 +57,7 @@ class DemoInterstitialAdListener(private val listener: DemoActivityListener) :
     }
 
     /**
-    Called after an interstitial ad has been clicked
+    Called after an rewarded ad has been clicked
     @param adInfo The info of the ad
      */
     override fun onAdClicked(adInfo: LevelPlayAdInfo) {
@@ -59,15 +65,17 @@ class DemoInterstitialAdListener(private val listener: DemoActivityListener) :
     }
 
     /**
-    Called after an interstitial ad has been closed
+    Called after an rewarded ad has been closed
     @param adInfo The info of the ad
      */
     override fun onAdClosed(adInfo: LevelPlayAdInfo) {
         logCallbackName(TAG, "adInfo = $adInfo")
+        listener.showRewardDialog()
+
     }
 
     /**
-    Called after the ad info is updated. Available when another interstitial ad has loaded, and includes a higher CPM/Rate
+    Called after the ad info is updated. Available when another rewarded ad has loaded, and includes a higher CPM/Rate
     @param adInfo The info of the ad
      */
     override fun onAdInfoChanged(adInfo: LevelPlayAdInfo) {
