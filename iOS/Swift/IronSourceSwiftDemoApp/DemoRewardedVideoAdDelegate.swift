@@ -8,7 +8,7 @@
 import Foundation
 import IronSource
 
-class DemoRewardedVideoAdDelegate: NSObject, LevelPlayRewardedVideoDelegate {
+class DemoRewardedVideoAdDelegate: NSObject, LPMRewardedAdDelegate {
     
     weak var delegate: DemoViewControllerDelegate?
 
@@ -17,70 +17,74 @@ class DemoRewardedVideoAdDelegate: NSObject, LevelPlayRewardedVideoDelegate {
     }
     
     /**
-     Called after a rewarded video has changed its availability to true.
+     Called after an rewarded has been loaded
      @param adInfo The info of the ad.
      */
-    func hasAvailableAd(with adInfo: ISAdInfo!) {
+    func didLoadAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
         self.delegate?.setButtonEnablement(ButtonIdentifiers.showRewardedVideoButtonIdentifier, enable: true)
     }
     
     /**
-     Called after a rewarded video has changed its availability to false.
+     Called after an rewarded has attempted to load but failed.
+     @param error The reason for the error
      */
-    func hasNoAvailableAd() {
-        logCallbackName()
+    func didFailToLoadAd(withAdUnitId adUnitId: String, error: Error) {
+        logCallbackName(string: "\(#function) error = \(String(describing:error.self))")
         self.delegate?.setButtonEnablement(ButtonIdentifiers.showRewardedVideoButtonIdentifier, enable: false)
     }
     
     /**
-     Called after a rewarded video has been opened.
-     @param adInfo The info of the ad.
+     Called after an rewarded has attempted to load but failed.
+     @param adUnitId The ad unit id of the ad.
+     @param error The reason for the error
      */
-    func didOpen(with adInfo: ISAdInfo!) {
+    func didChangeAdInfo(_ adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
-        self.delegate?.setButtonEnablement(ButtonIdentifiers.showRewardedVideoButtonIdentifier, enable: true)
     }
     
     /**
-     Called after a rewarded video has attempted to show but failed.
+     Called after an rewarded has been opened.
+     This is the indication for impression.
+     @param adInfo The info of the ad.
+     */
+    func didDisplayAd(with adInfo: LPMAdInfo) {
+        logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
+        self.delegate?.setButtonEnablement(ButtonIdentifiers.showRewardedVideoButtonIdentifier, enable: false)
+    }
+    
+    /**
+     Called after an rewarded has attempted to show but failed.
      @param error The reason for the error.
      @param adInfo The info of the ad.
      */
-    func didFailToShowWithError(_ error: Error!, andAdInfo adInfo: ISAdInfo!) {
+    func didFailToDisplayAd(with adInfo: LPMAdInfo, error: Error) {
         logCallbackName(string: "\(#function) error = \(String(describing:error.self)) | adInfo =  \(String(describing:adInfo.self))")
     }
     
     /**
-     Called after a rewarded video has been clicked.
-     This callback is not supported by all networks, and we recommend using it
-     only if it's supported by all networks you included in your build
-     @param placementInfo An object that contains the placement's reward name and amount.
-     @param adInfo The info of the ad.
-     */ 
-    func didClick(_ placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!) {
-        logCallbackName(string: "\(#function) placement = \(String(describing:placementInfo.self)) | adInfo =  \(String(describing:adInfo.self))")
-    }
-    
-    /**
-     Called after a rewarded video has been viewed completely and the user is eligible for a reward.
-     @param placementInfo An object that contains the placement's reward name and amount.
+     Called after an rewarded has been clicked.
      @param adInfo The info of the ad.
      */
-    func didReceiveReward(forPlacement placementInfo: ISPlacementInfo!, with adInfo: ISAdInfo!) {
-        logCallbackName(string: "\(#function) placement = \(String(describing:placementInfo.self)) | adInfo =  \(String(describing:adInfo.self))")
-        self.delegate?.setPlacementInfo(placementInfo)
+    func didClickAd(with adInfo: LPMAdInfo) {
+        logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
     
+    
+    func didRewardAd(with adInfo: LPMAdInfo, reward: LPMReward) {
+        logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
+        self.delegate?.setReward(reward);
+    }
+
     /**
-     Called after a rewarded video has been dismissed.
+     Called after an rewarded has been dismissed.
      @param adInfo The info of the ad.
      */
-    func didClose(with adInfo: ISAdInfo!) {
+    func didCloseAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
         self.delegate?.showVideoRewardMessage()
     }
-    
+
     //MARK: Helper Method
     
     func logCallbackName(string: String = #function) {
