@@ -11,24 +11,24 @@
 		471A2A441E66D27A00217BE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A421E66D27A00217BE4 /* Main.storyboard */; };
 		471A2A461E66D27A00217BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A451E66D27A00217BE4 /* Assets.xcassets */; };
 		471A2A491E66D27A00217BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */; };
+		5D58B63EF8356D8C0B06EB54 /* Pods_LevelPlayDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412F075612017601F18A0250 /* Pods_LevelPlayDemo.framework */; };
 		F1666FFE2AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */; };
 		F1666FFF2AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */; };
 		F16670012AFA6FCC0077FADE /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */; };
 		F16670022AFA6FCC0077FADE /* DemoBannerAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFC2AFA6FCC0077FADE /* DemoBannerAdDelegate.swift */; };
 		F16670032AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFD2AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift */; };
-		FC6F30119CA71BFB5602928C /* Pods_IronSourceSwiftDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C2849ED84A55F7AFC2C8C9B /* Pods_IronSourceSwiftDemoApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0486859A07471BFD76B41AFC /* Pods-IronSourceSwiftDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceSwiftDemoApp.release.xcconfig"; path = "Target Support Files/Pods-IronSourceSwiftDemoApp/Pods-IronSourceSwiftDemoApp.release.xcconfig"; sourceTree = "<group>"; };
-		471A2A3B1E66D27900217BE4 /* IronSourceSwiftDemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IronSourceSwiftDemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		412F075612017601F18A0250 /* Pods_LevelPlayDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LevelPlayDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelPlayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		471A2A3E1E66D27900217BE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		471A2A431E66D27A00217BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		471A2A451E66D27A00217BE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		471A2A481E66D27A00217BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		471A2A4A1E66D27A00217BE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C2849ED84A55F7AFC2C8C9B /* Pods_IronSourceSwiftDemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IronSourceSwiftDemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5111310BE6147BB80A95CF4 /* Pods-IronSourceSwiftDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceSwiftDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-IronSourceSwiftDemoApp/Pods-IronSourceSwiftDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
+		584541910829645B43B832D7 /* Pods-LevelPlayDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		C05CAF90E6CF76EE6AB67A99 /* Pods-LevelPlayDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.release.xcconfig"; sourceTree = "<group>"; };
 		F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoRewardedVideoAdDelegate.swift; sourceTree = "<group>"; };
 		F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoImpressionDataDelegate.swift; sourceTree = "<group>"; };
 		F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -41,7 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC6F30119CA71BFB5602928C /* Pods_IronSourceSwiftDemoApp.framework in Frameworks */,
+				5D58B63EF8356D8C0B06EB54 /* Pods_LevelPlayDemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,7 +51,7 @@
 		471A2A321E66D27900217BE4 = {
 			isa = PBXGroup;
 			children = (
-				471A2A3D1E66D27900217BE4 /* IronSourceSwiftDemoApp */,
+				471A2A3D1E66D27900217BE4 /* LevelPlayDemo */,
 				471A2A3C1E66D27900217BE4 /* Products */,
 				E442F24393CE3EB636E90D07 /* Pods */,
 				F0AFEE623213F9B180953967 /* Frameworks */,
@@ -61,12 +61,12 @@
 		471A2A3C1E66D27900217BE4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				471A2A3B1E66D27900217BE4 /* IronSourceSwiftDemoApp.app */,
+				471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		471A2A3D1E66D27900217BE4 /* IronSourceSwiftDemoApp */ = {
+		471A2A3D1E66D27900217BE4 /* LevelPlayDemo */ = {
 			isa = PBXGroup;
 			children = (
 				471A2A3E1E66D27900217BE4 /* AppDelegate.swift */,
@@ -80,14 +80,14 @@
 				471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */,
 				471A2A4A1E66D27A00217BE4 /* Info.plist */,
 			);
-			path = IronSourceSwiftDemoApp;
+			path = LevelPlayDemo;
 			sourceTree = "<group>";
 		};
 		E442F24393CE3EB636E90D07 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				B5111310BE6147BB80A95CF4 /* Pods-IronSourceSwiftDemoApp.debug.xcconfig */,
-				0486859A07471BFD76B41AFC /* Pods-IronSourceSwiftDemoApp.release.xcconfig */,
+				584541910829645B43B832D7 /* Pods-LevelPlayDemo.debug.xcconfig */,
+				C05CAF90E6CF76EE6AB67A99 /* Pods-LevelPlayDemo.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -95,7 +95,7 @@
 		F0AFEE623213F9B180953967 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8C2849ED84A55F7AFC2C8C9B /* Pods_IronSourceSwiftDemoApp.framework */,
+				412F075612017601F18A0250 /* Pods_LevelPlayDemo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -103,22 +103,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		471A2A3A1E66D27900217BE4 /* IronSourceSwiftDemoApp */ = {
+		471A2A3A1E66D27900217BE4 /* LevelPlayDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 471A2A4D1E66D27A00217BE4 /* Build configuration list for PBXNativeTarget "IronSourceSwiftDemoApp" */;
+			buildConfigurationList = 471A2A4D1E66D27A00217BE4 /* Build configuration list for PBXNativeTarget "LevelPlayDemo" */;
 			buildPhases = (
 				9D12D4989CF6B2909693D100 /* [CP] Check Pods Manifest.lock */,
 				471A2A371E66D27900217BE4 /* Sources */,
 				471A2A381E66D27900217BE4 /* Frameworks */,
 				471A2A391E66D27900217BE4 /* Resources */,
+				A4A6B9F4B7A5E1FB61682B40 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = IronSourceSwiftDemoApp;
+			name = LevelPlayDemo;
 			productName = TestSwift;
-			productReference = 471A2A3B1E66D27900217BE4 /* IronSourceSwiftDemoApp.app */;
+			productReference = 471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -139,7 +140,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 471A2A361E66D27900217BE4 /* Build configuration list for PBXProject "IronSourceSwiftDemoApp" */;
+			buildConfigurationList = 471A2A361E66D27900217BE4 /* Build configuration list for PBXProject "LevelPlayDemo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -153,7 +154,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				471A2A3A1E66D27900217BE4 /* IronSourceSwiftDemoApp */,
+				471A2A3A1E66D27900217BE4 /* LevelPlayDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -187,11 +188,31 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-IronSourceSwiftDemoApp-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-LevelPlayDemo-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4A6B9F4B7A5E1FB61682B40 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceAdQualitySDK/IronSourceAdQualityPrivacyInfo.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourceAdQualityPrivacyInfo.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourcePrivacyInfo.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -281,7 +302,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "$(inherited)";
@@ -334,7 +355,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "$(inherited)";
 				SDKROOT = iphoneos;
@@ -345,17 +366,17 @@
 		};
 		471A2A4E1E66D27A00217BE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B5111310BE6147BB80A95CF4 /* Pods-IronSourceSwiftDemoApp.debug.xcconfig */;
+			baseConfigurationReference = 584541910829645B43B832D7 /* Pods-LevelPlayDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NLKYWCU5C3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/IronSourceSwiftDemoApp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LevelPlayDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ironsrc.test-new";
+				PRODUCT_BUNDLE_IDENTIFIER = com.levelplay.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -365,17 +386,17 @@
 		};
 		471A2A4F1E66D27A00217BE4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0486859A07471BFD76B41AFC /* Pods-IronSourceSwiftDemoApp.release.xcconfig */;
+			baseConfigurationReference = C05CAF90E6CF76EE6AB67A99 /* Pods-LevelPlayDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NLKYWCU5C3;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "$(SRCROOT)/IronSourceSwiftDemoApp/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/LevelPlayDemo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.ironsrc.test-new";
+				PRODUCT_BUNDLE_IDENTIFIER = com.levelplay.test;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
@@ -385,7 +406,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		471A2A361E66D27900217BE4 /* Build configuration list for PBXProject "IronSourceSwiftDemoApp" */ = {
+		471A2A361E66D27900217BE4 /* Build configuration list for PBXProject "LevelPlayDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				471A2A4B1E66D27A00217BE4 /* Debug */,
@@ -394,7 +415,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		471A2A4D1E66D27A00217BE4 /* Build configuration list for PBXNativeTarget "IronSourceSwiftDemoApp" */ = {
+		471A2A4D1E66D27A00217BE4 /* Build configuration list for PBXNativeTarget "LevelPlayDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				471A2A4E1E66D27A00217BE4 /* Debug */,
