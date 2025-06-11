@@ -1,6 +1,6 @@
 //
 //  DemoViewController.swift
-//  IronSourceSwiftDemoApp
+//  LevelPlayDemo
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
