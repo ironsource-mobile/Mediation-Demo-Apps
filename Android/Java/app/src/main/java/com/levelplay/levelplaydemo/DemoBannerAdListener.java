@@ -1,6 +1,7 @@
-package com.ironsource.ironsourcesdkdemo;
+package com.levelplay.levelplaydemo;
 
-import static com.ironsource.ironsourcesdkdemo.DemoActivity.logCallbackName;
+
+import static com.levelplay.levelplaydemo.DemoActivity.logCallbackName;
 import android.view.View;
 import androidx.annotation.NonNull;
 import com.unity3d.mediation.LevelPlayAdError;
@@ -92,6 +93,4 @@ public class DemoBannerAdListener implements LevelPlayBannerAdViewListener {
     public void onAdLeftApplication(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
     }
-
-
 }

@@ -1,6 +1,6 @@
-package com.ironsource.ironsourcesdkdemo;
+package com.levelplay.levelplaydemo;
 
-import static com.ironsource.ironsourcesdkdemo.DemoActivity.logCallbackName;
+import static com.levelplay.levelplaydemo.DemoActivity.logCallbackName;
 
 import androidx.annotation.NonNull;
 import com.unity3d.mediation.LevelPlayConfiguration;
@@ -24,6 +24,7 @@ public class DemoInitializationListener implements LevelPlayInitListener {
     public void onInitSuccess(LevelPlayConfiguration configuration) {
         logCallbackName(TAG, "");
         this.listener.createInterstitialAd();
+        this.listener.createRewardedAd();
         this.listener.createBannerAd();
     }
 
@@ -34,7 +35,6 @@ public class DemoInitializationListener implements LevelPlayInitListener {
     @Override
     public void onInitFailed(@NonNull LevelPlayInitError error) {
         logCallbackName(TAG, "error = " + error);
-
     }
 
 }

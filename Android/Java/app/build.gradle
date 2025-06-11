@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.ironsource.ironsourcesdkdemo"
+    namespace "com.levelplay.levelplaydemo"
     compileSdkVersion 34
     buildToolsVersion '34.0.0'
     defaultConfig {
-        applicationId "com.ironsource.ironsourcesdkdemo"
+        applicationId "com.levelplay.levelplaydemo"
         minSdkVersion 19
         targetSdkVersion 34
         versionCode 1
