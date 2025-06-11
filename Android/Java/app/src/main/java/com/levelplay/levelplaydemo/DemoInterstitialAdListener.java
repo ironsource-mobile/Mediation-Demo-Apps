@@ -1,6 +1,6 @@
-package com.ironsource.ironsourcesdkdemo;
+package com.levelplay.levelplaydemo;
 
-import static com.ironsource.ironsourcesdkdemo.DemoActivity.logCallbackName;
+import static com.levelplay.levelplaydemo.DemoActivity.logCallbackName;
 import androidx.annotation.NonNull;
 import com.unity3d.mediation.LevelPlayAdError;
 import com.unity3d.mediation.LevelPlayAdInfo;
@@ -63,7 +63,8 @@ public class DemoInterstitialAdListener implements LevelPlayInterstitialAdListen
      Called after an interstitial ad has been closed
      @param adInfo The info of the ad
      */
-    @Override public void onAdClosed(@NonNull LevelPlayAdInfo adInfo) {
+    @Override
+    public void onAdClosed(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
     }
 
@@ -71,18 +72,19 @@ public class DemoInterstitialAdListener implements LevelPlayInterstitialAdListen
      Called after an interstitial ad has been clicked
      @param adInfo The info of the ad
      */
-    @Override public void onAdClicked(@NonNull LevelPlayAdInfo adInfo) {
+    @Override
+    public void onAdClicked(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
 
     }
 
     /**
-     Called after the ad info is updated. Available when another interstitial ad has loaded, and includes a higher CPM/Rate
-     @param adInfo The info of the ad
+     * Called after the ad info is updated. Available when another interstitial ad has loaded, and includes a higher CPM/Rate
+     *
+     * @param adInfo The info of the ad
      */
     @Override
     public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
     }
-
 }
