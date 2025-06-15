@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Integration Demo</string>
+    <string name="app_name">LevelPlay Demo</string>
     <string name="initializing">Initializing…</string>
 
     <string name="show">Show</string>

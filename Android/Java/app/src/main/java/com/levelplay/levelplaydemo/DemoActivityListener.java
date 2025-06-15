@@ -1,13 +1,13 @@
-package com.ironsource.ironsourcesdkdemo;
+package com.levelplay.levelplaydemo;
 
-import com.ironsource.mediationsdk.model.Placement;
+import com.unity3d.mediation.rewarded.LevelPlayReward;
 
 interface DemoActivityListener {
     void setEnablementForButton(DemoButtonIdentifiers buttonIdentifier, boolean enable);
     void setBannerViewVisibility(int visibility);
-    void setPlacementInfo(Placement placementInfo);
+    void setReward(LevelPlayReward reward);
     void showRewardDialog();
     void createInterstitialAd();
+    void createRewardedAd();
     void createBannerAd();
-
 }
