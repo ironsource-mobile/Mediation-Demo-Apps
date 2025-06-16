@@ -147,8 +147,8 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
         // Create the banner view and set the ad unit id and ad size
         if (adSize != null) {
-            bannerAd = new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID);
-            bannerAd.setAdSize(adSize);
+            LevelPlayBannerAdView.Config config = new LevelPlayBannerAdView.Config.Builder().setAdSize(adSize).build();
+            bannerAd = new LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID, config);
 
             // set the banner listener
             bannerAd.setBannerListener(new DemoBannerAdListener(this));
