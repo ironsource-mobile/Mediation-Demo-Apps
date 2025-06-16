@@ -29,7 +29,7 @@ public class DemoInitializationListener implements LevelPlayInitListener {
     }
 
     /**
-      the configuration was not retrieved successfully and ads cannot be loaded. It is recommended to try and initialize the ironSource SDK later (when internet connection is available, or when the failure reason is resolved)
+      the configuration was not retrieved successfully and ads cannot be loaded. It is recommended to try and initialize the levelPlay SDK later (when internet connection is available, or when the failure reason is resolved)
      @param error The reason for the error
      */
     @Override

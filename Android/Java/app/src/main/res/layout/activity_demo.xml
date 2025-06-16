@@ -54,7 +54,7 @@
                 android:enabled="false"
                 android:textAllCaps="false"
                 android:textColor="#000000"
-                android:background="@drawable/ironsource_button_shape"
+                android:background="@drawable/levelplay_button_shape"
                 android:onClick="loadRewardedButtonTapped"
                 android:text="@string/load"
                 tools:ignore="ButtonStyle" />
@@ -68,7 +68,7 @@
                 android:textAllCaps="false"
                 android:textColor="#000000"
                 android:onClick="showRewardedVideoButtonTapped"
-                android:background="@drawable/ironsource_button_shape"
+                android:background="@drawable/levelplay_button_shape"
                 android:text="@string/show"
                 tools:ignore="ButtonStyle" />
 
@@ -107,7 +107,7 @@
                 android:enabled="false"
                 android:textAllCaps="false"
                 android:textColor="#000000"
-                android:background="@drawable/ironsource_button_shape"
+                android:background="@drawable/levelplay_button_shape"
                 android:onClick="loadInterstitialButtonTapped"
                 android:text="@string/load"
                 tools:ignore="ButtonStyle" />
@@ -121,7 +121,7 @@
                 android:textAllCaps="false"
                 android:textColor="#000000"
                 android:onClick="showInterstitialButtonTapped"
-                android:background="@drawable/ironsource_button_shape"
+                android:background="@drawable/levelplay_button_shape"
                 android:text="@string/show"
                 tools:ignore="ButtonStyle" />
 
@@ -162,7 +162,7 @@
                 android:textColor="#000000"
                 android:layout_gravity="center_horizontal"
                 android:onClick="loadBannerButtonTapped"
-                android:background="@drawable/ironsource_button_shape"
+                android:background="@drawable/levelplay_button_shape"
                 android:text="@string/load"
                 tools:ignore="ButtonStyle" />
 
