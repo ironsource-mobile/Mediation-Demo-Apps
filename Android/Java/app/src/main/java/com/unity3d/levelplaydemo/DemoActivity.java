@@ -122,7 +122,6 @@ public class DemoActivity extends Activity implements DemoActivityListener {
         // It is advised to make sure there is available ad that isn't capped before attempting to show it
         if (interstitialAd != null && interstitialAd.isAdReady()) {
             // This will present the Interstitial.
-            // Unlike Rewarded Videos there are no placements.
 
             log("showAd for interstitial");
             interstitialAd.showAd(this);
