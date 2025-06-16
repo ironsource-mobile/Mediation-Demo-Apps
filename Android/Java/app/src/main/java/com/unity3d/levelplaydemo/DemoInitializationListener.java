@@ -21,7 +21,7 @@ public class DemoInitializationListener implements LevelPlayInitListener {
      @param configuration The configuration
      */
     @Override
-    public void onInitSuccess(LevelPlayConfiguration configuration) {
+    public void onInitSuccess(@NonNull LevelPlayConfiguration configuration) {
         logCallbackName(TAG, "");
         this.listener.createInterstitialAd();
         this.listener.createRewardedAd();
