@@ -1,4 +1,4 @@
-package com.levelplay.levelplaydemo;
+package com.unity3d.levelplaydemo;
 
 import com.unity3d.mediation.rewarded.LevelPlayReward;
 

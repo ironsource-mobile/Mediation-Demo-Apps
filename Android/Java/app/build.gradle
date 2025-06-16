@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.levelplay.levelplaydemo"
+    namespace "com.unity3d.levelplaydemo"
     compileSdkVersion 34
     buildToolsVersion '34.0.0'
     defaultConfig {
-        applicationId "com.levelplay.levelplaydemo"
+        applicationId "com.unity3d.levelplaydemo"
         minSdkVersion 19
         targetSdkVersion 34
         versionCode 1

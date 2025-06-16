@@ -1,4 +1,4 @@
-package com.levelplay.levelplaydemo;
+package com.unity3d.levelplaydemo;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 

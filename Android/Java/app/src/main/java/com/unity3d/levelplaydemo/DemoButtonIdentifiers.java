@@ -1,4 +1,4 @@
-package com.levelplay.levelplaydemo;
+package com.unity3d.levelplaydemo;
 
 enum DemoButtonIdentifiers {
     LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER,

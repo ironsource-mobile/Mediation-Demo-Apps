@@ -1,6 +1,6 @@
-package com.levelplay.levelplaydemo;
+package com.unity3d.levelplaydemo;
 
-import static com.levelplay.levelplaydemo.DemoActivity.logCallbackName;
+import static com.unity3d.levelplaydemo.DemoActivity.logCallbackName;
 import androidx.annotation.NonNull;
 import com.unity3d.mediation.LevelPlayAdError;
 import com.unity3d.mediation.LevelPlayAdInfo;
