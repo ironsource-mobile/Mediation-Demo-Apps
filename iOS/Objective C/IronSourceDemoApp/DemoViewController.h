@@ -11,6 +11,7 @@
 #define logCallbackName(fmt, ...) NSLog((@"%s " fmt), __PRETTY_FUNCTION__, ##__VA_ARGS__);
 
 typedef NS_ENUM(NSInteger, ButtonIdentifiers) {
+    LoadRewardedVideoButtonIdentifier,
     ShowRewardedVideoButtonIdentifier,
     LoadInterstitialButtonIdentifier,
     ShowInterstitialButtonIdentifier,
@@ -20,13 +21,15 @@ typedef NS_ENUM(NSInteger, ButtonIdentifiers) {
 @protocol DemoViewControllerDelegate <NSObject>
 - (void)setEnablementForButton:(ButtonIdentifiers)buttonIdentifier
                         enable:(BOOL)enable;
-- (void)setPlacementInfo:(ISPlacementInfo *)placementInfo;
+- (void)setReward:(LPMReward *)reward;
 - (void)showVideoRewardMessage;
 @end
 
 
 @interface DemoViewController : UIViewController <DemoViewControllerDelegate>
 
+
+@property (weak, nonatomic) IBOutlet UIButton *loadRewardedVideoButton;
 @property (weak, nonatomic) IBOutlet UIButton *showRewardedVideoButton;
 
 @property (weak, nonatomic) IBOutlet UIButton *loadInterstitialButton;

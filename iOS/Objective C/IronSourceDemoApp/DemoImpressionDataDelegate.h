@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DemoImpressionDataDelegate : NSObject<ISImpressionDataDelegate>
+@interface DemoImpressionDataDelegate : NSObject<LPMImpressionDataDelegate>
 
 @end
 

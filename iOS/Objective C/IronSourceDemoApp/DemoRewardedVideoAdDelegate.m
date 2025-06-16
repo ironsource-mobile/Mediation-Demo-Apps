@@ -20,72 +20,77 @@
 }
 
 /**
- Called after a rewarded video has changed its availability to true.
+ Called after a rewarded has been loaded
  @param adInfo The info of the ad.
  */
-- (void)hasAvailableAdWithAdInfo:(ISAdInfo *)adInfo {
+- (void)didLoadAdWithAdInfo:(nonnull LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate setEnablementForButton:ShowRewardedVideoButtonIdentifier
                                    enable:YES];
 }
 
 /**
- Called after a rewarded video has changed its availability to false.
+ Called after a rewarded has attempted to load but failed.
+ @param adUnitId The ad unit id of the ad.
+ @param error The reason for the error
  */
-- (void)hasNoAvailableAd {
-    logCallbackName();
+- (void)didFailToLoadAdWithAdUnitId:(nonnull NSString *)adUnitId error:(nonnull NSError *)error {
+    logCallbackName(@"error = %@", error.localizedDescription);
     [self.delegate setEnablementForButton:ShowRewardedVideoButtonIdentifier
                                     enable:NO];
 }
 
 /**
- Called after a rewarded video has been opened.
+ Called after the ad info is updated, Available when another rewarded ad has loaded, and includes a higher CPM/Rate
  @param adInfo The info of the ad.
  */
-- (void)didOpenWithAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName(@"adInfo = %@", adInfo);
-    [self.delegate setEnablementForButton:ShowRewardedVideoButtonIdentifier
-                                   enable:NO];
+- (void) didChangeAdInfo:(nonnull LPMAdInfo *)adInfo {
+    logCallbackName(@"adInfo =%@", adInfo)
 }
 
 /**
- Called after a rewarded video has attempted to show but failed.
- @param error The reason for the error.
+ Called after a rewarded ad has been opened..
+ This is the indication for impression.
  @param adInfo The info of the ad.
  */
-- (void)didFailToShowWithError:(NSError *)error
-                     andAdInfo:(ISAdInfo *)adInfo {
+- (void)didDisplayAdWithAdInfo:(nonnull LPMAdInfo *)adInfo {
+    logCallbackName(@"adInfo =%@", adInfo)
+    [self.delegate setEnablementForButton:ShowRewardedVideoButtonIdentifier
+                                    enable:NO];
+}
+
+/**
+ Called after a rewarded has attempted to show but failed.
+ @param adInfo The info of the ad.
+ @param error The reason for the error.
+ */
+- (void)didFailToDisplayAdWithAdInfo:(LPMAdInfo *)adInfo error:(NSError *)error {
     logCallbackName(@"error = %@ | adInfo = %@", error.localizedDescription, adInfo);
 }
 
 /**
- Called after a rewarded video has been clicked.
- This callback is not supported by all networks, and we recommend using it 
- only if it's supported by all networks you included in your build
- @param placementInfo An object that contains the placement's reward name and amount.
+ Called after a rewarded ad has been clicked.
  @param adInfo The info of the ad.
  */ 
-- (void)didClick:(ISPlacementInfo *)placementInfo
-      withAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName(@"placement = %@ | adInfo = %@", placementInfo, adInfo);
+- (void)didClickAdWithAdInfo:(LPMAdInfo *)adInfo {
+    logCallbackName(@"adInfo = %@", adInfo);
 }
 
 /**
- Called after a rewarded video has been viewed completely and the user is eligible for a reward.
+ Called after a rewarded ad has been viewed completely and the user is eligible for a reward.
  @param placementInfo An object that contains the placement's reward name and amount.
  @param adInfo The info of the ad.
  */
-- (void)didReceiveRewardForPlacement:(ISPlacementInfo *)placementInfo
-                          withAdInfo:(ISAdInfo *)adInfo {
-    logCallbackName(@"placement = %@ | adInfo = %@", placementInfo, adInfo);
-    [self.delegate setPlacementInfo:placementInfo];
+- (void)didRewardAdWithAdInfo:(nonnull LPMAdInfo *)adInfo reward:(nonnull LPMReward *)reward {
+    logCallbackName(@"adInfo = %@", adInfo);
+    [self.delegate setReward:reward];
 }
 
 /**
- Called after a rewarded video has been dismissed.
+ Called after a rewarded ad has been dismissed.
  @param adInfo The info of the ad.
  */
-- (void)didCloseWithAdInfo:(ISAdInfo *)adInfo {
+- (void)didCloseAdWithAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
     [self.delegate showVideoRewardMessage];
 }

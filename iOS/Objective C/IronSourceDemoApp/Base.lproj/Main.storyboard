@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -40,22 +40,40 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="cl3-aC-wSG" userLabel="Buttons Stack View">
                                                 <rect key="frame" x="0.0" y="30.5" width="220" height="27"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N20-QP-8mE" userLabel="Show Rewarded Video Button">
-                                                        <rect key="frame" x="0.0" y="0.0" width="220" height="27"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1rn-WV-s2b" userLabel="Load Interstitial Button">
+                                                        <rect key="frame" x="0.0" y="0.0" width="100" height="27"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="220" id="XQp-1b-8jb"/>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Fc2-qw-fWD"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                        <state key="normal" title="Load">
+                                                            <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <state key="disabled" title="Load">
+                                                            <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="loadRewardedButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sOb-FP-TbW"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mwc-xL-vqI" userLabel="Show Interstitial Button">
+                                                        <rect key="frame" x="120" y="0.0" width="100" height="27"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="8Im-lf-CbI"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                         <state key="normal" title="Show">
                                                             <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </state>
-                                                        <state key="disabled" title="Initializing">
+                                                        <state key="disabled" title="Show">
                                                             <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </state>
                                                         <state key="selected" title="Show"/>
+                                                        <state key="highlighted" title="Show"/>
                                                         <connections>
-                                                            <action selector="showRewardedVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rbr-Q7-Efw"/>
+                                                            <action selector="showRewardedVideoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bvj-ua-qca"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -166,8 +184,9 @@
                     <connections>
                         <outlet property="loadBannerButton" destination="DN1-DN-sO8" id="rHw-dA-GPy"/>
                         <outlet property="loadInterstitialButton" destination="qE4-Rn-VtA" id="5Wh-Ea-XS0"/>
+                        <outlet property="loadRewardedVideoButton" destination="1rn-WV-s2b" id="erB-ev-5gE"/>
                         <outlet property="showInterstitialButton" destination="Dhm-wI-nt6" id="lZv-jU-P6G"/>
-                        <outlet property="showRewardedVideoButton" destination="N20-QP-8mE" id="TcG-9c-34W"/>
+                        <outlet property="showRewardedVideoButton" destination="Mwc-xL-vqI" id="46o-bg-mcr"/>
                         <outlet property="versionLabel" destination="Dnw-Fv-bW3" id="eDm-X0-027"/>
                     </connections>
                 </viewController>

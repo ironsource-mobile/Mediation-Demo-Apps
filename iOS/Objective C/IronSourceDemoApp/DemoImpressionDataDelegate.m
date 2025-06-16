@@ -13,8 +13,8 @@
  Called when the ad was displayed successfully and the impression data was recorded
  @param impressionData The recorded impression data 
  */
-- (void)impressionDataDidSucceed:(ISImpressionData *)impressionData {
-    logCallbackName();
+- (void)impressionDataDidSucceed:(LPMImpressionData *)impressionData { 
+  logCallbackName();
 }
 
 @end
