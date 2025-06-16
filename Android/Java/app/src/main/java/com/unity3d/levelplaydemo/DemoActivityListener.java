@@ -2,7 +2,7 @@ package com.unity3d.levelplaydemo;
 
 import com.unity3d.mediation.rewarded.LevelPlayReward;
 
-interface DemoActivityListener {
+public interface DemoActivityListener {
     void setEnablementForButton(DemoButtonIdentifiers buttonIdentifier, boolean enable);
     void setBannerViewVisibility(int visibility);
     void setReward(LevelPlayReward reward);
