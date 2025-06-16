@@ -1,6 +1,6 @@
 package com.unity3d.levelplaydemo;
 
-enum DemoButtonIdentifiers {
+public enum DemoButtonIdentifiers {
     LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER,
     SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER,
     LOAD_INTERSTITIAL_BUTTON_IDENTIFIER,
