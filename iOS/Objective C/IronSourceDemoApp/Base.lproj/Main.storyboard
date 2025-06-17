@@ -22,7 +22,7 @@
                             <stackView opaque="NO" contentMode="top" axis="vertical" distribution="equalSpacing" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2mE-MQ-57a">
                                 <rect key="frame" x="74" y="40" width="227.5" height="567"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ironSourceLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="ironSource Logo">
+                                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="levelPlayLogo" translatesAutoresizingMaskIntoConstraints="NO" id="WUr-4g-cHl" userLabel="levelPlay Logo">
                                         <rect key="frame" x="0.0" y="0.0" width="227.5" height="41"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="lessThanOrEqual" constant="70" id="AIm-zw-dN4"/>
@@ -196,7 +196,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ironSourceLogo" width="227.5" height="41"/>
+        <image name="levelPlayLogo" width="227.5" height="41"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
