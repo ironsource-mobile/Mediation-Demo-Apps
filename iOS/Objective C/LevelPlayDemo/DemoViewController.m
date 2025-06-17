@@ -154,8 +154,8 @@
 
     // Create the banner view and set the ad unit id and ad size
     if (self.bannerSize != nil) {
-        self.bannerAd = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId];
-        [self.bannerAd setAdSize:self.bannerSize];
+      LPMBannerAdViewConfig *config = [[[[LPMBannerAdViewConfigBuilder alloc] init] setWithAdSize:self.bannerSize] build];
+      self.bannerAd = [[LPMBannerAdView alloc] initWithAdUnitId:kBannerAdUnitId config: config];
 
         // set the banner listener
         self.bannerAdViewDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
