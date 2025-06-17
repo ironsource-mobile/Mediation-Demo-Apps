@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace "com.ironsource.ironsourcesdkdemo"
+    namespace "com.unity3d.levelplaydemo"
     compileSdkVersion 34
     buildToolsVersion '34.0.0'
     defaultConfig {
-        applicationId "com.ironsource.ironsourcesdkdemo"
+        applicationId "com.unity3d.levelplaydemo"
         minSdkVersion 19
         targetSdkVersion 34
         versionCode 1
@@ -24,7 +24,7 @@ android {
     }
 }
 
-// Include IronSource maven repositories
+// Include LevelPlay maven repositories
 repositories {
     mavenCentral()
 }
@@ -36,7 +36,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-appset:16.0.2'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
-    // Add IronSource Mediation SDK dependency.
+    // Add LevelPlay Mediation SDK dependency.
     implementation "com.unity3d.ads-mediation:mediation-sdk:8.+"
     // Add AdNetworks adapters dependencies and matching ad networks SDKs dependencies .
     // Make sure you also configure the AdNetworks in your dashboard.

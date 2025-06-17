@@ -1,6 +1,6 @@
-package com.ironsource.ironsourcesdkdemo;
+package com.unity3d.levelplaydemo;
 
-import static com.ironsource.ironsourcesdkdemo.DemoActivity.logCallbackName;
+import static com.unity3d.levelplaydemo.DemoActivity.logCallbackName;
 
 import androidx.annotation.NonNull;
 import com.unity3d.mediation.LevelPlayConfiguration;
@@ -21,20 +21,20 @@ public class DemoInitializationListener implements LevelPlayInitListener {
      @param configuration The configuration
      */
     @Override
-    public void onInitSuccess(LevelPlayConfiguration configuration) {
+    public void onInitSuccess(@NonNull LevelPlayConfiguration configuration) {
         logCallbackName(TAG, "");
         this.listener.createInterstitialAd();
+        this.listener.createRewardedAd();
         this.listener.createBannerAd();
     }
 
     /**
-      the configuration was not retrieved successfully and ads cannot be loaded. It is recommended to try and initialize the ironSource SDK later (when internet connection is available, or when the failure reason is resolved)
+      the configuration was not retrieved successfully and ads cannot be loaded. It is recommended to try and initialize the levelPlay SDK later (when internet connection is available, or when the failure reason is resolved)
      @param error The reason for the error
      */
     @Override
     public void onInitFailed(@NonNull LevelPlayInitError error) {
         logCallbackName(TAG, "error = " + error);
-
     }
 
 }
