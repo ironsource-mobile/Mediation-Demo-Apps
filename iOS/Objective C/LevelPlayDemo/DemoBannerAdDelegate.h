@@ -1,6 +1,6 @@
 //
-//  DemoInterstitialAdDelegate.h
-//  IronSourceDemoApp
+//  DemoBannerAdDelegate.h
+//  LevelPlayDemo
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface DemoInterstitialAdDelegate : NSObject<LPMInterstitialAdDelegate>
+@interface DemoBannerAdDelegate : NSObject<LPMBannerAdViewDelegate>
 
 @property (weak, nonatomic) id<DemoViewControllerDelegate> delegate;
 
@@ -20,4 +20,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-

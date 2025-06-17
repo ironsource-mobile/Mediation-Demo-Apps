@@ -1,6 +1,6 @@
 //
 //  main.m
-//  IronSourceDemoApp
+//  LevelPlayDemo
 //
 //  Copyright © 2024 ironSource Mobile Ltd. All rights reserved.
 //
