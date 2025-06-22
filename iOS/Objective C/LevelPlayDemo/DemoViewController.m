@@ -213,7 +213,7 @@
   if (self.rewardedAd != nil && self.rewardedAd.isAdReady) {
         // This will present the Rewarded Video.
     
-        [self logMethodName:@"showAd for rewarded"];
+        [self logMethodName:@"showAdWithViewController for rewarded"];
         [self.rewardedAd showAdWithViewController:self placementName:nil];
     } else {
         // load a new ad before calling show
