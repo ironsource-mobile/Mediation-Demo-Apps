@@ -179,9 +179,9 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
             return
         }
 
-        //  Create the banner ad view object with required & optional params
-        self.bannerAd = LPMBannerAdView(adUnitId: bannerAdUnitId)
-        self.bannerAd.setAdSize(bannerSize)
+        // Create the banner ad view object with required & optional params
+        let config = LPMBannerAdViewConfigBuilder().set(adSize: .banner()).build()
+        self.bannerAd = LPMBannerAdView(adUnitId: bannerAdUnitId, config: config)
 
         // set the banner listener
         bannerAdViewDelegate = .init(delegate: self)
