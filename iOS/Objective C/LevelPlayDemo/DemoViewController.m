@@ -126,7 +126,7 @@
     if ([self.interstitialAd isAdReady]) {
         // This will present the Interstitial.
 
-        [self logMethodName:@"showAdWithViewController for interstitial:"];
+        [self logMethodName:@"showAdWithViewController for interstitial"];
         [self.interstitialAd showAdWithViewController:self placementName:NULL];
     } else {
         // load a new ad before calling show
@@ -213,7 +213,7 @@
   if (self.rewardedAd != nil && self.rewardedAd.isAdReady) {
         // This will present the Rewarded Video.
     
-        [self logMethodName:@"showAd for rewarded:"];
+        [self logMethodName:@"showAd for rewarded"];
         [self.rewardedAd showAdWithViewController:self placementName:nil];
     } else {
         // load a new ad before calling show
