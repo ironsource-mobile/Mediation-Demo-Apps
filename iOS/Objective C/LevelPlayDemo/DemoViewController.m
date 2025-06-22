@@ -84,7 +84,6 @@
     // After setting the delegates you can go ahead and initialize the SDK. 
     // Once the initialization callback is return you can start loading your ads
     
-    // Init the SDK when implementing the Multiple Ad Units Interstitial and Banner API, and Rewarded using legacy APIs
     [self logMethodName:[NSString stringWithFormat:@"init levelPlay SDK with appKey: %@", kAppKey]];
     LPMInitRequestBuilder *requestBuilder = [[LPMInitRequestBuilder alloc] initWithAppKey:kAppKey];
     [requestBuilder withLegacyAdFormats:@[IS_REWARDED_VIDEO]];
