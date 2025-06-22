@@ -252,7 +252,7 @@
         
         switch (buttonIdentifier) {
           case LoadRewardedVideoButtonIdentifier:
-            buttonToModify = self.loadRewardedVideoButton;
+                buttonToModify = self.loadRewardedVideoButton;
             break;
           case ShowRewardedVideoButtonIdentifier:
                 buttonToModify = self.showRewardedVideoButton;
