@@ -125,7 +125,6 @@
     // It is advised to make sure there is available ad that isn't capped before attempting to show it
     if ([self.interstitialAd isAdReady]) {
         // This will present the Interstitial.
-        // Unlike Rewarded Videos there are no placements.
 
         [self logMethodName:@"showAdWithViewController for interstitial:"];
         [self.interstitialAd showAdWithViewController:self placementName:NULL];
