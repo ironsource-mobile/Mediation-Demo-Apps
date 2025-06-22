@@ -86,7 +86,6 @@
     
     [self logMethodName:[NSString stringWithFormat:@"init levelPlay SDK with appKey: %@", kAppKey]];
     LPMInitRequestBuilder *requestBuilder = [[LPMInitRequestBuilder alloc] initWithAppKey:kAppKey];
-    [requestBuilder withLegacyAdFormats:@[IS_REWARDED_VIDEO]];
     LPMInitRequest *initRequest = [requestBuilder build];
     [LevelPlay initWithRequest:initRequest completion:^(LPMConfiguration *_Nullable config, NSError *_Nullable error){
     
