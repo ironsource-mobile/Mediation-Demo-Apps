@@ -251,10 +251,10 @@
         UIButton *buttonToModify;
         
         switch (buttonIdentifier) {
-          case LoadRewardedVideoButtonIdentifier:
+            case LoadRewardedVideoButtonIdentifier:
                 buttonToModify = self.loadRewardedVideoButton;
                 break;
-          case ShowRewardedVideoButtonIdentifier:
+            case ShowRewardedVideoButtonIdentifier:
                 buttonToModify = self.showRewardedVideoButton;
                 break;
             case LoadInterstitialButtonIdentifier:
