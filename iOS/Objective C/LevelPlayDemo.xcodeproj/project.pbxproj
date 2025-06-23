@@ -37,7 +37,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		126ED039A58CD8FF06C4EA94 /* Pods-IronSourceDemoApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceDemoApp.debug.xcconfig"; path = "Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp.debug.xcconfig"; sourceTree = "<group>"; };
 		35E1BF82BA5FFCC38DD5E41F /* Pods-LevelPlayDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		47B0AD291CB5252100B8D125 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		72849D3F1E2B7D2400CCCB4B /* IronSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = IronSource.framework; sourceTree = "<group>"; };
@@ -49,7 +48,6 @@
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FB9F0520C576186EECE23F6 /* Pods-LevelPlayDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.release.xcconfig"; sourceTree = "<group>"; };
 		B69266617B2255A7ECB1C929 /* libPods-LevelPlayDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LevelPlayDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BD9B6B5F89AFD94696FF9BC2 /* Pods-IronSourceDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceDemoApp.release.xcconfig"; path = "Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp.release.xcconfig"; sourceTree = "<group>"; };
 		C7864FDA2E098C8D00937C8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E80C8F981C16E28400CF3C27 /* LevelPlayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelPlayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -133,8 +131,6 @@
 		BCB3B4B5C8801D4E454A4A5C /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				126ED039A58CD8FF06C4EA94 /* Pods-IronSourceDemoApp.debug.xcconfig */,
-				BD9B6B5F89AFD94696FF9BC2 /* Pods-IronSourceDemoApp.release.xcconfig */,
 				35E1BF82BA5FFCC38DD5E41F /* Pods-LevelPlayDemo.debug.xcconfig */,
 				7FB9F0520C576186EECE23F6 /* Pods-LevelPlayDemo.release.xcconfig */,
 			);
