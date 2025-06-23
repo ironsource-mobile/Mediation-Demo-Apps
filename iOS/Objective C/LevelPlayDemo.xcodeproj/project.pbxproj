@@ -14,7 +14,7 @@
 		72E0D6561E267513009ABC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6461E267513009ABC1B /* Assets.xcassets */; };
 		72E0D6571E267513009ABC1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */; };
 		72E0D6581E267513009ABC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6491E267513009ABC1B /* Main.storyboard */; };
-		72E0D6601E2675C7009ABC1B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 72E0D65F1E2675C7009ABC1B /* main.m */; };
+		C7864FDB2E098C8D00937C8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7864FDA2E098C8D00937C8F /* main.m */; };
 		E80C8FB61C16E48200CF3C27 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */; };
 		E80C8FB71C16E48200CF3C27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB51C16E48200CF3C27 /* Foundation.framework */; };
 		E80C8FBD1C16E4A000CF3C27 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB81C16E4A000CF3C27 /* CoreGraphics.framework */; };
@@ -46,11 +46,11 @@
 		72E0D6461E267513009ABC1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		72E0D6481E267513009ABC1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		72E0D64A1E267513009ABC1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		72E0D65F1E2675C7009ABC1B /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = LevelPlayDemo/main.m; sourceTree = SOURCE_ROOT; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FB9F0520C576186EECE23F6 /* Pods-LevelPlayDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.release.xcconfig"; sourceTree = "<group>"; };
 		B69266617B2255A7ECB1C929 /* libPods-LevelPlayDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LevelPlayDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BD9B6B5F89AFD94696FF9BC2 /* Pods-IronSourceDemoApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IronSourceDemoApp.release.xcconfig"; path = "Target Support Files/Pods-IronSourceDemoApp/Pods-IronSourceDemoApp.release.xcconfig"; sourceTree = "<group>"; };
+		C7864FDA2E098C8D00937C8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E80C8F981C16E28400CF3C27 /* LevelPlayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelPlayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E80C8FB51C16E48200CF3C27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -125,6 +125,7 @@
 				72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */,
 				72E0D6491E267513009ABC1B /* Main.storyboard */,
 				72E0D6611E267AFB009ABC1B /* Info.plist */,
+				C7864FDA2E098C8D00937C8F /* main.m */,
 			);
 			path = LevelPlayDemo;
 			sourceTree = "<group>";
@@ -144,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				72E0D6431E267513009ABC1B /* LevelPlayDemo */,
-				E80C8F9B1C16E28400CF3C27 /* Supporting Files */,
 				E80C8FD21C16E52200CF3C27 /* Frameworks */,
 				E80C8F991C16E28400CF3C27 /* Products */,
 				BCB3B4B5C8801D4E454A4A5C /* Pods */,
@@ -158,15 +158,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		E80C8F9B1C16E28400CF3C27 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				72E0D65F1E2675C7009ABC1B /* main.m */,
-			);
-			name = "Supporting Files";
-			path = IronSourceDemoApp;
-			sourceTree = SOURCE_ROOT;
 		};
 		E80C8FD21C16E52200CF3C27 /* Frameworks */ = {
 			isa = PBXGroup;
@@ -313,10 +304,10 @@
 			files = (
 				F1666FED2AFA55C40077FADE /* DemoInterstitialAdDelegate.m in Sources */,
 				F1666FE72AFA55B50077FADE /* DemoBannerAdDelegate.m in Sources */,
-				72E0D6601E2675C7009ABC1B /* main.m in Sources */,
 				F1666FEA2AFA55BC0077FADE /* DemoRewardedVideoAdDelegate.m in Sources */,
 				F1666FD82AFA55140077FADE /* DemoImpressionDataDelegate.m in Sources */,
 				F1666FCB2AF954A20077FADE /* DemoViewController.m in Sources */,
+				C7864FDB2E098C8D00937C8F /* main.m in Sources */,
 				72E0D6551E267513009ABC1B /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
