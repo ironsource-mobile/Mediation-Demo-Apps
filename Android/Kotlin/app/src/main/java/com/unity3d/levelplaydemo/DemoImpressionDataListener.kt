@@ -1,6 +1,6 @@
-package com.levelplay.levelplaydemo
+package com.unity3d.levelplaydemo
 
-import com.levelplay.levelplaydemo.DemoActivity.Companion.logCallbackName
+import com.unity3d.levelplaydemo.DemoActivity.Companion.logCallbackName
 import com.unity3d.mediation.impression.LevelPlayImpressionData
 import com.unity3d.mediation.impression.LevelPlayImpressionDataListener
 
