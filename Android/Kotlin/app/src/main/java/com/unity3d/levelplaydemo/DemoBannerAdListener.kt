@@ -1,7 +1,7 @@
-package com.levelplay.levelplaydemo
+package com.unity3d.levelplaydemo
 
 import android.view.View
-import com.levelplay.levelplaydemo.DemoActivity.Companion.logCallbackName
+import com.unity3d.levelplaydemo.DemoActivity.Companion.logCallbackName
 import com.unity3d.mediation.LevelPlayAdError
 import com.unity3d.mediation.LevelPlayAdInfo
 import com.unity3d.mediation.banner.LevelPlayBannerAdViewListener
