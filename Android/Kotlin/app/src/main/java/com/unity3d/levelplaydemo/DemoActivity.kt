@@ -155,8 +155,8 @@ class DemoActivity : Activity(), DemoActivityListener {
 
         // Create the banner view and set the ad unit id and ad size
         adSize?.let {
-            bannerAd = LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID)
-            bannerAd?.setAdSize(adSize)
+            val config = LevelPlayBannerAdView.Config.Builder().setAdSize(it).build()
+            bannerAd = LevelPlayBannerAdView(this, BANNER_AD_UNIT_ID, config)
 
             // set the banner listener
             bannerAd?.setBannerListener(DemoBannerAdListener(this))
