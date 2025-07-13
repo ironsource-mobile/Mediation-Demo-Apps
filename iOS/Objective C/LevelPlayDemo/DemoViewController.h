@@ -2,7 +2,7 @@
 //  DemoViewController.h
 //  LevelPlayDemo
 //
-//  Copyright © 2025 LevelPlay Ltd. All rights reserved.
+//  Copyright © 2021-2025 Unity Technologies. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

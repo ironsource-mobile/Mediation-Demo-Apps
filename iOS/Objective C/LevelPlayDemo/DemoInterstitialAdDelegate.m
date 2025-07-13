@@ -2,7 +2,7 @@
 //  DemoInterstitialAdDelegate.m
 //  LevelPlayDemo
 //
-//  Copyright © 2025 LevelPlay Ltd. All rights reserved.
+//  Copyright © 2021-2025 Unity Technologies. All rights reserved.
 //
 
 #import "DemoInterstitialAdDelegate.h"
