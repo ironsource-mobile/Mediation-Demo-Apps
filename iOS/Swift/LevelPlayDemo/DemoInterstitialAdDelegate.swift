@@ -27,6 +27,7 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
     
     /**
      Called after an interstitial has attempted to load but failed.
+     @param adUnitId The ad unit id of the ad.
      @param error The reason for the error
      */
     func didFailToLoadAd(withAdUnitId adUnitId: String, error: Error) {
@@ -35,9 +36,8 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
     }
     
     /**
-     Called after an interstitial has attempted to load but failed.
-     @param adUnitId The ad unit id of the ad.
-     @param error The reason for the error
+     Called after the ad info is updated. Available when another interstitial ad has loaded, and includes a higher CPM/Rate
+     @param adInfo The info of the ad.
      */
     func didChangeAdInfo(_ adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
@@ -55,8 +55,8 @@ class DemoInterstitialAdDelegate: NSObject, LPMInterstitialAdDelegate {
     
     /**
      Called after an interstitial has attempted to show but failed.
-     @param error The reason for the error.
      @param adInfo The info of the ad.
+     @param error The reason for the error.
      */
     func didFailToDisplayAd(with adInfo: LPMAdInfo, error: Error) {
         logCallbackName(string: "\(#function) error = \(String(describing:error.self)) | adInfo =  \(String(describing:adInfo.self))")

@@ -87,6 +87,10 @@ public class DemoRewardedVideoAdListener implements LevelPlayRewardedAdListener 
         this.listener.showRewardDialog();
     }
 
+    /**
+     Called after the ad info is updated. Available when another rewarded ad has loaded, and includes a higher CPM/Rate
+     @param adInfo The info of the ad
+     */
     @Override
     public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {
         logCallbackName(TAG, "adInfo = " + adInfo);
