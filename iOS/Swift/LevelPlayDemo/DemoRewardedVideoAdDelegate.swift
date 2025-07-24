@@ -27,6 +27,7 @@ class DemoRewardedVideoAdDelegate: NSObject, LPMRewardedAdDelegate {
     
     /**
      Called after an rewarded has attempted to load but failed.
+     @param adUnitId The ad unit id of the ad.
      @param error The reason for the error
      */
     func didFailToLoadAd(withAdUnitId adUnitId: String, error: Error) {
@@ -36,8 +37,7 @@ class DemoRewardedVideoAdDelegate: NSObject, LPMRewardedAdDelegate {
     
     /**
      Called after an rewarded has attempted to load but failed.
-     @param adUnitId The ad unit id of the ad.
-     @param error The reason for the error
+     @param adInfo The info of the ad.
      */
     func didChangeAdInfo(_ adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
@@ -55,8 +55,8 @@ class DemoRewardedVideoAdDelegate: NSObject, LPMRewardedAdDelegate {
     
     /**
      Called after an rewarded has attempted to show but failed.
-     @param error The reason for the error.
      @param adInfo The info of the ad.
+     @param error The reason for the error.
      */
     func didFailToDisplayAd(with adInfo: LPMAdInfo, error: Error) {
         logCallbackName(string: "\(#function) error = \(String(describing:error.self)) | adInfo =  \(String(describing:adInfo.self))")
@@ -70,7 +70,11 @@ class DemoRewardedVideoAdDelegate: NSObject, LPMRewardedAdDelegate {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
     }
     
-    
+    /**
+     Called after a rewarded ad has been viewed completely and the user is eligible for a reward.
+     @param adInfo The info of the ad.
+     @param reward An object that contains the placement's reward name and amount.
+     */
     func didRewardAd(with adInfo: LPMAdInfo, reward: LPMReward) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
         self.delegate?.setReward(reward);

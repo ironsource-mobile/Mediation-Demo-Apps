@@ -21,6 +21,11 @@ class DemoRewardedAdListener(private val listener: DemoActivityListener) :
         listener.setEnablementForButton(DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER, true)
     }
 
+    /**
+    Called after a rewarded video has been viewed completely and the user is eligible for a reward.
+    @param levelPlayReward The reward that the user is eligible for.
+    @param adInfo The info of the ad.
+     */
     override fun onAdRewarded(reward: LevelPlayReward, adInfo: LevelPlayAdInfo) {
         listener.setReward(reward)
         logCallbackName(TAG, "adInfo = $adInfo")

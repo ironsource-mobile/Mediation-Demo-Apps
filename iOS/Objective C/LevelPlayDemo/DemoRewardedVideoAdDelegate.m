@@ -78,8 +78,8 @@
 
 /**
  Called after a rewarded ad has been viewed completely and the user is eligible for a reward.
- @param placementInfo An object that contains the placement's reward name and amount.
  @param adInfo The info of the ad.
+ @param reward An object that contains the placement's reward name and amount.
  */
 - (void)didRewardAdWithAdInfo:(nonnull LPMAdInfo *)adInfo reward:(nonnull LPMReward *)reward {
     logCallbackName(@"adInfo = %@", adInfo);
