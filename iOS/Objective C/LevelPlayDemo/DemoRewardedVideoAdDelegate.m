@@ -41,10 +41,10 @@
 }
 
 /**
- Called after the ad info is updated, Available when another rewarded ad has loaded, and includes a higher CPM/Rate
+ Called after the ad info is updated. Available when another rewarded ad has loaded, and includes a higher CPM/Rate
  @param adInfo The info of the ad.
  */
-- (void) didChangeAdInfo:(nonnull LPMAdInfo *)adInfo {
+- (void)didChangeAdInfo:(nonnull LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo =%@", adInfo)
 }
 

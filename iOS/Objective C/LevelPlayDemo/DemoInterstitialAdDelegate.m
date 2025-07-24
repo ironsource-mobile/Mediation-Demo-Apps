@@ -41,7 +41,7 @@
 }
 
 /**
- Called after an interstitial has attempted to load but failed.
+ Called after the ad info is updated. Available when another interstitial ad has loaded, and includes a higher CPM/Rate
  @param adInfo The info of the ad.
  */
 - (void)didChangeAdInfo:(LPMAdInfo *)adInfo {

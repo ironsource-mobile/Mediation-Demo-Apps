@@ -36,7 +36,7 @@ class DemoRewardedVideoAdDelegate: NSObject, LPMRewardedAdDelegate {
     }
     
     /**
-     Called after an rewarded has attempted to load but failed.
+     Called after the ad info is updated. Available when another rewarded ad has loaded, and includes a higher CPM/Rate
      @param adInfo The info of the ad.
      */
     func didChangeAdInfo(_ adInfo: LPMAdInfo) {
