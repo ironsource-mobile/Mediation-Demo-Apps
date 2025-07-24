@@ -23,7 +23,7 @@ class DemoRewardedAdListener(private val listener: DemoActivityListener) :
 
     /**
     Called after a rewarded video has been viewed completely and the user is eligible for a reward.
-    @param levelPlayReward The reward that the user is eligible for.
+    @param reward The reward that the user is eligible for.
     @param adInfo The info of the ad.
      */
     override fun onAdRewarded(reward: LevelPlayReward, adInfo: LevelPlayAdInfo) {
