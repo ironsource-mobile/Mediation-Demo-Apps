@@ -41,9 +41,8 @@
 }
 
 /**
- Called after an interstitial has attempted to load but failed.
- @param adUnitId The ad unit id of the ad.
- @param error The reason for the error
+ Called after the ad info is updated. Available when another interstitial ad has loaded, and includes a higher CPM/Rate
+ @param adInfo The info of the ad.
  */
 - (void)didChangeAdInfo:(LPMAdInfo *)adInfo {
     logCallbackName(@"adInfo = %@", adInfo);
@@ -64,8 +63,8 @@
 
 /**
  Called after an interstitial has attempted to show but failed.
- @param error The reason for the error.
  @param adInfo The info of the ad.
+ @param error The reason for the error.
  */
 - (void)didFailToDisplayAdWithAdInfo:(LPMAdInfo *)adInfo error:(NSError *)error {
     logCallbackName(@"error = %@ | adInfo = %@", error.localizedDescription, adInfo);
