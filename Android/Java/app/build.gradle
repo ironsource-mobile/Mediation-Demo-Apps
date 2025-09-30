@@ -37,7 +37,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     // Add LevelPlay Mediation SDK dependency.
-    implementation "com.unity3d.ads-mediation:mediation-sdk:8.+"
+    implementation "com.unity3d.ads-mediation:mediation-sdk:9.+"
     // Add AdNetworks adapters dependencies and matching ad networks SDKs dependencies .
     // Make sure you also configure the AdNetworks in your dashboard.
     // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
