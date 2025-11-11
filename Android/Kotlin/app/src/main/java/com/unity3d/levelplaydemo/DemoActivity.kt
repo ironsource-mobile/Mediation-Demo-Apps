@@ -166,7 +166,7 @@ class DemoActivity : Activity(), DemoActivityListener {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            bannerParentLayout?.addView(bannerAd, 0, layoutParams)
+            bannerParentLayout?.addView(bannerAd)
 
             setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
         }?: run {
