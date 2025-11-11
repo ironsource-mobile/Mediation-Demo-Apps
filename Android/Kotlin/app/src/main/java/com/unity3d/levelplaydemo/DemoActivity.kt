@@ -42,6 +42,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     private var interstitialAd : LevelPlayInterstitialAd? = null
 
     private lateinit var bannerLoadButton: Button
+    private lateinit var bannerDestroyButton: Button
     private var bannerParentLayout: FrameLayout? = null
     private var bannerAd : LevelPlayBannerAdView? = null
 
@@ -82,6 +83,7 @@ class DemoActivity : Activity(), DemoActivityListener {
         interstitialLoadButton = findViewById(R.id.interstitial_load_button)
         interstitialShowButton = findViewById(R.id.interstitial_show_button)
         bannerLoadButton = findViewById(R.id.banner_load_button)
+        bannerDestroyButton = findViewById(R.id.banner_destroy_button)
 
         val versionTV = findViewById<TextView>(R.id.version_txt)
         "${resources.getString(R.string.version)} ${LevelPlay.getSdkVersion()}".also { versionTV.text = it }
@@ -166,7 +168,7 @@ class DemoActivity : Activity(), DemoActivityListener {
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.MATCH_PARENT
             )
-            bannerParentLayout?.addView(bannerAd)
+            bannerParentLayout?.addView(bannerAd, 0, layoutParams)
 
             setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
         }?: run {
@@ -178,7 +180,27 @@ class DemoActivity : Activity(), DemoActivityListener {
         // Load a banner ad. If the "refresh" option is enabled in the LevelPlay dashboard settings, the banner will automatically refresh at the specified interval,
         // otherwise, the banner will remain static until manually destroyed
         log("loadAd for banner")
+
+        // Recreate banner if it was destroyed
+        if (bannerAd == null) {
+            createBannerAd()
+        }
+
         bannerAd?.loadAd()
+    }
+
+    fun destroyBannerButtonTapped(view: View) {
+        // Destroy the banner ad and clean up resources
+        log("destroy for banner")
+        bannerAd?.destroy()
+        bannerAd = null
+
+        // Hide the banner container
+        setBannerViewVisibility(View.GONE)
+
+        // Update button states: disable destroy, enable load for reload
+        setEnablementForButton(DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER, false)
+        setEnablementForButton(DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER, true)
     }
 
     override fun setBannerViewVisibility(visibility: Int){
@@ -247,6 +269,7 @@ class DemoActivity : Activity(), DemoActivityListener {
             DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER -> buttonToModify = rewardedLoadButton
             DemoButtonIdentifiers.SHOW_REWARDED_VIDEO_BUTTON_IDENTIFIER -> buttonToModify = rewardedShowButton
             DemoButtonIdentifiers.LOAD_BANNER_BUTTON_IDENTIFIER -> buttonToModify = bannerLoadButton
+            DemoButtonIdentifiers.DESTROY_BANNER_BUTTON_IDENTIFIER -> buttonToModify = bannerDestroyButton
             else -> {}
         }
 
