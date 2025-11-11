@@ -23,12 +23,12 @@ import com.unity3d.mediation.rewarded.LevelPlayRewardedAd
 private const val TAG = "DemoActivity"
 
 // Replace with your app key as available in the LevelPlay dashboard
-private const val APP_KEY = "85460dcd"
+private const val APP_KEY = "23c016fcd"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-private const val INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9"
-private const val BANNER_AD_UNIT_ID = "thnfvcsog13bhn08"
-private const val REWARDED_AD_UNIT_ID = "76yy3nay3ceui2a3"
+private const val INTERSTITIAL_AD_UNIT_ID = "bsw64pmsv6g1hvml"
+private const val BANNER_AD_UNIT_ID = "omyner864cboqceu"
+private const val REWARDED_AD_UNIT_ID = "cueg8kgga0ab92i7"
 
 class DemoActivity : Activity(), DemoActivityListener {
 
