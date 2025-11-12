@@ -118,6 +118,9 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
             button?.layer.borderColor = UIColor.gray.cgColor
             button?.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
         }
+
+        // Disable ad buttons until SDK init succeeds
+        self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: false)
     }
     
     func setupLevelPlaySdk() {
@@ -148,6 +151,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
             self.logMethodName(string: "sdk initialization succeeded")
             self.createRewardedAd()
             self.createInterstititalAd()
+            self.createBannerAd()
         }
         
         // Scroll down the file to find out what happens when you tap a button...
@@ -213,9 +217,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // set the banner listener
         bannerAdViewDelegate = .init(delegate: self)
         self.bannerAd.setDelegate(bannerAdViewDelegate)
-        
-        addBannerToView()
-        
+
         self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
     }
     
@@ -234,15 +236,17 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     }
 
     @IBAction func loadBannerButtonTapped(_ sender: Any) {
-        self.createBannerAd()
-
         guard let bannerAd = self.bannerAd else {
             return
         }
 
+        // Add banner to view hierarchy if not already added
+        if bannerAd.superview == nil {
+            addBannerToView()
+        }
+
         logMethodName(string: "loadAd for banner")
         bannerAd.loadAd(with: self)
-        self.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: true)
     }
 
     @IBAction func destroyBannerButtonTapped(_ sender: Any) {
