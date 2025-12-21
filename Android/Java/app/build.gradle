@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     namespace "com.unity3d.levelplaydemo"
-    compileSdkVersion 34
+    compileSdkVersion 35
     buildToolsVersion '34.0.0'
     defaultConfig {
         applicationId "com.unity3d.levelplaydemo"
-        minSdkVersion 19
-        targetSdkVersion 34
+        minSdkVersion 24
+        targetSdkVersion 35
         versionCode 1
         versionName "1.0"
         multiDexEnabled = true
@@ -19,8 +19,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
