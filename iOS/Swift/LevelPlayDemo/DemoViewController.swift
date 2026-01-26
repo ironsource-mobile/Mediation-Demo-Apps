@@ -12,12 +12,12 @@ import IronSource
 import AVFoundation
 
 // Replace with your app key as available in the LevelPlay dashboard
-let appKey = "23c0089ad"
+let appKey = "23c016fcd"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-let interstitialAdUnitId = "fcytzrndsif7ld12"
-let bannerAdUnitId = "y18x838ztk3aikez"
-let rewardedAdUnitId = "z9qjp8d53xf32hd0"
+let interstitialAdUnitId = "bsw64pmsv6g1hvml"
+let bannerAdUnitId = "omyner864cboqceu"
+let rewardedAdUnitId = "cueg8kgga0ab92i7"
 
 enum ButtonIdentifiers : Int {
     case loadRewardedVideoButtonIdentifier
