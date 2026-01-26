@@ -156,6 +156,18 @@
                 android:background="@drawable/levelplay_button_shape"
                 android:text="@string/load" />
 
+            <Button
+                android:id="@+id/banner_destroy_button"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:enabled="false"
+                android:textColor="#000000"
+                android:layout_gravity="center_horizontal"
+                android:onClick="destroyBannerButtonTapped"
+                android:background="@drawable/levelplay_button_shape"
+                android:text="@string/destroy" />
+
         </LinearLayout>
     </LinearLayout>
 

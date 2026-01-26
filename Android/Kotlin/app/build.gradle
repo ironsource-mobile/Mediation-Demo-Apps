@@ -5,7 +5,7 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
 
@@ -37,13 +37,19 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
     }
 }
 
 repositories {
     mavenCentral()
+    flatDir {
+        dirs 'libs'
+    }
 }
 
 
@@ -54,8 +60,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-appset:16.0.2'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'androidx.multidex:multidex:2.0.1'
-    // Add LevelPlay Mediation SDK dependency.
-    implementation "com.unity3d.ads-mediation:mediation-sdk:$sdkVersion"
+    // Add LevelPlay Mediation SDK dependency (local AAR).
+    implementation(name: 'mediationsdk-9.0.0', ext: 'aar')
 
     // Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
     // Make sure you also configure the AdNetworks in your dashboard.

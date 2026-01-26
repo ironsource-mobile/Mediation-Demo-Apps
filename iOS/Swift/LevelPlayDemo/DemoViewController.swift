@@ -9,14 +9,15 @@ import UIKit
 import Foundation
 import ObjectiveC.runtime
 import IronSource
+import AVFoundation
 
 // Replace with your app key as available in the LevelPlay dashboard
-let appKey = "8545d445"
+let appKey = "23c016fcd"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-let interstitialAdUnitId = "wmgt0712uuux8ju4"
-let bannerAdUnitId = "iep3rxsyp9na3rw8"
-let rewardedAdUnitId = "qwouvdrkuwivay5q"
+let interstitialAdUnitId = "bsw64pmsv6g1hvml"
+let bannerAdUnitId = "omyner864cboqceu"
+let rewardedAdUnitId = "cueg8kgga0ab92i7"
 
 enum ButtonIdentifiers : Int {
     case loadRewardedVideoButtonIdentifier
@@ -24,6 +25,7 @@ enum ButtonIdentifiers : Int {
     case loadInterstitialButtonIdentifier
     case showInterstitialButtonIdentifier
     case loadBannerButtonIdentifier
+    case destroyBannerButtonIdentifier
 }
 
 protocol DemoViewControllerDelegate: NSObjectProtocol {
@@ -52,6 +54,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     var interstitialAd: LPMInterstitialAd! = nil
 
     @IBOutlet weak var loadBannerButton: UIButton!
+    @IBOutlet weak var destroyBannerButton: UIButton!
     var bannerAdViewDelegate: DemoBannerAdDelegate! = nil
     var bannerAd: LPMBannerAdView! = nil
     var bannerSize: LPMAdSize! = nil
@@ -66,22 +69,49 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         super.viewDidLoad()
         self.setupUI()
         self.setupLevelPlaySdk()
+        self.registerForAudioVolumeChanges()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        unregisterForAudioVolumeChanges()
+    }
+
     deinit {
         self.bannerAd.destroy()
+        self.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: false)
+    }
+
+    func registerForAudioVolumeChanges() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .default, options: .mixWithOthers)
+            try audioSession.setActive(true)
+        } catch {
+            logMethodName(string: "Error configuring AVAudioSession: \(error)")
+        }
+    }
+
+    func unregisterForAudioVolumeChanges() {
+        logMethodName(string: "unregisterForAudioVolumeChanges")
+        // let audioSession = AVAudioSession.sharedInstance()
+        // do {
+        //     try audioSession.setActive(false)
+        // } catch {
+        //     logMethodName(string: "Error unsetting the AVAudioSession as inactive: \(error.localizedDescription)")
+        // }
     }
 
     //MARK: Initialization Methods
     
     func setupUI() {
         self.versionLabel.text =  String(format: "sdk version %@", LevelPlay.sdkVersion());
-        let buttons = [self.loadRewardedVideoButton, self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton]
+        let buttons = [self.loadRewardedVideoButton, self.showRewardedVideoButton, self.loadInterstitialButton, self.showInterstitialButton, self.loadBannerButton, self.destroyBannerButton]
 
         for button in buttons {
             button?.layer.cornerRadius = 17.0
@@ -90,6 +120,9 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
             button?.layer.borderColor = UIColor.gray.cgColor
             button?.contentEdgeInsets = UIEdgeInsets(top: 8, left: 20, bottom: 8, right: 20)
         }
+
+        // Disable ad buttons until SDK init succeeds
+        self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: false)
     }
     
     func setupLevelPlaySdk() {
@@ -186,9 +219,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // set the banner listener
         bannerAdViewDelegate = .init(delegate: self)
         self.bannerAd.setDelegate(bannerAdViewDelegate)
-        
-        addBannerToView()
-        
+
         self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
     }
     
@@ -207,13 +238,28 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     }
 
     @IBAction func loadBannerButtonTapped(_ sender: Any) {
-        
         guard let bannerAd = self.bannerAd else {
             return
         }
 
+        // Add banner to view hierarchy if not already added
+        if bannerAd.superview == nil {
+            addBannerToView()
+        }
+
         logMethodName(string: "loadAd for banner")
         bannerAd.loadAd(with: self)
+    }
+
+    @IBAction func destroyBannerButtonTapped(_ sender: Any) {
+        guard let bannerAd = self.bannerAd else {
+            return
+        }
+
+        logMethodName(string: "destroy for banner")
+        bannerAd.destroy()
+        self.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: false)
+        self.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: true)
     }
 
 
@@ -298,6 +344,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
                 buttonToModify = self.showInterstitialButton
             case .loadBannerButtonIdentifier:
                 buttonToModify = self.loadBannerButton
+            case .destroyBannerButtonIdentifier:
+                buttonToModify = self.destroyBannerButton
             }
             
             buttonToModify?.isEnabled = enable
