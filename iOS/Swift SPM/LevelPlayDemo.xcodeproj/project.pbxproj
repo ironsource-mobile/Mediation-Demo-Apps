@@ -1,0 +1,394 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10B802A82F34E51200F5C141 /* UnityMediationSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 10B802A72F34E51200F5C141 /* UnityMediationSDK */; };
+		471A2A3F1E66D27900217BE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471A2A3E1E66D27900217BE4 /* AppDelegate.swift */; };
+		471A2A441E66D27A00217BE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A421E66D27A00217BE4 /* Main.storyboard */; };
+		471A2A461E66D27A00217BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A451E66D27A00217BE4 /* Assets.xcassets */; };
+		471A2A491E66D27A00217BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */; };
+		F1666FFE2AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */; };
+		F1666FFF2AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */; };
+		F16670012AFA6FCC0077FADE /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */; };
+		F16670022AFA6FCC0077FADE /* DemoBannerAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFC2AFA6FCC0077FADE /* DemoBannerAdDelegate.swift */; };
+		F16670032AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFD2AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelPlayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		471A2A3E1E66D27900217BE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		471A2A431E66D27A00217BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		471A2A451E66D27A00217BE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		471A2A481E66D27A00217BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		471A2A4A1E66D27A00217BE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoRewardedVideoAdDelegate.swift; sourceTree = "<group>"; };
+		F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoImpressionDataDelegate.swift; sourceTree = "<group>"; };
+		F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		F1666FFC2AFA6FCC0077FADE /* DemoBannerAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoBannerAdDelegate.swift; sourceTree = "<group>"; };
+		F1666FFD2AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoInterstitialAdDelegate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		471A2A381E66D27900217BE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10B802A82F34E51200F5C141 /* UnityMediationSDK in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		471A2A321E66D27900217BE4 = {
+			isa = PBXGroup;
+			children = (
+				471A2A3D1E66D27900217BE4 /* LevelPlayDemo */,
+				471A2A3C1E66D27900217BE4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		471A2A3C1E66D27900217BE4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		471A2A3D1E66D27900217BE4 /* LevelPlayDemo */ = {
+			isa = PBXGroup;
+			children = (
+				471A2A3E1E66D27900217BE4 /* AppDelegate.swift */,
+				F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */,
+				F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */,
+				F1666FFD2AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift */,
+				F1666FFC2AFA6FCC0077FADE /* DemoBannerAdDelegate.swift */,
+				F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */,
+				471A2A451E66D27A00217BE4 /* Assets.xcassets */,
+				471A2A421E66D27A00217BE4 /* Main.storyboard */,
+				471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */,
+				471A2A4A1E66D27A00217BE4 /* Info.plist */,
+			);
+			path = LevelPlayDemo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		471A2A3A1E66D27900217BE4 /* LevelPlayDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 471A2A4D1E66D27A00217BE4 /* Build configuration list for PBXNativeTarget "LevelPlayDemo" */;
+			buildPhases = (
+				471A2A371E66D27900217BE4 /* Sources */,
+				471A2A381E66D27900217BE4 /* Frameworks */,
+				471A2A391E66D27900217BE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LevelPlayDemo;
+			productName = TestSwift;
+			productReference = 471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		471A2A331E66D27900217BE4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 1140;
+				ORGANIZATIONNAME = ironsrc;
+				TargetAttributes = {
+					471A2A3A1E66D27900217BE4 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = NLKYWCU5C3;
+						LastSwiftMigration = 0820;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 471A2A361E66D27900217BE4 /* Build configuration list for PBXProject "LevelPlayDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+				Base,
+			);
+			mainGroup = 471A2A321E66D27900217BE4;
+			packageReferences = (
+				10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "Unity-Mediation-iAds-Swift-Package" */,
+			);
+			productRefGroup = 471A2A3C1E66D27900217BE4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				471A2A3A1E66D27900217BE4 /* LevelPlayDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		471A2A391E66D27900217BE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				471A2A491E66D27A00217BE4 /* LaunchScreen.storyboard in Resources */,
+				471A2A461E66D27A00217BE4 /* Assets.xcassets in Resources */,
+				471A2A441E66D27A00217BE4 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		471A2A371E66D27900217BE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F16670022AFA6FCC0077FADE /* DemoBannerAdDelegate.swift in Sources */,
+				F1666FFE2AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift in Sources */,
+				471A2A3F1E66D27900217BE4 /* AppDelegate.swift in Sources */,
+				F1666FFF2AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift in Sources */,
+				F16670012AFA6FCC0077FADE /* DemoViewController.swift in Sources */,
+				F16670032AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		471A2A421E66D27A00217BE4 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				471A2A431E66D27A00217BE4 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				471A2A481E66D27A00217BE4 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		471A2A4B1E66D27A00217BE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "$(inherited)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		471A2A4C1E66D27A00217BE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "$(inherited)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		471A2A4E1E66D27A00217BE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = NLKYWCU5C3;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "$(SRCROOT)/LevelPlayDemo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.unity3d.levelPlayDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		471A2A4F1E66D27A00217BE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				DEVELOPMENT_TEAM = NLKYWCU5C3;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				INFOPLIST_FILE = "$(SRCROOT)/LevelPlayDemo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(inherited)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.unity3d.levelPlayDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		471A2A361E66D27900217BE4 /* Build configuration list for PBXProject "LevelPlayDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				471A2A4B1E66D27A00217BE4 /* Debug */,
+				471A2A4C1E66D27A00217BE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		471A2A4D1E66D27A00217BE4 /* Build configuration list for PBXNativeTarget "LevelPlayDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				471A2A4E1E66D27A00217BE4 /* Debug */,
+				471A2A4F1E66D27A00217BE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "Unity-Mediation-iAds-Swift-Package" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ironsource-mobile/Unity-Mediation-iAds-Swift-Package";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		10B802A72F34E51200F5C141 /* UnityMediationSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "Unity-Mediation-iAds-Swift-Package" */;
+			productName = UnityMediationSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 471A2A331E66D27900217BE4 /* Project object */;
+}
