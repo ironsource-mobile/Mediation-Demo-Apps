@@ -1,0 +1,24 @@
+{
+  "originHash" : "56a8f888ff286d87bad0a0051858a4d9d9cc197cc70ce11bad46510d4ea4bbf3",
+  "pins" : [
+    {
+      "identity" : "unity-ad-quality-swift-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ironsource-mobile/Unity-Ad-Quality-Swift-Package",
+      "state" : {
+        "revision" : "efff497b17657e81e8334084a4991f706d4407db",
+        "version" : "9.2.1"
+      }
+    },
+    {
+      "identity" : "unity-mediation-iads-swift-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ironsource-mobile/Unity-Mediation-iAds-Swift-Package",
+      "state" : {
+        "revision" : "e712d4a50618d14bf75776d0161dc2366515ca2b",
+        "version" : "9.3.0"
+      }
+    }
+  ],
+  "version" : 3
+}
