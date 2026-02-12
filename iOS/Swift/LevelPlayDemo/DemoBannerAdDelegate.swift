@@ -22,7 +22,7 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
      */
     func didLoadAd(with adInfo: LPMAdInfo) {
         logCallbackName(string: "\(#function) adInfo = \(String(describing:adInfo.self))")
-        self.delegate?.setButtonEnablement(ButtonIdentifiers.loadBannerButtonIdentifier, enable: false)
+        self.delegate?.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: true)
     }
     
     /**
@@ -32,6 +32,7 @@ class DemoBannerAdDelegate: NSObject, LPMBannerAdViewDelegate {
      */
     func didFailToLoadAd(withAdUnitId adUnitId: String, error: Error) {
         logCallbackName(string: "\(#function) error = \(String(describing:error.self))")
+        self.delegate?.setButtonEnablement(ButtonIdentifiers.destroyBannerButtonIdentifier, enable: false)
     }
     
     /**
