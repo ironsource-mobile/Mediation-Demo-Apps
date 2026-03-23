@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.8.0'
+    ext.kotlin_version = '2.1.0'
     repositories {
         google()
         mavenCentral()
@@ -19,6 +19,22 @@ allprojects {
     repositories {
         google()
         mavenCentral()
+
+        def privateMavenUsername = System.getenv("PRIVATE_MAVEN_USERNAME") ?: ""
+        def privateMavenPassword = System.getenv("PRIVATE_MAVEN_PASSWORD") ?: ""
+
+        if (privateMavenUsername && privateMavenPassword) {
+            maven {
+                credentials {
+                    username = privateMavenUsername
+                    password = privateMavenPassword
+                }
+                url "https://raw.githubusercontent.com/ironsource-mobile/android-sdk-maven/master"
+                authentication {
+                    basic(BasicAuthentication)
+                }
+            }
+        }
     }
 }
 
