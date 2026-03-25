@@ -3,14 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
-    }
-}
-
 ext {
-    sdkVersion = "9.+"
+    sdkVersion = project.hasProperty('sdkVersion') ? project.property('sdkVersion') : "9.+"
 }
 
 android {
@@ -39,6 +33,10 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
 

@@ -1,0 +1,67 @@
+name: Build Android Kotlin with Custom SDK Version
+
+on:
+  workflow_dispatch:
+    inputs:
+      sdk_version:
+        description: 'LevelPlay SDK version'
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      PRIVATE_MAVEN_USERNAME: ${{ secrets.PRIVATE_MAVEN_USERNAME }}
+      PRIVATE_MAVEN_PASSWORD: ${{ secrets.PRIVATE_MAVEN_PASSWORD }}
+
+    defaults:
+      run:
+        working-directory: Android/Kotlin
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Verify Java version
+        run: |
+          java -version
+          echo "JAVA_HOME=$JAVA_HOME"
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Build Debug APK
+        run: ./gradlew assembleDebug -PsdkVersion=${{ inputs.sdk_version }} --stacktrace
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease -PsdkVersion=${{ inputs.sdk_version }} --stacktrace
+
+      - name: Upload APK Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: apk-sdk-${{ inputs.sdk_version }}
+          path: |
+            Android/Kotlin/app/build/outputs/apk/debug/app-debug.apk
+            Android/Kotlin/app/build/outputs/apk/release/app-release-unsigned.apk
+          retention-days: 30
+
+      - name: Upload Build Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-reports-sdk-${{ inputs.sdk_version }}
+          path: |
+            Android/Kotlin/app/build/reports/
+          retention-days: 7
