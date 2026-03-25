@@ -1,4 +1,4 @@
-name: Build with Custom SDK Version
+name: Build Android Kotlin with Custom SDK Version
 
 on:
   workflow_dispatch:
@@ -15,6 +15,10 @@ jobs:
     env:
       PRIVATE_MAVEN_USERNAME: ${{ secrets.PRIVATE_MAVEN_USERNAME }}
       PRIVATE_MAVEN_PASSWORD: ${{ secrets.PRIVATE_MAVEN_PASSWORD }}
+
+    defaults:
+      run:
+        working-directory: Android/Kotlin
 
     steps:
       - name: Checkout code
@@ -49,8 +53,8 @@ jobs:
         with:
           name: apk-sdk-${{ inputs.sdk_version }}
           path: |
-            app/build/outputs/apk/debug/app-debug.apk
-            app/build/outputs/apk/release/app-release-unsigned.apk
+            Android/Kotlin/app/build/outputs/apk/debug/app-debug.apk
+            Android/Kotlin/app/build/outputs/apk/release/app-release-unsigned.apk
           retention-days: 30
 
       - name: Upload Build Reports
@@ -59,5 +63,5 @@ jobs:
         with:
           name: build-reports-sdk-${{ inputs.sdk_version }}
           path: |
-            app/build/reports/
+            Android/Kotlin/app/build/reports/
           retention-days: 7
