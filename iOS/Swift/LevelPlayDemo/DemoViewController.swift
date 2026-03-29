@@ -101,16 +101,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         LevelPlay.validateIntegration()
 #endif
         
-        guard let ironSrcSdkClass = NSClassFromString("IronSourceSdk") else {
-          return
-        }
-
-        guard let ironSrcSdkObject = ironSrcSdkClass.value(forKey: "sharedInstance") else {
-          return
-        }
-
-        (ironSrcSdkObject as AnyObject).setValue(0, forKey: "serr")
-
         impressionDataDelegate = .init()
         LevelPlay.add(self.impressionDataDelegate)
         
