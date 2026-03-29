@@ -13,12 +13,12 @@
 		72E0D6561E267513009ABC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6461E267513009ABC1B /* Assets.xcassets */; };
 		72E0D6571E267513009ABC1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */; };
 		72E0D6581E267513009ABC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6491E267513009ABC1B /* Main.storyboard */; };
-		84FD2659FBDB61D7A33013DD /* BannerIntegrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 620230CF843D4D5DC0093100 /* BannerIntegrationTest.m */; };
 		8DBAFDAAA9F45D9CEE2C8B54 /* libPods-LevelPlayDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065D73985F8C0AD5DF84AE2F /* libPods-LevelPlayDemoTests.a */; };
 		A51CBB5AA7C464DE9E926A63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83084D48BEC5E1D4EE814821 /* Foundation.framework */; };
-		A6A109B04E2D889CAB915203 /* InterstitialIntegrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CB010F22A80C522454930F /* InterstitialIntegrationTest.m */; };
+		AB4D0E53F903C24463906206 /* BannerIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A10672672BA65A46E82E8C /* BannerIntegrationTest.swift */; };
+		B698AC783286760612CEE784 /* RewardedIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E5A2FFD0AD55161D7BC9B73 /* RewardedIntegrationTest.swift */; };
 		C7864FDB2E098C8D00937C8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7864FDA2E098C8D00937C8F /* main.m */; };
-		CA28128CCB0F100A227A30AE /* RewardedIntegrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BA87D3CF8CEEB15D912E75E9 /* RewardedIntegrationTest.m */; };
+		E6DA8C6FB1F644757B2F0E46 /* InterstitialIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = AECE97C2844391C481CAD5C4 /* InterstitialIntegrationTest.swift */; };
 		E80C8FB61C16E48200CF3C27 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */; };
 		E80C8FB71C16E48200CF3C27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB51C16E48200CF3C27 /* Foundation.framework */; };
 		E80C8FBD1C16E4A000CF3C27 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB81C16E4A000CF3C27 /* CoreGraphics.framework */; };
@@ -55,7 +55,6 @@
 		2A5C9FE60468D227E3155122 /* Pods-LevelPlayDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemoTests.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemoTests/Pods-LevelPlayDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		35E1BF82BA5FFCC38DD5E41F /* Pods-LevelPlayDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		47B0AD291CB5252100B8D125 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		620230CF843D4D5DC0093100 /* BannerIntegrationTest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BannerIntegrationTest.m; sourceTree = "<group>"; };
 		72E0D6441E267513009ABC1B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		72E0D6451E267513009ABC1B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		72E0D6461E267513009ABC1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -64,12 +63,14 @@
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FB9F0520C576186EECE23F6 /* Pods-LevelPlayDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.release.xcconfig"; sourceTree = "<group>"; };
 		83084D48BEC5E1D4EE814821 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		8C045E9FB672C29FCDE1907D /* LevelPlayDemoTests-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LevelPlayDemoTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		8E5A2FFD0AD55161D7BC9B73 /* RewardedIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RewardedIntegrationTest.swift; sourceTree = "<group>"; };
 		90BB80396C12B18A61B2578C /* Pods-LevelPlayDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemoTests/Pods-LevelPlayDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		AECE97C2844391C481CAD5C4 /* InterstitialIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InterstitialIntegrationTest.swift; sourceTree = "<group>"; };
 		B69266617B2255A7ECB1C929 /* libPods-LevelPlayDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LevelPlayDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		BA87D3CF8CEEB15D912E75E9 /* RewardedIntegrationTest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RewardedIntegrationTest.m; sourceTree = "<group>"; };
+		B6A10672672BA65A46E82E8C /* BannerIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BannerIntegrationTest.swift; sourceTree = "<group>"; };
 		BE094498EFD84DEC2D27D7FA /* LevelPlayDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevelPlayDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7864FDA2E098C8D00937C8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		E4CB010F22A80C522454930F /* InterstitialIntegrationTest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = InterstitialIntegrationTest.m; sourceTree = "<group>"; };
 		E80C8F981C16E28400CF3C27 /* LevelPlayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelPlayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E80C8FB51C16E48200CF3C27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -179,9 +180,10 @@
 		D9A569023E47640219700F48 /* LevelPlayDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				E4CB010F22A80C522454930F /* InterstitialIntegrationTest.m */,
-				BA87D3CF8CEEB15D912E75E9 /* RewardedIntegrationTest.m */,
-				620230CF843D4D5DC0093100 /* BannerIntegrationTest.m */,
+				8C045E9FB672C29FCDE1907D /* LevelPlayDemoTests-Bridging-Header.h */,
+				AECE97C2844391C481CAD5C4 /* InterstitialIntegrationTest.swift */,
+				8E5A2FFD0AD55161D7BC9B73 /* RewardedIntegrationTest.swift */,
+				B6A10672672BA65A46E82E8C /* BannerIntegrationTest.swift */,
 			);
 			name = LevelPlayDemoTests;
 			path = LevelPlayDemoTests;
@@ -402,9 +404,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6A109B04E2D889CAB915203 /* InterstitialIntegrationTest.m in Sources */,
-				CA28128CCB0F100A227A30AE /* RewardedIntegrationTest.m in Sources */,
-				84FD2659FBDB61D7A33013DD /* BannerIntegrationTest.m in Sources */,
+				E6DA8C6FB1F644757B2F0E46 /* InterstitialIntegrationTest.swift in Sources */,
+				B698AC783286760612CEE784 /* RewardedIntegrationTest.swift in Sources */,
+				AB4D0E53F903C24463906206 /* BannerIntegrationTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -461,10 +463,12 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				DEVELOPMENT_TEAM = NLKYWCU5C3;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unity3d.levelPlayDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "LevelPlayDemoTests/LevelPlayDemoTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LevelPlayDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LevelPlayDemo";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -478,10 +482,12 @@
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				DEVELOPMENT_TEAM = NLKYWCU5C3;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.unity3d.levelPlayDemoTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "LevelPlayDemoTests/LevelPlayDemoTests-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LevelPlayDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LevelPlayDemo";
 			};
 			name = Debug;
