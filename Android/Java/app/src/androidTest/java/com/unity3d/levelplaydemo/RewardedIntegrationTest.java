@@ -33,7 +33,7 @@ import java.util.concurrent.TimeUnit;
 public class RewardedIntegrationTest {
 
     private static final String APP_KEY = DemoActivity.APP_KEY;
-    private static final String REWARDED_AD_UNIT_ID = DemoActivity.REWARDED_VIDEO_AD_UNIT_ID;
+    private static final String REWARDED_AD_UNIT_ID = DemoActivity.REWARDED_AD_UNIT_ID;
 
     @Rule
     public ActivityScenarioRule<DemoActivity> activityRule = new ActivityScenarioRule<>(DemoActivity.class);

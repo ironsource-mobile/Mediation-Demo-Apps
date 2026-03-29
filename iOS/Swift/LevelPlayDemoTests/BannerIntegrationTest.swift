@@ -30,7 +30,8 @@ func testBannerInitLoadAndImpression() async throws {
     bannerAd.setDelegate(delegate)
 
     // Add banner to view hierarchy (required before loading)
-    let rootVC = UIApplication.shared.keyWindow?.rootViewController
+    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
 
     bannerAd.translatesAutoresizingMaskIntoConstraints = false
     rootVC!.view.addSubview(bannerAd)
@@ -49,8 +50,14 @@ func testBannerInitLoadAndImpression() async throws {
     }
 
     // Wait for impression
-    try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-        impressionDelegate.onImpression = { continuation.resume() }
+    if !impressionDelegate.received {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            if impressionDelegate.received {
+                continuation.resume()
+            } else {
+                impressionDelegate.onImpression = { continuation.resume() }
+            }
+        }
     }
 
     // Cleanup
@@ -74,8 +81,10 @@ private class BannerTestDelegate: NSObject, LPMBannerAdViewDelegate {
 
 private class BannerImpressionDelegate: NSObject, LPMImpressionDataDelegate {
     var onImpression: (() -> Void)?
+    private(set) var received = false
 
     func impressionDataDidSucceed(_ impressionData: LPMImpressionData) {
+        received = true
         onImpression?()
     }
 }

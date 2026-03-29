@@ -35,13 +35,20 @@ func testInterstitialInitLoadAndImpression() async throws {
     }
 
     // Show ad
-    let rootVC = UIApplication.shared.keyWindow?.rootViewController
+    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
 
     interstitialAd.showAd(viewController: rootVC!, placementName: nil as String?)
 
     // Wait for impression
-    try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-        impressionDelegate.onImpression = { continuation.resume() }
+    if !impressionDelegate.received {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            if impressionDelegate.received {
+                continuation.resume()
+            } else {
+                impressionDelegate.onImpression = { continuation.resume() }
+            }
+        }
     }
 }
 
@@ -60,8 +67,10 @@ private class InterstitialTestDelegate: NSObject, LPMInterstitialAdDelegate {
 
 private class TestImpressionDelegate: NSObject, LPMImpressionDataDelegate {
     var onImpression: (() -> Void)?
+    private(set) var received = false
 
     func impressionDataDidSucceed(_ impressionData: LPMImpressionData) {
+        received = true
         onImpression?()
     }
 }

@@ -32,7 +32,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     // Replace with your ad unit ids as available in the LevelPlay dashboard
     public static final String INTERSTITIAL_AD_UNIT_ID = "h3xw38h9214adgxo";
     public static final String BANNER_AD_UNIT_ID = "4fpetq4lhe5lsw3e";
-    public static final String REWARDED_VIDEO_AD_UNIT_ID = "syz3d8ekts22q0or";
+    public static final String REWARDED_AD_UNIT_ID = "syz3d8ekts22q0or";
 
     private Button rewardedVideoLoadButton;
     private Button rewardedVideoShowButton;
@@ -179,7 +179,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     //region Rewarded Methods
 
     public void createRewardedAd() {
-        rewardedAd = new LevelPlayRewardedAd(REWARDED_VIDEO_AD_UNIT_ID);
+        rewardedAd = new LevelPlayRewardedAd(REWARDED_AD_UNIT_ID);
         rewardedAd.setListener(new DemoRewardedVideoAdListener(this));
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER, true);

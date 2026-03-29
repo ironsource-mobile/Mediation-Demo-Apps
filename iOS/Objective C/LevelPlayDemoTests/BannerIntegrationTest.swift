@@ -23,21 +23,23 @@ func testBannerInitLoadAndImpression() async throws {
         }
     }
 
-    // Create banner ad
+    // Create banner ad using adaptive size (matching the ObjC demo)
     let bannerSize = LPMAdSize.createAdaptive()!
     let config = LPMBannerAdViewConfigBuilder().set(adSize: bannerSize).build()
     let bannerAd = LPMBannerAdView(adUnitId: kBannerAdUnitId, config: config)
     bannerAd.setDelegate(delegate)
 
     // Add banner to view hierarchy before loading
-    let rootVC = UIApplication.shared.keyWindow?.rootViewController
+    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
+
     bannerAd.translatesAutoresizingMaskIntoConstraints = false
     rootVC!.view.addSubview(bannerAd)
     NSLayoutConstraint.activate([
         bannerAd.centerXAnchor.constraint(equalTo: rootVC!.view.centerXAnchor),
         bannerAd.bottomAnchor.constraint(equalTo: rootVC!.view.safeAreaLayoutGuide.bottomAnchor),
-        bannerAd.widthAnchor.constraint(equalToConstant: 320),
-        bannerAd.heightAnchor.constraint(equalToConstant: 50)
+        bannerAd.widthAnchor.constraint(equalToConstant: CGFloat(bannerSize.width)),
+        bannerAd.heightAnchor.constraint(equalToConstant: CGFloat(bannerSize.height))
     ])
 
     // Load ad (banner auto-displays on load)
@@ -48,8 +50,14 @@ func testBannerInitLoadAndImpression() async throws {
     }
 
     // Wait for impression
-    try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-        impressionDelegate.onImpression = { continuation.resume() }
+    if !impressionDelegate.received {
+        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+            if impressionDelegate.received {
+                continuation.resume()
+            } else {
+                impressionDelegate.onImpression = { continuation.resume() }
+            }
+        }
     }
 
     // Cleanup
@@ -73,8 +81,10 @@ private class BannerTestDelegate: NSObject, LPMBannerAdViewDelegate {
 
 private class BannerImpressionDelegate: NSObject, LPMImpressionDataDelegate {
     var onImpression: (() -> Void)?
+    private(set) var received = false
 
     func impressionDataDidSucceed(_ impressionData: LPMImpressionData) {
+        received = true
         onImpression?()
     }
 }
