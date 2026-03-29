@@ -11,7 +11,12 @@
 		471A2A441E66D27A00217BE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A421E66D27A00217BE4 /* Main.storyboard */; };
 		471A2A461E66D27A00217BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A451E66D27A00217BE4 /* Assets.xcassets */; };
 		471A2A491E66D27A00217BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */; };
+		5BB3A4E54E91664FF922EADD /* RewardedIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DB1BE7BCCA205F0251F5BD /* RewardedIntegrationTest.swift */; };
 		5D58B63EF8356D8C0B06EB54 /* Pods_LevelPlayDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412F075612017601F18A0250 /* Pods_LevelPlayDemo.framework */; };
+		A219C5CD23D4293E4902A27B /* BannerIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51CB461CDC3659BBA9BF514 /* BannerIntegrationTest.swift */; };
+		B5D59E6183D174D9661BC6C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6861E24A792F8894EBB78826 /* Foundation.framework */; };
+		DC5F2046D3C23C42575B8B10 /* InterstitialIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857C6EB541E8BCB6A2A3796E /* InterstitialIntegrationTest.swift */; };
+		E429D4335D03C6D72B5FC597 /* Pods_LevelPlayDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239D803A36BBC47B4AB861CB /* Pods_LevelPlayDemoTests.framework */; };
 		F1666FFE2AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */; };
 		F1666FFF2AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */; };
 		F16670012AFA6FCC0077FADE /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */; };
@@ -19,7 +24,19 @@
 		F16670032AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FFD2AFA6FCC0077FADE /* DemoInterstitialAdDelegate.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B918389C0B87E7E04354429B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 471A2A331E66D27900217BE4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 471A2A3A1E66D27900217BE4;
+			remoteInfo = LevelPlayDemo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		0D41F426CF5D403A6EEAD34B /* Pods-LevelPlayDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemoTests.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemoTests/Pods-LevelPlayDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		239D803A36BBC47B4AB861CB /* Pods_LevelPlayDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LevelPlayDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		412F075612017601F18A0250 /* Pods_LevelPlayDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LevelPlayDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelPlayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		471A2A3E1E66D27900217BE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -28,7 +45,13 @@
 		471A2A481E66D27A00217BE4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		471A2A4A1E66D27A00217BE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		584541910829645B43B832D7 /* Pods-LevelPlayDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		6861E24A792F8894EBB78826 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		857C6EB541E8BCB6A2A3796E /* InterstitialIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InterstitialIntegrationTest.swift; sourceTree = "<group>"; };
+		98DB1BE7BCCA205F0251F5BD /* RewardedIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RewardedIntegrationTest.swift; sourceTree = "<group>"; };
+		B4EF4E78E6658EDA3CAC55D2 /* LevelPlayDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevelPlayDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C05CAF90E6CF76EE6AB67A99 /* Pods-LevelPlayDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.release.xcconfig"; sourceTree = "<group>"; };
+		D2C6DD7B7786F002A0979A08 /* Pods-LevelPlayDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemoTests/Pods-LevelPlayDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E51CB461CDC3659BBA9BF514 /* BannerIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BannerIntegrationTest.swift; sourceTree = "<group>"; };
 		F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoRewardedVideoAdDelegate.swift; sourceTree = "<group>"; };
 		F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoImpressionDataDelegate.swift; sourceTree = "<group>"; };
 		F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +60,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2E6A4234426F1AFC06410C38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5D59E6183D174D9661BC6C0 /* Foundation.framework in Frameworks */,
+				E429D4335D03C6D72B5FC597 /* Pods_LevelPlayDemoTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		471A2A381E66D27900217BE4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -55,6 +87,7 @@
 				471A2A3C1E66D27900217BE4 /* Products */,
 				E442F24393CE3EB636E90D07 /* Pods */,
 				F0AFEE623213F9B180953967 /* Frameworks */,
+				C16EFC2FA37CF52D6B155382 /* LevelPlayDemoTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */,
+				B4EF4E78E6658EDA3CAC55D2 /* LevelPlayDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,11 +117,32 @@
 			path = LevelPlayDemo;
 			sourceTree = "<group>";
 		};
+		C16EFC2FA37CF52D6B155382 /* LevelPlayDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				857C6EB541E8BCB6A2A3796E /* InterstitialIntegrationTest.swift */,
+				98DB1BE7BCCA205F0251F5BD /* RewardedIntegrationTest.swift */,
+				E51CB461CDC3659BBA9BF514 /* BannerIntegrationTest.swift */,
+			);
+			name = LevelPlayDemoTests;
+			path = LevelPlayDemoTests;
+			sourceTree = "<group>";
+		};
+		C4E3BAC6B5B91083E8B718F3 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6861E24A792F8894EBB78826 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		E442F24393CE3EB636E90D07 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				584541910829645B43B832D7 /* Pods-LevelPlayDemo.debug.xcconfig */,
 				C05CAF90E6CF76EE6AB67A99 /* Pods-LevelPlayDemo.release.xcconfig */,
+				0D41F426CF5D403A6EEAD34B /* Pods-LevelPlayDemoTests.release.xcconfig */,
+				D2C6DD7B7786F002A0979A08 /* Pods-LevelPlayDemoTests.debug.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -96,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				412F075612017601F18A0250 /* Pods_LevelPlayDemo.framework */,
+				C4E3BAC6B5B91083E8B718F3 /* iOS */,
+				239D803A36BBC47B4AB861CB /* Pods_LevelPlayDemoTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -121,6 +178,25 @@
 			productName = TestSwift;
 			productReference = 471A2A3B1E66D27900217BE4 /* LevelPlayDemo.app */;
 			productType = "com.apple.product-type.application";
+		};
+		D79309FF0A07D2BB020BCAAD /* LevelPlayDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D0621394B104772383AA52F7 /* Build configuration list for PBXNativeTarget "LevelPlayDemoTests" */;
+			buildPhases = (
+				5BB82027CADC4A2378419171 /* [CP] Check Pods Manifest.lock */,
+				818140E64AB0CBC070AD3B32 /* Sources */,
+				2E6A4234426F1AFC06410C38 /* Frameworks */,
+				134AF0559741C3FF360A7D23 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA32838D78091395E810CB36 /* PBXTargetDependency */,
+			);
+			name = LevelPlayDemoTests;
+			productName = LevelPlayDemoTests;
+			productReference = B4EF4E78E6658EDA3CAC55D2 /* LevelPlayDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -155,11 +231,19 @@
 			projectRoot = "";
 			targets = (
 				471A2A3A1E66D27900217BE4 /* LevelPlayDemo */,
+				D79309FF0A07D2BB020BCAAD /* LevelPlayDemoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		134AF0559741C3FF360A7D23 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		471A2A391E66D27900217BE4 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -173,6 +257,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5BB82027CADC4A2378419171 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LevelPlayDemoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9D12D4989CF6B2909693D100 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -204,11 +310,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceAdQualitySDK/IronSourceAdQualityPrivacyInfo.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/UnityAds/UnityAdsResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourceAdQualityPrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourcePrivacyInfo.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UnityAdsResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -231,7 +339,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		818140E64AB0CBC070AD3B32 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC5F2046D3C23C42575B8B10 /* InterstitialIntegrationTest.swift in Sources */,
+				5BB3A4E54E91664FF922EADD /* RewardedIntegrationTest.swift in Sources */,
+				A219C5CD23D4293E4902A27B /* BannerIntegrationTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BA32838D78091395E810CB36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LevelPlayDemo;
+			target = 471A2A3A1E66D27900217BE4 /* LevelPlayDemo */;
+			targetProxy = B918389C0B87E7E04354429B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		471A2A421E66D27A00217BE4 /* Main.storyboard */ = {
@@ -403,6 +530,41 @@
 			};
 			name = Release;
 		};
+		621AB0FD4B9F83C2C96A324D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2C6DD7B7786F002A0979A08 /* Pods-LevelPlayDemoTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = NLKYWCU5C3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.unity3d.levelPlayDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LevelPlayDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LevelPlayDemo";
+			};
+			name = Debug;
+		};
+		95309369289E536076655920 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0D41F426CF5D403A6EEAD34B /* Pods-LevelPlayDemoTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = NLKYWCU5C3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.unity3d.levelPlayDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LevelPlayDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LevelPlayDemo";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -420,6 +582,15 @@
 			buildConfigurations = (
 				471A2A4E1E66D27A00217BE4 /* Debug */,
 				471A2A4F1E66D27A00217BE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D0621394B104772383AA52F7 /* Build configuration list for PBXNativeTarget "LevelPlayDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				95309369289E536076655920 /* Release */,
+				621AB0FD4B9F83C2C96A324D /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,0 +1,48 @@
+name: iOS Integration Tests
+
+on:
+  pull_request:
+    paths:
+      - 'iOS/**'
+  workflow_dispatch:
+
+jobs:
+  integration-tests:
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        project:
+          - name: Swift
+            workspace: LevelPlayDemo.xcworkspace
+            uses_cocoapods: true
+          - name: Objective C
+            workspace: LevelPlayDemo.xcworkspace
+            uses_cocoapods: true
+
+    defaults:
+      run:
+        working-directory: iOS/${{ matrix.project.name }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install CocoaPods dependencies
+        if: matrix.project.uses_cocoapods
+        run: pod install
+
+      - name: Run integration tests
+        run: |
+          xcodebuild test \
+            -workspace ${{ matrix.project.workspace }} \
+            -scheme LevelPlayDemo \
+            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -resultBundlePath TestResults
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results-${{ matrix.project.name }}
+          path: iOS/${{ matrix.project.name }}/TestResults
+          retention-days: 7

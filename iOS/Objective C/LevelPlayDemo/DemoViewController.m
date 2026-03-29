@@ -13,12 +13,12 @@
 #import "DemoImpressionDataDelegate.h"
 
 // Replace with your app key as available in the LevelPlay dashboard
-#define kAppKey @"8545d445"
+#define kAppKey @"25c43a4a5"
 
 // Replace with your ad unit ids as available in the LevelPlay dashboard
-#define kInterstitialAdUnitId @"wmgt0712uuux8ju4"
-#define kBannerAdUnitId @"iep3rxsyp9na3rw8"
-#define kRewardedAdUnit @"qwouvdrkuwivay5q"
+#define kInterstitialAdUnitId @"obg6ohwts3y690ks"
+#define kBannerAdUnitId @"xc2bsuntn9ea734t"
+#define kRewardedAdUnit @"l1quzz1xmmdhw5er"
 
 @interface DemoViewController ()
 

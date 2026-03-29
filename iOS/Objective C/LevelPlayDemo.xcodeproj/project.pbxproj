@@ -276,11 +276,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceAdQualitySDK/IronSourceAdQualityPrivacyInfo.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/IronSourceSDK/IronSourcePrivacyInfo.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/UnityAds/UnityAdsResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourceAdQualityPrivacyInfo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IronSourcePrivacyInfo.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UnityAdsResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

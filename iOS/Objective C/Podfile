@@ -5,6 +5,7 @@ target 'LevelPlayDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
   #use_frameworks!
 pod 'IronSourceSDK'
+pod 'IronSourceUnityAdsAdapter'
   # Pods for LevelPlayDemo
 
 end
