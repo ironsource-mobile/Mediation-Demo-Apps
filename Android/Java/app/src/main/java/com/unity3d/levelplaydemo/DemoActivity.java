@@ -27,12 +27,12 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     public static final String TAG = "DemoActivity";
 
     // Replace with your app key as available in the LevelPlay dashboard
-    public static final String APP_KEY = "85460dcd";
+    public static final String APP_KEY = "25b63cf85";
 
     // Replace with your ad unit ids as available in the LevelPlay dashboard
-    public static final String INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9";
-    public static final String BANNER_AD_UNIT_ID = "thnfvcsog13bhn08";
-    public static final String REWARDED_VIDEO_AD_UNIT_ID = "76yy3nay3ceui2a3";
+    public static final String INTERSTITIAL_AD_UNIT_ID = "h3xw38h9214adgxo";
+    public static final String BANNER_AD_UNIT_ID = "4fpetq4lhe5lsw3e";
+    public static final String REWARDED_VIDEO_AD_UNIT_ID = "syz3d8ekts22q0or";
 
     private Button rewardedVideoLoadButton;
     private Button rewardedVideoShowButton;
