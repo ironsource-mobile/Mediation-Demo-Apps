@@ -8,4 +8,7 @@ pod 'IronSourceSDK'
 pod 'IronSourceUnityAdsAdapter'
   # Pods for LevelPlayDemo
 
+  target 'LevelPlayDemoTests' do
+    inherit! :search_paths
+  end
 end

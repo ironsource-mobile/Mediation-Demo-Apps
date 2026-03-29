@@ -13,7 +13,12 @@
 		72E0D6561E267513009ABC1B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6461E267513009ABC1B /* Assets.xcassets */; };
 		72E0D6571E267513009ABC1B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */; };
 		72E0D6581E267513009ABC1B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 72E0D6491E267513009ABC1B /* Main.storyboard */; };
+		84FD2659FBDB61D7A33013DD /* BannerIntegrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 620230CF843D4D5DC0093100 /* BannerIntegrationTest.m */; };
+		8DBAFDAAA9F45D9CEE2C8B54 /* libPods-LevelPlayDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 065D73985F8C0AD5DF84AE2F /* libPods-LevelPlayDemoTests.a */; };
+		A51CBB5AA7C464DE9E926A63 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83084D48BEC5E1D4EE814821 /* Foundation.framework */; };
+		A6A109B04E2D889CAB915203 /* InterstitialIntegrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E4CB010F22A80C522454930F /* InterstitialIntegrationTest.m */; };
 		C7864FDB2E098C8D00937C8F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C7864FDA2E098C8D00937C8F /* main.m */; };
+		CA28128CCB0F100A227A30AE /* RewardedIntegrationTest.m in Sources */ = {isa = PBXBuildFile; fileRef = BA87D3CF8CEEB15D912E75E9 /* RewardedIntegrationTest.m */; };
 		E80C8FB61C16E48200CF3C27 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */; };
 		E80C8FB71C16E48200CF3C27 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB51C16E48200CF3C27 /* Foundation.framework */; };
 		E80C8FBD1C16E4A000CF3C27 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E80C8FB81C16E4A000CF3C27 /* CoreGraphics.framework */; };
@@ -35,9 +40,22 @@
 		F1666FED2AFA55C40077FADE /* DemoInterstitialAdDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1666FEC2AFA55C30077FADE /* DemoInterstitialAdDelegate.m */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		23B53F31438A9419E31BC039 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E80C8F901C16E28400CF3C27 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E80C8F971C16E28400CF3C27;
+			remoteInfo = LevelPlayDemo;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		065D73985F8C0AD5DF84AE2F /* libPods-LevelPlayDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LevelPlayDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A5C9FE60468D227E3155122 /* Pods-LevelPlayDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemoTests.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemoTests/Pods-LevelPlayDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		35E1BF82BA5FFCC38DD5E41F /* Pods-LevelPlayDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		47B0AD291CB5252100B8D125 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		620230CF843D4D5DC0093100 /* BannerIntegrationTest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = BannerIntegrationTest.m; sourceTree = "<group>"; };
 		72E0D6441E267513009ABC1B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		72E0D6451E267513009ABC1B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		72E0D6461E267513009ABC1B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,8 +63,13 @@
 		72E0D64A1E267513009ABC1B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		72E0D6611E267AFB009ABC1B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FB9F0520C576186EECE23F6 /* Pods-LevelPlayDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.release.xcconfig"; sourceTree = "<group>"; };
+		83084D48BEC5E1D4EE814821 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		90BB80396C12B18A61B2578C /* Pods-LevelPlayDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemoTests/Pods-LevelPlayDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B69266617B2255A7ECB1C929 /* libPods-LevelPlayDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LevelPlayDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA87D3CF8CEEB15D912E75E9 /* RewardedIntegrationTest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RewardedIntegrationTest.m; sourceTree = "<group>"; };
+		BE094498EFD84DEC2D27D7FA /* LevelPlayDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevelPlayDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7864FDA2E098C8D00937C8F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E4CB010F22A80C522454930F /* InterstitialIntegrationTest.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = InterstitialIntegrationTest.m; sourceTree = "<group>"; };
 		E80C8F981C16E28400CF3C27 /* LevelPlayDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelPlayDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E80C8FB51C16E48200CF3C27 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -75,6 +98,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5B22D38E9EAFDE3D3CDCB4EF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A51CBB5AA7C464DE9E926A63 /* Foundation.framework in Frameworks */,
+				8DBAFDAAA9F45D9CEE2C8B54 /* libPods-LevelPlayDemoTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E80C8F951C16E28400CF3C27 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -101,6 +133,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6BC1E489F88420F304939A90 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				83084D48BEC5E1D4EE814821 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
 		72E0D6431E267513009ABC1B /* LevelPlayDemo */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,8 +170,21 @@
 			children = (
 				35E1BF82BA5FFCC38DD5E41F /* Pods-LevelPlayDemo.debug.xcconfig */,
 				7FB9F0520C576186EECE23F6 /* Pods-LevelPlayDemo.release.xcconfig */,
+				2A5C9FE60468D227E3155122 /* Pods-LevelPlayDemoTests.release.xcconfig */,
+				90BB80396C12B18A61B2578C /* Pods-LevelPlayDemoTests.debug.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		D9A569023E47640219700F48 /* LevelPlayDemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				E4CB010F22A80C522454930F /* InterstitialIntegrationTest.m */,
+				BA87D3CF8CEEB15D912E75E9 /* RewardedIntegrationTest.m */,
+				620230CF843D4D5DC0093100 /* BannerIntegrationTest.m */,
+			);
+			name = LevelPlayDemoTests;
+			path = LevelPlayDemoTests;
 			sourceTree = "<group>";
 		};
 		E80C8F8F1C16E28400CF3C27 = {
@@ -141,6 +194,7 @@
 				E80C8FD21C16E52200CF3C27 /* Frameworks */,
 				E80C8F991C16E28400CF3C27 /* Products */,
 				BCB3B4B5C8801D4E454A4A5C /* Pods */,
+				D9A569023E47640219700F48 /* LevelPlayDemoTests */,
 			);
 			sourceTree = "<group>";
 		};
@@ -148,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				E80C8F981C16E28400CF3C27 /* LevelPlayDemo.app */,
+				BE094498EFD84DEC2D27D7FA /* LevelPlayDemoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +226,8 @@
 				E80C8FB41C16E48200CF3C27 /* AVFoundation.framework */,
 				E80C8FB51C16E48200CF3C27 /* Foundation.framework */,
 				B69266617B2255A7ECB1C929 /* libPods-LevelPlayDemo.a */,
+				6BC1E489F88420F304939A90 /* iOS */,
+				065D73985F8C0AD5DF84AE2F /* libPods-LevelPlayDemoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -178,6 +235,25 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		52161951B6EBD58B4FC418DD /* LevelPlayDemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8BB7DD5B785A54337F8E29FD /* Build configuration list for PBXNativeTarget "LevelPlayDemoTests" */;
+			buildPhases = (
+				8FDFB6B0CF56836DABD094B2 /* [CP] Check Pods Manifest.lock */,
+				6B723BA99265E4B6CEBEBE8A /* Sources */,
+				5B22D38E9EAFDE3D3CDCB4EF /* Frameworks */,
+				5B4BAC90DC47EE86C693AA99 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				62E97A8FA5F4091939B26575 /* PBXTargetDependency */,
+			);
+			name = LevelPlayDemoTests;
+			productName = LevelPlayDemoTests;
+			productReference = BE094498EFD84DEC2D27D7FA /* LevelPlayDemoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E80C8F971C16E28400CF3C27 /* LevelPlayDemo */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E80C8FAF1C16E28400CF3C27 /* Build configuration list for PBXNativeTarget "LevelPlayDemo" */;
@@ -227,11 +303,19 @@
 			projectRoot = "";
 			targets = (
 				E80C8F971C16E28400CF3C27 /* LevelPlayDemo */,
+				52161951B6EBD58B4FC418DD /* LevelPlayDemoTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5B4BAC90DC47EE86C693AA99 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E80C8F961C16E28400CF3C27 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -267,6 +351,28 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		8FDFB6B0CF56836DABD094B2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-LevelPlayDemoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 		E447840E18748146CA6C5CF3 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -292,6 +398,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		6B723BA99265E4B6CEBEBE8A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A6A109B04E2D889CAB915203 /* InterstitialIntegrationTest.m in Sources */,
+				CA28128CCB0F100A227A30AE /* RewardedIntegrationTest.m in Sources */,
+				84FD2659FBDB61D7A33013DD /* BannerIntegrationTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E80C8F941C16E28400CF3C27 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,6 +423,15 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		62E97A8FA5F4091939B26575 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LevelPlayDemo;
+			target = E80C8F971C16E28400CF3C27 /* LevelPlayDemo */;
+			targetProxy = 23B53F31438A9419E31BC039 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		72E0D6471E267513009ABC1B /* LaunchScreen.storyboard */ = {
@@ -328,6 +453,39 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		07ADA92BAED4A6E45266D22E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2A5C9FE60468D227E3155122 /* Pods-LevelPlayDemoTests.release.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = NLKYWCU5C3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.unity3d.levelPlayDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LevelPlayDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LevelPlayDemo";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8884A16B1D3AF83CC87E5F22 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90BB80396C12B18A61B2578C /* Pods-LevelPlayDemoTests.debug.xcconfig */;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				DEVELOPMENT_TEAM = NLKYWCU5C3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.unity3d.levelPlayDemoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LevelPlayDemo.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LevelPlayDemo";
+			};
+			name = Debug;
+		};
 		E80C8FAD1C16E28400CF3C27 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -467,6 +625,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8BB7DD5B785A54337F8E29FD /* Build configuration list for PBXNativeTarget "LevelPlayDemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				07ADA92BAED4A6E45266D22E /* Release */,
+				8884A16B1D3AF83CC87E5F22 /* Debug */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E80C8F931C16E28400CF3C27 /* Build configuration list for PBXProject "LevelPlayDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
