@@ -1,18 +1,19 @@
 import Testing
 import IronSource
 import UIKit
+@testable import LevelPlayDemo
 
 @Test(.timeLimit(.minutes(1)))
 @MainActor
-func testInterstitialInitLoadAndImpression() async throws {
+func testShouldInitLoadShowInterstitialAndReceiveImpression() async throws {
+    // Given
     let delegate = InterstitialTestDelegate()
     let impressionDelegate = TestImpressionDelegate()
 
     LevelPlay.add(impressionDelegate as LPMImpressionDataDelegate)
 
-    // Init SDK
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-        let requestBuilder = LPMInitRequestBuilder(appKey: kAppKey)
+        let requestBuilder = LPMInitRequestBuilder(appKey: DemoViewController.appKey)
         let initRequest = requestBuilder.build()
         LevelPlay.initWith(initRequest) { config, error in
             if let error = error {
@@ -23,23 +24,22 @@ func testInterstitialInitLoadAndImpression() async throws {
         }
     }
 
-    // Create and load ad
-    let interstitialAd = LPMInterstitialAd(adUnitId: kInterstitialAdUnitId)
+    let interstitialAd = LPMInterstitialAd(adUnitId: DemoViewController.interstitialAdUnitId)
     interstitialAd.setDelegate(delegate)
 
+    // When
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         delegate.onLoad = { continuation.resume() }
         delegate.onLoadFail = { error in continuation.resume(throwing: error) }
         interstitialAd.loadAd()
     }
 
-    // Show ad
     let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
     let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
 
     interstitialAd.showAd(viewController: rootVC!, placementName: nil as String?)
 
-    // Wait for impression
+    // Then
     if !impressionDelegate.received {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             if impressionDelegate.received {

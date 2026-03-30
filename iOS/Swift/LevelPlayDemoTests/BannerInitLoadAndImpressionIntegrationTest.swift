@@ -5,13 +5,13 @@ import UIKit
 
 @Test(.timeLimit(.minutes(1)))
 @MainActor
-func testBannerInitLoadAndImpression() async throws {
+func testShouldInitLoadBannerAndReceiveImpression() async throws {
+    // Given
     let delegate = BannerTestDelegate()
     let impressionDelegate = BannerImpressionDelegate()
 
     LevelPlay.add(impressionDelegate as LPMImpressionDataDelegate)
 
-    // Init SDK
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         let requestBuilder = LPMInitRequestBuilder(appKey: DemoViewController.appKey)
         let initRequest = requestBuilder.build()
@@ -24,12 +24,10 @@ func testBannerInitLoadAndImpression() async throws {
         }
     }
 
-    // Create banner ad
     let config = LPMBannerAdViewConfigBuilder().set(adSize: .banner()).build()
     let bannerAd = LPMBannerAdView(adUnitId: DemoViewController.bannerAdUnitId, config: config)
     bannerAd.setDelegate(delegate)
 
-    // Add banner to view hierarchy (required before loading)
     let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
     let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
 
@@ -42,14 +40,14 @@ func testBannerInitLoadAndImpression() async throws {
         bannerAd.heightAnchor.constraint(equalToConstant: 50)
     ])
 
-    // Load ad (banner auto-displays on load, no show step needed)
+    // When
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         delegate.onLoad = { continuation.resume() }
         delegate.onLoadFail = { error in continuation.resume(throwing: error) }
         bannerAd.loadAd(with: rootVC!)
     }
 
-    // Wait for impression
+    // Then
     if !impressionDelegate.received {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             if impressionDelegate.received {
@@ -60,7 +58,6 @@ func testBannerInitLoadAndImpression() async throws {
         }
     }
 
-    // Cleanup
     bannerAd.removeFromSuperview()
     bannerAd.destroy()
 }

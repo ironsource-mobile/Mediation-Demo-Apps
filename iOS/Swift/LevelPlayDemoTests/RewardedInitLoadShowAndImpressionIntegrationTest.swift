@@ -5,13 +5,13 @@ import UIKit
 
 @Test(.timeLimit(.minutes(1)))
 @MainActor
-func testInterstitialInitLoadAndImpression() async throws {
-    let delegate = InterstitialTestDelegate()
-    let impressionDelegate = TestImpressionDelegate()
+func testShouldInitLoadShowRewardedAndReceiveImpression() async throws {
+    // Given
+    let delegate = RewardedTestDelegate()
+    let impressionDelegate = RewardedImpressionDelegate()
 
     LevelPlay.add(impressionDelegate as LPMImpressionDataDelegate)
 
-    // Init SDK
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         let requestBuilder = LPMInitRequestBuilder(appKey: DemoViewController.appKey)
         let initRequest = requestBuilder.build()
@@ -24,23 +24,22 @@ func testInterstitialInitLoadAndImpression() async throws {
         }
     }
 
-    // Create and load ad
-    let interstitialAd = LPMInterstitialAd(adUnitId: DemoViewController.interstitialAdUnitId)
-    interstitialAd.setDelegate(delegate)
+    let rewardedAd = LPMRewardedAd(adUnitId: DemoViewController.rewardedAdUnitId)
+    rewardedAd.setDelegate(delegate)
 
+    // When
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         delegate.onLoad = { continuation.resume() }
         delegate.onLoadFail = { error in continuation.resume(throwing: error) }
-        interstitialAd.loadAd()
+        rewardedAd.loadAd()
     }
 
-    // Show ad
     let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
     let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
 
-    interstitialAd.showAd(viewController: rootVC!, placementName: nil as String?)
+    rewardedAd.showAd(viewController: rootVC!, placementName: nil as String?)
 
-    // Wait for impression
+    // Then
     if !impressionDelegate.received {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             if impressionDelegate.received {
@@ -52,7 +51,7 @@ func testInterstitialInitLoadAndImpression() async throws {
     }
 }
 
-private class InterstitialTestDelegate: NSObject, LPMInterstitialAdDelegate {
+private class RewardedTestDelegate: NSObject, LPMRewardedAdDelegate {
     var onLoad: (() -> Void)?
     var onLoadFail: ((Error) -> Void)?
 
@@ -62,10 +61,11 @@ private class InterstitialTestDelegate: NSObject, LPMInterstitialAdDelegate {
     func didFailToDisplayAd(with adInfo: LPMAdInfo, error: Error) {}
     func didClickAd(with adInfo: LPMAdInfo) {}
     func didCloseAd(with adInfo: LPMAdInfo) {}
+    func didRewardAd(with adInfo: LPMAdInfo, reward: LPMReward) {}
     func didChangeAdInfo(_ adInfo: LPMAdInfo) {}
 }
 
-private class TestImpressionDelegate: NSObject, LPMImpressionDataDelegate {
+private class RewardedImpressionDelegate: NSObject, LPMImpressionDataDelegate {
     var onImpression: (() -> Void)?
     private(set) var received = false
 

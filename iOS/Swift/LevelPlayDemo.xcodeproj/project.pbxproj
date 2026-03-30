@@ -11,11 +11,11 @@
 		471A2A441E66D27A00217BE4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A421E66D27A00217BE4 /* Main.storyboard */; };
 		471A2A461E66D27A00217BE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A451E66D27A00217BE4 /* Assets.xcassets */; };
 		471A2A491E66D27A00217BE4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 471A2A471E66D27A00217BE4 /* LaunchScreen.storyboard */; };
-		5BB3A4E54E91664FF922EADD /* RewardedIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DB1BE7BCCA205F0251F5BD /* RewardedIntegrationTest.swift */; };
+		5BB3A4E54E91664FF922EADD /* RewardedInitLoadShowAndImpressionIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98DB1BE7BCCA205F0251F5BD /* RewardedInitLoadShowAndImpressionIntegrationTest.swift */; };
 		5D58B63EF8356D8C0B06EB54 /* Pods_LevelPlayDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412F075612017601F18A0250 /* Pods_LevelPlayDemo.framework */; };
-		A219C5CD23D4293E4902A27B /* BannerIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51CB461CDC3659BBA9BF514 /* BannerIntegrationTest.swift */; };
+		A219C5CD23D4293E4902A27B /* BannerInitLoadAndImpressionIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E51CB461CDC3659BBA9BF514 /* BannerInitLoadAndImpressionIntegrationTest.swift */; };
 		B5D59E6183D174D9661BC6C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6861E24A792F8894EBB78826 /* Foundation.framework */; };
-		DC5F2046D3C23C42575B8B10 /* InterstitialIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857C6EB541E8BCB6A2A3796E /* InterstitialIntegrationTest.swift */; };
+		DC5F2046D3C23C42575B8B10 /* InterstitialInitLoadShowAndImpressionIntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 857C6EB541E8BCB6A2A3796E /* InterstitialInitLoadShowAndImpressionIntegrationTest.swift */; };
 		E429D4335D03C6D72B5FC597 /* Pods_LevelPlayDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 239D803A36BBC47B4AB861CB /* Pods_LevelPlayDemoTests.framework */; };
 		F1666FFE2AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */; };
 		F1666FFF2AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */; };
@@ -46,12 +46,12 @@
 		471A2A4A1E66D27A00217BE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		584541910829645B43B832D7 /* Pods-LevelPlayDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		6861E24A792F8894EBB78826 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS18.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		857C6EB541E8BCB6A2A3796E /* InterstitialIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InterstitialIntegrationTest.swift; sourceTree = "<group>"; };
-		98DB1BE7BCCA205F0251F5BD /* RewardedIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RewardedIntegrationTest.swift; sourceTree = "<group>"; };
+		857C6EB541E8BCB6A2A3796E /* InterstitialInitLoadShowAndImpressionIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = InterstitialInitLoadShowAndImpressionIntegrationTest.swift; sourceTree = "<group>"; };
+		98DB1BE7BCCA205F0251F5BD /* RewardedInitLoadShowAndImpressionIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RewardedInitLoadShowAndImpressionIntegrationTest.swift; sourceTree = "<group>"; };
 		B4EF4E78E6658EDA3CAC55D2 /* LevelPlayDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LevelPlayDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C05CAF90E6CF76EE6AB67A99 /* Pods-LevelPlayDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemo.release.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemo/Pods-LevelPlayDemo.release.xcconfig"; sourceTree = "<group>"; };
 		D2C6DD7B7786F002A0979A08 /* Pods-LevelPlayDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LevelPlayDemoTests.debug.xcconfig"; path = "Target Support Files/Pods-LevelPlayDemoTests/Pods-LevelPlayDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E51CB461CDC3659BBA9BF514 /* BannerIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BannerIntegrationTest.swift; sourceTree = "<group>"; };
+		E51CB461CDC3659BBA9BF514 /* BannerInitLoadAndImpressionIntegrationTest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = BannerInitLoadAndImpressionIntegrationTest.swift; sourceTree = "<group>"; };
 		F1666FF82AFA6FCC0077FADE /* DemoRewardedVideoAdDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoRewardedVideoAdDelegate.swift; sourceTree = "<group>"; };
 		F1666FF92AFA6FCC0077FADE /* DemoImpressionDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoImpressionDataDelegate.swift; sourceTree = "<group>"; };
 		F1666FFB2AFA6FCC0077FADE /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
@@ -120,9 +120,9 @@
 		C16EFC2FA37CF52D6B155382 /* LevelPlayDemoTests */ = {
 			isa = PBXGroup;
 			children = (
-				857C6EB541E8BCB6A2A3796E /* InterstitialIntegrationTest.swift */,
-				98DB1BE7BCCA205F0251F5BD /* RewardedIntegrationTest.swift */,
-				E51CB461CDC3659BBA9BF514 /* BannerIntegrationTest.swift */,
+				857C6EB541E8BCB6A2A3796E /* InterstitialInitLoadShowAndImpressionIntegrationTest.swift */,
+				98DB1BE7BCCA205F0251F5BD /* RewardedInitLoadShowAndImpressionIntegrationTest.swift */,
+				E51CB461CDC3659BBA9BF514 /* BannerInitLoadAndImpressionIntegrationTest.swift */,
 			);
 			name = LevelPlayDemoTests;
 			path = LevelPlayDemoTests;
@@ -343,9 +343,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DC5F2046D3C23C42575B8B10 /* InterstitialIntegrationTest.swift in Sources */,
-				5BB3A4E54E91664FF922EADD /* RewardedIntegrationTest.swift in Sources */,
-				A219C5CD23D4293E4902A27B /* BannerIntegrationTest.swift in Sources */,
+				DC5F2046D3C23C42575B8B10 /* InterstitialInitLoadShowAndImpressionIntegrationTest.swift in Sources */,
+				5BB3A4E54E91664FF922EADD /* RewardedInitLoadShowAndImpressionIntegrationTest.swift in Sources */,
+				A219C5CD23D4293E4902A27B /* BannerInitLoadAndImpressionIntegrationTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

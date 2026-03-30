@@ -4,13 +4,13 @@ import UIKit
 
 @Test(.timeLimit(.minutes(1)))
 @MainActor
-func testBannerInitLoadAndImpression() async throws {
-    let delegate = BannerTestDelegate()
-    let impressionDelegate = BannerImpressionDelegate()
+func testShouldInitLoadShowInterstitialAndReceiveImpression() async throws {
+    // Given
+    let delegate = InterstitialTestDelegate()
+    let impressionDelegate = TestImpressionDelegate()
 
     LevelPlay.add(impressionDelegate as LPMImpressionDataDelegate)
 
-    // Init SDK
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         let requestBuilder = LPMInitRequestBuilder(appKey: kAppKey)
         let initRequest = requestBuilder.build()
@@ -23,33 +23,22 @@ func testBannerInitLoadAndImpression() async throws {
         }
     }
 
-    // Create banner ad using adaptive size (matching the ObjC demo)
-    let bannerSize = LPMAdSize.createAdaptive()!
-    let config = LPMBannerAdViewConfigBuilder().set(adSize: bannerSize).build()
-    let bannerAd = LPMBannerAdView(adUnitId: kBannerAdUnitId, config: config)
-    bannerAd.setDelegate(delegate)
+    let interstitialAd = LPMInterstitialAd(adUnitId: kInterstitialAdUnitId)
+    interstitialAd.setDelegate(delegate)
 
-    // Add banner to view hierarchy before loading
-    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-    let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
-
-    bannerAd.translatesAutoresizingMaskIntoConstraints = false
-    rootVC!.view.addSubview(bannerAd)
-    NSLayoutConstraint.activate([
-        bannerAd.centerXAnchor.constraint(equalTo: rootVC!.view.centerXAnchor),
-        bannerAd.bottomAnchor.constraint(equalTo: rootVC!.view.safeAreaLayoutGuide.bottomAnchor),
-        bannerAd.widthAnchor.constraint(equalToConstant: CGFloat(bannerSize.width)),
-        bannerAd.heightAnchor.constraint(equalToConstant: CGFloat(bannerSize.height))
-    ])
-
-    // Load ad (banner auto-displays on load)
+    // When
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         delegate.onLoad = { continuation.resume() }
         delegate.onLoadFail = { error in continuation.resume(throwing: error) }
-        bannerAd.loadAd(with: rootVC!)
+        interstitialAd.loadAd()
     }
 
-    // Wait for impression
+    let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+    let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
+
+    interstitialAd.showAd(viewController: rootVC!, placementName: nil as String?)
+
+    // Then
     if !impressionDelegate.received {
         try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
             if impressionDelegate.received {
@@ -59,13 +48,9 @@ func testBannerInitLoadAndImpression() async throws {
             }
         }
     }
-
-    // Cleanup
-    bannerAd.removeFromSuperview()
-    bannerAd.destroy()
 }
 
-private class BannerTestDelegate: NSObject, LPMBannerAdViewDelegate {
+private class InterstitialTestDelegate: NSObject, LPMInterstitialAdDelegate {
     var onLoad: (() -> Void)?
     var onLoadFail: ((Error) -> Void)?
 
@@ -74,12 +59,11 @@ private class BannerTestDelegate: NSObject, LPMBannerAdViewDelegate {
     func didDisplayAd(with adInfo: LPMAdInfo) {}
     func didFailToDisplayAd(with adInfo: LPMAdInfo, error: Error) {}
     func didClickAd(with adInfo: LPMAdInfo) {}
-    func didExpandAd(with adInfo: LPMAdInfo) {}
-    func didCollapseAd(with adInfo: LPMAdInfo) {}
-    func didLeaveApp(with adInfo: LPMAdInfo) {}
+    func didCloseAd(with adInfo: LPMAdInfo) {}
+    func didChangeAdInfo(_ adInfo: LPMAdInfo) {}
 }
 
-private class BannerImpressionDelegate: NSObject, LPMImpressionDataDelegate {
+private class TestImpressionDelegate: NSObject, LPMImpressionDataDelegate {
     var onImpression: (() -> Void)?
     private(set) var received = false
 
