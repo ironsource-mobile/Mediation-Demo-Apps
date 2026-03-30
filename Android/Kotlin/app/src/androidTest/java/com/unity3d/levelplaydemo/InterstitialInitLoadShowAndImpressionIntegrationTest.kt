@@ -22,17 +22,15 @@ import org.junit.runner.RunWith
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-private val APP_KEY = DemoActivity.APP_KEY
-private val INTERSTITIAL_AD_UNIT_ID = DemoActivity.INTERSTITIAL_AD_UNIT_ID
-
 @RunWith(AndroidJUnit4::class)
-class InterstitialIntegrationTest {
+class InterstitialInitLoadShowAndImpressionIntegrationTest {
 
     @get:Rule
     val activityRule = ActivityScenarioRule(DemoActivity::class.java)
 
     @Test
-    fun testInitLoadAndImpression() {
+    fun testShouldInitLoadShowInterstitialAndReceiveImpression() {
+        // Given
         val initLatch = CountDownLatch(1)
         val loadLatch = CountDownLatch(1)
         val impressionLatch = CountDownLatch(1)
@@ -50,13 +48,14 @@ class InterstitialIntegrationTest {
             }
         })
 
+        // When
         activityRule.scenario.onActivity { activity ->
-            val request = LevelPlayInitRequest.Builder(APP_KEY).build()
+            val request = LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build()
             LevelPlay.init(activity, request, object : LevelPlayInitListener {
                 override fun onInitSuccess(configuration: LevelPlayConfiguration) {
                     initLatch.countDown()
 
-                    interstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID)
+                    interstitialAd = LevelPlayInterstitialAd(DemoActivity.INTERSTITIAL_AD_UNIT_ID)
                     interstitialAd?.setListener(object : LevelPlayInterstitialAdListener {
                         override fun onAdLoaded(adInfo: LevelPlayAdInfo) {
                             loadLatch.countDown()
@@ -88,6 +87,7 @@ class InterstitialIntegrationTest {
             interstitialAd?.showAd(activity)
         }
 
+        // Then
         assertTrue("Impression callback not received within 20 seconds", impressionLatch.await(20, TimeUnit.SECONDS))
     }
 }

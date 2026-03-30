@@ -15,8 +15,9 @@ import com.unity3d.mediation.LevelPlayInitListener;
 import com.unity3d.mediation.LevelPlayInitRequest;
 import com.unity3d.mediation.impression.LevelPlayImpressionData;
 import com.unity3d.mediation.impression.LevelPlayImpressionDataListener;
-import com.unity3d.mediation.interstitial.LevelPlayInterstitialAd;
-import com.unity3d.mediation.interstitial.LevelPlayInterstitialAdListener;
+import com.unity3d.mediation.rewarded.LevelPlayReward;
+import com.unity3d.mediation.rewarded.LevelPlayRewardedAd;
+import com.unity3d.mediation.rewarded.LevelPlayRewardedAdListener;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,20 +30,18 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
-public class InterstitialIntegrationTest {
-
-    private static final String APP_KEY = DemoActivity.APP_KEY;
-    private static final String INTERSTITIAL_AD_UNIT_ID = DemoActivity.INTERSTITIAL_AD_UNIT_ID;
+public class RewardedInitLoadShowAndImpressionIntegrationTest {
 
     @Rule
     public ActivityScenarioRule<DemoActivity> activityRule = new ActivityScenarioRule<>(DemoActivity.class);
 
     @Test
-    public void testInitLoadAndImpression() throws InterruptedException {
+    public void testShouldInitLoadShowRewardedAndReceiveImpression() throws InterruptedException {
+        // Given
         final CountDownLatch initLatch = new CountDownLatch(1);
         final CountDownLatch loadLatch = new CountDownLatch(1);
         final CountDownLatch impressionLatch = new CountDownLatch(1);
-        final LevelPlayInterstitialAd[] interstitialAdHolder = new LevelPlayInterstitialAd[1];
+        final LevelPlayRewardedAd[] rewardedAdHolder = new LevelPlayRewardedAd[1];
 
         activityRule.getScenario().onActivity(activity ->
                 activity.getWindow().addFlags(
@@ -60,15 +59,16 @@ public class InterstitialIntegrationTest {
             }
         });
 
+        // When
         activityRule.getScenario().onActivity(activity -> {
-            LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(APP_KEY).build();
+            LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build();
             LevelPlay.init(activity, request, new LevelPlayInitListener() {
                 @Override
                 public void onInitSuccess(@NonNull LevelPlayConfiguration configuration) {
                     initLatch.countDown();
 
-                    interstitialAdHolder[0] = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
-                    interstitialAdHolder[0].setListener(new LevelPlayInterstitialAdListener() {
+                    rewardedAdHolder[0] = new LevelPlayRewardedAd(DemoActivity.REWARDED_AD_UNIT_ID);
+                    rewardedAdHolder[0].setListener(new LevelPlayRewardedAdListener() {
                         @Override
                         public void onAdLoaded(@NonNull LevelPlayAdInfo adInfo) {
                             loadLatch.countDown();
@@ -92,9 +92,12 @@ public class InterstitialIntegrationTest {
                         public void onAdClosed(@NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
+                        public void onAdRewarded(@NonNull LevelPlayReward reward, @NonNull LevelPlayAdInfo adInfo) {}
+
+                        @Override
                         public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {}
                     });
-                    interstitialAdHolder[0].loadAd();
+                    rewardedAdHolder[0].loadAd();
                 }
 
                 @Override
@@ -105,12 +108,13 @@ public class InterstitialIntegrationTest {
         });
 
         assertTrue("Init did not complete within 10 seconds", initLatch.await(10, TimeUnit.SECONDS));
-        assertTrue("Interstitial did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS));
+        assertTrue("Rewarded ad did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS));
 
         activityRule.getScenario().onActivity(activity ->
-                interstitialAdHolder[0].showAd(activity)
+                rewardedAdHolder[0].showAd(activity)
         );
 
+        // Then
         assertTrue("Impression callback not received within 20 seconds", impressionLatch.await(20, TimeUnit.SECONDS));
     }
 }

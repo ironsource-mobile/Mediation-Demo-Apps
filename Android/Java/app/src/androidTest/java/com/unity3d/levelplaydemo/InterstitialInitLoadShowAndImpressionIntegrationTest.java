@@ -1,9 +1,6 @@
 package com.unity3d.levelplaydemo;
 
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -12,15 +9,14 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.unity3d.mediation.LevelPlay;
 import com.unity3d.mediation.LevelPlayAdError;
 import com.unity3d.mediation.LevelPlayAdInfo;
-import com.unity3d.mediation.LevelPlayAdSize;
 import com.unity3d.mediation.LevelPlayConfiguration;
 import com.unity3d.mediation.LevelPlayInitError;
 import com.unity3d.mediation.LevelPlayInitListener;
 import com.unity3d.mediation.LevelPlayInitRequest;
-import com.unity3d.mediation.banner.LevelPlayBannerAdView;
-import com.unity3d.mediation.banner.LevelPlayBannerAdViewListener;
 import com.unity3d.mediation.impression.LevelPlayImpressionData;
 import com.unity3d.mediation.impression.LevelPlayImpressionDataListener;
+import com.unity3d.mediation.interstitial.LevelPlayInterstitialAd;
+import com.unity3d.mediation.interstitial.LevelPlayInterstitialAdListener;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -33,19 +29,18 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
-public class BannerIntegrationTest {
-
-    private static final String APP_KEY = DemoActivity.APP_KEY;
-    private static final String BANNER_AD_UNIT_ID = DemoActivity.BANNER_AD_UNIT_ID;
+public class InterstitialInitLoadShowAndImpressionIntegrationTest {
 
     @Rule
     public ActivityScenarioRule<DemoActivity> activityRule = new ActivityScenarioRule<>(DemoActivity.class);
 
     @Test
-    public void testInitLoadAndImpression() throws InterruptedException {
+    public void testShouldInitLoadShowInterstitialAndReceiveImpression() throws InterruptedException {
+        // Given
         final CountDownLatch initLatch = new CountDownLatch(1);
         final CountDownLatch loadLatch = new CountDownLatch(1);
         final CountDownLatch impressionLatch = new CountDownLatch(1);
+        final LevelPlayInterstitialAd[] interstitialAdHolder = new LevelPlayInterstitialAd[1];
 
         activityRule.getScenario().onActivity(activity ->
                 activity.getWindow().addFlags(
@@ -63,23 +58,16 @@ public class BannerIntegrationTest {
             }
         });
 
+        // When
         activityRule.getScenario().onActivity(activity -> {
-            LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(APP_KEY).build();
+            LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build();
             LevelPlay.init(activity, request, new LevelPlayInitListener() {
                 @Override
                 public void onInitSuccess(@NonNull LevelPlayConfiguration configuration) {
                     initLatch.countDown();
 
-                    LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(activity);
-                    if (adSize == null) {
-                        fail("Failed to create banner ad size");
-                        return;
-                    }
-
-                    LevelPlayBannerAdView.Config config = new LevelPlayBannerAdView.Config.Builder().setAdSize(adSize).build();
-                    LevelPlayBannerAdView bannerAd = new LevelPlayBannerAdView(activity, BANNER_AD_UNIT_ID, config);
-
-                    bannerAd.setBannerListener(new LevelPlayBannerAdViewListener() {
+                    interstitialAdHolder[0] = new LevelPlayInterstitialAd(DemoActivity.INTERSTITIAL_AD_UNIT_ID);
+                    interstitialAdHolder[0].setListener(new LevelPlayInterstitialAdListener() {
                         @Override
                         public void onAdLoaded(@NonNull LevelPlayAdInfo adInfo) {
                             loadLatch.countDown();
@@ -94,25 +82,18 @@ public class BannerIntegrationTest {
                         public void onAdDisplayed(@NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
-                        public void onAdDisplayFailed(@NonNull LevelPlayAdInfo adInfo, @NonNull LevelPlayAdError error) {}
+                        public void onAdDisplayFailed(@NonNull LevelPlayAdError error, @NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
                         public void onAdClicked(@NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
-                        public void onAdExpanded(@NonNull LevelPlayAdInfo adInfo) {}
+                        public void onAdClosed(@NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
-                        public void onAdCollapsed(@NonNull LevelPlayAdInfo adInfo) {}
-
-                        @Override
-                        public void onAdLeftApplication(@NonNull LevelPlayAdInfo adInfo) {}
+                        public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {}
                     });
-
-                    FrameLayout bannerContainer = activity.findViewById(R.id.banner_frame_layout);
-                    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
-                    bannerContainer.addView(bannerAd, 0, layoutParams);
-                    bannerAd.loadAd();
+                    interstitialAdHolder[0].loadAd();
                 }
 
                 @Override
@@ -123,7 +104,13 @@ public class BannerIntegrationTest {
         });
 
         assertTrue("Init did not complete within 10 seconds", initLatch.await(10, TimeUnit.SECONDS));
-        assertTrue("Banner did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS));
+        assertTrue("Interstitial did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS));
+
+        activityRule.getScenario().onActivity(activity ->
+                interstitialAdHolder[0].showAd(activity)
+        );
+
+        // Then
         assertTrue("Impression callback not received within 20 seconds", impressionLatch.await(20, TimeUnit.SECONDS));
     }
 }

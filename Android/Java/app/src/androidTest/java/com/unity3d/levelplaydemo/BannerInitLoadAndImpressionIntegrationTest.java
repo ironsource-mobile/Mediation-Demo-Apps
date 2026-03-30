@@ -1,6 +1,9 @@
 package com.unity3d.levelplaydemo;
 
+import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
@@ -9,15 +12,15 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import com.unity3d.mediation.LevelPlay;
 import com.unity3d.mediation.LevelPlayAdError;
 import com.unity3d.mediation.LevelPlayAdInfo;
+import com.unity3d.mediation.LevelPlayAdSize;
 import com.unity3d.mediation.LevelPlayConfiguration;
 import com.unity3d.mediation.LevelPlayInitError;
 import com.unity3d.mediation.LevelPlayInitListener;
 import com.unity3d.mediation.LevelPlayInitRequest;
+import com.unity3d.mediation.banner.LevelPlayBannerAdView;
+import com.unity3d.mediation.banner.LevelPlayBannerAdViewListener;
 import com.unity3d.mediation.impression.LevelPlayImpressionData;
 import com.unity3d.mediation.impression.LevelPlayImpressionDataListener;
-import com.unity3d.mediation.rewarded.LevelPlayReward;
-import com.unity3d.mediation.rewarded.LevelPlayRewardedAd;
-import com.unity3d.mediation.rewarded.LevelPlayRewardedAdListener;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,20 +33,17 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 @RunWith(AndroidJUnit4.class)
-public class RewardedIntegrationTest {
-
-    private static final String APP_KEY = DemoActivity.APP_KEY;
-    private static final String REWARDED_AD_UNIT_ID = DemoActivity.REWARDED_AD_UNIT_ID;
+public class BannerInitLoadAndImpressionIntegrationTest {
 
     @Rule
     public ActivityScenarioRule<DemoActivity> activityRule = new ActivityScenarioRule<>(DemoActivity.class);
 
     @Test
-    public void testInitLoadAndImpression() throws InterruptedException {
+    public void testShouldInitLoadBannerAndReceiveImpression() throws InterruptedException {
+        // Given
         final CountDownLatch initLatch = new CountDownLatch(1);
         final CountDownLatch loadLatch = new CountDownLatch(1);
         final CountDownLatch impressionLatch = new CountDownLatch(1);
-        final LevelPlayRewardedAd[] rewardedAdHolder = new LevelPlayRewardedAd[1];
 
         activityRule.getScenario().onActivity(activity ->
                 activity.getWindow().addFlags(
@@ -61,15 +61,24 @@ public class RewardedIntegrationTest {
             }
         });
 
+        // When
         activityRule.getScenario().onActivity(activity -> {
-            LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(APP_KEY).build();
+            LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build();
             LevelPlay.init(activity, request, new LevelPlayInitListener() {
                 @Override
                 public void onInitSuccess(@NonNull LevelPlayConfiguration configuration) {
                     initLatch.countDown();
 
-                    rewardedAdHolder[0] = new LevelPlayRewardedAd(REWARDED_AD_UNIT_ID);
-                    rewardedAdHolder[0].setListener(new LevelPlayRewardedAdListener() {
+                    LevelPlayAdSize adSize = LevelPlayAdSize.createAdaptiveAdSize(activity);
+                    if (adSize == null) {
+                        fail("Failed to create banner ad size");
+                        return;
+                    }
+
+                    LevelPlayBannerAdView.Config config = new LevelPlayBannerAdView.Config.Builder().setAdSize(adSize).build();
+                    LevelPlayBannerAdView bannerAd = new LevelPlayBannerAdView(activity, DemoActivity.BANNER_AD_UNIT_ID, config);
+
+                    bannerAd.setBannerListener(new LevelPlayBannerAdViewListener() {
                         @Override
                         public void onAdLoaded(@NonNull LevelPlayAdInfo adInfo) {
                             loadLatch.countDown();
@@ -84,21 +93,25 @@ public class RewardedIntegrationTest {
                         public void onAdDisplayed(@NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
-                        public void onAdDisplayFailed(@NonNull LevelPlayAdError error, @NonNull LevelPlayAdInfo adInfo) {}
+                        public void onAdDisplayFailed(@NonNull LevelPlayAdInfo adInfo, @NonNull LevelPlayAdError error) {}
 
                         @Override
                         public void onAdClicked(@NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
-                        public void onAdClosed(@NonNull LevelPlayAdInfo adInfo) {}
+                        public void onAdExpanded(@NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
-                        public void onAdRewarded(@NonNull LevelPlayReward reward, @NonNull LevelPlayAdInfo adInfo) {}
+                        public void onAdCollapsed(@NonNull LevelPlayAdInfo adInfo) {}
 
                         @Override
-                        public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {}
+                        public void onAdLeftApplication(@NonNull LevelPlayAdInfo adInfo) {}
                     });
-                    rewardedAdHolder[0].loadAd();
+
+                    FrameLayout bannerContainer = activity.findViewById(R.id.banner_frame_layout);
+                    FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
+                    bannerContainer.addView(bannerAd, 0, layoutParams);
+                    bannerAd.loadAd();
                 }
 
                 @Override
@@ -108,13 +121,9 @@ public class RewardedIntegrationTest {
             });
         });
 
+        // Then
         assertTrue("Init did not complete within 10 seconds", initLatch.await(10, TimeUnit.SECONDS));
-        assertTrue("Rewarded ad did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS));
-
-        activityRule.getScenario().onActivity(activity ->
-                rewardedAdHolder[0].showAd(activity)
-        );
-
+        assertTrue("Banner did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS));
         assertTrue("Impression callback not received within 20 seconds", impressionLatch.await(20, TimeUnit.SECONDS));
     }
 }
