@@ -44,7 +44,7 @@ dependencies {
 
     // Add AdNetworks adapters dependencies and matching ad networks SDKs dependencies .
     // Make sure you also configure the AdNetworks in your dashboard.
-    // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
+    // For more information: https://docs.unity.com/en-us/grow/levelplay/sdk/android/mediation-networks
 
     androidTestImplementation 'androidx.test:runner:1.5.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
