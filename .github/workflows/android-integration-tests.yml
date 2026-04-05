@@ -47,25 +47,11 @@ jobs:
       - name: Build debug and test APKs
         run: ./gradlew assembleDebug assembleDebugAndroidTest --stacktrace
 
-      - name: Install emulator and system image
-        run: |
-          sdkmanager --install "emulator" "system-images;android-35;default;x86_64"
-
-      - name: Create AVD
-        run: |
-          echo "no" | avdmanager create avd -n test_device -k "system-images;android-35;default;x86_64" --force
-
-      - name: Start emulator
-        run: |
-          $ANDROID_HOME/emulator/emulator -avd test_device -no-snapshot-save -no-window -noaudio -no-boot-anim &
-          adb wait-for-device
-          adb shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
-          adb shell settings put global window_animation_scale 0
-          adb shell settings put global transition_animation_scale 0
-          adb shell settings put global animator_duration_scale 0
-
       - name: Run integration tests
-        run: ./gradlew connectedDebugAndroidTest --stacktrace
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 29
+          script: cd Android/${{ matrix.project }} && ./gradlew connectedDebugAndroidTest --stacktrace
 
       - name: Upload test results
         if: always()
