@@ -5,7 +5,11 @@ target 'LevelPlayDemo' do
   # Comment the next line if you don't want to use dynamic frameworks
  use_frameworks!
 
-    pod 'IronSourceSDK' 
+    pod 'IronSourceSDK'
+    pod 'IronSourceUnityAdsAdapter'
   # Pods for LevelPlayDemo
 
+  target 'LevelPlayDemoTests' do
+    inherit! :search_paths
+  end
 end

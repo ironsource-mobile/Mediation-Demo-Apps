@@ -10,13 +10,6 @@ import Foundation
 import ObjectiveC.runtime
 import IronSource
 
-// Replace with your app key as available in the LevelPlay dashboard
-let appKey = "8545d445"
-
-// Replace with your ad unit ids as available in the LevelPlay dashboard
-let interstitialAdUnitId = "wmgt0712uuux8ju4"
-let bannerAdUnitId = "iep3rxsyp9na3rw8"
-let rewardedAdUnitId = "qwouvdrkuwivay5q"
 
 enum ButtonIdentifiers : Int {
     case loadRewardedVideoButtonIdentifier
@@ -36,7 +29,15 @@ protocol DemoViewControllerDelegate: NSObjectProtocol {
 }
 
 class DemoViewController: UIViewController, DemoViewControllerDelegate {
-    
+
+    // Replace with your app key as available in the LevelPlay dashboard
+    static let appKey = "25c43a4a5"
+
+    // Replace with your ad unit ids as available in the LevelPlay dashboard
+    static let interstitialAdUnitId = "obg6ohwts3y690ks"
+    static let bannerAdUnitId = "xc2bsuntn9ea734t"
+    static let rewardedAdUnitId = "l1quzz1xmmdhw5er"
+
     //MARK: IBOutlets
     
     @IBOutlet weak var loadRewardedVideoButton: UIButton!
@@ -100,15 +101,14 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         LevelPlay.validateIntegration()
 #endif
         
-        
         impressionDataDelegate = .init()
         LevelPlay.add(self.impressionDataDelegate)
         
         // After setting the delegates you can go ahead and initialize the SDK.
         // Once the iniitaliztion callback is return you can start loading your ads
         
-        self.logMethodName(string: "init levelPlay SDK with appKey:  \(appKey)")
-        let requestBuilder = LPMInitRequestBuilder(appKey: appKey)
+        self.logMethodName(string: "init levelPlay SDK with appKey:  \(Self.appKey)")
+        let requestBuilder = LPMInitRequestBuilder(appKey: Self.appKey)
         let initRequest = requestBuilder.build()
         LevelPlay.initWith(initRequest)
         { config, error in
@@ -130,7 +130,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     //MARK: Interstitial Methods
 
     func createInterstititalAd() {
-        self.interstitialAd = LPMInterstitialAd(adUnitId: interstitialAdUnitId)
+        self.interstitialAd = LPMInterstitialAd(adUnitId: Self.interstitialAdUnitId)
         interstitialAdDelegate = .init(delegate: self)
         self.interstitialAd.setDelegate(interstitialAdDelegate)
 
@@ -181,7 +181,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
 
         // Create the banner ad view object with required & optional params
         let config = LPMBannerAdViewConfigBuilder().set(adSize: .banner()).build()
-        self.bannerAd = LPMBannerAdView(adUnitId: bannerAdUnitId, config: config)
+        self.bannerAd = LPMBannerAdView(adUnitId: Self.bannerAdUnitId, config: config)
 
         // set the banner listener
         bannerAdViewDelegate = .init(delegate: self)
@@ -220,7 +220,7 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     //MARK: Rewarded Video Methods
     
     func createRewardedAd() {
-        self.rewardedAd = LPMRewardedAd(adUnitId: rewardedAdUnitId)
+        self.rewardedAd = LPMRewardedAd(adUnitId: Self.rewardedAdUnitId)
         rewardedAdDelegate = .init(delegate: self)
         self.rewardedAd.setDelegate(rewardedAdDelegate)
 

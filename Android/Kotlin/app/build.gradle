@@ -18,6 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildFeatures {
@@ -54,8 +55,13 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     // Add LevelPlay Mediation SDK dependency.
     implementation "com.unity3d.ads-mediation:mediation-sdk:$sdkVersion"
+    implementation "com.unity3d.ads-mediation:unityads-adapter:5.+"
+    implementation "com.unity3d.ads:unity-ads:4.+"
 
     // Add AdNetworks adapters dependencies - every adapter contains also the ad network SDK.
     // Make sure you also configure the AdNetworks in your dashboard.
-    // For more information: http://developers.ironsrc.com/ironsource-mobile/android/mediation-networks-android/
+    // For more information: https://docs.unity.com/en-us/grow/levelplay/sdk/android/mediation-networks
+
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
 }

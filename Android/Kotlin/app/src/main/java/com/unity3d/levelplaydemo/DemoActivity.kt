@@ -22,14 +22,6 @@ import com.unity3d.mediation.rewarded.LevelPlayRewardedAd
 
 private const val TAG = "DemoActivity"
 
-// Replace with your app key as available in the LevelPlay dashboard
-private const val APP_KEY = "85460dcd"
-
-// Replace with your ad unit ids as available in the LevelPlay dashboard
-private const val INTERSTITIAL_AD_UNIT_ID = "aeyqi3vqlv6o8sh9"
-private const val BANNER_AD_UNIT_ID = "thnfvcsog13bhn08"
-private const val REWARDED_AD_UNIT_ID = "76yy3nay3ceui2a3"
-
 class DemoActivity : Activity(), DemoActivityListener {
 
     private lateinit var rewardedLoadButton: Button
@@ -46,6 +38,14 @@ class DemoActivity : Activity(), DemoActivityListener {
     private var bannerAd : LevelPlayBannerAdView? = null
 
     companion object {
+        // Replace with your app key as available in the LevelPlay dashboard
+        internal const val APP_KEY = "25b63cf85"
+
+        // Replace with your ad unit ids as available in the LevelPlay dashboard
+        internal const val INTERSTITIAL_AD_UNIT_ID = "h3xw38h9214adgxo"
+        internal const val BANNER_AD_UNIT_ID = "4fpetq4lhe5lsw3e"
+        internal const val REWARDED_AD_UNIT_ID = "syz3d8ekts22q0or"
+
         internal fun logCallbackName(tag: String, fmt: String) {
             Log.d(tag, String.format("%s $fmt", getMethodName()))
         }
