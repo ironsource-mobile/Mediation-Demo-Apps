@@ -9,8 +9,6 @@ func testShouldInitLoadShowRewardedAndReceiveImpression() async throws {
     let delegate = RewardedTestDelegate()
     let impressionDelegate = RewardedImpressionDelegate()
 
-    LevelPlay.add(impressionDelegate as LPMImpressionDataDelegate)
-
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         let requestBuilder = LPMInitRequestBuilder(appKey: kAppKey)
         let initRequest = requestBuilder.build()
@@ -25,6 +23,7 @@ func testShouldInitLoadShowRewardedAndReceiveImpression() async throws {
 
     let rewardedAd = LPMRewardedAd(adUnitId: kRewardedAdUnit)
     rewardedAd.setDelegate(delegate)
+    rewardedAd.setImpressionDataDelegate(impressionDelegate)
 
     // When
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in

@@ -9,8 +9,6 @@ func testShouldInitLoadShowInterstitialAndReceiveImpression() async throws {
     let delegate = InterstitialTestDelegate()
     let impressionDelegate = TestImpressionDelegate()
 
-    LevelPlay.add(impressionDelegate as LPMImpressionDataDelegate)
-
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         let requestBuilder = LPMInitRequestBuilder(appKey: kAppKey)
         let initRequest = requestBuilder.build()
@@ -25,6 +23,7 @@ func testShouldInitLoadShowInterstitialAndReceiveImpression() async throws {
 
     let interstitialAd = LPMInterstitialAd(adUnitId: kInterstitialAdUnitId)
     interstitialAd.setDelegate(delegate)
+    interstitialAd.setImpressionDataDelegate(impressionDelegate)
 
     // When
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
