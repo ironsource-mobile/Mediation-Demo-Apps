@@ -10,8 +10,6 @@ func testShouldInitLoadBannerAndReceiveImpression() async throws {
     let delegate = BannerTestDelegate()
     let impressionDelegate = BannerImpressionDelegate()
 
-    LevelPlay.add(impressionDelegate as LPMImpressionDataDelegate)
-
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
         let requestBuilder = LPMInitRequestBuilder(appKey: DemoViewController.appKey)
         let initRequest = requestBuilder.build()
@@ -27,6 +25,7 @@ func testShouldInitLoadBannerAndReceiveImpression() async throws {
     let config = LPMBannerAdViewConfigBuilder().set(adSize: .banner()).build()
     let bannerAd = LPMBannerAdView(adUnitId: DemoViewController.bannerAdUnitId, config: config)
     bannerAd.setDelegate(delegate)
+    bannerAd.setImpressionDataDelegate(impressionDelegate)
 
     let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
     let rootVC = windowScene?.windows.first(where: { $0.isKeyWindow })?.rootViewController
