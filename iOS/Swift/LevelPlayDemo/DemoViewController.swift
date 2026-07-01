@@ -102,7 +102,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         LevelPlay.validateIntegration()
 #endif
         
-        // After setting the delegates you can go ahead and initialize the SDK.
         // Once the iniitaliztion callback is return you can start loading your ads
         
         self.logMethodName(string: "init levelPlay SDK with appKey:  \(Self.appKey)")
