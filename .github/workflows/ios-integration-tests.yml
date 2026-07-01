@@ -36,7 +36,7 @@ jobs:
           xcodebuild test \
             -workspace ${{ matrix.project.workspace }} \
             -scheme LevelPlayDemo \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest' \
             -resultBundlePath TestResults
 
       - name: Upload test results
