@@ -44,12 +44,6 @@ class BannerInitLoadAndImpressionIntegrationTest {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         }
 
-        LevelPlay.addImpressionDataListener(object : LevelPlayImpressionDataListener {
-            override fun onImpressionSuccess(impressionData: LevelPlayImpressionData) {
-                impressionLatch.countDown()
-            }
-        })
-
         // When
         activityRule.scenario.onActivity { activity ->
             val request = LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build()
@@ -80,6 +74,12 @@ class BannerInitLoadAndImpressionIntegrationTest {
                         override fun onAdExpanded(adInfo: LevelPlayAdInfo) {}
                         override fun onAdCollapsed(adInfo: LevelPlayAdInfo) {}
                         override fun onAdLeftApplication(adInfo: LevelPlayAdInfo) {}
+                    })
+
+                    bannerAd.setImpressionDataListener(object : LevelPlayImpressionDataListener {
+                        override fun onImpressionSuccess(impressionData: LevelPlayImpressionData) {
+                            impressionLatch.countDown()
+                        }
                     })
 
                     val bannerContainer = activity.findViewById<FrameLayout>(R.id.banner_footer)

@@ -43,12 +43,6 @@ class RewardedInitLoadShowAndImpressionIntegrationTest {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         }
 
-        LevelPlay.addImpressionDataListener(object : LevelPlayImpressionDataListener {
-            override fun onImpressionSuccess(impressionData: LevelPlayImpressionData) {
-                impressionLatch.countDown()
-            }
-        })
-
         // When
         activityRule.scenario.onActivity { activity ->
             val request = LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build()
@@ -72,6 +66,11 @@ class RewardedInitLoadShowAndImpressionIntegrationTest {
                         override fun onAdClosed(adInfo: LevelPlayAdInfo) {}
                         override fun onAdRewarded(reward: LevelPlayReward, adInfo: LevelPlayAdInfo) {}
                         override fun onAdInfoChanged(adInfo: LevelPlayAdInfo) {}
+                    })
+                    rewardedAd?.setImpressionDataListener(object : LevelPlayImpressionDataListener {
+                        override fun onImpressionSuccess(impressionData: LevelPlayImpressionData) {
+                            impressionLatch.countDown()
+                        }
                     })
                     rewardedAd?.loadAd()
                 }
