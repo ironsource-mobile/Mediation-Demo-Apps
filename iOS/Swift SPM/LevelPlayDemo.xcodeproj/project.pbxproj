@@ -127,7 +127,7 @@
 			);
 			mainGroup = 471A2A321E66D27900217BE4;
 			packageReferences = (
-				10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "Unity-Mediation-iAds-Swift-Package" */,
+				10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "LevelPlay-Swift-Package" */,
 			);
 			productRefGroup = 471A2A3C1E66D27900217BE4 /* Products */;
 			projectDirPath = "";
@@ -372,12 +372,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "Unity-Mediation-iAds-Swift-Package" */ = {
+		10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "LevelPlay-Swift-Package" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ironsource-mobile/Unity-Mediation-iAds-Swift-Package";
+			repositoryURL = "https://github.com/ironsource-mobile/LevelPlay-Swift-Package";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 9.3.0;
+				minimumVersion = 9.5.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -385,7 +385,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		10B802A72F34E51200F5C141 /* UnityMediationSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "Unity-Mediation-iAds-Swift-Package" */;
+			package = 10B802A62F34E51200F5C141 /* XCRemoteSwiftPackageReference "LevelPlay-Swift-Package" */;
 			productName = UnityMediationSDK;
 		};
 /* End XCSwiftPackageProductDependency section */
