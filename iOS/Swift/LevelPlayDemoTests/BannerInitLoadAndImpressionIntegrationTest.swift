@@ -3,23 +3,27 @@ import IronSource
 import UIKit
 @testable import LevelPlayDemo
 
-@Test(.timeLimit(.minutes(1)))
-@MainActor
-func testShouldInitLoadBannerAndReceiveImpression() async throws {
+@Suite(.serialized)
+struct AdIntegrationTests {}
+
+extension AdIntegrationTests {
+  @Test(.timeLimit(.minutes(1)))
+  @MainActor
+  func testShouldInitLoadBannerAndReceiveImpression() async throws {
     // Given
     let delegate = BannerTestDelegate()
     let impressionDelegate = BannerImpressionDelegate()
 
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-        let requestBuilder = LPMInitRequestBuilder(appKey: DemoViewController.appKey)
-        let initRequest = requestBuilder.build()
-        LevelPlay.initWith(initRequest) { config, error in
-            if let error = error {
-                continuation.resume(throwing: error)
-            } else {
-                continuation.resume()
-            }
+      let requestBuilder = LPMInitRequestBuilder(appKey: DemoViewController.appKey)
+      let initRequest = requestBuilder.build()
+      LevelPlay.initWith(initRequest) { config, error in
+        if let error = error {
+          continuation.resume(throwing: error)
+        } else {
+          continuation.resume()
         }
+      }
     }
 
     let config = LPMBannerAdViewConfigBuilder().set(adSize: .banner()).build()
@@ -33,32 +37,33 @@ func testShouldInitLoadBannerAndReceiveImpression() async throws {
     bannerAd.translatesAutoresizingMaskIntoConstraints = false
     rootVC!.view.addSubview(bannerAd)
     NSLayoutConstraint.activate([
-        bannerAd.centerXAnchor.constraint(equalTo: rootVC!.view.centerXAnchor),
-        bannerAd.bottomAnchor.constraint(equalTo: rootVC!.view.safeAreaLayoutGuide.bottomAnchor),
-        bannerAd.widthAnchor.constraint(equalToConstant: 320),
-        bannerAd.heightAnchor.constraint(equalToConstant: 50)
+      bannerAd.centerXAnchor.constraint(equalTo: rootVC!.view.centerXAnchor),
+      bannerAd.bottomAnchor.constraint(equalTo: rootVC!.view.safeAreaLayoutGuide.bottomAnchor),
+      bannerAd.widthAnchor.constraint(equalToConstant: 320),
+      bannerAd.heightAnchor.constraint(equalToConstant: 50)
     ])
 
     // When
     try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-        delegate.onLoad = { continuation.resume() }
-        delegate.onLoadFail = { error in continuation.resume(throwing: error) }
-        bannerAd.loadAd(with: rootVC!)
+      delegate.onLoad = { continuation.resume() }
+      delegate.onLoadFail = { error in continuation.resume(throwing: error) }
+      bannerAd.loadAd(with: rootVC!)
     }
 
     // Then
     if !impressionDelegate.received {
-        try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-            if impressionDelegate.received {
-                continuation.resume()
-            } else {
-                impressionDelegate.onImpression = { continuation.resume() }
-            }
+      try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
+        if impressionDelegate.received {
+          continuation.resume()
+        } else {
+          impressionDelegate.onImpression = { continuation.resume() }
         }
+      }
     }
 
     bannerAd.removeFromSuperview()
     bannerAd.destroy()
+  }
 }
 
 private class BannerTestDelegate: NSObject, LPMBannerAdViewDelegate {
