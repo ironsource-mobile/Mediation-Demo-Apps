@@ -27,6 +27,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # IronSourceSDK 9.5.0.0 is built with the Xcode 26 toolchain. The macos-26
+      # runner defaults to Xcode 26.5, which fails to link the Objective-C app
+      # target against the Swift static pods (missing swiftCompatibility libs).
+      # 26.6 links cleanly, so pin it explicitly.
+      - name: Select Xcode 26.6
+        run: sudo xcode-select -s /Applications/Xcode_26.6.app
+
       - name: Install CocoaPods dependencies
         if: matrix.project.uses_cocoapods
         run: pod install
