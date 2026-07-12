@@ -42,12 +42,6 @@ class InterstitialInitLoadShowAndImpressionIntegrationTest {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         }
 
-        LevelPlay.addImpressionDataListener(object : LevelPlayImpressionDataListener {
-            override fun onImpressionSuccess(impressionData: LevelPlayImpressionData) {
-                impressionLatch.countDown()
-            }
-        })
-
         // When
         activityRule.scenario.onActivity { activity ->
             val request = LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build()
@@ -70,6 +64,11 @@ class InterstitialInitLoadShowAndImpressionIntegrationTest {
                         override fun onAdClicked(adInfo: LevelPlayAdInfo) {}
                         override fun onAdClosed(adInfo: LevelPlayAdInfo) {}
                         override fun onAdInfoChanged(adInfo: LevelPlayAdInfo) {}
+                    })
+                    interstitialAd?.setImpressionDataListener(object : LevelPlayImpressionDataListener {
+                        override fun onImpressionSuccess(impressionData: LevelPlayImpressionData) {
+                            impressionLatch.countDown()
+                        }
                     })
                     interstitialAd?.loadAd()
                 }

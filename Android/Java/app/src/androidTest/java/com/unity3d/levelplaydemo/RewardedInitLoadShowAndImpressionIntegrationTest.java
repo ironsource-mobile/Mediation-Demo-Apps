@@ -52,13 +52,6 @@ public class RewardedInitLoadShowAndImpressionIntegrationTest {
                 )
         );
 
-        LevelPlay.addImpressionDataListener(new LevelPlayImpressionDataListener() {
-            @Override
-            public void onImpressionSuccess(@NonNull LevelPlayImpressionData impressionData) {
-                impressionLatch.countDown();
-            }
-        });
-
         // When
         activityRule.getScenario().onActivity(activity -> {
             LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build();
@@ -96,6 +89,12 @@ public class RewardedInitLoadShowAndImpressionIntegrationTest {
 
                         @Override
                         public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {}
+                    });
+                    rewardedAdHolder[0].setImpressionDataListener(new LevelPlayImpressionDataListener() {
+                        @Override
+                        public void onImpressionSuccess(@NonNull LevelPlayImpressionData impressionData) {
+                            impressionLatch.countDown();
+                        }
                     });
                     rewardedAdHolder[0].loadAd();
                 }

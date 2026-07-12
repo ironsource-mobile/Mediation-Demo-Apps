@@ -54,13 +54,6 @@ public class BannerInitLoadAndImpressionIntegrationTest {
                 )
         );
 
-        LevelPlay.addImpressionDataListener(new LevelPlayImpressionDataListener() {
-            @Override
-            public void onImpressionSuccess(@NonNull LevelPlayImpressionData impressionData) {
-                impressionLatch.countDown();
-            }
-        });
-
         // When
         activityRule.getScenario().onActivity(activity -> {
             LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build();
@@ -106,6 +99,13 @@ public class BannerInitLoadAndImpressionIntegrationTest {
 
                         @Override
                         public void onAdLeftApplication(@NonNull LevelPlayAdInfo adInfo) {}
+                    });
+
+                    bannerAd.setImpressionDataListener(new LevelPlayImpressionDataListener() {
+                        @Override
+                        public void onImpressionSuccess(@NonNull LevelPlayImpressionData impressionData) {
+                            impressionLatch.countDown();
+                        }
                     });
 
                     FrameLayout bannerContainer = activity.findViewById(R.id.banner_frame_layout);

@@ -8,7 +8,7 @@ on:
 
 jobs:
   integration-tests:
-    runs-on: macos-latest
+    runs-on: macos-26
     strategy:
       matrix:
         project:
@@ -27,6 +27,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Select Xcode 26.6
+        run: sudo xcode-select -s /Applications/Xcode_26.6.app
+
       - name: Install CocoaPods dependencies
         if: matrix.project.uses_cocoapods
         run: pod install
@@ -36,7 +39,7 @@ jobs:
           xcodebuild test \
             -workspace ${{ matrix.project.workspace }} \
             -scheme LevelPlayDemo \
-            -destination 'platform=iOS Simulator,name=iPhone 16,OS=latest' \
+            -destination 'platform=iOS Simulator,name=iPhone 17,OS=latest' \
             -resultBundlePath TestResults
 
       - name: Upload test results

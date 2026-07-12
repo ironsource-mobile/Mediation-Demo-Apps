@@ -87,8 +87,6 @@ public class DemoActivity extends Activity implements DemoActivityListener {
             LevelPlay.validateIntegration(this);
         }
 
-        LevelPlay.addImpressionDataListener(new DemoImpressionDataListener());
-
         // After setting the listeners you can go ahead and initialize the SDK.
         // Once the initialization callback is returned you can start loading your ads
 
@@ -106,6 +104,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     public void createInterstitialAd() {
         interstitialAd = new LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID);
         interstitialAd.setListener(new DemoInterstitialAdListener(this));
+        interstitialAd.setImpressionDataListener(new DemoImpressionDataListener());
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true);
     }
@@ -151,6 +150,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
 
             // set the banner listener
             bannerAd.setBannerListener(new DemoBannerAdListener(this));
+            bannerAd.setImpressionDataListener(new DemoImpressionDataListener());
 
             // add LevelPlayBannerAdView to your container
             FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT);
@@ -181,6 +181,7 @@ public class DemoActivity extends Activity implements DemoActivityListener {
     public void createRewardedAd() {
         rewardedAd = new LevelPlayRewardedAd(REWARDED_AD_UNIT_ID);
         rewardedAd.setListener(new DemoRewardedVideoAdListener(this));
+        rewardedAd.setImpressionDataListener(new DemoImpressionDataListener());
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER, true);
     }

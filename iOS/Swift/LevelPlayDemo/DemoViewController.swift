@@ -43,21 +43,22 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
     @IBOutlet weak var loadRewardedVideoButton: UIButton!
     @IBOutlet weak var showRewardedVideoButton: UIButton!
     var rewardedAdDelegate: DemoRewardedVideoAdDelegate! = nil
+    var rewardedImpressionDataDelegate: DemoImpressionDataDelegate! = nil
     var rewardedAd: LPMRewardedAd! = nil
     var reward: LPMReward! = nil
 
-    
+
     @IBOutlet weak var loadInterstitialButton: UIButton!
     @IBOutlet weak var showInterstitialButton: UIButton!
     var interstitialAdDelegate: DemoInterstitialAdDelegate! = nil
+    var interstitialImpressionDataDelegate: DemoImpressionDataDelegate! = nil
     var interstitialAd: LPMInterstitialAd! = nil
 
     @IBOutlet weak var loadBannerButton: UIButton!
     var bannerAdViewDelegate: DemoBannerAdDelegate! = nil
+    var bannerImpressionDataDelegate: DemoImpressionDataDelegate! = nil
     var bannerAd: LPMBannerAdView! = nil
     var bannerSize: LPMAdSize! = nil
-
-    var impressionDataDelegate: DemoImpressionDataDelegate! = nil
 
     @IBOutlet weak var versionLabel: UILabel!
     
@@ -101,10 +102,6 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         LevelPlay.validateIntegration()
 #endif
         
-        impressionDataDelegate = .init()
-        LevelPlay.add(self.impressionDataDelegate)
-        
-        // After setting the delegates you can go ahead and initialize the SDK.
         // Once the iniitaliztion callback is return you can start loading your ads
         
         self.logMethodName(string: "init levelPlay SDK with appKey:  \(Self.appKey)")
@@ -133,6 +130,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         self.interstitialAd = LPMInterstitialAd(adUnitId: Self.interstitialAdUnitId)
         interstitialAdDelegate = .init(delegate: self)
         self.interstitialAd.setDelegate(interstitialAdDelegate)
+        interstitialImpressionDataDelegate = .init()
+        self.interstitialAd.setImpressionDataDelegate(interstitialImpressionDataDelegate)
 
         self.setButtonEnablement(ButtonIdentifiers.loadInterstitialButtonIdentifier, enable: true)
     }
@@ -186,6 +185,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         // set the banner listener
         bannerAdViewDelegate = .init(delegate: self)
         self.bannerAd.setDelegate(bannerAdViewDelegate)
+        bannerImpressionDataDelegate = .init()
+        self.bannerAd.setImpressionDataDelegate(bannerImpressionDataDelegate)
         
         addBannerToView()
         
@@ -223,6 +224,8 @@ class DemoViewController: UIViewController, DemoViewControllerDelegate {
         self.rewardedAd = LPMRewardedAd(adUnitId: Self.rewardedAdUnitId)
         rewardedAdDelegate = .init(delegate: self)
         self.rewardedAd.setDelegate(rewardedAdDelegate)
+        rewardedImpressionDataDelegate = .init()
+        self.rewardedAd.setImpressionDataDelegate(rewardedImpressionDataDelegate)
 
         self.setButtonEnablement(ButtonIdentifiers.loadRewardedVideoButtonIdentifier, enable: true)
     }

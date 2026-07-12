@@ -51,13 +51,6 @@ public class InterstitialInitLoadShowAndImpressionIntegrationTest {
                 )
         );
 
-        LevelPlay.addImpressionDataListener(new LevelPlayImpressionDataListener() {
-            @Override
-            public void onImpressionSuccess(@NonNull LevelPlayImpressionData impressionData) {
-                impressionLatch.countDown();
-            }
-        });
-
         // When
         activityRule.getScenario().onActivity(activity -> {
             LevelPlayInitRequest request = new LevelPlayInitRequest.Builder(DemoActivity.APP_KEY).build();
@@ -92,6 +85,12 @@ public class InterstitialInitLoadShowAndImpressionIntegrationTest {
 
                         @Override
                         public void onAdInfoChanged(@NonNull LevelPlayAdInfo adInfo) {}
+                    });
+                    interstitialAdHolder[0].setImpressionDataListener(new LevelPlayImpressionDataListener() {
+                        @Override
+                        public void onImpressionSuccess(@NonNull LevelPlayImpressionData impressionData) {
+                            impressionLatch.countDown();
+                        }
                     });
                     interstitialAdHolder[0].loadAd();
                 }

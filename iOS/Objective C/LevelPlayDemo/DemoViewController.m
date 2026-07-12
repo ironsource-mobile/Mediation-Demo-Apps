@@ -18,15 +18,16 @@
 @property (nonatomic, strong) DemoRewardedVideoAdDelegate         *rewardedVideoDelegate;
 @property (nonatomic, strong) LPMRewardedAd                       *rewardedAd;
 @property (nonatomic, strong) LPMReward                           *reward;
+@property (nonatomic, strong) DemoImpressionDataDelegate          *rewardedImpressionDataDelegate;
 
 @property (nonatomic, strong) DemoInterstitialAdDelegate          *interstitialAdDelegate;
 @property (nonatomic, strong) LPMInterstitialAd                   *interstitialAd;
+@property (nonatomic, strong) DemoImpressionDataDelegate          *interstitialImpressionDataDelegate;
 
 @property (nonatomic, strong) DemoBannerAdDelegate                *bannerAdViewDelegate;
 @property (nonatomic, strong) LPMBannerAdView                     *bannerAd;
 @property (nonatomic, strong) LPMAdSize                           *bannerSize;
-
-@property (nonatomic, strong) DemoImpressionDataDelegate          *impressionDataDelegate;
+@property (nonatomic, strong) DemoImpressionDataDelegate          *bannerImpressionDataDelegate;
 
 @end
 
@@ -70,11 +71,6 @@
     // Remove it before going live!
     [LevelPlay validateIntegration];
 #endif
-    
-    self.impressionDataDelegate = [[DemoImpressionDataDelegate alloc] init];
-    [LevelPlay addImpressionDataDelegate:self.impressionDataDelegate];
-        
-    // After setting the delegates you can go ahead and initialize the SDK. 
     // Once the initialization callback is return you can start loading your ads
     
     [self logMethodName:[NSString stringWithFormat:@"init levelPlay SDK with appKey: %@", kAppKey]];
@@ -103,7 +99,9 @@
     self.interstitialAd = [[LPMInterstitialAd alloc] initWithAdUnitId:kInterstitialAdUnitId];
     self.interstitialAdDelegate = [[DemoInterstitialAdDelegate alloc] initWithDelegate:self];
     self.interstitialAd.delegate = self.interstitialAdDelegate;
-    
+    self.interstitialImpressionDataDelegate = [[DemoImpressionDataDelegate alloc] init];
+    [self.interstitialAd setImpressionDataDelegate:self.interstitialImpressionDataDelegate];
+
     [self setEnablementForButton:LoadInterstitialButtonIdentifier
                                    enable:YES];
 }
@@ -150,7 +148,9 @@
         // set the banner listener
         self.bannerAdViewDelegate = [[DemoBannerAdDelegate alloc] initWithDelegate:self];
         [self.bannerAd setDelegate:self.bannerAdViewDelegate];
-        
+        self.bannerImpressionDataDelegate = [[DemoImpressionDataDelegate alloc] init];
+        [self.bannerAd setImpressionDataDelegate:self.bannerImpressionDataDelegate];
+
         [self addBannerToView];
         
         [self setEnablementForButton:LoadBannerButtonIdentifier
@@ -190,7 +190,9 @@
   self.rewardedAd = [[LPMRewardedAd alloc] initWithAdUnitId:kRewardedAdUnit];
   self.rewardedVideoDelegate = [[DemoRewardedVideoAdDelegate alloc] initWithDelegate:self];
   self.rewardedAd.delegate = self.rewardedVideoDelegate;
-  
+  self.rewardedImpressionDataDelegate = [[DemoImpressionDataDelegate alloc] init];
+  [self.rewardedAd setImpressionDataDelegate:self.rewardedImpressionDataDelegate];
+
   [self setEnablementForButton:LoadRewardedVideoButtonIdentifier
                         enable:YES];
 }

@@ -95,8 +95,6 @@ class DemoActivity : Activity(), DemoActivityListener {
             LevelPlay.validateIntegration(this)
         }
 
-        LevelPlay.addImpressionDataListener(DemoImpressionDataListener())
-
         // After setting the listeners you can go ahead and initialize the SDK.
         // Once the initialization callback is returned you can start loading your ads
 
@@ -114,6 +112,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     override fun createInterstitialAd() {
         interstitialAd = LevelPlayInterstitialAd(INTERSTITIAL_AD_UNIT_ID)
         interstitialAd?.setListener(DemoInterstitialAdListener(this))
+        interstitialAd?.setImpressionDataListener(DemoImpressionDataListener())
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_INTERSTITIAL_BUTTON_IDENTIFIER, true)
     }
@@ -160,6 +159,7 @@ class DemoActivity : Activity(), DemoActivityListener {
 
             // set the banner listener
             bannerAd?.setBannerListener(DemoBannerAdListener(this))
+            bannerAd?.setImpressionDataListener(DemoImpressionDataListener())
 
             // add LevelPlayBannerAdView to your container
             val layoutParams = FrameLayout.LayoutParams(
@@ -191,6 +191,7 @@ class DemoActivity : Activity(), DemoActivityListener {
     override fun createRewardedAd() {
         rewardedAd = LevelPlayRewardedAd(REWARDED_AD_UNIT_ID)
         rewardedAd?.setListener(DemoRewardedAdListener(this))
+        rewardedAd?.setImpressionDataListener(DemoImpressionDataListener())
 
         setEnablementForButton(DemoButtonIdentifiers.LOAD_REWARDED_VIDEO_BUTTON_IDENTIFIER, true)
     }
