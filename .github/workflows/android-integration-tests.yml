@@ -5,6 +5,22 @@ on:
     paths:
       - 'Android/**'
   workflow_dispatch:
+    inputs:
+      sdk_version:
+        description: 'LevelPlay SDK version (blank = use project default)'
+        required: false
+        type: string
+        default: ''
+      api_level:
+        description: 'Android emulator API level'
+        required: false
+        type: string
+        default: '29'
+      target_sdk_version:
+        description: 'Android target + compiled SDK version'
+        required: false
+        type: string
+        default: '34'
 
 jobs:
   integration-tests:
@@ -44,20 +60,45 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: Resolve build args
+        id: args
+        run: |
+          SDK_ARG=""
+          if [ -n "${{ inputs.sdk_version }}" ]; then
+            SDK_ARG="-PsdkVersion=${{ inputs.sdk_version }}"
+          fi
+          TARGET_ARG=""
+          if [ -n "${{ inputs.target_sdk_version }}" ]; then
+            TARGET_ARG="-PtargetSdkVersion=${{ inputs.target_sdk_version }} -PcompileSdkVersion=${{ inputs.target_sdk_version }}"
+          fi
+          API_LEVEL="${{ inputs.api_level }}"
+          if [ -z "$API_LEVEL" ]; then API_LEVEL="29"; fi
+          echo "sdk_arg=$SDK_ARG" >> $GITHUB_OUTPUT
+          echo "target_arg=$TARGET_ARG" >> $GITHUB_OUTPUT
+          echo "api_level=$API_LEVEL" >> $GITHUB_OUTPUT
+
       - name: Build debug and test APKs
-        run: ./gradlew assembleDebug assembleDebugAndroidTest --stacktrace
+        run: |
+          ./gradlew assembleDebug assembleDebugAndroidTest \
+            ${{ steps.args.outputs.sdk_arg }} \
+            ${{ steps.args.outputs.target_arg }} \
+            --stacktrace
 
       - name: Run integration tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 29
-          script: cd Android/${{ matrix.project }} && ./gradlew connectedDebugAndroidTest --stacktrace
+          api-level: ${{ steps.args.outputs.api_level }}
+          script: |
+            cd Android/${{ matrix.project }} && ./gradlew connectedDebugAndroidTest \
+              ${{ steps.args.outputs.sdk_arg }} \
+              ${{ steps.args.outputs.target_arg }} \
+              --stacktrace
 
       - name: Upload test results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: integration-test-results-${{ matrix.project }}
+          name: integration-test-results-${{ matrix.project }}-api${{ steps.args.outputs.api_level }}
           path: |
             Android/${{ matrix.project }}/app/build/reports/androidTests/
             Android/${{ matrix.project }}/app/build/outputs/androidTest-results/
