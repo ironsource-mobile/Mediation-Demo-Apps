@@ -89,11 +89,7 @@ jobs:
         with:
           api-level: ${{ steps.args.outputs.api_level }}
           arch: x86_64
-          script: |
-            cd Android/${{ matrix.project }} && ./gradlew connectedDebugAndroidTest \
-              ${{ steps.args.outputs.sdk_arg }} \
-              ${{ steps.args.outputs.target_arg }} \
-              --stacktrace
+          script: cd Android/${{ matrix.project }} && ./gradlew connectedDebugAndroidTest ${{ steps.args.outputs.sdk_arg }} ${{ steps.args.outputs.target_arg }} --stacktrace
 
       - name: Upload test results
         if: always()
