@@ -1,4 +1,4 @@
-name: Build Android Kotlin with Custom SDK Version
+name: Build Android Demo Apps with Custom SDK Version
 
 on:
   workflow_dispatch:
@@ -7,10 +7,18 @@ on:
         description: 'LevelPlay SDK version'
         required: true
         type: string
+      target_sdk_version:
+        description: 'Android target + compiled SDK version'
+        required: false
+        type: string
+        default: '34'
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        project: [Kotlin, Java]
 
     env:
       PRIVATE_MAVEN_USERNAME: ${{ secrets.PRIVATE_MAVEN_USERNAME }}
@@ -18,7 +26,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: Android/Kotlin
+        working-directory: Android/${{ matrix.project }}
 
     steps:
       - name: Checkout code
@@ -43,25 +51,61 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug -PsdkVersion=${{ inputs.sdk_version }} --stacktrace
+        run: |
+          ./gradlew assembleDebug \
+            -PsdkVersion=${{ inputs.sdk_version }} \
+            -PtargetSdkVersion=${{ inputs.target_sdk_version }} \
+            -PcompileSdkVersion=${{ inputs.target_sdk_version }} \
+            --stacktrace
+
+      - name: Verify resolved SDK versions
+        run: |
+          {
+            echo "### ${{ matrix.project }} SDK version verification"
+            echo ""
+            echo "**Passed to Gradle:**"
+            echo "- \`-PtargetSdkVersion=${{ inputs.target_sdk_version }}\`"
+            echo "- \`-PcompileSdkVersion=${{ inputs.target_sdk_version }}\`"
+            echo ""
+            echo "**Resolved Gradle ext values:**"
+            echo '```'
+            ./gradlew :app:properties -q \
+              -PsdkVersion=${{ inputs.sdk_version }} \
+              -PtargetSdkVersion=${{ inputs.target_sdk_version }} \
+              -PcompileSdkVersion=${{ inputs.target_sdk_version }} \
+              | grep -E "^(demoCompileSdk|demoTargetSdk|sdkVersion):" | head -3
+            echo '```'
+            echo ""
+            echo "**APK manifest (aapt2 dump badging):**"
+            echo '```'
+            BUILD_TOOLS=$(ls -d $ANDROID_HOME/build-tools/*/ | sort -V | tail -1)
+            ${BUILD_TOOLS}aapt2 dump badging app/build/outputs/apk/debug/app-debug.apk \
+              | grep -E "^(sdkVersion|targetSdkVersion|application:)"
+            echo '```'
+          } >> $GITHUB_STEP_SUMMARY
 
       - name: Build Release APK
-        run: ./gradlew assembleRelease -PsdkVersion=${{ inputs.sdk_version }} --stacktrace
+        run: |
+          ./gradlew assembleRelease \
+            -PsdkVersion=${{ inputs.sdk_version }} \
+            -PtargetSdkVersion=${{ inputs.target_sdk_version }} \
+            -PcompileSdkVersion=${{ inputs.target_sdk_version }} \
+            --stacktrace
 
       - name: Upload APK Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: apk-sdk-${{ inputs.sdk_version }}
+          name: apk-${{ matrix.project }}-sdk-${{ inputs.sdk_version }}-target-${{ inputs.target_sdk_version }}
           path: |
-            Android/Kotlin/app/build/outputs/apk/debug/app-debug.apk
-            Android/Kotlin/app/build/outputs/apk/release/app-release-unsigned.apk
+            Android/${{ matrix.project }}/app/build/outputs/apk/debug/app-debug.apk
+            Android/${{ matrix.project }}/app/build/outputs/apk/release/app-release-unsigned.apk
           retention-days: 30
 
       - name: Upload Build Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: build-reports-sdk-${{ inputs.sdk_version }}
+          name: build-reports-${{ matrix.project }}-sdk-${{ inputs.sdk_version }}-target-${{ inputs.target_sdk_version }}
           path: |
-            Android/Kotlin/app/build/reports/
+            Android/${{ matrix.project }}/app/build/reports/
           retention-days: 7

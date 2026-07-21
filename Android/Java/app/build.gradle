@@ -1,13 +1,19 @@
 apply plugin: 'com.android.application'
 
+ext {
+    sdkVersion = project.hasProperty('sdkVersion') ? project.property('sdkVersion') : "9.+"
+    demoCompileSdk = project.hasProperty('compileSdkVersion') ? project.property('compileSdkVersion').toInteger() : 34
+    demoTargetSdk = project.hasProperty('targetSdkVersion') ? project.property('targetSdkVersion').toInteger() : 34
+}
+
 android {
     namespace "com.unity3d.levelplaydemo"
-    compileSdkVersion 34
+    compileSdkVersion demoCompileSdk
     buildToolsVersion '34.0.0'
     defaultConfig {
         applicationId "com.unity3d.levelplaydemo"
         minSdkVersion 19
-        targetSdkVersion 34
+        targetSdkVersion demoTargetSdk
         versionCode 1
         versionName "1.0"
         multiDexEnabled = true
@@ -38,7 +44,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     // Add LevelPlay Mediation SDK dependency.
-    implementation "com.unity3d.ads-mediation:mediation-sdk:9.+"
+    implementation "com.unity3d.ads-mediation:mediation-sdk:$sdkVersion"
     implementation "com.unity3d.ads-mediation:unityads-adapter:5.+"
     implementation "com.unity3d.ads:unity-ads:4.+"
 
