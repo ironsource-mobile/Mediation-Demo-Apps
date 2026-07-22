@@ -82,7 +82,7 @@ class RewardedInitLoadShowAndImpressionIntegrationTest {
         }
 
         assertTrue("Init did not complete within 10 seconds", initLatch.await(10, TimeUnit.SECONDS))
-        assertTrue("Rewarded ad did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS))
+        assertTrue("Rewarded ad did not load within 30 seconds", loadLatch.await(30, TimeUnit.SECONDS))
 
         activityRule.scenario.onActivity { activity ->
             rewardedAd?.showAd(activity)

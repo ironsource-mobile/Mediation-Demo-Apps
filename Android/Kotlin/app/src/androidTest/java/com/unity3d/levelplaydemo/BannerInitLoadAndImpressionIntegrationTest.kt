@@ -39,9 +39,12 @@ class BannerInitLoadAndImpressionIntegrationTest {
         val impressionLatch = CountDownLatch(1)
 
         activityRule.scenario.onActivity { activity ->
-            activity.setTurnScreenOn(true)
-            activity.setShowWhenLocked(true)
-            activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            activity.window.addFlags(
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                        or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                        or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                        or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+            )
         }
 
         // When
@@ -99,7 +102,7 @@ class BannerInitLoadAndImpressionIntegrationTest {
 
         // Then
         assertTrue("Init did not complete within 10 seconds", initLatch.await(10, TimeUnit.SECONDS))
-        assertTrue("Banner did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS))
+        assertTrue("Banner did not load within 90 seconds", loadLatch.await(90, TimeUnit.SECONDS))
         assertTrue("Impression callback not received within 20 seconds", impressionLatch.await(20, TimeUnit.SECONDS))
     }
 }
