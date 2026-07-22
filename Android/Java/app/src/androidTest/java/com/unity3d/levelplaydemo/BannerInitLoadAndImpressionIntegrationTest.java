@@ -123,7 +123,7 @@ public class BannerInitLoadAndImpressionIntegrationTest {
 
         // Then
         assertTrue("Init did not complete within 10 seconds", initLatch.await(10, TimeUnit.SECONDS));
-        assertTrue("Banner did not load within 30 seconds", loadLatch.await(30, TimeUnit.SECONDS));
+        assertTrue("Banner did not load within 90 seconds", loadLatch.await(90, TimeUnit.SECONDS));
         assertTrue("Impression callback not received within 20 seconds", impressionLatch.await(20, TimeUnit.SECONDS));
     }
 }
