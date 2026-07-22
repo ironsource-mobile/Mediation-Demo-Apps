@@ -39,9 +39,12 @@ class BannerInitLoadAndImpressionIntegrationTest {
         val impressionLatch = CountDownLatch(1)
 
         activityRule.scenario.onActivity { activity ->
-            activity.setTurnScreenOn(true)
-            activity.setShowWhenLocked(true)
-            activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            activity.window.addFlags(
+                WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                        or WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON
+                        or WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
+                        or WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+            )
         }
 
         // When
