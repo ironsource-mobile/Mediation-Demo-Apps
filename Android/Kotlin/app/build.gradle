@@ -5,16 +5,18 @@ plugins {
 
 ext {
     sdkVersion = project.hasProperty('sdkVersion') ? project.property('sdkVersion') : "9.+"
+    demoCompileSdk = project.hasProperty('compileSdkVersion') ? project.property('compileSdkVersion').toInteger() : 34
+    demoTargetSdk = project.hasProperty('targetSdkVersion') ? project.property('targetSdkVersion').toInteger() : 34
 }
 
 android {
     namespace "com.unity3d.levelplaydemo"
-    compileSdkVersion 34
+    compileSdkVersion demoCompileSdk
     buildToolsVersion '34.0.0'
     defaultConfig {
         applicationId "com.unity3d.levelplaydemo"
         minSdkVersion 19
-        targetSdkVersion 34
+        targetSdkVersion demoTargetSdk
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
