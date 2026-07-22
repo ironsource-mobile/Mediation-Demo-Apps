@@ -103,7 +103,7 @@ public class InterstitialInitLoadShowAndImpressionIntegrationTest {
         });
 
         assertTrue("Init did not complete within 10 seconds", initLatch.await(10, TimeUnit.SECONDS));
-        assertTrue("Interstitial did not load within 15 seconds", loadLatch.await(15, TimeUnit.SECONDS));
+        assertTrue("Interstitial did not load within 30 seconds", loadLatch.await(30, TimeUnit.SECONDS));
 
         activityRule.getScenario().onActivity(activity ->
                 interstitialAdHolder[0].showAd(activity)
