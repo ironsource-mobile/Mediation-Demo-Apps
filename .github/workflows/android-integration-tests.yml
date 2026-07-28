@@ -96,6 +96,24 @@ jobs:
             ${{ steps.args.outputs.target_arg }} \
             --stacktrace
 
+      # Android 17 requires cmdline-tools 22.0 for avdmanager to correctly
+      # handle feature-drop system-image packages. Without this, avdmanager
+      # emits "This version only understands SDK XML versions up to 3 but an
+      # SDK XML file of version 4 was encountered" and writes a broken
+      # `target=android-0` into the AVD's config.ini, so the emulator
+      # never finishes booting. Pending upstream:
+      # ReactiveCircus/android-emulator-runner#483.
+      - name: Upgrade cmdline-tools to 22.0 (for API 37 support)
+        working-directory: .
+        if: ${{ steps.args.outputs.api_level == '37' }}
+        run: |
+          curl -sfLO https://dl.google.com/android/repository/commandlinetools-linux-15859902_latest.zip
+          unzip -q commandlinetools-linux-15859902_latest.zip -d /tmp/newcmd
+          rm -rf "$ANDROID_HOME/cmdline-tools/latest"
+          mv /tmp/newcmd/cmdline-tools "$ANDROID_HOME/cmdline-tools/latest"
+          rm commandlinetools-linux-15859902_latest.zip
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --version
+
       - name: Run integration tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
