@@ -79,11 +79,18 @@ jobs:
           # api-level directly into the package name, so pass the versioned
           # string here to make it install the right one.
           EMU_API_LEVEL="$API_LEVEL"
-          if [ "$API_LEVEL" = "37" ]; then EMU_API_LEVEL="37.0"; fi
+          EMU_TARGET="default"
+          # API 37 (Android 17) is only published under `google_apis` etc. —
+          # no `default` system-image tag exists — so switch the target too.
+          if [ "$API_LEVEL" = "37" ]; then
+            EMU_API_LEVEL="37.0"
+            EMU_TARGET="google_apis"
+          fi
           echo "sdk_arg=$SDK_ARG" >> $GITHUB_OUTPUT
           echo "target_arg=$TARGET_ARG" >> $GITHUB_OUTPUT
           echo "api_level=$API_LEVEL" >> $GITHUB_OUTPUT
           echo "emu_api_level=$EMU_API_LEVEL" >> $GITHUB_OUTPUT
+          echo "emu_target=$EMU_TARGET" >> $GITHUB_OUTPUT
 
       - name: Build debug and test APKs
         run: |
@@ -117,6 +124,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: ${{ steps.args.outputs.emu_api_level }}
+          target: ${{ steps.args.outputs.emu_target }}
           arch: x86_64
           script: cd Android/${{ matrix.project }} && ./gradlew connectedDebugAndroidTest ${{ steps.args.outputs.sdk_arg }} ${{ steps.args.outputs.target_arg }} --stacktrace
 
