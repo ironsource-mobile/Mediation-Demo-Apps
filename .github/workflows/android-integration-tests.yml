@@ -68,6 +68,8 @@ jobs:
             SDK_ARG="-PsdkVersion=${{ inputs.sdk_version }}"
           fi
           TARGET_ARG=""
+          TARGET_SDK="${{ inputs.target_sdk_version }}"
+          if [ -z "$TARGET_SDK" ]; then TARGET_SDK="34"; fi
           if [ -n "${{ inputs.target_sdk_version }}" ]; then
             TARGET_ARG="-PtargetSdkVersion=${{ inputs.target_sdk_version }} -PcompileSdkVersion=${{ inputs.target_sdk_version }}"
           fi
@@ -75,7 +77,11 @@ jobs:
           if [ -z "$API_LEVEL" ]; then API_LEVEL="29"; fi
           echo "sdk_arg=$SDK_ARG" >> $GITHUB_OUTPUT
           echo "target_arg=$TARGET_ARG" >> $GITHUB_OUTPUT
+          echo "target_sdk=$TARGET_SDK" >> $GITHUB_OUTPUT
           echo "api_level=$API_LEVEL" >> $GITHUB_OUTPUT
+
+      - name: Install required Android platform
+        run: sdkmanager "platforms;android-${{ steps.args.outputs.target_sdk }}"
 
       - name: Build debug and test APKs
         run: |
