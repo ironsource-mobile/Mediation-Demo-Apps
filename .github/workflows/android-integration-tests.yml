@@ -73,9 +73,17 @@ jobs:
           fi
           API_LEVEL="${{ inputs.api_level }}"
           if [ -z "$API_LEVEL" ]; then API_LEVEL="29"; fi
+          # Android 17 (API 37) is only published under feature-drop names
+          # (system-images;android-37.0/-37.1), not bare `android-37`. Map here.
+          case "$API_LEVEL" in
+            37) SYS_IMAGE_LEVEL="37.0" ;;
+            *)  SYS_IMAGE_LEVEL="$API_LEVEL" ;;
+          esac
+          SYS_IMAGE="system-images;android-$SYS_IMAGE_LEVEL;default;x86_64"
           echo "sdk_arg=$SDK_ARG" >> $GITHUB_OUTPUT
           echo "target_arg=$TARGET_ARG" >> $GITHUB_OUTPUT
           echo "api_level=$API_LEVEL" >> $GITHUB_OUTPUT
+          echo "sys_image=$SYS_IMAGE" >> $GITHUB_OUTPUT
 
       - name: Build debug and test APKs
         run: |
@@ -84,12 +92,56 @@ jobs:
             ${{ steps.args.outputs.target_arg }} \
             --stacktrace
 
+      - name: Install emulator + system image
+        working-directory: .
+        env:
+          SYS_IMAGE: ${{ steps.args.outputs.sys_image }}
+        run: |
+          yes | sdkmanager --licenses > /dev/null 2>&1 || true
+          sdkmanager --install "emulator" "$SYS_IMAGE"
+
+      - name: Create AVD
+        working-directory: .
+        env:
+          SYS_IMAGE: ${{ steps.args.outputs.sys_image }}
+        run: echo "no" | avdmanager create avd -n test -k "$SYS_IMAGE" --force
+
+      - name: Boot emulator (background)
+        working-directory: .
+        run: |
+          nohup "$ANDROID_HOME/emulator/emulator" -avd test \
+            -no-window -no-audio -no-boot-anim -no-snapshot \
+            -gpu swiftshader_indirect \
+            > /tmp/emulator.log 2>&1 &
+          echo "emulator started (pid $!)"
+
+      - name: Wait for emulator boot
+        working-directory: .
+        run: |
+          adb wait-for-device
+          BOOT_TIMEOUT=600
+          ELAPSED=0
+          until [ "$(adb shell getprop sys.boot_completed 2>/dev/null | tr -d '\r')" = "1" ]; do
+            if [ "$ELAPSED" -ge "$BOOT_TIMEOUT" ]; then
+              echo "boot timeout after ${BOOT_TIMEOUT}s"
+              tail -100 /tmp/emulator.log
+              exit 1
+            fi
+            sleep 5
+            ELAPSED=$((ELAPSED + 5))
+          done
+          echo "emulator booted after ${ELAPSED}s"
+          echo "release: $(adb shell getprop ro.build.version.release | tr -d '\r')"
+          echo "sdk: $(adb shell getprop ro.build.version.sdk | tr -d '\r')"
+          adb shell input keyevent 82
+
       - name: Run integration tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ steps.args.outputs.api_level }}
-          arch: x86_64
-          script: cd Android/${{ matrix.project }} && ./gradlew connectedDebugAndroidTest ${{ steps.args.outputs.sdk_arg }} ${{ steps.args.outputs.target_arg }} --stacktrace
+        run: ./gradlew connectedDebugAndroidTest ${{ steps.args.outputs.sdk_arg }} ${{ steps.args.outputs.target_arg }} --stacktrace
+
+      - name: Kill emulator
+        if: always()
+        working-directory: .
+        run: adb emu kill 2>&1 || true
 
       - name: Upload test results
         if: always()
