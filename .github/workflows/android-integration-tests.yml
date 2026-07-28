@@ -74,12 +74,14 @@ jobs:
           API_LEVEL="${{ inputs.api_level }}"
           if [ -z "$API_LEVEL" ]; then API_LEVEL="29"; fi
           # Android 17 (API 37) is only published under feature-drop names
-          # (system-images;android-37.0/-37.1), not bare `android-37`. Map here.
+          # (system-images;android-37.0/-37.1), not bare `android-37`, and only
+          # under `google_apis` / `google_apis_playstore` tags — no `default`
+          # variant exists at API 37. Map both here.
           case "$API_LEVEL" in
-            37) SYS_IMAGE_LEVEL="37.0" ;;
-            *)  SYS_IMAGE_LEVEL="$API_LEVEL" ;;
+            37) SYS_IMAGE_LEVEL="37.0" ; SYS_IMAGE_TAG="google_apis" ;;
+            *)  SYS_IMAGE_LEVEL="$API_LEVEL" ; SYS_IMAGE_TAG="default" ;;
           esac
-          SYS_IMAGE="system-images;android-$SYS_IMAGE_LEVEL;default;x86_64"
+          SYS_IMAGE="system-images;android-$SYS_IMAGE_LEVEL;$SYS_IMAGE_TAG;x86_64"
           echo "sdk_arg=$SDK_ARG" >> $GITHUB_OUTPUT
           echo "target_arg=$TARGET_ARG" >> $GITHUB_OUTPUT
           echo "api_level=$API_LEVEL" >> $GITHUB_OUTPUT
