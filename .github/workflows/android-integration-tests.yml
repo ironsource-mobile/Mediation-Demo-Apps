@@ -97,6 +97,18 @@ jobs:
           echo "emu_target=$EMU_TARGET" >> $GITHUB_OUTPUT
           echo "is_android_17=$IS_ANDROID_17" >> $GITHUB_OUTPUT
 
+          # Surface resolved parameters at the top of the run's summary page.
+          {
+            echo "### Android Integration Tests — ${{ matrix.project }}"
+            echo ""
+            echo "| Parameter | Value |"
+            echo "|---|---|"
+            echo "| LevelPlay SDK version | \`${{ inputs.sdk_version || 'project default' }}\` |"
+            echo "| Emulator API level | \`$API_LEVEL\`$([ "$EMU_API_LEVEL" != "$API_LEVEL" ] && echo " (system image: \`$EMU_API_LEVEL\`)" || echo "") |"
+            echo "| Emulator target | \`$EMU_TARGET\` |"
+            echo "| App \`targetSdk\` / \`compileSdk\` | \`${{ inputs.target_sdk_version || '34 (default)' }}\` |"
+          } >> $GITHUB_STEP_SUMMARY
+
       - name: Build debug and test APKs
         run: |
           ./gradlew assembleDebug assembleDebugAndroidTest \
