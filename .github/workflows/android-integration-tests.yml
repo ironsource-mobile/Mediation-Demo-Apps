@@ -73,9 +73,41 @@ jobs:
           fi
           API_LEVEL="${{ inputs.api_level }}"
           if [ -z "$API_LEVEL" ]; then API_LEVEL="29"; fi
+          # Android 17 uses feature-drop naming: only platforms;android-37.0/-37.1
+          # exist (no bare -37), and only google_apis / google_apis_playstore tags
+          # (no `default` at API 37). Treat 37, 37.0, and 37.1 as equivalent
+          # inputs and steer reactivecircus/android-emulator-runner accordingly.
+          # Single source of truth for the "is this Android 17" decision:
+          case "$API_LEVEL" in
+            37|37.0|37.1) IS_ANDROID_17="true" ;;
+            *)            IS_ANDROID_17="false" ;;
+          esac
+          EMU_API_LEVEL="$API_LEVEL"
+          EMU_TARGET="default"
+          if [ "$IS_ANDROID_17" = "true" ]; then
+            # emulator-runner interpolates api-level directly into the package
+            # name; bare "37" doesn't resolve, so upgrade it to 37.0.
+            [ "$API_LEVEL" = "37" ] && EMU_API_LEVEL="37.0"
+            EMU_TARGET="google_apis"
+          fi
           echo "sdk_arg=$SDK_ARG" >> $GITHUB_OUTPUT
           echo "target_arg=$TARGET_ARG" >> $GITHUB_OUTPUT
           echo "api_level=$API_LEVEL" >> $GITHUB_OUTPUT
+          echo "emu_api_level=$EMU_API_LEVEL" >> $GITHUB_OUTPUT
+          echo "emu_target=$EMU_TARGET" >> $GITHUB_OUTPUT
+          echo "is_android_17=$IS_ANDROID_17" >> $GITHUB_OUTPUT
+
+          # Surface resolved parameters at the top of the run's summary page.
+          {
+            echo "### Android Integration Tests — ${{ matrix.project }}"
+            echo ""
+            echo "| Parameter | Value |"
+            echo "|---|---|"
+            echo "| LevelPlay SDK version | \`${{ inputs.sdk_version || 'project default' }}\` |"
+            echo "| Emulator API level | \`$API_LEVEL\`$([ "$EMU_API_LEVEL" != "$API_LEVEL" ] && echo " (system image: \`$EMU_API_LEVEL\`)" || echo "") |"
+            echo "| Emulator target | \`$EMU_TARGET\` |"
+            echo "| App \`targetSdk\` / \`compileSdk\` | \`${{ inputs.target_sdk_version || '34 (default)' }}\` |"
+          } >> $GITHUB_STEP_SUMMARY
 
       - name: Build debug and test APKs
         run: |
@@ -84,10 +116,32 @@ jobs:
             ${{ steps.args.outputs.target_arg }} \
             --stacktrace
 
+      # Android 17 requires cmdline-tools 22.0 for avdmanager to correctly
+      # handle feature-drop system-image packages. Without this, avdmanager
+      # emits "This version only understands SDK XML versions up to 3 but an
+      # SDK XML file of version 4 was encountered" and writes a broken
+      # `target=android-0` into the AVD's config.ini, so the emulator
+      # never finishes booting. Pending upstream:
+      # ReactiveCircus/android-emulator-runner#483.
+      - name: Upgrade cmdline-tools to 22.0 (for API 37 support)
+        working-directory: /tmp
+        if: ${{ steps.args.outputs.is_android_17 == 'true' }}
+        env:
+          CMDLINE_TOOLS_URL: https://dl.google.com/android/repository/commandlinetools-linux-15859902_latest.zip
+          CMDLINE_TOOLS_SHA1: 040d3996a65543d22ec4bf73e4c37aa37a8d4af4
+        run: |
+          curl -sfLO "$CMDLINE_TOOLS_URL"
+          echo "$CMDLINE_TOOLS_SHA1  commandlinetools-linux-15859902_latest.zip" | sha1sum -c -
+          unzip -q commandlinetools-linux-15859902_latest.zip -d newcmd
+          rm -rf "$ANDROID_HOME/cmdline-tools/latest"
+          mv newcmd/cmdline-tools "$ANDROID_HOME/cmdline-tools/latest"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --version
+
       - name: Run integration tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ steps.args.outputs.api_level }}
+          api-level: ${{ steps.args.outputs.emu_api_level }}
+          target: ${{ steps.args.outputs.emu_target }}
           arch: x86_64
           script: cd Android/${{ matrix.project }} && ./gradlew connectedDebugAndroidTest ${{ steps.args.outputs.sdk_arg }} ${{ steps.args.outputs.target_arg }} --stacktrace
 
